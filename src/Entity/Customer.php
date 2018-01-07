@@ -112,9 +112,9 @@ class Customer
      */
     private $infoFile;
 
-    //TODO: check for relation
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Agency", inversedBy="customers")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $agency;
 
@@ -133,33 +133,33 @@ class Customer
      */
     private $endDay;
 
-    //TODO: check for relation
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="ProgramType", inversedBy="customers")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $programType;
 
-    //TODO: check for relation
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="LodgingType", inversedBy="customers")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $lodgingType;
 
-    //TODO: check for relation
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="AllInType", inversedBy="customers")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $allInType;
 
-    //TODO: check for relation
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="InsuranceType", inversedBy="customers")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $insuranceType;
 
-    //TODO: check for relation
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TravelType", inversedBy="customers")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $travelGoType;
 
@@ -168,9 +168,9 @@ class Customer
      */
     private $travelGoDate;
 
-    //TODO: check for relation
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TravelType", inversedBy="customers")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $travelBackType;
 
@@ -214,9 +214,8 @@ class Customer
      */
     private $bookerPayed;
 
-    //TODO: needs relation
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\OneToOne(targetEntity="App\Entity\Customer")
      */
     private $payerId;
 
@@ -555,7 +554,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getAgency()
+    public function getAgency() : Agency
     {
         return $this->agency;
     }
@@ -563,7 +562,7 @@ class Customer
     /**
      * @param mixed $agency
      */
-    public function setAgency($agency): void
+    public function setAgency(Agency $agency): void
     {
         $this->agency = $agency;
     }
@@ -619,7 +618,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getProgramType()
+    public function getProgramType() : ProgramType
     {
         return $this->programType;
     }
@@ -627,7 +626,7 @@ class Customer
     /**
      * @param mixed $programType
      */
-    public function setProgramType($programType): void
+    public function setProgramType(ProgramType $programType): void
     {
         $this->programType = $programType;
     }

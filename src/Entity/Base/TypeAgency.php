@@ -2,8 +2,7 @@
 
 namespace App\Entity\Base;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Agency;
 use Doctrine\ORM\Mapping as ORM;
 
 class TypeAgency extends TypeBase
@@ -12,12 +11,12 @@ class TypeAgency extends TypeBase
      * @ORM\ManyToOne(targetEntity="App\Entity\Agency")
      * @ORM\JoinColumn(nullable=true)
      */
-    public $agency;
+    protected $agency;
 
     /**
      * @return mixed
      */
-    public function getAgency() : Agency
+    public function getAgency()
     {
         return $this->agency;
     }

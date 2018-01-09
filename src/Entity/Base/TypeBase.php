@@ -3,47 +3,29 @@
 namespace App\Entity\Base;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 class TypeBase
 {
-    public function __construct()
-    {
-        $this->customers = new ArrayCollection();
-    }
 
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    public $id;
+    protected $id;
 
     // add your own fields
 
     /**
      * @ORM\Column(type="string")
      */
-    public $code;
+    protected $code;
 
     /**
      * @ORM\Column(type="string")
      */
-    public $description;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Customer", mappedBy="agency")
-     */
-    public $customers;
-
-    /**
-     * @return Collection|Customer[]
-     */
-    public function getCustomers()
-    {
-        return $this->customers;
-    }
+    protected $description;
 
     /**
      * @return mixed

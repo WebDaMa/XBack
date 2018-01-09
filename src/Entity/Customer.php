@@ -113,7 +113,7 @@ class Customer
     private $infoFile;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Agency", inversedBy="customers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Agency")
      * @ORM\JoinColumn(nullable=true)
      */
     private $agency;
@@ -134,31 +134,31 @@ class Customer
     private $endDay;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ProgramType", inversedBy="customers")
+     * @ORM\ManyToOne(targetEntity="ProgramType")
      * @ORM\JoinColumn(nullable=true)
      */
     private $programType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="LodgingType", inversedBy="customers")
+     * @ORM\ManyToOne(targetEntity="LodgingType")
      * @ORM\JoinColumn(nullable=true)
      */
     private $lodgingType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AllInType", inversedBy="customers")
+     * @ORM\ManyToOne(targetEntity="AllInType")
      * @ORM\JoinColumn(nullable=true)
      */
     private $allInType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="InsuranceType", inversedBy="customers")
+     * @ORM\ManyToOne(targetEntity="InsuranceType")
      * @ORM\JoinColumn(nullable=true)
      */
     private $insuranceType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TravelType", inversedBy="customers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TravelType")
      * @ORM\JoinColumn(nullable=true)
      */
     private $travelGoType;
@@ -169,7 +169,7 @@ class Customer
     private $travelGoDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\TravelType", inversedBy="customers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\TravelType")
      * @ORM\JoinColumn(nullable=true)
      */
     private $travelBackType;
@@ -554,7 +554,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getAgency() : Agency
+    public function getAgency()
     {
         return $this->agency;
     }

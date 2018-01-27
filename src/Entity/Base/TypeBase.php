@@ -75,5 +75,9 @@ class TypeBase
         $this->description = $description;
     }
 
+    public function __toString() : string
+    {
+        return $this->getCode();
+    }
 
 }

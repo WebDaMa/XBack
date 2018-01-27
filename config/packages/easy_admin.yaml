@@ -3,12 +3,14 @@ easy_admin:
     design:
             brand_color: '#70b32e'
             menu:
-                - { label: 'Test custom page', route: 'test' }
+                - { label: 'BO Import', route: 'test' }
                 - Customer
                 - Agency
+                - Location
                 - { label: 'Types' }
                 - AllInType
                 - InsuranceType
+                - GroupType
                 - LodgingType
                 - ProgramType
                 - TravelType
@@ -21,3 +23,5 @@ easy_admin:
         - App\Entity\LodgingType
         - App\Entity\ProgramType
         - App\Entity\TravelType
+        - App\Entity\Location
+        - App\Entity\GroupType

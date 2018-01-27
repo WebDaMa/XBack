@@ -42,12 +42,12 @@ class Customer
     private $booker;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $lastName;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $firstName;
 
@@ -119,7 +119,8 @@ class Customer
     private $agency;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $location;
 
@@ -195,7 +196,8 @@ class Customer
     private $groupName;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\GroupType")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $groupPreference;
 
@@ -209,6 +211,7 @@ class Customer
      */
     private $groupLayout;
 
+    //TODO: make bool?
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
@@ -219,11 +222,13 @@ class Customer
      */
     private $payerId;
 
+    //TODO: make bool?
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
     private $isCamper;
 
+    //TODO: make bool?
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
@@ -578,7 +583,7 @@ class Customer
     /**
      * @param mixed $location
      */
-    public function setLocation($location): void
+    public function setLocation(Location $location): void
     {
         $this->location = $location;
     }
@@ -618,7 +623,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getProgramType() : ProgramType
+    public function getProgramType()
     {
         return $this->programType;
     }

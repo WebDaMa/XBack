@@ -6,9 +6,8 @@ use App\Entity\Base\TypeBase;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AgencyRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\LocationRepository")
  */
-class Agency extends TypeBase
+class Location extends TypeBase
 {
-
 }

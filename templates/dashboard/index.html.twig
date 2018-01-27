@@ -1,5 +1,11 @@
 {% extends "@EasyAdmin/default/layout.html.twig" %}
 
 {% block main %}
-    Your custom content that you want to see in EasyAdminBundle context.
+    {{ form_start(form) }}
+    {{ form_row(form.boPeriodFile) }}
+    <br>
+    <div class="button-action">
+        {{ form_row(form.import) }}
+    </div>
+    {{ form_end(form) }}
 {% endblock %}

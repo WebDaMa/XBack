@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Agency;
 use App\Entity\AllInType;
-use App\Entity\BOUpload;
+use App\Entity\Upload;
 use App\Entity\Customer;
 use App\Entity\GroupType;
 use App\Entity\InsuranceType;
@@ -12,8 +12,7 @@ use App\Entity\Location;
 use App\Entity\LodgingType;
 use App\Entity\ProgramType;
 use App\Entity\TravelType;
-use App\Form\BOUploadType;
-use App\Repository\AgencyRepository;
+use App\Form\UploadType;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,21 +20,21 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class TestController extends Controller
+class DashboardController extends Controller
 {
     /**
-     * @Route("admin/test", name="test")
+     * @Route("admin/bo-upload", name="admin_bo_upload")
      */
-    public function index(Request $request)
+    public function boUploadAction(Request $request)
     {
-        $boUpload = new BOUpload();
-        $form = $this->createForm(BOUploadType::class, $boUpload);
+        $upload = new Upload();
+        $form = $this->createForm(UploadType::class, $upload);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             // $file stores the uploaded PDF file
             /** @var UploadedFile $file */
-            $file = $boUpload->getBoPeriodFile();
+            $file = $upload->getFile();
 
             $rp = $file->getRealPath();
 
@@ -53,9 +52,9 @@ class TestController extends Controller
 
                     $em->persist($customer);
                 }
-                $boUpload->setBoPeriodFile($file->getClientOriginalName());
+                $upload->setFile($file->getClientOriginalName());
 
-                $em->persist($boUpload);
+                $em->persist($upload);
 
                 $em->flush();
             }
@@ -64,7 +63,68 @@ class TestController extends Controller
             return $this->redirect($this->generateUrl('admin'));
         }
 
-        return $this->render('dashboard/index.html.twig', array(
+        return $this->render('dashboard/import.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("admin/planning-upload", name="admin_planning_upload")
+     */
+    public function planningUploadAction(Request $request)
+    {
+        $upload = new Upload();
+        $form = $this->createForm(UploadType::class, $upload);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // $file stores the uploaded PDF file
+            /** @var UploadedFile $file */
+            $file = $upload->getFile();
+
+            $rp = $file->getRealPath();
+
+            $spreadsheet = IOFactory::load($rp);
+            $groupSheet = $spreadsheet->getSheetByName('tblGroep')->toArray();
+
+            //Remove headers
+            array_shift($groupSheet);
+
+            if(is_array($groupSheet)) {
+                //Mapping
+                $em = $this->getDoctrine()->getManager();
+                foreach ($groupSheet as $row) {
+                    $group = $this->importGroup($row);
+
+                    $em->persist($group);
+                }
+
+            }
+
+            $planningSheet = $spreadsheet->getSheetByName('tblPlanning')->toArray();
+
+
+            if(is_array($planningSheet)) {
+                //Mapping
+                $em = $this->getDoctrine()->getManager();
+                foreach ($planningSheet as $row) {
+                    $planning = $this->importPlanning($row);
+
+                    $em->persist($planning);
+                }
+
+            }
+
+            $upload->setFile($file->getClientOriginalName());
+
+            $em->persist($upload);
+
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('admin'));
+        }
+
+        return $this->render('dashboard/import.html.twig', array(
             'form' => $form->createView(),
         ));
     }

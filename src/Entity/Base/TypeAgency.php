@@ -24,7 +24,7 @@ class TypeAgency extends TypeBase
     /**
      * @param mixed $agency
      */
-    public function setAgency(Agency $agency): void
+    public function setAgency(Agency $agency = null)
     {
         $this->agency = $agency;
     }

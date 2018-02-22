@@ -2,15 +2,15 @@
 
 namespace App\Repository;
 
-use App\Entity\BOUpload;
+use App\Entity\Upload;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class BOUploadRepository extends ServiceEntityRepository
+class UploadRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, BOUpload::class);
+        parent::__construct($registry, Upload::class);
     }
 
     /*

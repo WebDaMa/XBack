@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\Base\TypeAgency;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,4 +12,40 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class InsuranceType extends TypeAgency
 {
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Customer", mappedBy="insuranceType")
+     */
+    private $insCustomers;
+
+    public function __construct()
+    {
+        $this->insCustomers = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|Customer[]
+     */
+    public function getInsCustomers()
+    {
+        return $this->insCustomers;
+    }
+
+    public function addInsCustomer(Customer $customer)
+    {
+        if ($this->insCustomers->contains($customer)) {
+            return;
+        }
+
+        $this->insCustomers[] = $customer;
+        // set the *owning* side!
+        $customer->setInsuranceType($this);
+    }
+
+    public function removeInsCustomer(Customer $customer)
+    {
+        $this->insCustomers->removeElement($customer);
+        // set the owning side to null
+        $customer->setInsuranceType(null);
+    }
+
 }

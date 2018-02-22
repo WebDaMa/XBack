@@ -3,7 +3,9 @@ easy_admin:
     design:
             brand_color: '#70b32e'
             menu:
-                - { label: 'BO Import', route: 'test' }
+                - { label: 'Imports' }
+                - { label: 'BO Import', route: 'admin_bo_upload' }
+                - { label: 'Planning Import', route: 'admin_bo_upload' }
                 - Customer
                 - Agency
                 - Location
@@ -16,12 +18,30 @@ easy_admin:
                 - TravelType
     entities:
         # List the entity class name you want to manage
-        - App\Entity\Customer
-        - App\Entity\Agency
-        - App\Entity\AllInType
-        - App\Entity\InsuranceType
-        - App\Entity\LodgingType
-        - App\Entity\ProgramType
-        - App\Entity\TravelType
-        - App\Entity\Location
-        - App\Entity\GroupType
+
+        Customer:
+          class: App\Entity\Customer
+
+        Agency:
+          class: App\Entity\Agency
+
+        AllInType:
+          class: App\Entity\AllInType
+
+        InsuranceType:
+          class: App\Entity\InsuranceType
+
+        LodgingType:
+          class: App\Entity\LodgingType
+
+        ProgramType:
+          class: App\Entity\ProgramType
+
+        TravelType:
+          class: App\Entity\TravelType
+
+        Location:
+          class: App\Entity\Location
+
+        GroupType:
+          class: App\Entity\GroupType

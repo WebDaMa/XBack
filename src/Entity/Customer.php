@@ -113,13 +113,13 @@ class Customer
     private $infoFile;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Agency")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Agency", inversedBy="agencyCustomers")
      * @ORM\JoinColumn(nullable=true)
      */
     private $agency;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Location")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="locCustomers")
      * @ORM\JoinColumn(nullable=true)
      */
     private $location;
@@ -135,25 +135,25 @@ class Customer
     private $endDay;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ProgramType")
+     * @ORM\ManyToOne(targetEntity="ProgramType", inversedBy="programCustomers")
      * @ORM\JoinColumn(nullable=true)
      */
     private $programType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="LodgingType")
+     * @ORM\ManyToOne(targetEntity="LodgingType", inversedBy="lodgingCustomers")
      * @ORM\JoinColumn(nullable=true)
      */
     private $lodgingType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="AllInType")
+     * @ORM\ManyToOne(targetEntity="AllInType", inversedBy="allCustomers")
      * @ORM\JoinColumn(nullable=true)
      */
     private $allInType;
 
     /**
-     * @ORM\ManyToOne(targetEntity="InsuranceType")
+     * @ORM\ManyToOne(targetEntity="InsuranceType", inversedBy="insCustomers")
      * @ORM\JoinColumn(nullable=true)
      */
     private $insuranceType;
@@ -196,7 +196,7 @@ class Customer
     private $groupName;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\GroupType")
+     * @ORM\ManyToOne(targetEntity="App\Entity\GroupType", inversedBy="customers")
      * @ORM\JoinColumn(nullable=true)
      */
     private $groupPreference;
@@ -206,12 +206,14 @@ class Customer
      */
     private $LodgingLayout;
 
+    //TODO: needs relation with grptbl and period
+
     /**
      * @ORM\Column(type="string", nullable=true)
      */
     private $groupLayout;
 
-    //TODO: make bool?
+    //TODO: make bool? OK std: 0
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
@@ -222,13 +224,13 @@ class Customer
      */
     private $payerId;
 
-    //TODO: make bool?
+    //TODO: make bool? OK std: 1
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
     private $isCamper;
 
-    //TODO: make bool?
+    //TODO: make bool? OK std: 0
     /**
      * @ORM\Column(type="smallint", nullable=true)
      */
@@ -559,7 +561,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getAgency()
+    public function getAgency() : ?Agency
     {
         return $this->agency;
     }
@@ -567,7 +569,7 @@ class Customer
     /**
      * @param mixed $agency
      */
-    public function setAgency(Agency $agency): void
+    public function setAgency(Agency $agency = null)
     {
         $this->agency = $agency;
     }
@@ -575,7 +577,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getLocation()
+    public function getLocation() : ?Location
     {
         return $this->location;
     }
@@ -583,7 +585,7 @@ class Customer
     /**
      * @param mixed $location
      */
-    public function setLocation(Location $location): void
+    public function setLocation(Location $location = null)
     {
         $this->location = $location;
     }
@@ -623,7 +625,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getProgramType()
+    public function getProgramType(): ?ProgramType
     {
         return $this->programType;
     }
@@ -631,7 +633,7 @@ class Customer
     /**
      * @param mixed $programType
      */
-    public function setProgramType(ProgramType $programType): void
+    public function setProgramType(ProgramType $programType = null)
     {
         $this->programType = $programType;
     }
@@ -639,7 +641,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getLodgingType()
+    public function getLodgingType(): ?LodgingType
     {
         return $this->lodgingType;
     }
@@ -647,7 +649,7 @@ class Customer
     /**
      * @param mixed $lodgingType
      */
-    public function setLodgingType($lodgingType): void
+    public function setLodgingType(LodgingType $lodgingType = null)
     {
         $this->lodgingType = $lodgingType;
     }
@@ -655,7 +657,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getAllInType()
+    public function getAllInType() : ?AllInType
     {
         return $this->allInType;
     }
@@ -663,7 +665,7 @@ class Customer
     /**
      * @param mixed $allInType
      */
-    public function setAllInType($allInType): void
+    public function setAllInType(AllInType $allInType = null)
     {
         $this->allInType = $allInType;
     }
@@ -671,7 +673,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getInsuranceType()
+    public function getInsuranceType(): ?InsuranceType
     {
         return $this->insuranceType;
     }
@@ -679,7 +681,7 @@ class Customer
     /**
      * @param mixed $insuranceType
      */
-    public function setInsuranceType($insuranceType): void
+    public function setInsuranceType(InsuranceType $insuranceType = null)
     {
         $this->insuranceType = $insuranceType;
     }
@@ -799,7 +801,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getGroupPreference()
+    public function getGroupPreference(): ?GroupType
     {
         return $this->groupPreference;
     }
@@ -807,7 +809,7 @@ class Customer
     /**
      * @param mixed $groupPreference
      */
-    public function setGroupPreference($groupPreference): void
+    public function setGroupPreference(GroupType $groupPreference = null)
     {
         $this->groupPreference = $groupPreference;
     }
@@ -940,6 +942,9 @@ class Customer
         $this->insuranceValue = $insuranceValue;
     }
 
-
+    public function __toString() : string
+    {
+        return (string) $this->getFirstName() . ' ' . $this->getLastName();
+    }
 
 }

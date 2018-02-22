@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\BOUploadRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UploadRepository")
  */
-class BOUpload
+class Upload
 {
     /**
      * @ORM\Id
@@ -22,19 +22,19 @@ class BOUpload
     /**
      * @ORM\Column(type="string")
      *
-     * @Assert\NotBlank(message="Please, upload the BO list as an Excel file.")
+     * @Assert\NotBlank(message="Please, upload the an Excel file.")
      * @Assert\File()
      */
-    private $boPeriodFile;
+    private $file;
 
-    public function getBoPeriodFile()
+    public function getFile()
     {
-        return $this->boPeriodFile;
+        return $this->file;
     }
 
-    public function setBoPeriodFile($boPeriodFile)
+    public function setFile($file)
     {
-        $this->boPeriodFile = $boPeriodFile;
+        $this->file = $file;
 
         return $this;
     }

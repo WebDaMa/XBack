@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
  */
-class Group
+class Groep
 {
 
     /**
@@ -32,7 +32,7 @@ class Group
     protected $groupId;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $name;
 
@@ -134,12 +134,12 @@ class Group
     /**
      * @return Collection|Customer[]
      */
-    public function getPlannings()
+    public function getGroupPlannings()
     {
         return $this->groupPlannings;
     }
 
-    public function addPlanning(Planning $planning)
+    public function addGroupPlanning(Planning $planning)
     {
         if ($this->groupPlannings->contains($planning)) {
             return;
@@ -150,7 +150,7 @@ class Group
         $planning->setGuide($this);
     }
 
-    public function removePlanning(Planning $planning)
+    public function removeGroupPlanning(Planning $planning)
     {
         $this->groupPlannings->removeElement($planning);
         // set the owning side to null

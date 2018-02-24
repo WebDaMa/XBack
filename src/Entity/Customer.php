@@ -213,9 +213,8 @@ class Customer
      */
     private $groupLayout;
 
-    //TODO: make bool? OK std: 0
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $bookerPayed;
 
@@ -224,15 +223,13 @@ class Customer
      */
     private $payerId;
 
-    //TODO: make bool? OK std: 1
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $isCamper;
 
-    //TODO: make bool? OK std: 0
     /**
-     * @ORM\Column(type="smallint", nullable=true)
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $checkedIn;
 

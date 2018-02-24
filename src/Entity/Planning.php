@@ -30,13 +30,13 @@ class Planning
     protected $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="groupPlannings")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Groep", inversedBy="groupPlannings")
      * @ORM\JoinColumn(nullable=true)
      */
     protected $group;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     protected $activity;
 
@@ -47,9 +47,14 @@ class Planning
     protected $guide;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     protected $guideFunction;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    protected $print;
 
     /**
      * @return mixed
@@ -118,7 +123,7 @@ class Planning
     /**
      * @return mixed
      */
-    public function getGroup(): ?Group
+    public function getGroup(): ?Groep
     {
         return $this->group;
     }
@@ -126,7 +131,7 @@ class Planning
     /**
      * @param mixed $group
      */
-    public function setGroup(Group $group = null)
+    public function setGroup(Groep $group = null)
     {
         $this->group = $group;
     }
@@ -163,9 +168,25 @@ class Planning
         $this->guideFunction = $guideFunction;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPrint()
+    {
+        return $this->print;
+    }
+
+    /**
+     * @param mixed $print
+     */
+    public function setPrint($print)
+    {
+        $this->print = $print;
+    }
+
     public function __toString() : string
     {
-        return (string) $this->getActivity() . ' - ' . $this->getDate() . ' - ' . $this->getGuide()->getGuideShort();
+        return (string) $this->getActivity();
     }
 
 }

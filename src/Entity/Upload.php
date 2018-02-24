@@ -22,7 +22,7 @@ class Upload
     /**
      * @ORM\Column(type="string")
      *
-     * @Assert\NotBlank(message="Please, upload the an Excel file.")
+     * @Assert\NotBlank(message="Please, upload an Excel file.")
      * @Assert\File()
      */
     private $file;

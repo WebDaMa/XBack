@@ -5,8 +5,12 @@ easy_admin:
             menu:
                 - { label: 'Imports' }
                 - { label: 'BO Import', route: 'admin_bo_upload' }
-                - { label: 'Planning Import', route: 'admin_bo_upload' }
+                - { label: 'Planning Import', route: 'admin_planning_upload' }
+                - { label: 'Entities' }
                 - Customer
+                - Guide
+                - Groep
+                - Planning
                 - Agency
                 - Location
                 - { label: 'Types' }
@@ -45,3 +49,12 @@ easy_admin:
 
         GroupType:
           class: App\Entity\GroupType
+
+        Groep:
+          class: App\Entity\Groep
+
+        Guide:
+          class: App\Entity\Guide
+
+        Planning:
+          class: App\Entity\Planning

@@ -6,7 +6,7 @@ use App\Entity\Planning;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class PlanningRepository extends CodeBaseRepository
+class PlanningRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {

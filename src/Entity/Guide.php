@@ -2,10 +2,19 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-class Group
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\GuideRepository")
+ */
+class Guide
 {
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Planning", mappedBy="guide")
+     */
+    private $plannings;
 
     /**
      * @ORM\Id
@@ -17,24 +26,24 @@ class Group
     // add your own fields
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string")
      */
-    protected $groupId;
+    protected $guideShort;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $name;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    protected $periodId;
+    protected $guideFirstName;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $location;
+    protected $guideLastName;
+
+    public function __construct()
+    {
+        $this->plannings = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -55,70 +64,80 @@ class Group
     /**
      * @return mixed
      */
-    public function getGroupId()
+    public function getGuideShort()
     {
-        return $this->groupId;
+        return $this->guideShort;
     }
 
     /**
-     * @param mixed $groupId
+     * @param mixed $guideShort
      */
-    public function setGroupId($groupId): void
+    public function setGuideShort($guideShort): void
     {
-        $this->groupId = $groupId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
-    {
-        $this->name = $name;
+        $this->guideShort = $guideShort;
     }
 
     /**
      * @return mixed
      */
-    public function getPeriodId()
+    public function getGuideFirstName()
     {
-        return $this->periodId;
+        return $this->guideFirstName;
     }
 
     /**
-     * @param mixed $periodId
+     * @param mixed $guideFirstName
      */
-    public function setPeriodId($periodId): void
+    public function setGuideFirstName($guideFirstName): void
     {
-        $this->periodId = $periodId;
+        $this->guideFirstName = $guideFirstName;
     }
 
     /**
      * @return mixed
      */
-    public function getLocation()
+    public function getGuideLastName()
     {
-        return $this->location;
+        return $this->guideLastName;
     }
 
     /**
-     * @param mixed $location
+     * @param mixed $guideLastName
      */
-    public function setLocation($location): void
+    public function setGuideLastName($guideLastName): void
     {
-        $this->location = $location;
+        $this->guideLastName = $guideLastName;
+    }
+
+    /**
+     * @return Collection|Customer[]
+     */
+    public function getPlannings()
+    {
+        return $this->plannings;
+    }
+
+    public function addPlanning(Planning $planning)
+    {
+        if ($this->plannings->contains($planning)) {
+            return;
+        }
+
+        $this->plannings[] = $planning;
+        // set the *owning* side!
+        $planning->setGuide($this);
+    }
+
+    public function removePlanning(Planning $planning)
+    {
+        $this->plannings->removeElement($planning);
+        // set the owning side to null
+        $planning->setGuide(null);
     }
 
     public function __toString() : string
     {
-        return (string) $this->getName() . ' - ' . $this->getPeriodId();
+        return (string) $this->getGuideShort();
     }
 
 }

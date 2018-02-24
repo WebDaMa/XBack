@@ -1,12 +1,21 @@
 <?php
 
-namespace App\Entity\Base;
+namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-class TypeBase
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
+ */
+class Group
 {
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Planning", mappedBy="group")
+     */
+    private $groupPlannings;
 
     /**
      * @ORM\Id
@@ -18,14 +27,29 @@ class TypeBase
     // add your own fields
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      */
-    protected $code;
+    protected $groupId;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $description;
+    protected $name;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $periodId;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $location;
+
+    public function __construct()
+    {
+        $this->groupPlannings = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -46,38 +70,96 @@ class TypeBase
     /**
      * @return mixed
      */
-    public function getCode()
+    public function getGroupId()
     {
-        return $this->code;
+        return $this->groupId;
     }
 
     /**
-     * @param mixed $code
+     * @param mixed $groupId
      */
-    public function setCode($code): void
+    public function setGroupId($groupId): void
     {
-        $this->code = $code;
+        $this->groupId = $groupId;
     }
 
     /**
      * @return mixed
      */
-    public function getDescription()
+    public function getName()
     {
-        return $this->description;
+        return $this->name;
     }
 
     /**
-     * @param mixed $description
+     * @param mixed $name
      */
-    public function setDescription($description): void
+    public function setName($name): void
     {
-        $this->description = $description;
+        $this->name = $name;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPeriodId()
+    {
+        return $this->periodId;
+    }
+
+    /**
+     * @param mixed $periodId
+     */
+    public function setPeriodId($periodId): void
+    {
+        $this->periodId = $periodId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
+
+    /**
+     * @param mixed $location
+     */
+    public function setLocation($location): void
+    {
+        $this->location = $location;
+    }
+
+    /**
+     * @return Collection|Customer[]
+     */
+    public function getPlannings()
+    {
+        return $this->groupPlannings;
+    }
+
+    public function addPlanning(Planning $planning)
+    {
+        if ($this->groupPlannings->contains($planning)) {
+            return;
+        }
+
+        $this->groupPlannings[] = $planning;
+        // set the *owning* side!
+        $planning->setGuide($this);
+    }
+
+    public function removePlanning(Planning $planning)
+    {
+        $this->groupPlannings->removeElement($planning);
+        // set the owning side to null
+        $planning->setGuide(null);
     }
 
     public function __toString() : string
     {
-        return (string) $this->getCode();
+        return (string) $this->getName() . ' - ' . $this->getPeriodId();
     }
 
 }

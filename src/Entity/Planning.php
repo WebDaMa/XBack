@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Entity\Base;
+namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
-class Group
+/**
+ * @ORM\Entity(repositoryClass="App\Repository\PlanningRepository")
+ */
+class Planning
 {
 
     /**
@@ -20,22 +22,34 @@ class Group
     /**
      * @ORM\Column(type="integer")
      */
-    protected $groupId;
+    protected $planningId;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    protected $date;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Group", inversedBy="groupPlannings")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $group;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $name;
+    protected $activity;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Guide", inversedBy="plannings")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $guide;
 
     /**
      * @ORM\Column(type="integer")
      */
-    protected $periodId;
-
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $location;
+    protected $guideFunction;
 
     /**
      * @return mixed
@@ -56,70 +70,102 @@ class Group
     /**
      * @return mixed
      */
-    public function getGroupId()
+    public function getPlanningId()
     {
-        return $this->groupId;
+        return $this->planningId;
     }
 
     /**
-     * @param mixed $groupId
+     * @param mixed $planningId
      */
-    public function setGroupId($groupId): void
+    public function setPlanningId($planningId): void
     {
-        $this->groupId = $groupId;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName($name): void
-    {
-        $this->name = $name;
+        $this->planningId = $planningId;
     }
 
     /**
      * @return mixed
      */
-    public function getPeriodId()
+    public function getDate()
     {
-        return $this->periodId;
+        return $this->date;
     }
 
     /**
-     * @param mixed $periodId
+     * @param mixed $date
      */
-    public function setPeriodId($periodId): void
+    public function setDate($date): void
     {
-        $this->periodId = $periodId;
+        $this->date = $date;
     }
 
     /**
      * @return mixed
      */
-    public function getLocation()
+    public function getActivity()
     {
-        return $this->location;
+        return $this->activity;
     }
 
     /**
-     * @param mixed $location
+     * @param mixed $activity
      */
-    public function setLocation($location): void
+    public function setActivity($activity): void
     {
-        $this->location = $location;
+        $this->activity = $activity;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGroup(): ?Group
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param mixed $group
+     */
+    public function setGroup(Group $group = null)
+    {
+        $this->group = $group;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGuide() : ?Guide
+    {
+        return $this->guide;
+    }
+
+    /**
+     * @param mixed $guide
+     */
+    public function setGuide(Guide $guide = null)
+    {
+        $this->guide = $guide;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGuideFunction()
+    {
+        return $this->guideFunction;
+    }
+
+    /**
+     * @param mixed $guideFunction
+     */
+    public function setGuideFunction($guideFunction): void
+    {
+        $this->guideFunction = $guideFunction;
     }
 
     public function __toString() : string
     {
-        return (string) $this->getName() . ' - ' . $this->getPeriodId();
+        return (string) $this->getActivity() . ' - ' . $this->getDate() . ' - ' . $this->getGuide()->getGuideShort();
     }
 
 }

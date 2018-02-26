@@ -8,6 +8,7 @@ easy_admin:
                 - { label: 'Planning Import', route: 'admin_planning_upload' }
                 - { label: 'Entities' }
                 - Customer
+                - CustomerAltered
                 - Guide
                 - Groep
                 - Planning
@@ -25,6 +26,60 @@ easy_admin:
 
         Customer:
           class: App\Entity\Customer
+          form:
+            fields:
+              - { property: 'customerId'}
+              - { property: 'fileId'}
+              - { property: 'periodId'}
+              - { property: 'bookerId'}
+              - { property: 'booker'}
+              - { property: 'lastName'}
+              - { property: 'firstName'}
+              - { property: 'email'}
+              - { property: 'birthdate',
+                  type: 'Symfony\Component\Form\Extension\Core\Type\BirthdayType' }
+              - { property: 'gsm'}
+              - { property: 'nationalRegisterNumber'}
+              - { property: 'expireDate'}
+              - { property: 'size'}
+              - { property: 'sizeInfo'}
+              - { property: 'nameShortage'}
+              - { property: 'emergencyNumber'}
+              - { property: 'licensePlate'}
+              - { property: 'typePerson'}
+              - { property: 'infoCustomer'}
+              - { property: 'infoFile'}
+              - { property: 'agency'}
+              - { property: 'location'}
+              - { property: 'startDay'}
+              - { property: 'endDay'}
+              - { property: 'programType'}
+              - { property: 'lodgingType'}
+              - { property: 'allInType'}
+              - { property: 'insuranceType'}
+              - { property: 'travelGoType'}
+              - { property: 'travelGoDate'}
+              - { property: 'travelBackType'}
+              - { property: 'travelBackDate'}
+              - { property: 'boardingPoint'}
+              - { property: 'activityOption'}
+              - { property: 'groupName'}
+              - { property: 'groupPreference'}
+              - { property: 'lodgingLayout'}
+              - { property: 'groupLayout'}
+              - { property: 'bookerPayed'}
+              - { property: 'payerId'}
+              - { property: 'isCamper'}
+              - { property: 'checkedIn'}
+              - { property: 'totalExclInsurance'}
+              - { property: 'insuranceValue'}
+
+        CustomerAltered:
+          class: App\Entity\Customer
+          form:
+            fields:
+              - { property: 'birthdate',
+                  type: 'Symfony\Component\Form\Extension\Core\Type\BirthdayType' }
 
         Agency:
           class: App\Entity\Agency

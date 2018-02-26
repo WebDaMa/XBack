@@ -77,9 +77,15 @@ class Customer
     private $expireDate;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\SuitSize", inversedBy="agencyCustomers")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $size;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $sizeInfo;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -204,12 +210,11 @@ class Customer
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    private $LodgingLayout;
-
-    //TODO: needs relation with grptbl and period
+    private $lodgingLayout;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Groep", inversedBy="customers")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $groupLayout;
 
@@ -382,7 +387,7 @@ class Customer
     /**
      * @return mixed
      */
-    public function getSize()
+    public function getSize(): ?SuitSize
     {
         return $this->size;
     }
@@ -390,7 +395,7 @@ class Customer
     /**
      * @param mixed $size
      */
-    public function setSize($size): void
+    public function setSize(SuitSize $size = null)
     {
         $this->size = $size;
     }
@@ -816,7 +821,7 @@ class Customer
      */
     public function getLodgingLayout()
     {
-        return $this->LodgingLayout;
+        return $this->lodgingLayout;
     }
 
     /**
@@ -824,13 +829,13 @@ class Customer
      */
     public function setLodgingLayout($LodgingLayout): void
     {
-        $this->LodgingLayout = $LodgingLayout;
+        $this->lodgingLayout = $LodgingLayout;
     }
 
     /**
      * @return mixed
      */
-    public function getGroupLayout()
+    public function getGroupLayout(): ?Groep
     {
         return $this->groupLayout;
     }
@@ -838,7 +843,7 @@ class Customer
     /**
      * @param mixed $groupLayout
      */
-    public function setGroupLayout($groupLayout): void
+    public function setGroupLayout(Groep $groupLayout = null)
     {
         $this->groupLayout = $groupLayout;
     }
@@ -937,6 +942,22 @@ class Customer
     public function setInsuranceValue($insuranceValue): void
     {
         $this->insuranceValue = $insuranceValue;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSizeInfo()
+    {
+        return $this->sizeInfo;
+    }
+
+    /**
+     * @param mixed $sizeInfo
+     */
+    public function setSizeInfo($sizeInfo): void
+    {
+        $this->sizeInfo = $sizeInfo;
     }
 
     public function __toString() : string

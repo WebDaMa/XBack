@@ -7,6 +7,7 @@ use App\Entity\AllInType;
 use App\Entity\Groep;
 use App\Entity\Guide;
 use App\Entity\Planning;
+use App\Entity\SuitSize;
 use App\Entity\Upload;
 use App\Entity\Customer;
 use App\Entity\GroupType;
@@ -191,7 +192,13 @@ class DashboardController extends Controller {
         $customer->setGsm($row[10]);
         $customer->setNationalRegisterNumber($row[11]);
         $customer->setExpireDate($this->getDateOrNull($row[12]));
-        $customer->setSize($row[13]);
+
+        $size = $this->getDoctrine()->getRepository(SuitSize::class)->findByName($row[13]);
+        if ($size)
+        {
+            $customer->setSize($size);
+        }
+
         $customer->setNameShortage($row[14]);
         $customer->setEmergencyNumber($row[15]);
         $customer->setLicensePlate($row[16]);
@@ -270,7 +277,12 @@ class DashboardController extends Controller {
 
         $customer->setLodgingLayout($row[36]);
 
-        $customer->setGroupLayout($row[37]);
+
+        $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[37], $customer->getPeriodId());
+        if ($group)
+        {
+            $customer->setGroupLayout($group);
+        }
 
         $customer->setBookerPayed($row[38]);
 

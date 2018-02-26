@@ -7,15 +7,19 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\GroupRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\GroepRepository")
  */
 class Groep
 {
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Planning", mappedBy="group")
      */
     private $groupPlannings;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Customer", mappedBy="groupLayout")
+     */
+    private $groupCustomers;
 
     /**
      * @ORM\Id
@@ -132,7 +136,7 @@ class Groep
     }
 
     /**
-     * @return Collection|Customer[]
+     * @return Collection|Planning[]
      */
     public function getGroupPlannings()
     {
@@ -147,14 +151,40 @@ class Groep
 
         $this->groupPlannings[] = $planning;
         // set the *owning* side!
-        $planning->setGuide($this);
+        $planning->setGroup($this);
     }
 
     public function removeGroupPlanning(Planning $planning)
     {
         $this->groupPlannings->removeElement($planning);
         // set the owning side to null
-        $planning->setGuide(null);
+        $planning->setGroup(null);
+    }
+
+    /**
+     * @return Collection|Planning[]
+     */
+    public function getGroupCustomers()
+    {
+        return $this->groupCustomers;
+    }
+
+    public function addGroupCustomer(Customer $customer)
+    {
+        if ($this->groupPlannings->contains($customer)) {
+            return;
+        }
+
+        $this->groupPlannings[] = $customer;
+        // set the *owning* side!
+        $customer->setGroupLayout($this);
+    }
+
+    public function removeGroupCustomer(Customer $customer)
+    {
+        $this->groupPlannings->removeElement($customer);
+        // set the owning side to null
+        $customer->setGroupLayout(null);
     }
 
     public function __toString() : string

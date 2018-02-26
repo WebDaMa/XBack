@@ -110,7 +110,7 @@ class Guide
     }
 
     /**
-     * @return Collection|Customer[]
+     * @return Collection|Planning[]
      */
     public function getPlannings()
     {

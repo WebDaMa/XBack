@@ -77,7 +77,7 @@ class Customer
     private $expireDate;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\SuitSize", inversedBy="agencyCustomers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\SuitSize", inversedBy="suitCustomers")
      * @ORM\JoinColumn(nullable=true)
      */
     private $size;

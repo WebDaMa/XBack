@@ -6,9 +6,13 @@ easy_admin:
                 - { label: 'Imports' }
                 - { label: 'BO Import', route: 'admin_bo_upload' }
                 - { label: 'Planning Import', route: 'admin_planning_upload' }
+                - { label: 'Forms' }
+                - FormCheckin
+                - FormSizes
+                - FormGroupLayout
+                - FormLodgingLayout
                 - { label: 'Entities' }
                 - Customer
-                - CustomerAltered
                 - Guide
                 - Groep
                 - Planning
@@ -21,6 +25,9 @@ easy_admin:
                 - LodgingType
                 - ProgramType
                 - TravelType
+                - SuitSize
+                - HelmSize
+                - BeltSize
     entities:
         # List the entity class name you want to manage
 
@@ -74,12 +81,81 @@ easy_admin:
               - { property: 'totalExclInsurance'}
               - { property: 'insuranceValue'}
 
-        CustomerAltered:
+        FormSizes:
           class: App\Entity\Customer
+          list:
+            fields:
+              - { property: 'groupLayout'}
+              - { property: 'firstName'}
+              - { property: 'lastName'}
+              - { property: 'size'}
+              - { property: 'sizeInfo'}
           form:
             fields:
-              - { property: 'birthdate',
-                  type: 'Symfony\Component\Form\Extension\Core\Type\BirthdayType' }
+              - { property: 'size'}
+              - { property: 'sizeInfo'}
+
+        FormCheckin:
+            class: App\Entity\Customer
+            list:
+              fields:
+                - { property: 'checkedIn'}
+                - { property: 'firstName'}
+                - { property: 'lastName'}
+                - { property: 'booker'}
+                - { property: 'groupName'}
+                - { property: 'birthdate'}
+                - { property: 'nationalRegisterNumber'}
+                - { property: 'expireDate'}
+                - { property: 'lodgingLayout'}
+                - { property: 'allInType'}
+                - { property: 'groupLayout'}
+            form:
+              fields:
+                - { property: 'checkedIn'}
+                - { property: 'firstName'}
+                - { property: 'lastName'}
+                - { property: 'booker'}
+                - { property: 'groupName'}
+                - { property: 'birthdate',
+                    type: 'Symfony\Component\Form\Extension\Core\Type\BirthdayType' }
+                - { property: 'nationalRegisterNumber'}
+                - { property: 'expireDate'}
+                - { property: 'lodgingLayout'}
+                - { property: 'allInType'}
+                - { property: 'groupLayout'}
+
+        FormGroupLayout:
+            class: App\Entity\Customer
+            list:
+              fields:
+                - { property: 'groupLayout'}
+                - { property: 'groupPreference'}
+                - { property: 'programType'}
+                - { property: 'groupName'}
+                - { property: 'booker'}
+                - { property: 'travelGoType'}
+                - { property: 'birthdate'}
+                - { property: 'firstName'}
+                - { property: 'lastName'}
+            form:
+              fields:
+                - { property: 'groupLayout'}
+
+        FormLodgingLayout:
+            class: App\Entity\Customer
+            list:
+              fields:
+                - { property: 'groupName'}
+                - { property: 'booker'}
+                - { property: 'firstName'}
+                - { property: 'lastName'}
+                - { property: 'lodgingType'}
+                - { property: 'lodgingLayout'}
+
+            form:
+              fields:
+                - { property: 'lodgingLayout'}
 
         Agency:
           class: App\Entity\Agency
@@ -110,6 +186,15 @@ easy_admin:
 
         Guide:
           class: App\Entity\Guide
+
+        SuitSize:
+          class: App\Entity\SuitSize
+
+        HelmSize:
+          class: App\Entity\HelmSize
+
+        BeltSize:
+          class: App\Entity\BeltSize
 
         Planning:
           class: App\Entity\Planning

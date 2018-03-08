@@ -26,29 +26,29 @@ class Groep
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    private $id;
 
     // add your own fields
 
     /**
      * @ORM\Column(type="integer")
      */
-    protected $groupId;
+    private $groupId;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $name;
+    private $name;
 
     /**
      * @ORM\Column(type="integer")
      */
-    protected $periodId;
+    private $periodId;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $location;
+    private $location;
 
     public function __construct()
     {

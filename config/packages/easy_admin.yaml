@@ -24,6 +24,7 @@ easy_admin:
                 - GroupType
                 - LodgingType
                 - ProgramType
+                - TransportType
                 - TravelType
                 - SuitSize
                 - HelmSize
@@ -174,6 +175,9 @@ easy_admin:
 
         TravelType:
           class: App\Entity\TravelType
+
+        TransportType:
+          class: App\Entity\TransportType
 
         Location:
           class: App\Entity\Location

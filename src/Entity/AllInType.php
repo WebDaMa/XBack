@@ -10,12 +10,17 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\AllInTypeRepository")
  */
-class AllInType extends TypeAgency
-{
+class AllInType extends TypeAgency {
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Customer", mappedBy="allInType")
      */
     private $allCustomers;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $prize;
 
     public function __construct()
     {
@@ -32,7 +37,8 @@ class AllInType extends TypeAgency
 
     public function addAllCustomer(Customer $customer)
     {
-        if ($this->allCustomers->contains($customer)) {
+        if ($this->allCustomers->contains($customer))
+        {
             return;
         }
 
@@ -47,4 +53,21 @@ class AllInType extends TypeAgency
         // set the owning side to null
         $customer->setAllInType(null);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPrize()
+    {
+        return $this->prize;
+    }
+
+    /**
+     * @param mixed $prize
+     */
+    public function setPrize($prize): void
+    {
+        $this->prize = $prize;
+    }
+    
 }

@@ -17,6 +17,16 @@ class InsuranceType extends TypeAgency
      */
     private $insCustomers;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $insuranceCode;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $insuranceName;
+
     public function __construct()
     {
         $this->insCustomers = new ArrayCollection();
@@ -46,6 +56,38 @@ class InsuranceType extends TypeAgency
         $this->insCustomers->removeElement($customer);
         // set the owning side to null
         $customer->setInsuranceType(null);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInsuranceCode()
+    {
+        return $this->insuranceCode;
+    }
+
+    /**
+     * @param mixed $insuranceCode
+     */
+    public function setInsuranceCode($insuranceCode): void
+    {
+        $this->insuranceCode = $insuranceCode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInsuranceName()
+    {
+        return $this->insuranceName;
+    }
+
+    /**
+     * @param mixed $insuranceName
+     */
+    public function setInsuranceName($insuranceName): void
+    {
+        $this->insuranceName = $insuranceName;
     }
 
 }

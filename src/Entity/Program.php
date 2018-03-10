@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Entity\Base\TypeName;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Program extends TypeName
 {
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProgramActivity", mappedBy="program")
+     */
+    private $activityPrograms;
+
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Agency")
      * @ORM\JoinColumn(nullable=true)
@@ -38,6 +45,37 @@ class Program extends TypeName
      * @ORM\JoinColumn(nullable=true)
      */
     private $programType;
+
+    public function __construct()
+    {
+        $this->activityPrograms = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection|ProgramActivity[]
+     */
+    public function getAgencyCustomers()
+    {
+        return $this->activityPrograms;
+    }
+
+    public function addProgramActivity(ProgramActivity $programActivity)
+    {
+        if ($this->activityPrograms->contains($programActivity)) {
+            return;
+        }
+
+        $this->activityPrograms[] = $programActivity;
+        // set the *owning* side!
+        $programActivity->setProgram($this);
+    }
+
+    public function removeProgramActivity(ProgramActivity $programActivity)
+    {
+        $this->activityPrograms->removeElement($programActivity);
+        // set the owning side to null
+        $programActivity->setProgram(null);
+    }
 
     /**
      * @return mixed

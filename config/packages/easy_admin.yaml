@@ -19,6 +19,7 @@ easy_admin:
                 - Agency
                 - Location
                 - Activity
+                - Program
                 - { label: 'Types' }
                 - AllInType
                 - InsuranceType
@@ -214,3 +215,6 @@ easy_admin:
 
         Activity:
           class: App\Entity\Activity
+
+        Program:
+          class: App\Entity\Program

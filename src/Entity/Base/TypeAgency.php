@@ -16,7 +16,7 @@ class TypeAgency extends TypeBase
     /**
      * @return mixed
      */
-    public function getAgency()
+    public function getAgency(): ?Agency
     {
         return $this->agency;
     }

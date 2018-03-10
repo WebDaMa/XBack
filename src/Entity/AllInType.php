@@ -69,5 +69,5 @@ class AllInType extends TypeAgency {
     {
         $this->prize = $prize;
     }
-    
+
 }

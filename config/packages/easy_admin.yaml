@@ -18,6 +18,7 @@ easy_admin:
                 - Planning
                 - Agency
                 - Location
+                - Activity
                 - { label: 'Types' }
                 - AllInType
                 - InsuranceType
@@ -29,6 +30,8 @@ easy_admin:
                 - SuitSize
                 - HelmSize
                 - BeltSize
+                - ProgramGroup
+                - ActivityGroup
     entities:
         # List the entity class name you want to manage
 
@@ -202,3 +205,12 @@ easy_admin:
 
         Planning:
           class: App\Entity\Planning
+
+        ActivityGroup:
+          class: App\Entity\ActivityGroup
+
+        ProgramGroup:
+          class: App\Entity\ProgramGroup
+
+        Activity:
+          class: App\Entity\Activity

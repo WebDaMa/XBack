@@ -36,13 +36,17 @@ class ActivityGroup extends TypeName
             return;
         }
 
-        $this->activities[] = $activity;
+        $this->activities->add($activity);
         // set the *owning* side!
         $activity->setActivityGroup($this);
     }
 
     public function removeActivity(Activity $activity)
     {
+        if (!$this->activities->contains($activity)) {
+            return;
+        }
+
         $this->activities->removeElement($activity);
         // set the owning side to null
         $activity->setActivityGroup(null);

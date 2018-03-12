@@ -988,13 +988,17 @@ class Customer
             return;
         }
 
-        $this->activities[] = $activity;
+        $this->activities->add($activity);
         // set the *owning* side!
         $activity->addCustomer($this);
     }
 
     public function removeActivity(Activity $activity)
     {
+        if (!$this->activities->contains($activity)) {
+            return;
+        }
+
         $this->activities->removeElement($activity);
         // set the owning side to null
         $activity->removeCustomer($this);

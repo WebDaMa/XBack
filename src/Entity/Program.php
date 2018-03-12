@@ -65,13 +65,17 @@ class Program extends TypeName
             return;
         }
 
-        $this->activityPrograms[] = $programActivity;
+        $this->activityPrograms->add($programActivity);
         // set the *owning* side!
         $programActivity->setProgram($this);
     }
 
     public function removeProgramActivity(ProgramActivity $programActivity)
     {
+        if (!$this->activityPrograms->contains($programActivity)) {
+            return;
+        }
+
         $this->activityPrograms->removeElement($programActivity);
         // set the owning side to null
         $programActivity->setProgram(null);

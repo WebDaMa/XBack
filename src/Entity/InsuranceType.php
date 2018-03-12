@@ -46,13 +46,17 @@ class InsuranceType extends TypeAgency
             return;
         }
 
-        $this->insCustomers[] = $customer;
+        $this->insCustomers->add($customer);
         // set the *owning* side!
         $customer->setInsuranceType($this);
     }
 
     public function removeInsCustomer(Customer $customer)
     {
+        if (!$this->insCustomers->contains($customer)) {
+            return;
+        }
+
         $this->insCustomers->removeElement($customer);
         // set the owning side to null
         $customer->setInsuranceType(null);

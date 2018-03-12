@@ -35,13 +35,17 @@ class HelmSize extends Size
             return;
         }
 
-        $this->helmSuitSizes[] = $suitSize;
+        $this->helmSuitSizes->add($suitSize);
         // set the *owning* side!
         $suitSize->setHelmSize($this);
     }
 
     public function removeHelmSuitSize(SuitSize $suitSize)
     {
+        if (!$this->helmSuitSizes->contains($suitSize)) {
+            return;
+        }
+
         $this->helmSuitSizes->removeElement($suitSize);
         // set the owning side to null
         $suitSize->setHelmSize(null);

@@ -36,13 +36,17 @@ class Agency extends TypeBase
             return;
         }
 
-        $this->agencyCustomers[] = $customer;
+        $this->agencyCustomers->add($customer);
         // set the *owning* side!
         $customer->setAgency($this);
     }
 
     public function removeProgramCustomer(Customer $customer)
     {
+        if (!$this->agencyCustomers->contains($customer)) {
+            return;
+        }
+
         $this->agencyCustomers->removeElement($customer);
         // set the owning side to null
         $customer->setAgency(null);

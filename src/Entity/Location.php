@@ -36,13 +36,17 @@ class Location extends TypeBase
             return;
         }
 
-        $this->locCustomers[] = $customer;
+        $this->locCustomers->add($customer);
         // set the *owning* side!
         $customer->setLocation($this);
     }
 
     public function removeLocCustomer(Customer $customer)
     {
+        if (!$this->locCustomers->contains($customer)) {
+            return;
+        }
+
         $this->locCustomers->removeElement($customer);
         // set the owning side to null
         $customer->setLocation(null);

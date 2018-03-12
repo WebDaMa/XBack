@@ -150,13 +150,17 @@ class Groep
             return;
         }
 
-        $this->groupPlannings[] = $planning;
+        $this->groupPlannings->add($planning);
         // set the *owning* side!
         $planning->setGroup($this);
     }
 
     public function removeGroupPlanning(Planning $planning)
     {
+        if (!$this->groupPlannings->contains($planning)) {
+            return;
+        }
+
         $this->groupPlannings->removeElement($planning);
         // set the owning side to null
         $planning->setGroup(null);
@@ -176,13 +180,17 @@ class Groep
             return;
         }
 
-        $this->groupPlannings[] = $customer;
+        $this->groupPlannings->add($customer);
         // set the *owning* side!
         $customer->setGroupLayout($this);
     }
 
     public function removeGroupCustomer(Customer $customer)
     {
+        if (!$this->groupPlannings->contains($customer)) {
+            return;
+        }
+
         $this->groupPlannings->removeElement($customer);
         // set the owning side to null
         $customer->setGroupLayout(null);

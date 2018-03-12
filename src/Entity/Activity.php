@@ -67,13 +67,17 @@ class Activity extends TypeName
             return;
         }
 
-        $this->programActivities[] = $programActivity;
+        $this->programActivities->add($programActivity);
         // set the *owning* side!
         $programActivity->setActivity($this);
     }
 
     public function removeProgramActivity(ProgramActivity $programActivity)
     {
+        if (!$this->programActivities->contains($programActivity)) {
+            return;
+        }
+
         $this->programActivities->removeElement($programActivity);
         // set the owning side to null
         $programActivity->setActivity(null);
@@ -157,13 +161,17 @@ class Activity extends TypeName
             return;
         }
 
-        $this->customers[] = $customer;
+        $this->customers->add($customer);
         // set the *owning* side!
         $customer->addActivity($this);
     }
 
     public function removeCustomer(Customer $customer)
     {
+        if (!$this->customers->contains($customer)) {
+            return;
+        }
+
         $this->customers->removeElement($customer);
         // set the owning side to null
         $customer->removeActivity($this);

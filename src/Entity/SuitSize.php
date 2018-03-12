@@ -77,13 +77,17 @@ class SuitSize extends Size
             return;
         }
 
-        $this->suitCustomers[] = $customer;
+        $this->suitCustomers->add($customer);
         // set the *owning* side!
         $customer->setSize($this);
     }
 
     public function removeSuitCustomer(Customer $customer)
     {
+        if (!$this->suitCustomers->contains($customer)) {
+            return;
+        }
+
         $this->suitCustomers->removeElement($customer);
         // set the owning side to null
         $customer->setSize(null);

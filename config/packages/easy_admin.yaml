@@ -176,7 +176,7 @@ easy_admin:
                 - { property: 'activities'}
             form:
               fields:
-                - { property: 'activities'}
+                - { property: 'activities', type_options: { by_reference: false }}
 
         Agency:
           class: App\Entity\Agency

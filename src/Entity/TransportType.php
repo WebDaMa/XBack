@@ -36,13 +36,17 @@ class TransportType extends TypeName
             return;
         }
 
-        $this->travelTypes[] = $travelType;
+        $this->travelTypes->add($travelType);
         // set the *owning* side!
         $travelType->setTransportType($this);
     }
 
     public function removeTravelType(TravelType $travelType)
     {
+        if (!$this->travelTypes->contains($travelType)) {
+            return;
+        }
+
         $this->travelTypes->removeElement($travelType);
         // set the owning side to null
         $travelType->setTransportType(null);

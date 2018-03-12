@@ -42,13 +42,17 @@ class AllInType extends TypeAgency {
             return;
         }
 
-        $this->allCustomers[] = $customer;
+        $this->allCustomers->add($customer);
         // set the *owning* side!
         $customer->setAllInType($this);
     }
 
     public function removeInsCustomer(Customer $customer)
     {
+        if (!$this->allCustomers->contains($customer)) {
+            return;
+        }
+
         $this->allCustomers->removeElement($customer);
         // set the owning side to null
         $customer->setAllInType(null);

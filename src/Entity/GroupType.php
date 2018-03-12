@@ -36,13 +36,17 @@ class GroupType extends TypeAgency
             return;
         }
 
-        $this->customers[] = $customer;
+        $this->customers->add($customer);
         // set the *owning* side!
         $customer->setGroupPreference($this);
     }
 
     public function removeCustomer(Customer $customer)
     {
+        if (!$this->customers->contains($customer)) {
+            return;
+        }
+
         $this->customers->removeElement($customer);
         // set the owning side to null
         $customer->setGroupPreference(null);

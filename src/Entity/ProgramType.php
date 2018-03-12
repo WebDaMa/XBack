@@ -36,13 +36,17 @@ class ProgramType extends TypeAgency
             return;
         }
 
-        $this->programCustomers[] = $customer;
+        $this->programCustomers->add($customer);
         // set the *owning* side!
         $customer->setProgramType($this);
     }
 
     public function removeProgramCustomer(Customer $customer)
     {
+        if (!$this->programCustomers->contains($customer)) {
+            return;
+        }
+
         $this->programCustomers->removeElement($customer);
         // set the owning side to null
         $customer->setProgramType(null);

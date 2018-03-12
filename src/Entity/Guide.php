@@ -123,13 +123,17 @@ class Guide
             return;
         }
 
-        $this->plannings[] = $planning;
+        $this->plannings->add($planning);
         // set the *owning* side!
         $planning->setGuide($this);
     }
 
     public function removePlanning(Planning $planning)
     {
+        if (!$this->plannings->contains($planning)) {
+            return;
+        }
+
         $this->plannings->removeElement($planning);
         // set the owning side to null
         $planning->setGuide(null);

@@ -35,13 +35,17 @@ class BeltSize extends Size
             return;
         }
 
-        $this->beltSuitSizes[] = $suitSize;
+        $this->beltSuitSizes->add($suitSize);
         // set the *owning* side!
         $suitSize->setBeltSize($this);
     }
 
     public function removeBeltSuitSize(SuitSize $suitSize)
     {
+        if (!$this->beltSuitSizes->contains($suitSize)) {
+            return;
+        }
+
         $this->beltSuitSizes->removeElement($suitSize);
         // set the owning side to null
         $suitSize->setBeltSize(null);

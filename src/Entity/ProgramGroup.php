@@ -36,13 +36,17 @@ class ProgramGroup extends TypeName
             return;
         }
 
-        $this->programs[] = $program;
+        $this->programs->add($program);
         // set the *owning* side!
         $program->setProgramGroup($this);
     }
 
     public function removeProgram(Program $program)
     {
+        if (!$this->programs->contains($program)) {
+            return;
+        }
+
         $this->programs->removeElement($program);
         // set the owning side to null
         $program->setProgramGroup(null);

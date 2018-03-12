@@ -36,13 +36,17 @@ class LodgingType extends TypeAgency
             return;
         }
 
-        $this->lodgingCustomers[] = $customer;
+        $this->lodgingCustomers->add($customer);
         // set the *owning* side!
         $customer->setLodgingType($this);
     }
 
     public function removeLodgingCustomer(Customer $customer)
     {
+        if (!$this->lodgingCustomers->contains($customer)) {
+            return;
+        }
+
         $this->lodgingCustomers->removeElement($customer);
         // set the owning side to null
         $customer->setLodgingType(null);

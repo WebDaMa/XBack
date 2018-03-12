@@ -3,24 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/config/packages/easy_admin.yaml" afterPath="$PROJECT_DIR$/config/packages/easy_admin.yaml" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Activity.php" afterPath="$PROJECT_DIR$/src/Entity/Activity.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ActivityGroup.php" afterPath="$PROJECT_DIR$/src/Entity/ActivityGroup.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Agency.php" afterPath="$PROJECT_DIR$/src/Entity/Agency.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/AllInType.php" afterPath="$PROJECT_DIR$/src/Entity/AllInType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BeltSize.php" afterPath="$PROJECT_DIR$/src/Entity/BeltSize.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Customer.php" afterPath="$PROJECT_DIR$/src/Entity/Customer.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Groep.php" afterPath="$PROJECT_DIR$/src/Entity/Groep.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/GroupType.php" afterPath="$PROJECT_DIR$/src/Entity/GroupType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Guide.php" afterPath="$PROJECT_DIR$/src/Entity/Guide.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/HelmSize.php" afterPath="$PROJECT_DIR$/src/Entity/HelmSize.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/InsuranceType.php" afterPath="$PROJECT_DIR$/src/Entity/InsuranceType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Location.php" afterPath="$PROJECT_DIR$/src/Entity/Location.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/LodgingType.php" afterPath="$PROJECT_DIR$/src/Entity/LodgingType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Program.php" afterPath="$PROJECT_DIR$/src/Entity/Program.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ProgramGroup.php" afterPath="$PROJECT_DIR$/src/Entity/ProgramGroup.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/ProgramType.php" afterPath="$PROJECT_DIR$/src/Entity/ProgramType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/SuitSize.php" afterPath="$PROJECT_DIR$/src/Entity/SuitSize.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/TransportType.php" afterPath="$PROJECT_DIR$/src/Entity/TransportType.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Activity.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Activity.php">
+      <file leaf-file-name="easy_admin.yaml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1364">
-              <caret line="69" column="56" lean-forward="true" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="56" />
+            <state relative-caret-position="502">
+              <caret line="233" column="15" lean-forward="true" selection-start-line="233" selection-start-column="15" selection-end-line="233" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -474,12 +456,12 @@
       <workItem from="1519293222634" duration="27180000" />
       <workItem from="1520443973259" duration="581000" />
       <workItem from="1520510108491" duration="5667000" />
-      <workItem from="1520866752055" duration="3008000" />
+      <workItem from="1520866752055" duration="3290000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79360000" />
+    <option name="totallyTimeSpent" value="79642000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -881,18 +863,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
+    <entry file="file://$PROJECT_DIR$/src/Entity/Activity.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="507">
-          <caret line="178" column="81" lean-forward="false" selection-start-line="178" selection-start-column="81" selection-end-line="178" selection-end-column="81" />
+        <state relative-caret-position="817">
+          <caret line="47" column="21" lean-forward="false" selection-start-line="47" selection-start-column="12" selection-end-line="47" selection-end-column="21" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Activity.php">
+    <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1364">
-          <caret line="69" column="56" lean-forward="true" selection-start-line="69" selection-start-column="56" selection-end-line="69" selection-end-column="56" />
+        <state relative-caret-position="502">
+          <caret line="233" column="15" lean-forward="true" selection-start-line="233" selection-start-column="15" selection-end-line="233" selection-end-column="15" />
           <folding />
         </state>
       </provider>

@@ -176,7 +176,7 @@ easy_admin:
                 - { property: 'activities'}
             form:
               fields:
-                - { property: 'activities', type_options: { by_reference: false }}
+                - { property: 'activities'}
 
         Agency:
           class: App\Entity\Agency
@@ -231,6 +231,15 @@ easy_admin:
 
         Activity:
           class: App\Entity\Activity
+          form:
+            fields:
+              - { property: 'name'}
+              - { property: 'programActivities', type_options: { by_reference: false }}
+              - { property: 'agency'}
+              - { property: 'activityGroup'}
+              - { property: 'price'}
+              - { property: 'customers', type_options: { by_reference: false }}
+              - { property: 'location'}
 
         Program:
           class: App\Entity\Program

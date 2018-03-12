@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -247,6 +249,18 @@ class Customer
      * @ORM\Column(type="integer", nullable=true)
      */
     private $insuranceValue;
+
+    /**
+     * Many Customers have Many Options.
+     * @ORM\ManyToMany(targetEntity="App\Entity\Activity", inversedBy="customers")
+     * @ORM\JoinTable(name="customers_activities")
+     */
+    private $activities;
+
+    public function __construct()
+    {
+        $this->activities = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -958,6 +972,32 @@ class Customer
     public function setSizeInfo($sizeInfo): void
     {
         $this->sizeInfo = $sizeInfo;
+    }
+
+    /**
+     * @return Collection|Activity[]
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
+
+    public function addActivity(Activity $activity)
+    {
+        if ($this->activities->contains($activity)) {
+            return;
+        }
+
+        $this->activities[] = $activity;
+        // set the *owning* side!
+        $activity->addCustomer($this);
+    }
+
+    public function removeActivity(Activity $activity)
+    {
+        $this->activities->removeElement($activity);
+        // set the owning side to null
+        $activity->removeCustomer($this);
     }
 
     public function __toString() : string

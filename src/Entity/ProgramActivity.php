@@ -99,5 +99,8 @@ class ProgramActivity
         $this->optional = $optional;
     }
 
-
+    public function __toString() : string
+    {
+        return (string) $this->getProgram()->__toString() . ' - ' . $this->getActivity()->__toString();
+    }
 }

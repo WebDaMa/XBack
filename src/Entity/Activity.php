@@ -36,6 +36,12 @@ class Activity extends TypeName
     private $price;
 
     /**
+     * Many Activities have Many Customers.
+     * @ORM\ManyToMany(targetEntity="App\Entity\Customer", mappedBy="activities")
+     */
+    private $customers;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Location")
      * @ORM\JoinColumn(nullable=true)
      */
@@ -44,12 +50,13 @@ class Activity extends TypeName
     public function __construct()
     {
         $this->programActivities = new ArrayCollection();
+        $this->customers = new ArrayCollection();
     }
 
     /**
      * @return Collection|ProgramActivity[]
      */
-    public function getAgencyCustomers()
+    public function getProgramActivities()
     {
         return $this->programActivities;
     }
@@ -135,4 +142,32 @@ class Activity extends TypeName
     {
         $this->location = $location;
     }
+
+    /**
+     * @return Collection|Customer[]
+     */
+    public function getCustomers()
+    {
+        return $this->customers;
+    }
+
+    public function addCustomer(Customer $customer)
+    {
+        if ($this->customers->contains($customer)) {
+            return;
+        }
+
+        $this->customers[] = $customer;
+        // set the *owning* side!
+        $customer->addActivity($this);
+    }
+
+    public function removeCustomer(Customer $customer)
+    {
+        $this->customers->removeElement($customer);
+        // set the owning side to null
+        $customer->removeActivity($this);
+    }
+
+
 }

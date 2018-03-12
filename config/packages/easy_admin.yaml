@@ -11,6 +11,7 @@ easy_admin:
                 - FormSizes
                 - FormGroupLayout
                 - FormLodgingLayout
+                - FormOptions
                 - { label: 'Entities' }
                 - Customer
                 - Guide
@@ -86,6 +87,7 @@ easy_admin:
               - { property: 'checkedIn'}
               - { property: 'totalExclInsurance'}
               - { property: 'insuranceValue'}
+              - { property: 'activities'}
 
         FormSizes:
           class: App\Entity\Customer
@@ -162,6 +164,19 @@ easy_admin:
             form:
               fields:
                 - { property: 'lodgingLayout'}
+
+        FormOptions:
+            class: App\Entity\Customer
+            list:
+              fields:
+                - { property: 'groupLayout'}
+                - { property: 'programType'}
+                - { property: 'firstName'}
+                - { property: 'lastName'}
+                - { property: 'activities'}
+            form:
+              fields:
+                - { property: 'activities'}
 
         Agency:
           class: App\Entity\Agency

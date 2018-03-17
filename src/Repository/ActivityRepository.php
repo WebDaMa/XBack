@@ -19,16 +19,14 @@ class ActivityRepository extends ServiceEntityRepository
         parent::__construct($registry, Activity::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function findByName($name)
     {
         return $this->createQueryBuilder('a')
-            ->where('a.something = :value')->setParameter('value', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
+            ->where('a.name = :name')
+            ->setParameter('name', $name)
             ->getQuery()
-            ->getResult()
+            ->setMaxResults(1)
+            ->getOneOrNullResult()
         ;
     }
-    */
 }

@@ -31,6 +31,11 @@ class Activity extends TypeName
     private $activityGroup;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Planning", mappedBy="activity")
+     */
+    private $activityPlannings;
+
+    /**
      * @ORM\Column(type="float")
      */
     private $price;
@@ -50,6 +55,7 @@ class Activity extends TypeName
     public function __construct()
     {
         $this->programActivities = new ArrayCollection();
+        $this->activityPlannings = new ArrayCollection();
         $this->customers = new ArrayCollection();
     }
 
@@ -81,6 +87,36 @@ class Activity extends TypeName
         $this->programActivities->removeElement($programActivity);
         // set the owning side to null
         $programActivity->setActivity(null);
+    }
+
+    /**
+     * @return Collection|Planning[]
+     */
+    public function getActivityPlannings()
+    {
+        return $this->activityPlannings;
+    }
+
+    public function addActivityPlanning(Planning $planning)
+    {
+        if ($this->activityPlannings->contains($planning)) {
+            return;
+        }
+
+        $this->activityPlannings->add($planning);
+        // set the *owning* side!
+        $planning->setActivity($this);
+    }
+
+    public function removeActivityPlanning(Planning $planning)
+    {
+        if (!$this->activityPlannings->contains($planning)) {
+            return;
+        }
+
+        $this->activityPlannings->removeElement($planning);
+        // set the owning side to null
+        $planning->setActivity(null);
     }
 
     /**

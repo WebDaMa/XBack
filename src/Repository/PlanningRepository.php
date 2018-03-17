@@ -12,4 +12,14 @@ class PlanningRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Planning::class);
     }
+
+    public function findByPlanningIdAndDate($planningId, $date) {
+        return $this->createQueryBuilder('e')
+            ->where('e.planningId = :planningId AND e.date = :date')
+            ->setParameters(['planningId' => $planningId, 'date'=> $date])
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult()
+            ;
+    }
 }

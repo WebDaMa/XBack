@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Activity;
 use App\Entity\Agency;
 use App\Entity\AllInType;
 use App\Entity\Groep;
@@ -59,6 +60,13 @@ class DashboardController extends Controller {
                 {
                     $customer = $this->importCustomer($row);
 
+                    $customerExists = $this->getDoctrine()->getRepository(Customer::class)->findByCustomerId($customer->getCustomerId());
+
+                    if(!is_null($customerExists) || $customerExists) {
+                        //Update current
+                        $customer = $this->importCustomer($row, $customerExists);
+                    }
+
                     $em->persist($customer);
                 }
                 $upload->setFile($file->getClientOriginalName());
@@ -66,6 +74,11 @@ class DashboardController extends Controller {
                 $em->persist($upload);
 
                 $em->flush();
+
+                $this->addFlash(
+                    'notice',
+                    'Your Customers were saved!'
+                );
             }
 
 
@@ -115,9 +128,9 @@ class DashboardController extends Controller {
                 {
                     $guide = $this->importGuide($row);
 
-                    $exists = $this->getDoctrine()->getRepository(Guide::class)->findByGuideShort($guide->getGuideShort());
+                    $guideExists = $this->getDoctrine()->getRepository(Guide::class)->findByGuideShort($guide->getGuideShort());
 
-                    if(is_null($exists) || !$exists) {
+                    if(is_null($guideExists) || !$guideExists) {
                         $em->persist($guide);
                     }
                 }
@@ -135,10 +148,21 @@ class DashboardController extends Controller {
                 $em = $this->getDoctrine()->getManager();
                 foreach ($groupSheet as $row)
                 {
-                    $group = $this->importGroup($row);
-                    $periodId = $group->getPeriodId();
+                    $groep = $this->importGroep($row);
+                    $periodId = $groep->getPeriodId();
 
-                    $em->persist($group);
+                    $groepExists = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($groep->getGroupId(), $periodId);
+
+                    if(!is_null($groepExists) || $groepExists) {
+                        //Update current
+                        $groep = $this->importGroep($row, $groepExists);
+                    }
+
+                    if(!is_null($groep->getName()) && !empty($groep->getName()) && $groep->getName() !== '') {
+                        //Don't add empty groeps
+                        $em->persist($groep);
+                    }
+
                 }
                 $em->flush();
             }
@@ -158,6 +182,13 @@ class DashboardController extends Controller {
                 {
                     $planning = $this->importPlanning($row, $periodId);
 
+                    $planningExists = $this->getDoctrine()->getRepository(Planning::class)->findByPlanningIdAndDate($planning->getPlanningId(), $planning->getDate());
+
+                    if(!is_null($planningExists) || $planningExists) {
+                        //Update current
+                        $planning = $this->importPlanning($row, $periodId, $planningExists);
+                    }
+
                     $em->persist($planning);
                 }
             }
@@ -168,7 +199,12 @@ class DashboardController extends Controller {
 
             $em->flush();
 
-            return $this->redirect($this->generateUrl('admin'));
+            $this->addFlash(
+                'notice',
+                'Your plannings were saved!'
+            );
+
+            return $this->redirect($this->generateUrl('admin', array('entity' => 'Planning')));
         }
 
         return $this->render('dashboard/import.html.twig', array(
@@ -176,127 +212,129 @@ class DashboardController extends Controller {
         ));
     }
 
-    private function importCustomer($row): Customer
+    private function importCustomer($row, ?Customer $updateCustomer = null): Customer
     {
-        $customer = new Customer();
+        if(is_null($updateCustomer)) {
+            $updateCustomer = new Customer();
+        }
 
-        $customer->setCustomerId($row[0]);
-        $customer->setFileId($row[1]);
-        $customer->setPeriodId($row[3]);
-        $customer->setBookerId($row[4]);
-        $customer->setBooker($row[5]);
-        $customer->setLastName($row[6]);
-        $customer->setFirstName($row[7]);
-        $customer->setBirthdate($this->getDateOrNull($row[8]));
-        $customer->setEmail($row[9]);
-        $customer->setGsm($row[10]);
-        $customer->setNationalRegisterNumber($row[11]);
-        $customer->setExpireDate($this->getDateOrNull($row[12]));
+        $updateCustomer->setCustomerId($row[0]);
+        $updateCustomer->setFileId($row[1]);
+        $updateCustomer->setPeriodId($row[3]);
+        $updateCustomer->setBookerId($row[4]);
+        $updateCustomer->setBooker($row[5]);
+        $updateCustomer->setLastName($row[6]);
+        $updateCustomer->setFirstName($row[7]);
+        $updateCustomer->setBirthdate($this->getDateOrNull($row[8]));
+        $updateCustomer->setEmail($row[9]);
+        $updateCustomer->setGsm($row[10]);
+        $updateCustomer->setNationalRegisterNumber($row[11]);
+        $updateCustomer->setExpireDate($this->getDateOrNull($row[12]));
 
         $size = $this->getDoctrine()->getRepository(SuitSize::class)->findByName($row[13]);
         if ($size)
         {
-            $customer->setSize($size);
+            $updateCustomer->setSize($size);
         }
 
-        $customer->setNameShortage($row[14]);
-        $customer->setEmergencyNumber($row[15]);
-        $customer->setLicensePlate($row[16]);
+        $updateCustomer->setNameShortage($row[14]);
+        $updateCustomer->setEmergencyNumber($row[15]);
+        $updateCustomer->setLicensePlate($row[16]);
 
-        $customer->setTypePerson($row[17]);
+        $updateCustomer->setTypePerson($row[17]);
 
-        $customer->setInfoCustomer($row[18]);
-        $customer->setInfoFile($row[19]);
+        $updateCustomer->setInfoCustomer($row[18]);
+        $updateCustomer->setInfoFile($row[19]);
 
         $agency = $this->getDoctrine()->getRepository(Agency::class)->findByCode($row[20]);
         if ($agency)
         {
-            $customer->setAgency($agency);
+            $updateCustomer->setAgency($agency);
         }
 
         $location = $this->getDoctrine()->getRepository(Location::class)->findByCode($row[21]);
         if ($location)
         {
-            $customer->setLocation($location);
+            $updateCustomer->setLocation($location);
         }
 
-        $customer->setStartDay($this->getDateOrNull($row[22]));
-        $customer->setEndDay($this->getDateOrNull($row[23]));
+        $updateCustomer->setStartDay($this->getDateOrNull($row[22]));
+        $updateCustomer->setEndDay($this->getDateOrNull($row[23]));
 
         $program = $this->getDoctrine()->getRepository(ProgramType::class)->findByCode($row[24]);
         if ($program)
         {
-            $customer->setProgramType($program);
+            $updateCustomer->setProgramType($program);
         }
 
         $lodging = $this->getDoctrine()->getRepository(LodgingType::class)->findByCode($row[25]);
         if ($lodging)
         {
-            $customer->setLodgingType($lodging);
+            $updateCustomer->setLodgingType($lodging);
         }
 
         $allIn = $this->getDoctrine()->getRepository(AllInType::class)->findByCode($row[26]);
         if ($allIn)
         {
-            $customer->setAllInType($allIn);
+            $updateCustomer->setAllInType($allIn);
         }
 
         $insuranceType = $this->getDoctrine()->getRepository(InsuranceType::class)->findByCode($row[27]);
         if ($insuranceType)
         {
-            $customer->setInsuranceType($insuranceType);
+            $updateCustomer->setInsuranceType($insuranceType);
         }
 
         $travelGo = $this->getDoctrine()->getRepository(TravelType::class)->findByCode($row[28]);
         if ($travelGo)
         {
-            $customer->setTravelGoType($travelGo);
+            $updateCustomer->setTravelGoType($travelGo);
         }
 
-        $customer->setTravelGoDate($this->getDateOrNull($row[29]));
+        $updateCustomer->setTravelGoDate($this->getDateOrNull($row[29]));
 
         $travelBack = $this->getDoctrine()->getRepository(TravelType::class)->findByCode($row[30]);
         if ($travelBack)
         {
-            $customer->setTravelBackType($travelBack);
+            $updateCustomer->setTravelBackType($travelBack);
         }
 
-        $customer->setTravelBackDate($this->getDateOrNull($row[31]));
+        $updateCustomer->setTravelBackDate($this->getDateOrNull($row[31]));
 
-        $customer->setBoardingPoint($row[32]);
+        $updateCustomer->setBoardingPoint($row[32]);
 
-        $customer->setActivityOption($row[33]);
+        $updateCustomer->setActivityOption($row[33]);
 
-        $customer->setGroupName($row[34]);
+        $updateCustomer->setGroupName($row[34]);
 
         $groupType = $this->getDoctrine()->getRepository(GroupType::class)->findByCode($row[35]);
         if ($groupType)
         {
-            $customer->setGroupPreference($groupType);
+            $updateCustomer->setGroupPreference($groupType);
         }
 
-        $customer->setLodgingLayout($row[36]);
+        $updateCustomer->setLodgingLayout($row[36]);
 
 
-        $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[37], $customer->getPeriodId());
+        $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[37], $updateCustomer->getPeriodId());
         if ($group)
         {
-            $customer->setGroupLayout($group);
+            $updateCustomer->setGroupLayout($group);
         }
 
-        $customer->setBookerPayed($row[38]);
+        $updateCustomer->setBookerPayed($row[38]);
 
-        $customer->setPayerId($this->getDoctrine()->getRepository(Customer::class)->find($row[39]));
+        $updateCustomer->setPayerId($this->getDoctrine()->getRepository(Customer::class)->find($row[39]));
 
-        $customer->setIsCamper($row[40]);
+        $updateCustomer->setIsCamper($row[40]);
 
-        $customer->setCheckedIn($row[41]);
+        $updateCustomer->setCheckedIn($row[41]);
 
-        $customer->setTotalExclInsurance(is_float($row[42]) ? $row[42] : 0);
+        $updateCustomer->setTotalExclInsurance(is_float($row[42]) ? $row[42] : 0);
 
-        $customer->setInsuranceValue($row[43]);
+        $updateCustomer->setInsuranceValue($row[43]);
 
-        return $customer;
+        return $updateCustomer;
     }
 
     private function importGuide($row): Guide
@@ -310,43 +348,51 @@ class DashboardController extends Controller {
         return $guide;
     }
 
-    private function importGroup($row): Groep
+    private function importGroep($row, ?Groep $updateGroep = null): Groep
     {
-        $group = new Groep();
+        if(is_null($updateGroep)) {
+            $updateGroep = new Groep();
+        }
 
-        $group->setGroupId($row[0]);
-        $group->setName($row[1]);
-        $group->setPeriodId($row[2]);
-        $group->setLocation($row[3]);
+        $updateGroep->setGroupId($row[0]);
+        $updateGroep->setName($row[1]);
+        $updateGroep->setPeriodId($row[2]);
+        $updateGroep->setLocation($row[3]);
 
-        return $group;
+        return $updateGroep;
     }
 
-    private function importPlanning($row, $periodId): Planning
+    private function importPlanning($row, $periodId, ?Planning $updatePlanning = null): Planning
     {
-        $planning = new Planning();
+        if(is_null($updatePlanning)) {
+            $updatePlanning = new Planning();
+        }
 
-        $planning->setPlanningId($row[0]);
+        $updatePlanning->setPlanningId($row[0]);
 
-        $planning->setDate($this->convertExcelDateToDateTime($row[1]));
+        $updatePlanning->setDate($this->convertExcelDateToDateTime($row[1]));
 
         $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[2], $periodId);
         if ($group)
         {
-            $planning->setGroup($group);
+            $updatePlanning->setGroup($group);
         }
 
-        $planning->setActivity($row[5]);
+        $activity = $this->getDoctrine()->getRepository(Activity::class)->findByName($row[5]);
+        if ($activity)
+        {
+            $updatePlanning->setActivity($activity);
+        }
 
         $guide = $this->getDoctrine()->getRepository(Guide::class)->findByGuideShort($row[6]);
         if ($guide)
         {
-            $planning->setGuide($guide);
+            $updatePlanning->setGuide($guide);
         }
 
-        $planning->setGuideFunction($row[7]);
+        $updatePlanning->setGuideFunction($row[7]);
 
-        return $planning;
+        return $updatePlanning;
     }
 
     private function getDateOrNull($date)

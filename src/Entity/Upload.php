@@ -2,13 +2,15 @@
 
 namespace App\Entity;
 
+use App\Entity\Base\TypeTimestamps;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="App\Repository\UploadRepository")
  */
-class Upload
+class Upload extends TypeTimestamps
 {
     /**
      * @ORM\Id

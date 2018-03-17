@@ -3,14 +3,16 @@
 namespace App\Entity;
 
 use App\Entity\Base\TypeName;
+use App\Entity\Base\TypeTimestamps;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="App\Repository\GroepRepository")
  */
-class Groep
+class Groep extends TypeTimestamps
 {
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Planning", mappedBy="group")

@@ -2,12 +2,14 @@
 
 namespace App\Entity;
 
+use App\Entity\Base\TypeTimestamps;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="App\Repository\PlanningRepository")
  */
-class Planning
+class Planning extends TypeTimestamps
 {
 
     /**
@@ -15,46 +17,42 @@ class Planning
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    private $id;
 
     // add your own fields
 
     /**
      * @ORM\Column(type="integer")
      */
-    protected $planningId;
+    private $planningId;
 
     /**
      * @ORM\Column(type="date")
      */
-    protected $date;
+    private $date;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Groep", inversedBy="groupPlannings")
      * @ORM\JoinColumn(nullable=true)
      */
-    protected $group;
+    private $group;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Activity", inversedBy="activityPlannings")
+     * @ORM\JoinColumn(nullable=true)
      */
-    protected $activity;
+    private $activity;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Guide", inversedBy="plannings")
      * @ORM\JoinColumn(nullable=true)
      */
-    protected $guide;
+    private $guide;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    protected $guideFunction;
-
-    /**
-     * @ORM\Column(type="boolean", nullable=true)
-     */
-    protected $print;
+    private $guideFunction;
 
     /**
      * @return mixed
@@ -107,7 +105,7 @@ class Planning
     /**
      * @return mixed
      */
-    public function getActivity()
+    public function getActivity(): ?Activity
     {
         return $this->activity;
     }
@@ -115,7 +113,7 @@ class Planning
     /**
      * @param mixed $activity
      */
-    public function setActivity($activity): void
+    public function setActivity(Activity $activity = null)
     {
         $this->activity = $activity;
     }

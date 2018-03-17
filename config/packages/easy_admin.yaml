@@ -4,14 +4,16 @@ easy_admin:
             brand_color: '#70b32e'
             menu:
                 - { label: 'Imports' }
-                - { label: 'BO Import', route: 'admin_bo_upload' }
                 - { label: 'Planning Import', route: 'admin_planning_upload' }
+                - { label: 'BO Import', route: 'admin_bo_upload' }
                 - { label: 'Forms' }
                 - FormCheckin
                 - FormSizes
                 - FormGroupLayout
                 - FormLodgingLayout
                 - FormOptions
+                - FormPayment
+                - FormBill
                 - { label: 'Entities' }
                 - Customer
                 - Guide
@@ -133,6 +135,21 @@ easy_admin:
                 - { property: 'allInType'}
                 - { property: 'groupLayout'}
 
+        FormBill:
+            class: App\Entity\Customer
+            list:
+              fields:
+                - { property: 'groupLayout'}
+                - { property: 'booker'}
+                - { property: 'firstName'}
+                - { property: 'lastName'}
+                - { property: 'payments'}
+                - { property: 'bookerPayed'}
+            form:
+              fields:
+                - { property: 'payments'}
+                - { property: 'bookerPayed'}
+
         FormGroupLayout:
             class: App\Entity\Customer
             list:
@@ -246,3 +263,16 @@ easy_admin:
 
         ProgramActivity:
           class: App\Entity\ProgramActivity
+
+        FormPayment:
+          class: App\Entity\Payment
+          list:
+            fields:
+              - { property: 'customer'}
+              - { property: 'description'}
+              - { property: 'price'}
+          form:
+            fields:
+              - { property: 'customer'}
+              - { property: 'description'}
+              - { property: 'price'}

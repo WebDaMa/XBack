@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
+use App\Entity\Base\TypeTimestamps;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
  */
-class Customer
+class Customer extends TypeTimestamps
 {
     /**
      * @ORM\Id
@@ -251,6 +253,12 @@ class Customer
     private $insuranceValue;
 
     /**
+     * One Customer has Many Payments.
+     * @ORM\OneToMany(targetEntity="App\Entity\Payment", mappedBy="customer")
+     */
+    private $payments;
+
+    /**
      * Many Customers have Many Options.
      * @ORM\ManyToMany(targetEntity="App\Entity\Activity", inversedBy="customers")
      * @ORM\JoinTable(name="customers_activities")
@@ -260,6 +268,7 @@ class Customer
     public function __construct()
     {
         $this->activities = new ArrayCollection();
+        $this->payments = new ArrayCollection();
     }
 
     /**
@@ -979,6 +988,7 @@ class Customer
      */
     public function getActivities()
     {
+        // Filter $this->getAgency(); + On Program activity
         return $this->activities;
     }
 
@@ -1004,9 +1014,39 @@ class Customer
         $activity->removeCustomer($this);
     }
 
+    /**
+     * @return Collection|Payment[]
+     */
+    public function getPayments()
+    {
+        return $this->payments;
+    }
+
+    public function addPayment(Payment $payment)
+    {
+        if ($this->payments->contains($payment)) {
+            return;
+        }
+
+        $this->payments->add($payment);
+        // set the *owning* side!
+        $payment->setCustomer($this);
+    }
+
+    public function removePayment(Payment $payment)
+    {
+        if (!$this->payments->contains($payment)) {
+            return;
+        }
+
+        $this->payments->removeElement($payment);
+        // set the owning side to null
+        $payment->setCustomer(null);
+    }
+
     public function __toString() : string
     {
-        return (string) $this->getFirstName() . ' ' . $this->getLastName();
+        return (string) $this->getFirstName() . ' ' . $this->getLastName() . ' (' . $this->getBookerId() . ')';
     }
 
 }

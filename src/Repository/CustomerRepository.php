@@ -13,16 +13,13 @@ class CustomerRepository extends ServiceEntityRepository
         parent::__construct($registry, Customer::class);
     }
 
-    /*
-    public function findBySomething($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->where('c.something = :value')->setParameter('value', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+    public function findByCustomerId($customerId) {
+        return $this->createQueryBuilder('e')
+            ->where('e.customerId = :customerId')
+            ->setParameters(['customerId' => $customerId])
             ->getQuery()
-            ->getResult()
-        ;
+            ->setMaxResults(1)
+            ->getOneOrNullResult()
+            ;
     }
-    */
 }

@@ -197,61 +197,264 @@ easy_admin:
 
         Agency:
           class: App\Entity\Agency
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'agencyCustomers'}
+          form:
+            fields:
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'agencyCustomers', type_options: { by_reference: false }}
 
         AllInType:
           class: App\Entity\AllInType
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'price'}
+              - { property: 'allCustomers'}
+          form:
+            fields:
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'price'}
+              - { property: 'allCustomers', type_options: { by_reference: false }}
 
         InsuranceType:
           class: App\Entity\InsuranceType
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'insuranceCode'}
+              - { property: 'insuranceName'}
+              - { property: 'insCustomers'}
+          form:
+            fields:
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'insuranceCode'}
+              - { property: 'insuranceName'}
+              - { property: 'insCustomers', type_options: { by_reference: false }}
 
         LodgingType:
           class: App\Entity\LodgingType
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'lodgingCustomers'}
+          form:
+            fields:
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'lodgingCustomers', type_options: { by_reference: false }}
 
         ProgramType:
           class: App\Entity\ProgramType
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'programCustomers'}
+          form:
+            fields:
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'programCustomers', type_options: { by_reference: false }}
 
         TravelType:
           class: App\Entity\TravelType
 
         TransportType:
           class: App\Entity\TransportType
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'name'}
+              - { property: 'travelTypes'}
+          form:
+            fields:
+              - { property: 'name'}
+              - { property: 'travelTypes', type_options: { by_reference: false }}
 
         Location:
           class: App\Entity\Location
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'locCustomers'}
+          form:
+            fields:
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'locCustomers', type_options: { by_reference: false }}
 
         GroupType:
           class: App\Entity\GroupType
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'agency'}
+              - { property: 'customers'}
+          form:
+            fields:
+              - { property: 'code'}
+              - { property: 'description'}
+              - { property: 'agency'}
+              - { property: 'customers', type_options: { by_reference: false }}
 
         Groep:
           class: App\Entity\Groep
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'groupId'}
+              - { property: 'periodId'}
+              - { property: 'name'}
+              - { property: 'location'}
+              - { property: 'groupPlannings'}
+              - { property: 'groupCustomers'}
+          form:
+            fields:
+              - { property: 'groupId'}
+              - { property: 'periodId'}
+              - { property: 'name'}
+              - { property: 'location'}
+              - { property: 'groupPlannings', type_options: { by_reference: false }}
+              - { property: 'groupCustomers', type_options: { by_reference: false }}
 
         Guide:
           class: App\Entity\Guide
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'guideShort'}
+              - { property: 'guideFirstName'}
+              - { property: 'guideLastName'}
+              - { property: 'plannings'}
+          form:
+            fields:
+              - { property: 'guideShort'}
+              - { property: 'guideFirstName'}
+              - { property: 'guideLastName'}
+              - { property: 'plannings', type_options: { by_reference: false }}
 
         SuitSize:
           class: App\Entity\SuitSize
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'name'}
+              - { property: 'beltSize'}
+              - { property: 'helmSize'}
+              - { property: 'suitCustomers'}
+          form:
+            fields:
+              - { property: 'name'}
+              - { property: 'beltSize'}
+              - { property: 'helmSize'}
+              - { property: 'suitCustomers', type_options: { by_reference: false }}
 
         HelmSize:
           class: App\Entity\HelmSize
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'name'}
+              - { property: 'helmSuitSizes'}
+          form:
+            fields:
+              - { property: 'name'}
+              - { property: 'helmSuitSizes', type_options: { by_reference: false }}
 
         BeltSize:
           class: App\Entity\BeltSize
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'name'}
+              - { property: 'beltSuitSizes'}
+          form:
+            fields:
+              - { property: 'name'}
+              - { property: 'beltSuitSizes', type_options: { by_reference: false }}
 
         Planning:
           class: App\Entity\Planning
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'planningId'}
+              - { property: 'date'}
+              - { property: 'group'}
+              - { property: 'activity'}
+              - { property: 'guide'}
+              - { property: 'guideFunction'}
+          form:
+            fields:
+              - { property: 'id'}
+              - { property: 'planningId'}
+              - { property: 'date'}
+              - { property: 'group', type_options: { by_reference: false }}
+              - { property: 'activity', type_options: { by_reference: false }}
+              - { property: 'guide', type_options: { by_reference: false }}
+              - { property: 'guideFunction'}
 
         ActivityGroup:
           class: App\Entity\ActivityGroup
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'name'}
+              - { property: 'activities'}
+          form:
+            fields:
+              - { property: 'name'}
+              - { property: 'activities', type_options: { by_reference: false }}
 
         ProgramGroup:
           class: App\Entity\ProgramGroup
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'name'}
+              - { property: 'programs'}
+          form:
+            fields:
+              - { property: 'name'}
+              - { property: 'programs', type_options: { by_reference: false }}
 
         Activity:
           class: App\Entity\Activity
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'name'}
+              - { property: 'programActivities'}
+              - { property: 'agency'}
+              - { property: 'activityGroup'}
+              - { property: 'activityPlannings'}
+              - { property: 'price'}
+              - { property: 'customers'}
+              - { property: 'location'}
           form:
             fields:
               - { property: 'name'}
               - { property: 'programActivities', type_options: { by_reference: false }}
+              - { property: 'activityPlannings', type_options: { by_reference: false }}
               - { property: 'agency'}
               - { property: 'activityGroup'}
               - { property: 'price'}
@@ -260,6 +463,25 @@ easy_admin:
 
         Program:
           class: App\Entity\Program
+          list:
+            fields:
+              - { property: 'id'}
+              - { property: 'name'}
+              - { property: 'activityPrograms'}
+              - { property: 'agency'}
+              - { property: 'programGroup'}
+              - { property: 'days'}
+              - { property: 'programType'}
+              - { property: 'location'}
+          form:
+            fields:
+              - { property: 'name'}
+              - { property: 'activityPrograms', type_options: { by_reference: false }}
+              - { property: 'agency'}
+              - { property: 'programGroup'}
+              - { property: 'days'}
+              - { property: 'programType'}
+              - { property: 'location'}
 
         ProgramActivity:
           class: App\Entity\ProgramActivity

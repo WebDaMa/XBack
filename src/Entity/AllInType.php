@@ -20,7 +20,7 @@ class AllInType extends TypeAgency {
     /**
      * @ORM\Column(type="float")
      */
-    private $prize;
+    private $price;
 
     public function __construct()
     {
@@ -61,17 +61,17 @@ class AllInType extends TypeAgency {
     /**
      * @return mixed
      */
-    public function getPrize()
+    public function getPrice()
     {
-        return $this->prize;
+        return $this->price;
     }
 
     /**
-     * @param mixed $prize
+     * @param mixed $price
      */
-    public function setPrize($prize): void
+    public function setPrice($price): void
     {
-        $this->prize = $prize;
+        $this->price = $price;
     }
 
 }

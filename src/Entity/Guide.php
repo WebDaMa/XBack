@@ -141,7 +141,8 @@ class Guide
 
     public function __toString() : string
     {
-        return (string) $this->getGuideShort();
+        return (string) $this->getGuideShort() . ' - ' . $this->getGuideFirstName() .
+            ' ' . $this->getGuideLastName();
     }
 
 }

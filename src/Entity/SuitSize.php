@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\Base\TypeName;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SuitSizeRepository")
  */
-class SuitSize extends Size
+class SuitSize extends TypeName
 {
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Customer", mappedBy="size")
@@ -25,6 +26,11 @@ class SuitSize extends Size
      * @ORM\ManyToOne(targetEntity="App\Entity\HelmSize", inversedBy="helmSuitSizes")
      */
     private $helmSize;
+
+    public function __construct()
+    {
+        $this->suitCustomers = new ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -56,11 +62,6 @@ class SuitSize extends Size
     public function setHelmSize(HelmSize $helmSize)
     {
         $this->helmSize = $helmSize;
-    }
-
-    public function __construct()
-    {
-        $this->suitCustomers = new ArrayCollection();
     }
 
     /**

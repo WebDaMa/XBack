@@ -237,102 +237,105 @@ class DashboardController extends Controller {
             $updateCustomer->setSize($size);
         }
 
-        $updateCustomer->setNameShortage($row[14]);
-        $updateCustomer->setEmergencyNumber($row[15]);
-        $updateCustomer->setLicensePlate($row[16]);
+        $updateCustomer->setSizeInfo($row[14]);
+        $updateCustomer->setNameShortage($row[15]);
+        $updateCustomer->setEmergencyNumber($row[16]);
+        $updateCustomer->setLicensePlate($row[17]);
 
-        $updateCustomer->setTypePerson($row[17]);
+        $updateCustomer->setTypePerson($row[18]);
 
-        $updateCustomer->setInfoCustomer($row[18]);
-        $updateCustomer->setInfoFile($row[19]);
+        $updateCustomer->setInfoCustomer($row[19]);
+        $updateCustomer->setInfoFile($row[20]);
 
-        $agency = $this->getDoctrine()->getRepository(Agency::class)->findByCode($row[20]);
+        $agency = $this->getDoctrine()->getRepository(Agency::class)->findByCode($row[21]);
         if ($agency)
         {
             $updateCustomer->setAgency($agency);
         }
 
-        $location = $this->getDoctrine()->getRepository(Location::class)->findByCode($row[21]);
+        $location = $this->getDoctrine()->getRepository(Location::class)->findByCode($row[22]);
         if ($location)
         {
             $updateCustomer->setLocation($location);
         }
 
-        $updateCustomer->setStartDay($this->getDateOrNull($row[22]));
-        $updateCustomer->setEndDay($this->getDateOrNull($row[23]));
+        $updateCustomer->setStartDay($this->getDateOrNull($row[23]));
+        $updateCustomer->setEndDay($this->getDateOrNull($row[24]));
 
-        $program = $this->getDoctrine()->getRepository(ProgramType::class)->findByCode($row[24]);
+        $program = $this->getDoctrine()->getRepository(ProgramType::class)->findByCode($row[25]);
         if ($program)
         {
             $updateCustomer->setProgramType($program);
         }
 
-        $lodging = $this->getDoctrine()->getRepository(LodgingType::class)->findByCode($row[25]);
+        $lodging = $this->getDoctrine()->getRepository(LodgingType::class)->findByCode($row[26]);
         if ($lodging)
         {
             $updateCustomer->setLodgingType($lodging);
         }
 
-        $allIn = $this->getDoctrine()->getRepository(AllInType::class)->findByCode($row[26]);
+        $allIn = $this->getDoctrine()->getRepository(AllInType::class)->findByCode($row[27]);
         if ($allIn)
         {
             $updateCustomer->setAllInType($allIn);
         }
 
-        $insuranceType = $this->getDoctrine()->getRepository(InsuranceType::class)->findByCode($row[27]);
+        $insuranceType = $this->getDoctrine()->getRepository(InsuranceType::class)->findByCode($row[28]);
         if ($insuranceType)
         {
             $updateCustomer->setInsuranceType($insuranceType);
         }
 
-        $travelGo = $this->getDoctrine()->getRepository(TravelType::class)->findByCode($row[28]);
+        $travelGo = $this->getDoctrine()->getRepository(TravelType::class)->findByCode($row[29]);
         if ($travelGo)
         {
             $updateCustomer->setTravelGoType($travelGo);
         }
 
-        $updateCustomer->setTravelGoDate($this->getDateOrNull($row[29]));
+        $updateCustomer->setTravelGoDate($this->getDateOrNull($row[30]));
 
-        $travelBack = $this->getDoctrine()->getRepository(TravelType::class)->findByCode($row[30]);
+        $travelBack = $this->getDoctrine()->getRepository(TravelType::class)->findByCode($row[31]);
         if ($travelBack)
         {
             $updateCustomer->setTravelBackType($travelBack);
         }
 
-        $updateCustomer->setTravelBackDate($this->getDateOrNull($row[31]));
+        $updateCustomer->setTravelBackDate($this->getDateOrNull($row[32]));
 
-        $updateCustomer->setBoardingPoint($row[32]);
+        $updateCustomer->setBoardingPoint($row[33]);
 
-        $updateCustomer->setActivityOption($row[33]);
+        $updateCustomer->setActivityOption($row[34]);
 
-        $updateCustomer->setGroupName($row[34]);
+        $updateCustomer->setGroupName($row[35]);
 
-        $groupType = $this->getDoctrine()->getRepository(GroupType::class)->findByCode($row[35]);
+        $groupType = $this->getDoctrine()->getRepository(GroupType::class)->findByCode($row[36]);
         if ($groupType)
         {
             $updateCustomer->setGroupPreference($groupType);
         }
 
-        $updateCustomer->setLodgingLayout($row[36]);
+        $updateCustomer->setLodgingLayout($row[37]);
 
 
-        $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[37], $updateCustomer->getPeriodId());
+        $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[38], $updateCustomer->getPeriodId());
         if ($group)
         {
             $updateCustomer->setGroupLayout($group);
         }
 
-        $updateCustomer->setBookerPayed($row[38]);
+        $updateCustomer->setBookerPayed($this->getStringBool($row[39]));
 
-        $updateCustomer->setPayerId($this->getDoctrine()->getRepository(Customer::class)->find($row[39]));
+        $updateCustomer->setPayerId($this->getDoctrine()->getRepository(Customer::class)->find($row[40]));
 
-        $updateCustomer->setIsCamper($row[40]);
+        $updateCustomer->setIsCamper($this->getStringBool($row[41]));
 
-        $updateCustomer->setCheckedIn($row[41]);
+        $updateCustomer->setPayed($this->getStringBool($row[42]));
 
-        $updateCustomer->setTotalExclInsurance(is_float($row[42]) ? $row[42] : 0);
+        $updateCustomer->setCheckedIn($this->getStringBool($row[43]));
 
-        $updateCustomer->setInsuranceValue($row[43]);
+        $updateCustomer->setTotalExclInsurance(is_float($row[44]) ? $row[44] : 0);
+
+        $updateCustomer->setInsuranceValue($row[45]);
 
         return $updateCustomer;
     }
@@ -409,6 +412,16 @@ class DashboardController extends Controller {
         $time->setTimestamp($unix);
 
         return $time;
+    }
+
+    private function getStringBool($value) {
+        if(is_string($value)) {
+            $value = strtolower($value);
+            return $value === 'true';
+        }else{
+            return $value;
+        }
+
     }
 
     private function getDynamicSheetAsArray(Worksheet $sheet) {

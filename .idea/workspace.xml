@@ -3,13 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/config/packages/easy_admin.yaml" afterPath="$PROJECT_DIR$/config/packages/easy_admin.yaml" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/AllInType.php" afterPath="$PROJECT_DIR$/src/Entity/AllInType.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/BeltSize.php" afterPath="$PROJECT_DIR$/src/Entity/BeltSize.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Guide.php" afterPath="$PROJECT_DIR$/src/Entity/Guide.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/HelmSize.php" afterPath="$PROJECT_DIR$/src/Entity/HelmSize.php" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/Size.php" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/SuitSize.php" afterPath="$PROJECT_DIR$/src/Entity/SuitSize.php" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DashboardController.php" afterPath="$PROJECT_DIR$/src/Controller/DashboardController.php" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Customer.php" afterPath="$PROJECT_DIR$/src/Entity/Customer.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="easy_admin.yaml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
+      <file leaf-file-name="DashboardController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6615">
-              <caret line="349" column="41" lean-forward="true" selection-start-line="349" selection-start-column="41" selection-end-line="349" selection-end-column="41" />
+            <state relative-caret-position="540">
+              <caret line="333" column="68" lean-forward="true" selection-start-line="333" selection-start-column="68" selection-end-line="333" selection-end-column="68" />
               <folding />
             </state>
           </provider>
@@ -37,7 +32,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>groupty</find>
       <find>$groupPreference</find>
       <find>$insuranceType</find>
       <find>InsuranceType</find>
@@ -67,6 +61,7 @@
       <find>flas</find>
       <find>progr</find>
       <find>guide</find>
+      <find>payed</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -119,9 +114,7 @@
         <option value="$PROJECT_DIR$/src/Repository/ActivityRepository.php" />
         <option value="$PROJECT_DIR$/config/packages/framework.yaml" />
         <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
-        <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Planning.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Customer.php" />
         <option value="$PROJECT_DIR$/src/Entity/Payment.php" />
         <option value="$PROJECT_DIR$/src/Entity/Guide.php" />
         <option value="$PROJECT_DIR$/src/Entity/AllInType.php" />
@@ -129,6 +122,8 @@
         <option value="$PROJECT_DIR$/src/Entity/HelmSize.php" />
         <option value="$PROJECT_DIR$/src/Entity/BeltSize.php" />
         <option value="$PROJECT_DIR$/config/packages/easy_admin.yaml" />
+        <option value="$PROJECT_DIR$/src/Entity/Customer.php" />
+        <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
       </list>
     </option>
   </component>
@@ -244,8 +239,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -377,6 +370,8 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -515,18 +510,20 @@
       <workItem from="1520443973259" duration="581000" />
       <workItem from="1520510108491" duration="5667000" />
       <workItem from="1520866752055" duration="10322000" />
-      <workItem from="1521631396720" duration="4441000" />
+      <workItem from="1521631396720" duration="4677000" />
+      <workItem from="1521744917713" duration="792000" />
+      <workItem from="1521826465933" duration="728000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91115000" />
+    <option name="totallyTimeSpent" value="92871000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1875" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32904884" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -560,7 +557,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/templates/dashboard/planning.html.twig" />
     <entry file="file://$PROJECT_DIR$/src/Form/UploadType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -724,17 +720,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1316">
-          <caret line="202" column="25" lean-forward="true" selection-start-line="202" selection-start-column="25" selection-end-line="202" selection-end-column="25" />
-          <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
-            <element signature="e#6661#6689#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Payment.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="688">
@@ -776,16 +761,6 @@
         <state relative-caret-position="266">
           <caret line="17" column="25" lean-forward="false" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="25" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Customer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="147" column="41" lean-forward="false" selection-start-line="147" selection-start-column="36" selection-end-line="147" selection-end-column="41" />
-          <folding>
-            <element signature="e#30#65#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -869,14 +844,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Size.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-15">
-          <caret line="20" column="14" lean-forward="false" selection-start-line="20" selection-start-column="14" selection-end-line="20" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Size.php" />
     <entry file="file://$PROJECT_DIR$/src/Entity/SuitSize.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="456">
@@ -943,6 +911,31 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="6615">
           <caret line="349" column="41" lean-forward="true" selection-start-line="349" selection-start-column="41" selection-end-line="349" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env.dist">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Customer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="650">
+          <caret line="1067" column="0" lean-forward="false" selection-start-line="1067" selection-start-column="0" selection-end-line="1067" selection-end-column="0" />
+          <folding>
+            <element signature="e#30#65#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="333" column="68" lean-forward="true" selection-start-line="333" selection-start-column="68" selection-end-line="333" selection-end-column="68" />
           <folding />
         </state>
       </provider>

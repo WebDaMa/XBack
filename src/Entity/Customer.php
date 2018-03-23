@@ -135,12 +135,12 @@ class Customer extends TypeTimestamps
     private $location;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $startDay;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $endDay;
 
@@ -236,6 +236,11 @@ class Customer extends TypeTimestamps
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isCamper;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $payed;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -1042,6 +1047,22 @@ class Customer extends TypeTimestamps
         $this->payments->removeElement($payment);
         // set the owning side to null
         $payment->setCustomer(null);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPayed()
+    {
+        return $this->payed;
+    }
+
+    /**
+     * @param mixed $payed
+     */
+    public function setPayed($payed): void
+    {
+        $this->payed = $payed;
     }
 
     public function __toString() : string

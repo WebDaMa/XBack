@@ -65,9 +65,11 @@ class DashboardController extends Controller {
                     if(!is_null($customerExists) || $customerExists) {
                         //Update current
                         $customer = $this->importCustomer($row, $customerExists);
+                    }else{
+                        //import
+                        $em->persist($customer);
                     }
 
-                    $em->persist($customer);
                 }
                 $upload->setFile($file->getClientOriginalName());
 
@@ -137,7 +139,8 @@ class DashboardController extends Controller {
                 $em->flush();
             }
 
-            $groupSheet = $spreadsheet->getSheetByName('tblGroep')->toArray();
+            $groupSheet = $spreadsheet->getSheetByName('tblGroep');
+            $groupSheet = $this->getDynamicSheetAsArray($groupSheet);
 
             //Remove headers
             array_shift($groupSheet);
@@ -151,7 +154,7 @@ class DashboardController extends Controller {
                     $groep = $this->importGroep($row);
                     $periodId = $groep->getPeriodId();
 
-                    $groepExists = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($groep->getGroupId(), $periodId);
+                    $groepExists = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodIdAndLocationId($groep->getGroupId(), $periodId, $groep->getLocation()->getId());
 
                     if(!is_null($groepExists) || $groepExists) {
                         //Update current
@@ -182,14 +185,19 @@ class DashboardController extends Controller {
                 {
                     $planning = $this->importPlanning($row, $periodId);
 
-                    $planningExists = $this->getDoctrine()->getRepository(Planning::class)->findByPlanningIdAndDate($planning->getPlanningId(), $planning->getDate());
+                    $planningExists = $this->getDoctrine()->getRepository(Planning::class)
+                        ->findByPlanningIdAndDateAndGroepId($planning->getPlanningId(), $planning->getDate(), $row[12]);
 
                     if(!is_null($planningExists) || $planningExists) {
                         //Update current
                         $planning = $this->importPlanning($row, $periodId, $planningExists);
                     }
 
-                    $em->persist($planning);
+                    if(!is_null($planning->getGroup()) && !empty($planning->getGroup())) {
+                        //Don't add empty groeps
+                        $em->persist($planning);
+                    }
+
                 }
             }
 
@@ -357,10 +365,17 @@ class DashboardController extends Controller {
             $updateGroep = new Groep();
         }
 
-        $updateGroep->setGroupId($row[0]);
+        $updateGroep->setGroupIndex($row[0]);
         $updateGroep->setName($row[1]);
         $updateGroep->setPeriodId($row[2]);
-        $updateGroep->setLocation($row[3]);
+
+        $location = $this->getDoctrine()->getRepository(Location::class)->findByCode($row[3]);
+        if ($location)
+        {
+            $updateGroep->setLocation($location);
+        }
+
+        $updateGroep->setGroupId($row[4]);
 
         return $updateGroep;
     }
@@ -375,7 +390,7 @@ class DashboardController extends Controller {
 
         $updatePlanning->setDate($this->convertExcelDateToDateTime($row[1]));
 
-        $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[2], $periodId);
+        $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[12], $periodId);
         if ($group)
         {
             $updatePlanning->setGroup($group);

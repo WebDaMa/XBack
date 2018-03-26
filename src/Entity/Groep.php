@@ -36,6 +36,11 @@ class Groep extends TypeTimestamps
     /**
      * @ORM\Column(type="integer")
      */
+    private $groupIndex;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
     private $groupId;
 
     /**
@@ -49,7 +54,8 @@ class Groep extends TypeTimestamps
     private $periodId;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Location", inversedBy="locGroeps")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $location;
 
@@ -125,7 +131,7 @@ class Groep extends TypeTimestamps
     /**
      * @return mixed
      */
-    public function getLocation()
+    public function getLocation(): ?Location
     {
         return $this->location;
     }
@@ -133,7 +139,7 @@ class Groep extends TypeTimestamps
     /**
      * @param mixed $location
      */
-    public function setLocation($location): void
+    public function setLocation(Location $location = null)
     {
         $this->location = $location;
     }
@@ -197,6 +203,23 @@ class Groep extends TypeTimestamps
         // set the owning side to null
         $customer->setGroupLayout(null);
     }
+
+    /**
+     * @return mixed
+     */
+    public function getGroupIndex()
+    {
+        return $this->groupIndex;
+    }
+
+    /**
+     * @param mixed $groupIndex
+     */
+    public function setGroupIndex($groupIndex): void
+    {
+        $this->groupIndex = $groupIndex;
+    }
+
 
     public function __toString() : string
     {

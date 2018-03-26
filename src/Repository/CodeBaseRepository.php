@@ -15,6 +15,7 @@ class CodeBaseRepository extends ServiceEntityRepository
     }
 
     public function findByCode($code) {
+
         return $this->createQueryBuilder('e')
             ->where('e.code = :code')->setParameter('code', $code)
             ->getQuery()

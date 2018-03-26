@@ -17,9 +17,15 @@ class Location extends TypeBase
      */
     private $locCustomers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Groep", mappedBy="location")
+     */
+    private $locGroeps;
+
     public function __construct()
     {
         $this->locCustomers = new ArrayCollection();
+        $this->locGroeps = new ArrayCollection();
     }
 
     /**
@@ -50,5 +56,35 @@ class Location extends TypeBase
         $this->locCustomers->removeElement($customer);
         // set the owning side to null
         $customer->setLocation(null);
+    }
+
+    /**
+     * @return Collection|Groep[]
+     */
+    public function getLocGroeps()
+    {
+        return $this->locGroeps;
+    }
+
+    public function addLocGroep(Groep $groep)
+    {
+        if ($this->locGroeps->contains($groep)) {
+            return;
+        }
+
+        $this->locGroeps->add($groep);
+        // set the *owning* side!
+        $groep->setLocation($this);
+    }
+
+    public function removeLocGroep(Groep $groep)
+    {
+        if (!$this->locGroeps->contains($groep)) {
+            return;
+        }
+
+        $this->locGroeps->removeElement($groep);
+        // set the owning side to null
+        $groep->setLocation(null);
     }
 }

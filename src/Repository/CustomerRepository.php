@@ -13,7 +13,7 @@ class CustomerRepository extends ServiceEntityRepository
         parent::__construct($registry, Customer::class);
     }
 
-    public function findByCustomerId($customerId) {
+    public function findByCustomerId($customerId): ?Customer {
         return $this->createQueryBuilder('e')
             ->where('e.customerId = :customerId')
             ->setParameters(['customerId' => $customerId])

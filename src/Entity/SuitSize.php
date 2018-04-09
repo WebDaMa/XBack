@@ -13,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 class SuitSize extends TypeName
 {
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $sizeId;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Customer", mappedBy="size")
      */
     private $suitCustomers;
@@ -94,5 +99,20 @@ class SuitSize extends TypeName
         $customer->setSize(null);
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSizeId()
+    {
+        return $this->sizeId;
+    }
+
+    /**
+     * @param mixed $sizeId
+     */
+    public function setSizeId($sizeId): void
+    {
+        $this->sizeId = $sizeId;
+    }
 
 }

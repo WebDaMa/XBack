@@ -357,12 +357,14 @@ easy_admin:
           list:
             fields:
               - { property: 'id'}
+              - { property: 'sizeId'}
               - { property: 'name'}
               - { property: 'beltSize'}
               - { property: 'helmSize'}
               - { property: 'suitCustomers'}
           form:
             fields:
+              - { property: 'sizeId'}
               - { property: 'name'}
               - { property: 'beltSize'}
               - { property: 'helmSize'}

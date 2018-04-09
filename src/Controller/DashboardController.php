@@ -239,7 +239,7 @@ class DashboardController extends Controller {
         $updateCustomer->setNationalRegisterNumber($row[11]);
         $updateCustomer->setExpireDate($this->getDateOrNull($row[12]));
 
-        $size = $this->getDoctrine()->getRepository(SuitSize::class)->findByName($row[13]);
+        $size = $this->getDoctrine()->getRepository(SuitSize::class)->findBySizeId($row[13]);
         if ($size)
         {
             $updateCustomer->setSize($size);

@@ -28,4 +28,14 @@ class SuitSizeRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
             ;
     }
+
+    public function findBySizeId($sizeId) {
+        return $this->createQueryBuilder('e')
+            ->where('e.sizeId = :sizeId')
+            ->setParameter('sizeId',$sizeId)
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult()
+            ;
+    }
 }

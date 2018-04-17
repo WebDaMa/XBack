@@ -14,10 +14,11 @@ use Doctrine\ORM\Mapping as ORM;
  *              length   = 191,
  *              unique   = true
  *          )
+ *      )
  * })
  */
-class AccessToken extends BaseAccessToken
-{
+class AccessToken extends BaseAccessToken {
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")

@@ -15,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  *              length   = 191,
  *              unique   = true
  *          )
+ *      )
  * })
  */
 class RefreshToken extends BaseRefreshToken

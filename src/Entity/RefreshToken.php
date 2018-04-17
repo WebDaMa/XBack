@@ -8,6 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\RefreshTokenRepository")
+ * @ORM\AttributeOverrides({
+ *      @ORM\AttributeOverride(name="token",
+ *          column=@ORM\Column(
+ *              name     = "token",
+ *              length   = 191,
+ *              unique   = true
+ *          )
+ * })
  */
 class RefreshToken extends BaseRefreshToken
 {

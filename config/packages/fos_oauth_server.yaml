@@ -7,4 +7,4 @@ fos_oauth_server:
     service:
         user_provider: fos_user.user_provider.username # This property will be used when valid credentials are given to load the user upon access token creation
         options:
-              supported_scopes: user admin
+              supported_scopes: ROLE_ADMIN ROLE_USER

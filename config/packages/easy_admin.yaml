@@ -68,7 +68,8 @@ easy_admin:
                   type: 'Symfony\Component\Form\Extension\Core\Type\BirthdayType' }
               - { property: 'gsm'}
               - { property: 'nationalRegisterNumber'}
-              - { property: 'expireDate'}
+              - { property: 'expireDate',
+                  type: 'App\Form\DateFutureType'}
               - { property: 'size'}
               - { property: 'sizeInfo'}
               - { property: 'nameShortage'}
@@ -128,7 +129,8 @@ easy_admin:
                 - { property: 'groupName'}
                 - { property: 'birthdate'}
                 - { property: 'nationalRegisterNumber'}
-                - { property: 'expireDate'}
+                - { property: 'expireDate',
+                      type: 'App\Form\DateFutureType'}
                 - { property: 'lodgingLayout'}
                 - { property: 'allInType'}
                 - { property: 'groupLayout'}
@@ -142,7 +144,8 @@ easy_admin:
                 - { property: 'birthdate',
                     type: 'Symfony\Component\Form\Extension\Core\Type\BirthdayType' }
                 - { property: 'nationalRegisterNumber'}
-                - { property: 'expireDate'}
+                - { property: 'expireDate',
+                      type: 'App\Form\DateFutureType'}
                 - { property: 'lodgingLayout'}
                 - { property: 'allInType'}
                 - { property: 'groupLayout'}

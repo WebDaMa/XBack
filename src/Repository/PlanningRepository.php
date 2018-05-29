@@ -23,6 +23,16 @@ class PlanningRepository extends ServiceEntityRepository
             ;
     }
 
+    public function findByGuideIdAndDate($guideId, $date): ?Planning {
+        return $this->createQueryBuilder('e')
+            ->where('e.guide = :guideId AND e.date = :date')
+            ->setParameters(['guideId' => $guideId, 'date'=> $date])
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult()
+            ;
+    }
+
     public function findByPlanningIdAndDateAndGroepId($planningId, $date, $groepId): ?Planning {
         return $this->createQueryBuilder('e')
             ->join('e.group','gr')

@@ -2,6 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\Activity;
+use App\Entity\Customer;
+use App\Entity\Guide;
+use App\Entity\Planning;
 use App\Entity\SuitSize;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -37,5 +41,72 @@ class SuitSizeRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->getOneOrNullResult()
             ;
+    }
+
+    public function findSuitSizesFullFromDateAndGuide($date, $guideShort) {
+        $rep = $this->getEntityManager()->getRepository(Guide::class);
+
+        $guide = $rep->findByGuideShort($guideShort);
+
+        $rep = $this->getEntityManager()->getRepository(Planning::class);
+
+        $planning = $rep->findByGuideIdAndDate($guide->getId(), $date);
+
+        $activityName = "";
+        $customers = [];
+        $groupName = "";
+        $groupTotal = 0;
+
+        if(isset($planning)){
+            $activity = $planning->getActivity();
+            if(isset($activity)) {
+                $activityName = $activity->getName();
+            }
+            $group = $planning->getGroup();
+            if(isset($group)){
+                //TODO: some plannings don't have a activity?
+
+                $groupName = $group->getName();
+                $groupTotal = $group->getGroupCustomers()->count();
+                //Get all customers
+                //TODO: check with JSc for full query
+
+                $customers = $group->getGroupCustomers();
+            }
+        }
+
+
+        $customersIds = [];
+        $suitSizesTotals = [];
+        $helmetSizesTotals = [];
+        $beltSizesTotals = [];
+        $userSizes = [];
+
+        foreach ($customers as $customer) {
+            $customersIds[] = $customer->getId();
+        }
+
+        if(!empty($customersIds)) {
+            $rep = $this->getEntityManager()->getRepository(Customer::class);
+
+            $suitSizesTotals = $rep->getSuitSizeTotalsByCustomerIds($customersIds);
+            $helmetSizesTotals = $rep->getHelmetSizeTotalsByCustomerIds($customersIds);
+            $beltSizesTotals = $rep->getBeltSizeTotalsByCustomerIds($customersIds);
+
+            $userSizes = $rep->getSuitSizesByCustomerIds($customersIds);
+        }
+
+        return [
+            'date' => $date,
+            'guide' => $guide->getGuideShort(),
+            'activity' => $activityName,
+            'groupName' => $groupName,
+            'groupTotal' => $groupTotal,
+            'sizeTotals' => $suitSizesTotals,
+            'beltTotals' => $beltSizesTotals,
+            'helmetTotals' => $helmetSizesTotals,
+            'userSizes' => $userSizes
+        ];
+
     }
 }

@@ -175,7 +175,7 @@ class Groep extends TypeTimestamps
     }
 
     /**
-     * @return Collection|Planning[]
+     * @return Collection|Customer[]
      */
     public function getGroupCustomers()
     {

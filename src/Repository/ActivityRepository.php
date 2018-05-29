@@ -29,4 +29,5 @@ class ActivityRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+
 }

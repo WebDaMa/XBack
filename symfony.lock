@@ -99,7 +99,7 @@
         "version": "1.0.0"
     },
     "jms/serializer": {
-        "version": "1.11.0"
+        "version": "1.12.0"
     },
     "jms/serializer-bundle": {
         "version": "2.0",
@@ -277,6 +277,9 @@
     },
     "symfony/orm-pack": {
         "version": "v1.0.5"
+    },
+    "symfony/polyfill-ctype": {
+        "version": "v1.8.0"
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.6.0"

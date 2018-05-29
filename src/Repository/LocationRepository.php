@@ -12,4 +12,18 @@ class LocationRepository extends CodeBaseRepository
     {
         parent::__construct($registry, Location::class);
     }
+
+
+    public function findAllRaw(): ?array
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select('id', 'code')
+            ->from('location');
+
+        return $qb->execute()->fetchAll();
+    }
+
 }

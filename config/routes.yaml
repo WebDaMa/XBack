@@ -8,9 +8,9 @@ fos_oauth_server_authorize:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
 
 # redirecting the homepage
-#homepage:
-#    path: /
-#    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
-#    defaults:
-#        path: /admin
-#        permanent: true
+homepage:
+    path: /
+    controller: Symfony\Bundle\FrameworkBundle\Controller\RedirectController::urlRedirectAction
+    defaults:
+        path: /admin
+        permanent: true

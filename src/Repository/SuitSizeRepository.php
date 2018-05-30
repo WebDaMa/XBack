@@ -98,7 +98,10 @@ class SuitSizeRepository extends ServiceEntityRepository
 
         return [
             'date' => $date,
-            'guide' => $guide->getGuideShort(),
+            'guide' => [
+                'short' => $guide->getGuideShort(),
+                'name' => $guide->getGuideFirstName() . ' ' . $guide->getGuideLastName()
+            ],
             'activity' => $activityName,
             'groupName' => $groupName,
             'groupTotal' => $groupTotal,

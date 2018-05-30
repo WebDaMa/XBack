@@ -14,7 +14,7 @@ class LocationRepository extends CodeBaseRepository
     }
 
 
-    public function findAllRaw(): ?array
+    public function findAllRaw()
     {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();

@@ -43,14 +43,11 @@ class SuitSizeRepository extends ServiceEntityRepository
             ;
     }
 
-    public function findSuitSizesFullFromDateAndGuide($date, $guideShort) {
-        $rep = $this->getEntityManager()->getRepository(Guide::class);
-
-        $guide = $rep->findByGuideShort($guideShort);
+    public function findSuitSizesFullFromDateAndGuide($date, $guideId) {
 
         $rep = $this->getEntityManager()->getRepository(Planning::class);
 
-        $planning = $rep->findByGuideIdAndDate($guide->getId(), $date);
+        $planning = $rep->findByGuideIdAndDate($guideId, $date);
 
         $activityName = "";
         $customers = [];

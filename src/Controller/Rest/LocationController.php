@@ -14,7 +14,7 @@ class LocationController extends FOSRestController {
     /**
      * @Rest\Get("/locations")
      */
-    public function getAllAction() {
+    public function getLocationsAction() {
         $data = $this->getDoctrine()->getRepository(Location::class)->findAllRaw();
         $view = $this->view($data, Response::HTTP_OK);
 

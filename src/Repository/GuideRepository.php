@@ -51,6 +51,7 @@ class GuideRepository extends ServiceEntityRepository
             ->innerJoin('p', 'guide', 'g', 'p.guide_id = g.id')
             ->innerJoin('p', 'groep', 'gr', 'p.group_id = gr.id')
             ->where('WEEK(p.date) = WEEK(:date)')
+            ->andWhere('YEAR(p.date) = YEAR(:date)')
             ->andWhere('gr.location_id = :locationId')
             ->groupBy('g.id')
             ->setParameter('date', $date)

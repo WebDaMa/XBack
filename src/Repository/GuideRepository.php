@@ -45,7 +45,8 @@ class GuideRepository extends ServiceEntityRepository
         //AND gr.location_id = 1
         //GROUP BY g.id
         $qb
-            ->select('g.*')
+            ->select('g.id AS id, g.guide_short AS guideShort, g.guide_first_name AS guideFirstName, 
+            g.guide_last_name AS guideLastName')
             ->from('planning', 'p')
             ->innerJoin('p', 'guide', 'g', 'p.guide_id = g.id')
             ->innerJoin('p', 'groep', 'gr', 'p.group_id = gr.id')

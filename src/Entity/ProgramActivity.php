@@ -19,10 +19,10 @@ class ProgramActivity
     // add your own fields
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Program", inversedBy="activityPrograms")
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProgramType", inversedBy="activityProgramTypes")
      * @ORM\JoinColumn(nullable=true)
      */
-    private $program;
+    private $programType;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Activity", inversedBy="programActivities")
@@ -54,17 +54,17 @@ class ProgramActivity
     /**
      * @return mixed
      */
-    public function getProgram() : ?Program
+    public function getProgramType() : ?ProgramType
     {
-        return $this->program;
+        return $this->programType;
     }
 
     /**
-     * @param mixed $program
+     * @param mixed $programType
      */
-    public function setProgram(Program $program = null)
+    public function setProgramType(ProgramType $programType = null)
     {
-        $this->program = $program;
+        $this->programType = $programType;
     }
 
     /**
@@ -101,6 +101,6 @@ class ProgramActivity
 
     public function __toString() : string
     {
-        return (string) $this->getProgram()->__toString() . ' - ' . $this->getActivity()->__toString();
+        return (string) $this->getProgramType()->__toString() . ' - ' . $this->getActivity()->__toString();
     }
 }

@@ -88,6 +88,21 @@ class SuitSizeRepository extends ServiceEntityRepository
         $userSizes = [];
 
         foreach ($customers as $customer) {
+            //Filter
+
+            // PRogram per customer
+            /**
+             * @var $customer Customer
+             */
+
+            //$program = $customer->getProgramType()
+
+            // Vergelijken of activity in program zit
+
+            // Indien op 0, neem maar mee
+
+            // Indien
+
             $customersIds[] = $customer->getId();
         }
 

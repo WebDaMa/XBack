@@ -28,8 +28,6 @@ class PlanningRepository extends ServiceEntityRepository
             ->where('e.guide = :guideId AND e.date = :date')
             ->setParameters(['guideId' => $guideId, 'date'=> $date])
             ->getQuery()
-            ->setMaxResults(1)
-            ->getOneOrNullResult()
             ;
     }
 

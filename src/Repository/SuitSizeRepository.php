@@ -50,29 +50,35 @@ class SuitSizeRepository extends ServiceEntityRepository
         $guide = $rep->find($guideId);
         $rep = $this->getEntityManager()->getRepository(Planning::class);
 
-        $planning = $rep->findByGuideIdAndDate($guideId, $date);
+        $plannings = $rep->findByGuideIdAndDate($guideId, $date);
 
         $activityName = "";
         $customers = [];
         $groupName = "";
         $groupTotal = 0;
 
-        if(isset($planning)){
-            $activity = $planning->getActivity();
-            if(isset($activity)) {
-                $activityName = $activity->getName();
-            }
-            $group = $planning->getGroup();
-            if(isset($group)){
-                //TODO: some plannings don't have a activity?
+        if(!empty($plannings)){
+            foreach ($plannings as $planning) {
+                /**
+                 * @var $planning Planning
+                 */
+                $activity = $planning->getActivity();
+                if(isset($activity)) {
+                    $activityName = $activity->getName();
+                }
+                $group = $planning->getGroup();
+                if(isset($group)){
+                    //TODO: some plannings don't have a activity?
 
-                $groupName = $group->getName();
-                $groupTotal = $group->getGroupCustomers()->count();
-                //Get all customers
-                //TODO: check with JSc for full query
+                    $groupName .= $group->getName() . " ";
+                    $groupTotal += $group->getGroupCustomers()->count();
+                    //Get all customers
+                    //TODO: check with JSc for full query
 
-                $customers = $group->getGroupCustomers();
+                    $customers[] = $group->getGroupCustomers();
+                }
             }
+
         }
 
 

@@ -6,6 +6,7 @@ use App\Entity\Activity;
 use App\Entity\Customer;
 use App\Entity\Guide;
 use App\Entity\Planning;
+use App\Entity\ProgramActivity;
 use App\Entity\SuitSize;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -95,15 +96,46 @@ class SuitSizeRepository extends ServiceEntityRepository
              * @var $customer Customer
              */
 
-            //$program = $customer->getProgramType()
+            $programType = $customer->getProgramType();
+            $activityProgramTypes = $programType->getActivityProgramTypes();
 
-            // Vergelijken of activity in program zit
+            foreach ($activityProgramTypes as $activityProgramType){
+                /**
+                 * @var $activityProgramType ProgramActivity
+                 */
 
-            // Indien op 0, neem maar mee
+                // Vergelijken of activity in program zit
 
-            // Indien
+                if( $activityProgramType->getActivity()->getId() == $activity->getId()) {
 
-            $customersIds[] = $customer->getId();
+
+                    // Indien
+                    if($activityProgramType->getOptional()) {
+                        // klant gaat optioneel mee
+
+                        //Kijken of hij deze optie geboekt heeft
+                        $options = $customer->getActivities();
+
+                        foreach ($options as $option) {
+                            /**
+                             * @var $option Activity
+                             */
+
+                            if( $option->getId() == $activity->getId()) {
+                                $customersIds[] = $customer->getId();
+                            }
+                        }
+
+                    }else{
+                        // Indien op 0, neem maar mee
+                        $customersIds[] = $customer->getId();
+                    }
+
+                    break;
+                }
+
+            }
+
         }
 
         if(!empty($customersIds)) {

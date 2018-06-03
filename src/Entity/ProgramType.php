@@ -62,7 +62,7 @@ class ProgramType extends TypeAgency
     /**
      * @return Collection|ProgramActivity[]
      */
-    public function getAgencyCustomers()
+    public function getActivityProgramTypes()
     {
         return $this->activityProgramTypes;
     }

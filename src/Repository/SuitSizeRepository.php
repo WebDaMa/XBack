@@ -75,12 +75,11 @@ class SuitSizeRepository extends ServiceEntityRepository
                     //Get all customers
                     //TODO: check with JSc for full query
 
-                    $customers[] = $group->getGroupCustomers();
+                    $customers = array_merge($customers,$group->getGroupCustomers()->toArray());
                 }
             }
 
         }
-
 
         $customersIds = [];
         $suitSizesTotals = [];

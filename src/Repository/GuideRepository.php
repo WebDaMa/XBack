@@ -22,7 +22,7 @@ class GuideRepository extends ServiceEntityRepository
             ;
     }
 
-    public function getAllByGuideShort($guideShort) {
+    public function getIdByGuideShort($guideShort): string {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
 
@@ -35,7 +35,7 @@ class GuideRepository extends ServiceEntityRepository
         return $qb->execute()->fetch();
     }
 
-    public function getAllByPeriodAndLocation($date, $locationId) {
+    public function getAllByPeriodAndLocation($date, $locationId): array {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
 

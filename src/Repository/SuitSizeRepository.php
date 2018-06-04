@@ -89,7 +89,7 @@ class SuitSizeRepository extends ServiceEntityRepository
         $beltSizesTotals = [];
         $userSizes = [];
 
-        //TODO: fix customer
+        //TODO: test customer with all types
         foreach ($customers as $customer) {
             //Filter
 

@@ -66,17 +66,18 @@ class SuitSizeRepository extends ServiceEntityRepository
                 $activity = $planning->getActivity();
                 if(isset($activity)) {
                     $activityName = $activity->getName();
-                }
-                $group = $planning->getGroup();
-                if(isset($group)){
-                    //TODO: some plannings don't have a activity?
 
-                    $groupName .= $group->getName() . " ";
-                    $groupTotal += $group->getGroupCustomers()->count();
-                    //Get all customers
-                    //TODO: check with JSc for full query
+                    $group = $planning->getGroup();
+                    if(isset($group)){
+                        //TODO: some plannings don't have a activity?
 
-                    $customers = array_merge($customers,$group->getGroupCustomers()->toArray());
+                        $groupName .= $group->getName() . " ";
+                        $groupTotal += $group->getGroupCustomers()->count();
+                        //Get all customers
+                        //TODO: check with JSc for full query
+
+                        $customers = array_merge($customers,$group->getGroupCustomers()->toArray());
+                    }
                 }
             }
 
@@ -88,6 +89,7 @@ class SuitSizeRepository extends ServiceEntityRepository
         $beltSizesTotals = [];
         $userSizes = [];
 
+        //TODO: fix customer
         foreach ($customers as $customer) {
             //Filter
 

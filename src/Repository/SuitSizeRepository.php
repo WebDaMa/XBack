@@ -24,7 +24,7 @@ class SuitSizeRepository extends ServiceEntityRepository
         parent::__construct($registry, SuitSize::class);
     }
 
-    public function findByName($name) {
+    public function findByName($name): ?SuitSize {
         return $this->createQueryBuilder('e')
             ->where('e.name = :name')
             ->setParameter('name',$name)
@@ -34,7 +34,7 @@ class SuitSizeRepository extends ServiceEntityRepository
             ;
     }
 
-    public function findBySizeId($sizeId) {
+    public function findBySizeId($sizeId): ?SuitSize {
         return $this->createQueryBuilder('e')
             ->where('e.sizeId = :sizeId')
             ->setParameter('sizeId',$sizeId)
@@ -42,6 +42,17 @@ class SuitSizeRepository extends ServiceEntityRepository
             ->setMaxResults(1)
             ->getOneOrNullResult()
             ;
+    }
+
+    public function findAllRaw(): array {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("sz.id, sz.name")
+            ->from("suit_size", "sz");
+
+        return $qb->execute()->fetchAll();
     }
 
     public function findSuitSizesFullFromDateAndGuide($date, $guideId) {

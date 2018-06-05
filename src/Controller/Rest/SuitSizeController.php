@@ -23,4 +23,15 @@ class SuitSizeController extends FOSRestController {
 
         return $this->handleView($view);
     }
+
+    /**
+     * @Rest\Get("/suitsizes")
+     */
+    public function getAllAction() {
+        $rep = $this->getDoctrine()->getRepository(SuitSize::class);
+        $data = $rep->findAllRaw();
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
 }

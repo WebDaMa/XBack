@@ -12,23 +12,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CustomerController extends FOSRestController {
-    private $cusRep;
-
-    /**
-     * CustomerController constructor.
-     * @param $cusRep
-     */
-    public function __construct()
-    {
-        $this->cusRep = $this->getDoctrine()->getRepository(Customer::class);
-    }
-
 
     /**
      * @Rest\Get("/customers/groep/{groepId}")
      */
     public function getAllByGroepAction($groepId): Response {
-        $rep = $this->cusRep;
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
         $data = $rep->getAllByGroepId($groepId);
         $view = $this->view($data, Response::HTTP_OK);
 
@@ -40,10 +29,10 @@ class CustomerController extends FOSRestController {
      */
     public function putCustomerSizeAction($customerId, Request $request): Response
     {
-        $rep = $this->cusRep;
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
-        $sizeRep = $this->getDoctrine()->getRepository(SuitSize::class);
-        $size = $sizeRep->find((int) $request->get('size'));
+        $rep = $this->getDoctrine()->getRepository(SuitSize::class);
+        $size = $rep->find((int) $request->get('size'));
         if ($customer) {
             if($size) {
                 $customer->setSize($size);

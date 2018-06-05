@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/config/packages/fos_rest.yaml" afterPath="$PROJECT_DIR$/config/packages/fos_rest.yaml" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" afterPath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="fos_rest.yaml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/packages/fos_rest.yaml">
+      <file leaf-file-name="CustomerRepository.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="18" column="26" lean-forward="false" selection-start-line="17" selection-start-column="2" selection-end-line="18" selection-end-column="26" />
+            <state relative-caret-position="723">
+              <caret line="94" column="50" lean-forward="false" selection-start-line="94" selection-start-column="50" selection-end-line="94" selection-end-column="50" />
               <folding />
             </state>
           </provider>
@@ -119,13 +118,13 @@
         <option value="$PROJECT_DIR$/config/packages/doctrine.yaml" />
         <option value="$PROJECT_DIR$/src/Repository/GuideRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/GroepRepository.php" />
-        <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/GroepController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/GuideController.php" />
         <option value="$PROJECT_DIR$/src/Repository/SuitSizeRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/SuitSizeController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
         <option value="$PROJECT_DIR$/config/packages/fos_rest.yaml" />
+        <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
       </list>
     </option>
   </component>
@@ -483,12 +482,12 @@
       <workItem from="1528187237631" duration="2606000" />
       <workItem from="1528198429558" duration="994000" />
       <workItem from="1528206854375" duration="5000" />
-      <workItem from="1528207327106" duration="495000" />
+      <workItem from="1528207327106" duration="711000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="159341000" />
+    <option name="totallyTimeSpent" value="159557000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -800,14 +799,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="86" column="30" lean-forward="false" selection-start-line="86" selection-start-column="30" selection-end-line="86" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Rest/GuideController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
@@ -894,18 +885,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
+    <entry file="file://$PROJECT_DIR$/config/packages/fos_rest.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="23" column="28" lean-forward="false" selection-start-line="23" selection-start-column="28" selection-end-line="23" selection-end-column="28" />
+        <state relative-caret-position="342">
+          <caret line="18" column="18" lean-forward="true" selection-start-line="18" selection-start-column="18" selection-end-line="18" selection-end-column="18" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/fos_rest.yaml">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="18" column="26" lean-forward="false" selection-start-line="17" selection-start-column="2" selection-end-line="18" selection-end-column="26" />
+        <state relative-caret-position="266">
+          <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="723">
+          <caret line="94" column="50" lean-forward="false" selection-start-line="94" selection-start-column="50" selection-end-line="94" selection-end-column="50" />
           <folding />
         </state>
       </provider>

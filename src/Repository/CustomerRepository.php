@@ -90,9 +90,8 @@ class CustomerRepository extends ServiceEntityRepository {
         $qb = $connection->createQueryBuilder();
 
         $qb
-            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", 's.name AS size', 'c.size_info AS sizeInfo')
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", 'c.size_id AS size', 'c.size_info AS sizeInfo')
             ->from('customer', 'c')
-            ->innerJoin('c', 'suit_size', 's', 'c.size_id = s.id')
             ->where("c.group_layout_id = :groepId")
             ->setParameter("groepId", $groepId);
 

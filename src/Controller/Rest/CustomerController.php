@@ -43,7 +43,11 @@ class CustomerController extends FOSRestController {
             $dm->flush();
         }
         // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
-        $view = $this->view($customer, Response::HTTP_OK);
+        $view = $this->view([
+            "id" => $customer->getId(),
+            "size" => $customer->getSize()->getId(),
+            "sizeInfo" => $customer->getSizeInfo()
+        ], Response::HTTP_OK);
 
         return $this->handleView($view);
     }

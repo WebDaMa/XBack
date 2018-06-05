@@ -15,3 +15,5 @@ fos_rest:
       -
         path: '^/'
         stop: true
+  serializer:
+      serialize_null: true

@@ -24,7 +24,7 @@ class GuideController extends FOSRestController {
     }
 
     /**
-     * @Rest\Get("/guides-for-week-and-location/{date}/{locationId}")
+     * @Rest\Get("/guides/week-and-location/{date}/{locationId}")
      */
     public function getAllGuidesForWeekAndLocationAction($date, $locationId) {
         $rep = $this->getDoctrine()->getRepository(Guide::class);

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class GroepController extends FOSRestController {
 
     /**
-     * @Rest\Get("/groeps-for-week-and-location/{date}/{locationId}")
+     * @Rest\Get("/groeps/week-and-location/{date}/{locationId}")
      */
     public function getAllGroepsForWeekAndLocationAction($date, $locationId) {
         $rep = $this->getDoctrine()->getRepository(Groep::class);

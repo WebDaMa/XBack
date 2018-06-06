@@ -19,16 +19,15 @@ class ActivityGroupRepository extends ServiceEntityRepository
         parent::__construct($registry, ActivityGroup::class);
     }
 
-    /*
-    public function findBySomething($value)
+    public function findAllRaw()
     {
-        return $this->createQueryBuilder('a')
-            ->where('a.something = :value')->setParameter('value', $value)
-            ->orderBy('a.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select('id', 'name')
+            ->from('activity_group');
+
+        return $qb->execute()->fetchAll();
     }
-    */
 }

@@ -29,7 +29,8 @@ class CustomerRepository extends ServiceEntityRepository {
         $qb = $connection->createQueryBuilder();
 
         $qb
-            ->select("CONCAT(c.first_name, ' ', c.last_name) AS customer", 's.name AS size', 'c.size_info AS sizeInfo')
+            ->select("CONCAT(c.first_name, ' ', c.last_name) AS customer", 's.name AS size',
+                'c.size_info AS sizeInfo')
             ->from('customer', 'c')
             ->innerJoin('c', 'suit_size', 's', 'c.size_id = s.id')
             ->add('where', $qb->expr()->in('c.id', $customerIds));
@@ -90,8 +91,25 @@ class CustomerRepository extends ServiceEntityRepository {
         $qb = $connection->createQueryBuilder();
 
         $qb
-            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", 'c.size_id AS size', 'c.size_info AS sizeInfo')
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
+                'c.size_id AS size', 'c.size_info AS sizeInfo')
             ->from('customer', 'c')
+            ->where("c.group_layout_id = :groepId")
+            ->setParameter("groepId", $groepId);
+
+        return $qb->execute()->fetchAll();
+    }
+
+    public function getAllByGroepIdWithRaftingOption($groepId)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+        //TODO: must check with jsch to filter customers?
+        $qb
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
+                'pt.name AS programType', "TIMESTAMPDIFF(YEAR,c.birthdate,CURDATE()) AS age")
+            ->from('customer', 'c')
+            ->innerJoin('c', 'program_type', 'pt', 'c.program_type_id = pt.id')
             ->where("c.group_layout_id = :groepId")
             ->setParameter("groepId", $groepId);
 

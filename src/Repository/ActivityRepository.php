@@ -30,4 +30,18 @@ class ActivityRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findAllByActivityGroupId($activityGroupId)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select('id', 'name')
+            ->from('activity')
+            ->where("activity_group_id = :activityGroupId")
+            ->setParameters(["activityGroupId" => $activityGroupId]);
+
+        return $qb->execute()->fetchAll();
+    }
+
 }

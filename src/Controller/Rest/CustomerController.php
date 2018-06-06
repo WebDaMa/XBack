@@ -51,4 +51,15 @@ class CustomerController extends FOSRestController {
 
         return $this->handleView($view);
     }
+
+    /**
+     * @Rest\Get("/customers/groep/rafting/{groepId}")
+     */
+    public function getAllByGroepWithRaftingOptionAction($groepId): Response {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $data = $rep->getAllByGroepIdWithRaftingOption($groepId);
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
 }

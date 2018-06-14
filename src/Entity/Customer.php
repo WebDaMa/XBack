@@ -248,6 +248,16 @@ class Customer extends TypeTimestamps
     private $checkedIn;
 
     /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $busToCheckedIn;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $busBackCheckedIn;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $totalExclInsurance;
@@ -938,6 +948,38 @@ class Customer extends TypeTimestamps
     public function setCheckedIn($checkedIn): void
     {
         $this->checkedIn = $checkedIn;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBusToCheckedIn()
+    {
+        return $this->busToCheckedIn;
+    }
+
+    /**
+     * @param mixed $busToCheckedIn
+     */
+    public function setBusToCheckedIn($busToCheckedIn): void
+    {
+        $this->busToCheckedIn = $busToCheckedIn;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getBusBackCheckedIn()
+    {
+        return $this->busBackCheckedIn;
+    }
+
+    /**
+     * @param mixed $busBackCheckedIn
+     */
+    public function setBusBackCheckedIn($busBackCheckedIn): void
+    {
+        $this->busBackCheckedIn = $busBackCheckedIn;
     }
 
     /**

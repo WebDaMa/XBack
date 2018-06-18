@@ -115,4 +115,34 @@ class CustomerRepository extends ServiceEntityRepository {
 
         return $qb->execute()->fetchAll();
     }
+
+    public function getAllBusGoCustomersByDateAndTravelTypeCode($date, $travelTypeCode)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+        /*
+         * SELECT c.bus_to_checked_in, c.gsm, c.`travel_go_date`, a.code, tg.start_point,
+         * CONCAT(c.first_name, ' ', c.last_name) AS customer FROM customer c
+            INNER JOIN travel_type tg ON c.`travel_go_type_id` = tg.id
+            INNER JOIN agency a ON c.agency_id = a.id
+            WHERE c.`travel_go_date` = '2017-04-08'
+            AND tg.transport_type_id = 2
+            AND tg.code = 'BUSB'
+            ORDER BY customer
+
+         */
+        $qb
+            ->select("c.id", "c.bus_to_checked_in AS busCheckedIn", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
+                'tg.start_point AS place', 'a.code AS agency', 'c.gsm')
+            ->from('customer', 'c')
+            ->innerJoin('c', 'travel_type', 'tg', 'c.travel_go_type_id = tg.id')
+            ->innerJoin('c', 'agency', 'a', 'c.agency_id = a.id')
+            ->where("c.travel_go_date = :date")
+            ->andWhere('tg.transport_type_id = 2')
+            ->andWhere('tg.code = :travelTypeCode')
+            ->setParameter("date", $date)
+            ->setParameter("travelTypeCode", $travelTypeCode);
+
+        return $qb->execute()->fetchAll();
+    }
 }

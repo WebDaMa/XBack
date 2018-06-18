@@ -12,4 +12,12 @@ class TravelTypeRepository extends CodeBaseRepository
     {
         parent::__construct($registry, TravelType::class);
     }
+
+    public function getAllBusTypes ():? array {
+        return $this->createQueryBuilder('t')
+            ->where("t.transportType = 'bus'")
+            ->getQuery()
+            ->getResult()
+            ;
+    }
 }

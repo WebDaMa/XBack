@@ -38,7 +38,8 @@ class GroepRepository extends ServiceEntityRepository
         $qb = $connection->createQueryBuilder()
             ->select('g.id, g.name')
             ->from('groep', 'g')
-            ->where("g.period_id = CONCAT(DATE_FORMAT(:date, '%y'), DATE_FORMAT(:date, '%u')) AND g.location_id = :locationId")
+            ->where("g.period_id = CONCAT(DATE_FORMAT(:date, '%y'), DATE_FORMAT(:date, '%u'))
+            AND g.location_id = :locationId")
             ->setParameters(['date' => $date, 'locationId'=> $locationId])
             ;
 

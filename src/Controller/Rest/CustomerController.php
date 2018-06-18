@@ -6,6 +6,7 @@ namespace App\Controller\Rest;
 
 use App\Entity\Customer;
 use App\Entity\SuitSize;
+use App\Entity\TravelType;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,6 +59,63 @@ class CustomerController extends FOSRestController {
     public function getAllByGroepWithRaftingOptionAction($groepId): Response {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $data = $rep->getAllByGroepIdWithRaftingOption($groepId);
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Get("/customers/groep/rafting/{date}")
+     */
+    public function getBusGoCustomersByWeek($date): Response {
+        $rep = $this->getDoctrine()->getRepository(TravelType::class);
+        $busTypes = $rep->getAllBusTypes();
+
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+
+        $data = [
+            "date" => $date,
+            "total" => 0,
+            "places" => []
+        ];
+
+        foreach ($busTypes as $busType) {
+            /**
+             * @var $busType TravelType
+             */
+            $customers = $rep->getAllBusGoCustomersByDateAndTravelTypeCode($date, $busType->getCode());
+
+            if (!empty($customers)) {
+                $data["total"] += count($customers);
+
+                $totals = [];
+
+                $agencies = [];
+                foreach( $customers as $row ) {
+                    $agencies[] = $row["agency"];
+                }
+
+                if(!empty($agencies)) {
+                    $agencyTotals = array_count_values( $agencies );
+
+                    foreach ($agencyTotals as $agency => $total) {
+                        $totals[] = [
+                            "agency" => $agency,
+                            "total" => $total
+                        ];
+                    }
+                }
+
+                $data["places"][] = [
+                    "total" => count($customers),
+                    "totals" => $totals,
+                    "place" => $busType->getStartPoint(),
+                    "customers" => $customers
+                ];
+            }
+
+        }
+
         $view = $this->view($data, Response::HTTP_OK);
 
         return $this->handleView($view);

@@ -17,34 +17,35 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  * @method SuitSize[]    findAll()
  * @method SuitSize[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class SuitSizeRepository extends ServiceEntityRepository
-{
+class SuitSizeRepository extends ServiceEntityRepository {
+
     public function __construct(RegistryInterface $registry)
     {
         parent::__construct($registry, SuitSize::class);
     }
 
-    public function findByName($name): ?SuitSize {
+    public function findByName($name): ?SuitSize
+    {
         return $this->createQueryBuilder('e')
             ->where('e.name = :name')
-            ->setParameter('name',$name)
+            ->setParameter('name', $name)
             ->getQuery()
             ->setMaxResults(1)
-            ->getOneOrNullResult()
-            ;
+            ->getOneOrNullResult();
     }
 
-    public function findBySizeId($sizeId): ?SuitSize {
+    public function findBySizeId($sizeId): ?SuitSize
+    {
         return $this->createQueryBuilder('e')
             ->where('e.sizeId = :sizeId')
-            ->setParameter('sizeId',$sizeId)
+            ->setParameter('sizeId', $sizeId)
             ->getQuery()
             ->setMaxResults(1)
-            ->getOneOrNullResult()
-            ;
+            ->getOneOrNullResult();
     }
 
-    public function findAllRaw(): array {
+    public function findAllRaw(): array
+    {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
 
@@ -55,7 +56,8 @@ class SuitSizeRepository extends ServiceEntityRepository
         return $qb->execute()->fetchAll();
     }
 
-    public function findSuitSizesFullFromDateAndGuide($date, $guideId) {
+    public function findSuitSizesFullFromDateAndGuide($date, $guideId)
+    {
 
         $rep = $this->getEntityManager()->getRepository(Guide::class);
 
@@ -69,17 +71,21 @@ class SuitSizeRepository extends ServiceEntityRepository
         $groupName = "";
         $groupTotal = 0;
 
-        if(!empty($plannings)){
-            foreach ($plannings as $planning) {
+        if (!empty($plannings))
+        {
+            foreach ($plannings as $planning)
+            {
                 /**
                  * @var $planning Planning
                  */
                 $activity = $planning->getActivity();
-                if(isset($activity)) {
+                if (isset($activity))
+                {
                     $activityName = $activity->getName();
 
                     $group = $planning->getGroup();
-                    if(isset($group)){
+                    if (isset($group))
+                    {
                         //TODO: some plannings don't have a activity?
 
                         $groupName .= $group->getName() . " ";
@@ -87,11 +93,10 @@ class SuitSizeRepository extends ServiceEntityRepository
                         //Get all customers
                         //TODO: check with JSc for full query
 
-                        $customers = array_merge($customers,$group->getGroupCustomers()->toArray());
+                        $customers = array_merge($customers, $group->getGroupCustomers()->toArray());
                     }
                 }
             }
-
         }
 
         $customersIds = [];
@@ -101,7 +106,8 @@ class SuitSizeRepository extends ServiceEntityRepository
         $userSizes = [];
 
         //TODO: test customer with all types
-        foreach ($customers as $customer) {
+        foreach ($customers as $customer)
+        {
             //Filter
 
             // PRogram per customer
@@ -112,34 +118,40 @@ class SuitSizeRepository extends ServiceEntityRepository
             $programType = $customer->getProgramType();
             $activityProgramTypes = $programType->getActivityProgramTypes();
 
-            foreach ($activityProgramTypes as $activityProgramType){
+            foreach ($activityProgramTypes as $activityProgramType)
+            {
                 /**
                  * @var $activityProgramType ProgramActivity
                  */
 
                 // Vergelijken of activity in program zit
 
-                if( $activityProgramType->getActivity()->getId() == $activity->getId()) {
+                if ($activityProgramType->getActivity()->getId() == $activity->getId())
+                {
 
 
                     // Indien
-                    if($activityProgramType->getOptional()) {
+                    if ($activityProgramType->getOptional())
+                    {
                         // klant gaat optioneel mee
 
                         //Kijken of hij deze optie geboekt heeft
                         $options = $customer->getActivities();
 
-                        foreach ($options as $option) {
+                        foreach ($options as $option)
+                        {
                             /**
                              * @var $option Activity
                              */
 
-                            if( $option->getId() == $activity->getId()) {
+                            if ($option->getId() == $activity->getId())
+                            {
                                 $customersIds[] = $customer->getId();
                             }
                         }
 
-                    }else{
+                    } else
+                    {
                         // Indien op 0, neem maar mee
                         $customersIds[] = $customer->getId();
                     }
@@ -151,7 +163,8 @@ class SuitSizeRepository extends ServiceEntityRepository
 
         }
 
-        if(!empty($customersIds)) {
+        if (!empty($customersIds))
+        {
             $rep = $this->getEntityManager()->getRepository(Customer::class);
 
             $suitSizesTotals = $rep->getSuitSizeTotalsByCustomerIds($customersIds);

@@ -24,8 +24,8 @@ class ProgramActivityRepository extends ServiceEntityRepository
     public function findByProgramTypeAndActivity($programTypeId , $activityId) : ?ProgramActivity
     {
         return $this->createQueryBuilder('p')
-            ->where('p.programTypeId = :programTypeId')
-            ->andWhere("p.activityId = :activityId")
+            ->where('p.programType = :programTypeId')
+            ->andWhere("p.activity = :activityId")
             ->setParameters(['programTypeId' => $programTypeId, 'activityId' => $activityId])
             ->getQuery()
             ->setMaxResults(1)

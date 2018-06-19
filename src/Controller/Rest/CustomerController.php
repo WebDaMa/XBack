@@ -76,12 +76,58 @@ class CustomerController extends FOSRestController {
     }
 
     /**
+     * @Rest\Put("/customers/bus/go/{customerId}")
+     */
+    public function putBusGoCustomerCheckAction($customerId, Request $request): Response
+    {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $customer = $rep->find($customerId);
+        $check = $rep->find((bool) $request->get('busCheckedIn'));
+        if ($customer) {
+            $customer->setBusToCheckedIn($check);
+            $dm = $this->getDoctrine()->getManager();
+            $dm->persist($customer);
+            $dm->flush();
+        }
+        // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
+        $view = $this->view([
+            "id" => $customer->getId(),
+            "check" => $customer->getBusToCheckedIn(),
+        ], Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
      * @Rest\Get("/customers/bus/back/{date}")
      */
     public function getBusBackCustomersByWeek($date): Response {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $data = $rep->getBusBackCustomersByWeek($date);
         $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Put("/customers/bus/back/{customerId}")
+     */
+    public function putBusBackCustomerCheckAction($customerId, Request $request): Response
+    {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $customer = $rep->find($customerId);
+        $check = $rep->find((bool) $request->get('busCheckedIn'));
+        if ($customer) {
+            $customer->setBusBackCheckedIn($check);
+            $dm = $this->getDoctrine()->getManager();
+            $dm->persist($customer);
+            $dm->flush();
+        }
+        // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
+        $view = $this->view([
+            "id" => $customer->getId(),
+            "check" => $customer->getBusBackCheckedIn(),
+        ], Response::HTTP_OK);
 
         return $this->handleView($view);
     }

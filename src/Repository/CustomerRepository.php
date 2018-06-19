@@ -207,6 +207,7 @@ class CustomerRepository extends ServiceEntityRepository {
                     if( is_null($row["busCheckedIn"])) {
                         $row["busCheckedIn"] = false;
                     }
+                    $row["busCheckedIn"] = (boolean) $row["busCheckedIn"];
                     $agencies[] = $row["agency"];
 
                     $customers[$k] = $row;

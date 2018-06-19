@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Activity;
 use App\Entity\ProgramActivity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -19,16 +20,17 @@ class ProgramActivityRepository extends ServiceEntityRepository
         parent::__construct($registry, ProgramActivity::class);
     }
 
-    /*
-    public function findBySomething($value)
+
+    public function findByProgramTypeAndActivity($programTypeId , $activityId) : ProgramActivity
     {
         return $this->createQueryBuilder('p')
-            ->where('p.something = :value')->setParameter('value', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+            ->where('p.programType = :programtype')
+            ->andWhere("p.activity = :activity")
+            ->setParameter('programType', $programTypeId)
+            ->setParameter('activity', $activityId)
             ->getQuery()
-            ->getResult()
+            ->setMaxResults(1)
+            ->getOneOrNullResult()
         ;
     }
-    */
 }

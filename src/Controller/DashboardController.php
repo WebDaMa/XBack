@@ -193,7 +193,7 @@ class DashboardController extends Controller {
                         $planning = $this->importPlanning($row, $periodId, $planningExists);
                     }
 
-                    if(!is_null($planning->getGroup()) && !empty($planning->getGroup())) {
+                    if(!is_null($planning->getGuide()) && !empty($planning->getGuide())) {
                         //Don't add empty groeps
                         $em->persist($planning);
                     }

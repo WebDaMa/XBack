@@ -116,49 +116,24 @@ class SuitSizeRepository extends ServiceEntityRepository {
              */
 
             $programType = $customer->getProgramType();
-            $activityProgramTypes = $programType->getActivityProgramTypes();
 
-            foreach ($activityProgramTypes as $activityProgramType)
-            {
-                /**
-                 * @var $activityProgramType ProgramActivity
-                 */
+            $rep = $this->getEntityManager()->getRepository(ProgramActivity::class);
+            $activityProgramType = $rep->findByProgramTypeAndActivity($programType->getId(), $activity->getId());
 
-                // Vergelijken of activity in program zit
+            if(is_null($activityProgramType)) {
+                $customersIds[] = $customer->getId();
+            }else{
+                // klant gaat optioneel mee
 
-                if ($activityProgramType->getActivity()->getId() == $activity->getId())
+                //Kijken of hij deze optie geboekt heeft
+                $rep = $this->getEntityManager()->getRepository(Customer::class);
+
+                $hasOption = $rep->hasActivityForCustomer($customer->getId(), $activity->getId());
+
+                if ($hasOption)
                 {
-
-
-                    // Indien
-                    if ($activityProgramType->getOptional())
-                    {
-                        // klant gaat optioneel mee
-
-                        //Kijken of hij deze optie geboekt heeft
-                        $options = $customer->getActivities();
-
-                        foreach ($options as $option)
-                        {
-                            /**
-                             * @var $option Activity
-                             */
-
-                            if ($option->getId() == $activity->getId())
-                            {
-                                $customersIds[] = $customer->getId();
-                            }
-                        }
-
-                    } else
-                    {
-                        // Indien op 0, neem maar mee
-                        $customersIds[] = $customer->getId();
-                    }
-
-                    break;
+                    $customersIds[] = $customer->getId();
                 }
-
             }
 
         }

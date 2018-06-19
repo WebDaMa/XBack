@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\Activity;
 use App\Entity\Customer;
 use App\Entity\TravelType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -230,5 +231,24 @@ class CustomerRepository extends ServiceEntityRepository {
         }
 
         return $data;
+    }
+
+    public function hasActivityForCustomer($customerId, $activityId)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $ca = $qb
+            ->select("ca.id")
+            ->from('customer_activity', 'ca')
+            ->where("ca.customer_id = :customerId")
+            ->andWhere("ca.activity_id = :activityId")
+            ->setParameter("customerId", $customerId)
+            ->setParameter("activityId", $activityId)
+            ->getQuery()
+            ->setMaxResults(1)
+            ->getOneOrNullResult();
+
+        return is_null($ca) ? false : true;
     }
 }

@@ -140,6 +140,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->innerJoin('c', 'agency', 'a', 'c.agency_id = a.id')
             ->where("c.travel_go_date = :date")
             ->andWhere('tg.code = :travelTypeCode')
+            ->orderBy('customer')
             ->setParameter("date", $date)
             ->setParameter("travelTypeCode", $travelTypeCode);
 
@@ -158,6 +159,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->innerJoin('c', 'agency', 'a', 'c.agency_id = a.id')
             ->where("c.travel_back_date = :date")
             ->andWhere('tg.code = :travelTypeCode')
+            ->orderBy('customer')
             ->setParameter("date", $date)
             ->setParameter("travelTypeCode", $travelTypeCode);
 

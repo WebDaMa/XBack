@@ -233,7 +233,7 @@ class CustomerRepository extends ServiceEntityRepository {
         return $data;
     }
 
-    public function hasActivityForCustomer($customerId, $activityId)
+    public function hasActivityForCustomer($customerId, $activityId) : bool
     {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();

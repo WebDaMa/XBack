@@ -118,9 +118,9 @@ class SuitSizeRepository extends ServiceEntityRepository {
             $programType = $customer->getProgramType();
 
             $rep = $this->getEntityManager()->getRepository(ProgramActivity::class);
-            $activityProgramType = $rep->findByProgramTypeAndActivity($programType->getId(), $activity->getId());
+            $hasActivityProgramType = $rep->hasProgramActivityByProgramTypeAndActivity($programType->getId(), $activity->getId());
 
-            if(is_null($activityProgramType)) {
+            if(!$hasActivityProgramType) {
                 $customersIds[] = $customer->getId();
             }else{
                 // klant gaat optioneel mee

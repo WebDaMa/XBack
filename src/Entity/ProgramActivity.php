@@ -31,11 +31,6 @@ class ProgramActivity
     private $activity;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $optional;
-
-    /**
      * @return mixed
      */
     public function getId()
@@ -81,22 +76,6 @@ class ProgramActivity
     public function setActivity(Activity $activity = null)
     {
         $this->activity = $activity;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getOptional()
-    {
-        return $this->optional;
-    }
-
-    /**
-     * @param mixed $optional
-     */
-    public function setOptional($optional): void
-    {
-        $this->optional = $optional;
     }
 
     public function __toString() : string

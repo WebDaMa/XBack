@@ -226,6 +226,7 @@ class DashboardController extends Controller {
             $updateCustomer = new Customer();
         }
 
+        //TODO: check import dates!
         $updateCustomer->setCustomerId($row[0]);
         $updateCustomer->setFileId($row[1]);
         $updateCustomer->setPeriodId($row[3]);
@@ -415,6 +416,7 @@ class DashboardController extends Controller {
 
     private function getDateOrNull($date)
     {
+        //TODO: check format!
         $date = \DateTime::createFromFormat('d/m/Y', $date);
 
         return $date ? $date : null;

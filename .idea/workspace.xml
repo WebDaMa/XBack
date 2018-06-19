@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DashboardController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/TravelTypeRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/TravelTypeRepository.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,11 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CustomerController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
+      <file leaf-file-name="CustomerRepository.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="67" column="36" selection-start-line="67" selection-start-column="19" selection-end-line="67" selection-end-column="36" />
+            <state relative-caret-position="529">
+              <caret line="210" column="46" selection-start-line="210" selection-start-column="46" selection-end-line="210" selection-end-column="46" />
             </state>
           </provider>
         </entry>
@@ -31,7 +31,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getend</find>
       <find>groupl</find>
       <find>group</find>
       <find>todo</find>
@@ -61,6 +60,7 @@
       <find>options</find>
       <find>activityOption</find>
       <find>checkedIn</find>
+      <find>convertExcelDateToDateTime</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -75,7 +75,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/webpack.config.js" />
         <option value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/layout.html.twig" />
         <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/AdminController.php" />
@@ -124,8 +123,9 @@
         <option value="$PROJECT_DIR$/src/Repository/GroepRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/SuitSizeRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/TravelTypeRepository.php" />
-        <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
+        <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
       </list>
     </option>
   </component>
@@ -408,12 +408,12 @@
       <workItem from="1528803532660" duration="17000" />
       <workItem from="1528803590894" duration="2140000" />
       <workItem from="1529353649109" duration="1616000" />
-      <workItem from="1529355566237" duration="4101000" />
+      <workItem from="1529355566237" duration="6303000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="173372000" />
+    <option name="totallyTimeSpent" value="175574000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -461,6 +461,16 @@
         <option value="$PROJECT_DIR$/../XApp/app/shared/models/activity.model.js" />
         <option value="$PROJECT_DIR$/../XApp/app/shared/models/optionCategory.model.js" />
         <option value="$PROJECT_DIR$/../XApp/app/shared/models/base/typeName.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/lodgingCustomer.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/volpension.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/busCustomer.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/volpensionTotal.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/lodging.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/checkinBus.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/busPlace.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/volpensionRow.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/busTotal.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/volpensionCustomer.model.js" />
       </list>
     </option>
   </component>
@@ -473,9 +483,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Entity/Location.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Groep.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
@@ -754,17 +761,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1150">
-          <caret line="193" column="30" selection-start-line="193" selection-start-column="30" selection-end-line="193" selection-end-column="30" />
+        <state relative-caret-position="236">
+          <caret line="418" column="29" selection-start-line="418" selection-start-column="29" selection-end-line="418" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="67" column="36" selection-start-line="67" selection-start-column="19" selection-end-line="67" selection-end-column="36" />
+        <state relative-caret-position="535">
+          <caret line="71" column="36" selection-start-line="71" selection-start-column="36" selection-end-line="71" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="529">
+          <caret line="210" column="46" selection-start-line="210" selection-start-column="46" selection-end-line="210" selection-end-column="46" />
         </state>
       </provider>
     </entry>

@@ -208,12 +208,7 @@ class CustomerRepository extends ServiceEntityRepository {
                 if(!empty($agencies)) {
                     $agencyTotals = array_count_values( $agencies );
 
-                    foreach ($agencyTotals as $agency => $total) {
-                        $totals[] = [
-                            "agency" => $agency,
-                            "total" => $total
-                        ];
-                    }
+                    $totals[] = $agencyTotals;
                 }
 
                 $data["places"][] = [

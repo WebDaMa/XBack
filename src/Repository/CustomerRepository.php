@@ -201,8 +201,13 @@ class CustomerRepository extends ServiceEntityRepository {
                 $totals = [];
 
                 $agencies = [];
-                foreach( $customers as $row ) {
+                foreach( $customers as $k => $row ) {
+                    if( is_null($row["busCheckedIn"])) {
+                        $row["busCheckedIn"] = false;
+                    }
                     $agencies[] = $row["agency"];
+
+                    $customers[$k] = $row;
                 }
 
                 if(!empty($agencies)) {

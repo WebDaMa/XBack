@@ -15,7 +15,7 @@ class TravelTypeRepository extends CodeBaseRepository
 
     public function getAllBusTypes ():? array {
         return $this->createQueryBuilder('t')
-            ->where("t.transportType = 'bus'")
+            ->where("t.transportType = 2")
             ->getQuery()
             ->getResult()
             ;

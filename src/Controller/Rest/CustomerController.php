@@ -65,57 +65,22 @@ class CustomerController extends FOSRestController {
     }
 
     /**
-     * @Rest\Get("/customers/groep/rafting/{date}")
+     * @Rest\Get("/customers/bus/go/{date}")
      */
     public function getBusGoCustomersByWeek($date): Response {
-        $rep = $this->getDoctrine()->getRepository(TravelType::class);
-        $busTypes = $rep->getAllBusTypes();
-
         $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $data = $rep->getBusGoCustomersByWeek($date);
+        $view = $this->view($data, Response::HTTP_OK);
 
-        $data = [
-            "date" => $date,
-            "total" => 0,
-            "places" => []
-        ];
+        return $this->handleView($view);
+    }
 
-        foreach ($busTypes as $busType) {
-            /**
-             * @var $busType TravelType
-             */
-            $customers = $rep->getAllBusGoCustomersByDateAndTravelTypeCode($date, $busType->getCode());
-
-            if (!empty($customers)) {
-                $data["total"] += count($customers);
-
-                $totals = [];
-
-                $agencies = [];
-                foreach( $customers as $row ) {
-                    $agencies[] = $row["agency"];
-                }
-
-                if(!empty($agencies)) {
-                    $agencyTotals = array_count_values( $agencies );
-
-                    foreach ($agencyTotals as $agency => $total) {
-                        $totals[] = [
-                            "agency" => $agency,
-                            "total" => $total
-                        ];
-                    }
-                }
-
-                $data["places"][] = [
-                    "total" => count($customers),
-                    "totals" => $totals,
-                    "place" => $busType->getStartPoint(),
-                    "customers" => $customers
-                ];
-            }
-
-        }
-
+    /**
+     * @Rest\Get("/customers/bus/back/{date}")
+     */
+    public function getBusBackCustomersByWeek($date): Response {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $data = $rep->getBusBackCustomersByWeek($date);
         $view = $this->view($data, Response::HTTP_OK);
 
         return $this->handleView($view);

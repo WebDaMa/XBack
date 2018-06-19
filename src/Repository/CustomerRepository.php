@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Customer;
+use App\Entity\TravelType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -143,5 +144,88 @@ class CustomerRepository extends ServiceEntityRepository {
             ->setParameter("travelTypeCode", $travelTypeCode);
 
         return $qb->execute()->fetchAll();
+    }
+
+    public function getAllBusBackCustomersByDateAndTravelTypeCode($date, $travelTypeCode)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+        $qb
+            ->select("c.id", "c.bus_to_checked_in AS busCheckedIn", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
+                'tg.start_point AS place', 'a.code AS agency', 'c.gsm')
+            ->from('customer', 'c')
+            ->innerJoin('c', 'travel_type', 'tg', 'c.travel_go_type_id = tg.id')
+            ->innerJoin('c', 'agency', 'a', 'c.agency_id = a.id')
+            ->where("c.travel_back_date = :date")
+            ->andWhere('tg.code = :travelTypeCode')
+            ->setParameter("date", $date)
+            ->setParameter("travelTypeCode", $travelTypeCode);
+
+        return $qb->execute()->fetchAll();
+    }
+
+    public function getBusGoCustomersByWeek($date): array {
+
+        return $this->getBusCustomersByWeekAndType($date, "go");
+    }
+
+    public function getBusBackCustomersByWeek($date): array {
+
+        return $this->getBusCustomersByWeekAndType($date, "back");
+    }
+
+    public function getBusCustomersByWeekAndType($date, $type): array {
+        $rep = $this->getEntityManager()->getRepository(TravelType::class);
+        $busTypes = $rep->getAllBusTypes();
+
+        $data = [
+            "date" => $date,
+            "total" => 0,
+            "places" => []
+        ];
+
+        foreach ($busTypes as $busType) {
+            /**
+             * @var $busType TravelType
+             */
+
+            if($type === "go") {
+                $customers = $this->getAllBusGoCustomersByDateAndTravelTypeCode($date, $busType->getCode());
+            }elseif ($type === "back"){
+                $customers = $this->getAllBusBackCustomersByDateAndTravelTypeCode($date, $busType->getCode());
+            }
+
+            if (!empty($customers)) {
+                $data["total"] += count($customers);
+
+                $totals = [];
+
+                $agencies = [];
+                foreach( $customers as $row ) {
+                    $agencies[] = $row["agency"];
+                }
+
+                if(!empty($agencies)) {
+                    $agencyTotals = array_count_values( $agencies );
+
+                    foreach ($agencyTotals as $agency => $total) {
+                        $totals[] = [
+                            "agency" => $agency,
+                            "total" => $total
+                        ];
+                    }
+                }
+
+                $data["places"][] = [
+                    "total" => count($customers),
+                    "totals" => $totals,
+                    "place" => $busType->getStartPoint(),
+                    "customers" => $customers
+                ];
+            }
+
+        }
+
+        return $data;
     }
 }

@@ -342,6 +342,7 @@ easy_admin:
               - { property: 'location'}
               - { property: 'groupPlannings'}
               - { property: 'groupCustomers'}
+              - { property: 'groupActivities'}
           form:
             fields:
               - { property: 'groupId'}
@@ -350,6 +351,7 @@ easy_admin:
               - { property: 'location'}
               - { property: 'groupPlannings', type_options: { by_reference: false }}
               - { property: 'groupCustomers', type_options: { by_reference: false }}
+              - { property: 'groupActivities', type_options: { by_reference: false }}
 
         Guide:
           class: App\Entity\Guide
@@ -422,7 +424,6 @@ easy_admin:
               - { property: 'guideFunction'}
           form:
             fields:
-              - { property: 'id'}
               - { property: 'planningId'}
               - { property: 'date'}
               - { property: 'group', type_options: { by_reference: false }}

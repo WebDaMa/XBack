@@ -47,7 +47,7 @@ class DashboardController extends Controller {
             $rp = $file->getRealPath();
 
             $spreadsheet = IOFactory::load($rp);
-            $sheet = $spreadsheet->getActiveSheet()->toArray();
+            $sheet = $this->getDynamicSheetAsArray($spreadsheet->getActiveSheet());
 
             //Remove headers
             array_shift($sheet);
@@ -84,8 +84,6 @@ class DashboardController extends Controller {
                     'Your Customers were saved!'
                 );
             }
-
-
             return $this->redirect($this->generateUrl('admin'));
         }
 
@@ -248,11 +246,11 @@ class DashboardController extends Controller {
         $updateCustomer->setBooker($row[5]);
         $updateCustomer->setLastName($row[6]);
         $updateCustomer->setFirstName($row[7]);
-        $updateCustomer->setBirthdate($this->getDateOrNull($row[8]));
+        $updateCustomer->setBirthdate($this->convertExcelDateToDateTime($row[8]));
         $updateCustomer->setEmail($row[9]);
         $updateCustomer->setGsm($row[10]);
         $updateCustomer->setNationalRegisterNumber($row[11]);
-        $updateCustomer->setExpireDate($this->getDateOrNull($row[12]));
+        $updateCustomer->setExpireDate($this->getDateOrNull($row[12], 'j/m/Y'));
 
         $size = $this->getDoctrine()->getRepository(SuitSize::class)->findBySizeId($row[13]);
         if ($size)
@@ -282,8 +280,8 @@ class DashboardController extends Controller {
             $updateCustomer->setLocation($location);
         }
 
-        $updateCustomer->setStartDay($this->getDateOrNull($row[23]));
-        $updateCustomer->setEndDay($this->getDateOrNull($row[24]));
+        $updateCustomer->setStartDay($this->convertExcelDateToDateTime($row[23]));
+        $updateCustomer->setEndDay($this->convertExcelDateToDateTime($row[24]));
 
         $program = $this->getDoctrine()->getRepository(ProgramType::class)->findByCode($row[25]);
         if ($program)
@@ -315,7 +313,7 @@ class DashboardController extends Controller {
             $updateCustomer->setTravelGoType($travelGo);
         }
 
-        $updateCustomer->setTravelGoDate($this->getDateOrNull($row[30]));
+        $updateCustomer->setTravelGoDate($this->convertExcelDateToDateTime($row[30]));
 
         $travelBack = $this->getDoctrine()->getRepository(TravelType::class)->findByCode($row[31]);
         if ($travelBack)
@@ -323,7 +321,7 @@ class DashboardController extends Controller {
             $updateCustomer->setTravelBackType($travelBack);
         }
 
-        $updateCustomer->setTravelBackDate($this->getDateOrNull($row[32]));
+        $updateCustomer->setTravelBackDate($this->convertExcelDateToDateTime($row[32]));
 
         $updateCustomer->setBoardingPoint($row[33]);
 
@@ -437,9 +435,8 @@ class DashboardController extends Controller {
         return $updatePlanning;
     }
 
-    private function getDateOrNull($date)
+    private function getDateOrNull($date, $format = 'd/m/Y')
     {
-        //TODO: check format!
         $date = \DateTime::createFromFormat('j/n/Y', $date);
 
         return $date ? $date : null;
@@ -449,10 +446,14 @@ class DashboardController extends Controller {
     {
 
         $unix = ($dateValue - 25569) * 86400;
-        $time = new \DateTime();
-        $time->setTimestamp($unix);
+        if($unix > 0) {
+            $time = new \DateTime();
+            $time->setTimestamp($unix);
+            return $time;
+        }
 
-        return $time;
+
+        return null;
     }
 
     private function getStringBool($value)

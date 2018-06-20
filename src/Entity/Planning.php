@@ -32,13 +32,13 @@ class Planning extends TypeTimestamps
     private $date;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Groep", inversedBy="groupPlannings")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Groep", inversedBy="plannings")
      * @ORM\JoinColumn(nullable=true)
      */
     private $group;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Activity", inversedBy="activityPlannings")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Activity", inversedBy="plannings")
      * @ORM\JoinColumn(nullable=true)
      */
     private $activity;
@@ -166,25 +166,11 @@ class Planning extends TypeTimestamps
         $this->guideFunction = $guideFunction;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getPrint()
-    {
-        return $this->print;
-    }
-
-    /**
-     * @param mixed $print
-     */
-    public function setPrint($print)
-    {
-        $this->print = $print;
-    }
-
     public function __toString() : string
     {
-        return (string) $this->getActivity();
+        return (string) $this->getGuide()->__toString() . ' - ' . $this->getActivity()->__toString()
+            . ' - ' . $this->getGroup()->__toString();
     }
+
 
 }

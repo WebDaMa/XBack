@@ -17,7 +17,7 @@ class Groep extends TypeTimestamps
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Planning", mappedBy="group")
      */
-    private $groupPlannings;
+    private $plannings;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Customer", mappedBy="groupLayout")
@@ -67,7 +67,7 @@ class Groep extends TypeTimestamps
 
     public function __construct()
     {
-        $this->groupPlannings = new ArrayCollection();
+        $this->plannings = new ArrayCollection();
     }
 
     /**
@@ -153,29 +153,29 @@ class Groep extends TypeTimestamps
     /**
      * @return Collection|Planning[]
      */
-    public function getGroupPlannings()
+    public function getPlannings()
     {
-        return $this->groupPlannings;
+        return $this->plannings;
     }
 
-    public function addGroupPlanning(Planning $planning)
+    public function addPlanning(Planning $planning)
     {
-        if ($this->groupPlannings->contains($planning)) {
+        if ($this->plannings->contains($planning)) {
             return;
         }
 
-        $this->groupPlannings->add($planning);
+        $this->plannings->add($planning);
         // set the *owning* side!
         $planning->setGroup($this);
     }
 
-    public function removeGroupPlanning(Planning $planning)
+    public function removePlanning(Planning $planning)
     {
-        if (!$this->groupPlannings->contains($planning)) {
+        if (!$this->plannings->contains($planning)) {
             return;
         }
 
-        $this->groupPlannings->removeElement($planning);
+        $this->plannings->removeElement($planning);
         // set the owning side to null
         $planning->setGroup(null);
     }
@@ -190,22 +190,22 @@ class Groep extends TypeTimestamps
 
     public function addGroupCustomer(Customer $customer)
     {
-        if ($this->groupPlannings->contains($customer)) {
+        if ($this->plannings->contains($customer)) {
             return;
         }
 
-        $this->groupPlannings->add($customer);
+        $this->plannings->add($customer);
         // set the *owning* side!
         $customer->setGroupLayout($this);
     }
 
     public function removeGroupCustomer(Customer $customer)
     {
-        if (!$this->groupPlannings->contains($customer)) {
+        if (!$this->plannings->contains($customer)) {
             return;
         }
 
-        $this->groupPlannings->removeElement($customer);
+        $this->plannings->removeElement($customer);
         // set the owning side to null
         $customer->setGroupLayout(null);
     }
@@ -237,7 +237,7 @@ class Groep extends TypeTimestamps
     /**
      * @param mixed $agency
      */
-    public function setAgency(Agency $agency): void
+    public function setAgency(Agency $agency = null): void
     {
         $this->agency = $agency;
     }

@@ -21,24 +21,24 @@ class Guide
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    protected $id;
+    private $id;
 
     // add your own fields
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $guideShort;
+    private $guideShort;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $guideFirstName;
+    private $guideFirstName;
 
     /**
      * @ORM\Column(type="string")
      */
-    protected $guideLastName;
+    private $guideLastName;
 
     public function __construct()
     {

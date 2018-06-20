@@ -17,9 +17,15 @@ class Agency extends TypeBase
      */
     private $agencyCustomers;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Groep", mappedBy="agency")
+     */
+    private $agencyGroeps;
+
     public function __construct()
     {
         $this->agencyCustomers = new ArrayCollection();
+        $this->agencyGroeps = new ArrayCollection();
     }
 
     /**
@@ -41,7 +47,7 @@ class Agency extends TypeBase
         $customer->setAgency($this);
     }
 
-    public function removeProgramCustomer(Customer $customer)
+    public function removeAgencyCustomer(Customer $customer)
     {
         if (!$this->agencyCustomers->contains($customer)) {
             return;
@@ -50,5 +56,35 @@ class Agency extends TypeBase
         $this->agencyCustomers->removeElement($customer);
         // set the owning side to null
         $customer->setAgency(null);
+    }
+
+    /**
+     * @return Collection|Groep[]
+     */
+    public function getAgencyGroeps()
+    {
+        return $this->agencyGroeps;
+    }
+
+    public function addAgencyGroep(Groep $groep)
+    {
+        if ($this->agencyGroeps->contains($groep)) {
+            return;
+        }
+
+        $this->agencyGroeps->add($groep);
+        // set the *owning* side!
+        $groep->setAgency($this);
+    }
+
+    public function removeAgencyGroep(Groep $groep)
+    {
+        if (!$this->agencyGroeps->contains($groep)) {
+            return;
+        }
+
+        $this->agencyGroeps->removeElement($groep);
+        // set the owning side to null
+        $groep->setAgency(null);
     }
 }

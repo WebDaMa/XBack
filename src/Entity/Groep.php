@@ -59,6 +59,12 @@ class Groep extends TypeTimestamps
      */
     private $location;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Agency", inversedBy="agencyGroeps")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $agency;
+
     public function __construct()
     {
         $this->groupPlannings = new ArrayCollection();
@@ -220,6 +226,21 @@ class Groep extends TypeTimestamps
         $this->groupIndex = $groupIndex;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getAgency(): ?Agency
+    {
+        return $this->agency;
+    }
+
+    /**
+     * @param mixed $agency
+     */
+    public function setAgency(Agency $agency): void
+    {
+        $this->agency = $agency;
+    }
 
     public function __toString() : string
     {

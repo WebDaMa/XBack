@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ProgramActivityRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ProgramActivityRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Agency.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Agency.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Groep.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Groep.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,14 +18,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CustomerRepository.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
+      <file leaf-file-name="DashboardController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="402">
-              <caret line="246" column="27" lean-forward="true" selection-start-line="246" selection-start-column="27" selection-end-line="246" selection-end-column="27" />
-              <folding>
-                <element signature="e#34#58#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="481">
+              <caret line="385" column="43" lean-forward="true" selection-start-line="385" selection-start-column="43" selection-end-line="385" selection-end-column="43" />
             </state>
           </provider>
         </entry>
@@ -34,7 +31,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>todo</find>
       <find>date</find>
       <find>datebirthday</find>
       <find>birt</find>
@@ -64,6 +60,7 @@
       <find>convertExcelDateToDateTime</find>
       <find>_em</find>
       <find>has</find>
+      <find>agency</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -79,7 +76,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/templates/base.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/AdminController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Client.php" />
         <option value="$PROJECT_DIR$/src/Command/FosoCleanCommand.php" />
@@ -105,7 +101,6 @@
         <option value="$PROJECT_DIR$/config/services.yaml" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/APIController.php" />
         <option value="$PROJECT_DIR$/config/routes.yaml" />
-        <option value="$PROJECT_DIR$/src/Entity/Groep.php" />
         <option value="$PROJECT_DIR$/src/Repository/LocationRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/LocationController.php" />
         <option value="$PROJECT_DIR$/src/Repository/PlanningRepository.php" />
@@ -124,12 +119,14 @@
         <option value="$PROJECT_DIR$/src/Repository/TravelTypeRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
         <option value="$PROJECT_DIR$/src/Entity/ProgramActivity.php" />
-        <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
         <option value="$PROJECT_DIR$/src/Repository/GuideRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/GuideController.php" />
         <option value="$PROJECT_DIR$/src/Repository/SuitSizeRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/ProgramActivityRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Groep.php" />
+        <option value="$PROJECT_DIR$/src/Entity/Agency.php" />
+        <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
       </list>
     </option>
   </component>
@@ -431,12 +428,12 @@
       <workItem from="1529353649109" duration="1616000" />
       <workItem from="1529355566237" duration="15112000" />
       <workItem from="1529512987907" duration="14000" />
-      <workItem from="1529513039658" duration="690000" />
+      <workItem from="1529513039658" duration="4103000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="185087000" />
+    <option name="totallyTimeSpent" value="188500000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -452,7 +449,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Nativescript Palette" order="3" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -505,9 +502,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Repository/BeltSizeRepository.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/ProgramRepository.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -697,27 +691,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="242" column="77" lean-forward="true" selection-start-line="242" selection-start-column="77" selection-end-line="242" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Customer.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="564">
-          <caret line="126" column="34" lean-forward="true" selection-start-line="126" selection-start-column="34" selection-end-line="126" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Agency.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="15" column="76" lean-forward="true" selection-start-line="15" selection-start-column="76" selection-end-line="15" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Activity.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="441">
@@ -749,20 +722,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="356">
           <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/ActivityRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="34" column="29" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/GroepRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="36" column="29" selection-start-line="36" selection-start-column="29" selection-end-line="36" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -811,6 +770,48 @@
           <folding>
             <element signature="e#34#58#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/ActivityRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="292">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/GroepRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="15" column="20" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Customer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="125" column="75" selection-start-line="125" selection-start-column="75" selection-end-line="125" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Groep.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="536">
+          <caret line="238" column="7" lean-forward="true" selection-start-line="238" selection-start-column="7" selection-end-line="238" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Agency.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1501">
+          <caret line="82" column="19" lean-forward="true" selection-start-line="82" selection-start-column="19" selection-end-line="82" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="481">
+          <caret line="385" column="43" lean-forward="true" selection-start-line="385" selection-start-column="43" selection-end-line="385" selection-end-column="43" />
         </state>
       </provider>
     </entry>

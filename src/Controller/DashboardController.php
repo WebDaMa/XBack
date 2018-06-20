@@ -62,10 +62,12 @@ class DashboardController extends Controller {
 
                     $customerExists = $this->getDoctrine()->getRepository(Customer::class)->findByCustomerId($customer->getCustomerId());
 
-                    if(!is_null($customerExists) || $customerExists) {
+                    if (!is_null($customerExists) || $customerExists)
+                    {
                         //Update current
                         $customer = $this->importCustomer($row, $customerExists);
-                    }else{
+                    } else
+                    {
                         //import
                         $em->persist($customer);
                     }
@@ -132,7 +134,8 @@ class DashboardController extends Controller {
 
                     $guideExists = $this->getDoctrine()->getRepository(Guide::class)->findByGuideShort($guide->getGuideShort());
 
-                    if(is_null($guideExists) || !$guideExists) {
+                    if ((is_null($guideExists) || !$guideExists) && !is_null($guide->getGuideShort()))
+                    {
                         $em->persist($guide);
                     }
                 }
@@ -153,15 +156,23 @@ class DashboardController extends Controller {
                 {
                     $groep = $this->importGroep($row);
                     $periodId = $groep->getPeriodId();
+                    $location = $groep->getLocation();
 
-                    $groepExists = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodIdAndLocationId($groep->getGroupId(), $periodId, $groep->getLocation()->getId());
+                    $groepExists = null;
 
-                    if(!is_null($groepExists) || $groepExists) {
+                    if (!is_null($location))
+                    {
+                        $groepExists = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodIdAndLocationId($groep->getGroupId(), $periodId, $location->getId());
+                    }
+
+                    if (!is_null($groepExists) || $groepExists)
+                    {
                         //Update current
                         $groep = $this->importGroep($row, $groepExists);
                     }
 
-                    if(!is_null($groep->getName()) && !empty($groep->getName()) && $groep->getName() !== '') {
+                    if (!is_null($groep->getName()) && !empty($groep->getName()) && $groep->getName() !== '')
+                    {
                         //Don't add empty groeps
                         $em->persist($groep);
                     }
@@ -188,12 +199,14 @@ class DashboardController extends Controller {
                     $planningExists = $this->getDoctrine()->getRepository(Planning::class)
                         ->findByPlanningIdAndDateAndGroepId($planning->getPlanningId(), $planning->getDate(), $row[12]);
 
-                    if(!is_null($planningExists) || $planningExists) {
+                    if (!is_null($planningExists) || $planningExists)
+                    {
                         //Update current
                         $planning = $this->importPlanning($row, $periodId, $planningExists);
                     }
 
-                    if(!is_null($planning->getGuide()) && !empty($planning->getGuide())) {
+                    if (!is_null($planning->getGuide()) && !empty($planning->getGuide()))
+                    {
                         //Don't add empty groeps
                         $em->persist($planning);
                     }
@@ -222,7 +235,8 @@ class DashboardController extends Controller {
 
     private function importCustomer($row, ?Customer $updateCustomer = null): Customer
     {
-        if(is_null($updateCustomer)) {
+        if (is_null($updateCustomer))
+        {
             $updateCustomer = new Customer();
         }
 
@@ -362,7 +376,8 @@ class DashboardController extends Controller {
 
     private function importGroep($row, ?Groep $updateGroep = null): Groep
     {
-        if(is_null($updateGroep)) {
+        if (is_null($updateGroep))
+        {
             $updateGroep = new Groep();
         }
 
@@ -378,12 +393,19 @@ class DashboardController extends Controller {
 
         $updateGroep->setGroupId($row[4]);
 
+        $agency = $this->getDoctrine()->getRepository(Agency::class)->findByCode($row[5]);
+        if ($agency)
+        {
+            $updateGroep->setAgency($agency);
+        }
+
         return $updateGroep;
     }
 
     private function importPlanning($row, $periodId, ?Planning $updatePlanning = null): Planning
     {
-        if(is_null($updatePlanning)) {
+        if (is_null($updatePlanning))
+        {
             $updatePlanning = new Planning();
         }
 
@@ -409,7 +431,8 @@ class DashboardController extends Controller {
             $updatePlanning->setGuide($guide);
         }
 
-        $updatePlanning->setGuideFunction($row[7]);
+        $guideFunction = is_int($row[7]) ? $row[7] : 0;
+        $updatePlanning->setGuideFunction($guideFunction);
 
         return $updatePlanning;
     }
@@ -417,12 +440,13 @@ class DashboardController extends Controller {
     private function getDateOrNull($date)
     {
         //TODO: check format!
-        $date = \DateTime::createFromFormat('d/m/Y', $date);
+        $date = \DateTime::createFromFormat('j/n/Y', $date);
 
         return $date ? $date : null;
     }
 
-    private function convertExcelDateToDateTime($dateValue) {
+    private function convertExcelDateToDateTime($dateValue)
+    {
 
         $unix = ($dateValue - 25569) * 86400;
         $time = new \DateTime();
@@ -431,25 +455,32 @@ class DashboardController extends Controller {
         return $time;
     }
 
-    private function getStringBool($value) {
-        if(is_string($value)) {
+    private function getStringBool($value)
+    {
+        if (is_string($value))
+        {
             $value = strtolower($value);
+
             return $value === 'true';
-        }else{
+        } else
+        {
             return $value;
         }
 
     }
 
-    private function getDynamicSheetAsArray(Worksheet $sheet) {
+    private function getDynamicSheetAsArray(Worksheet $sheet)
+    {
         $rows = [];
-        foreach ($sheet->getRowIterator() AS $row) {
+        foreach ($sheet->getRowIterator() AS $row)
+        {
             $cellIterator = $row->getCellIterator();
-            $cellIterator->setIterateOnlyExistingCells(FALSE); // This loops through all cells,
+            $cellIterator->setIterateOnlyExistingCells(false); // This loops through all cells,
             $cells = [];
-            foreach ($cellIterator as $cell) {
+            foreach ($cellIterator as $cell)
+            {
                 $code = $cell->getValue();
-                if(strstr($code,'=')==true)
+                if (strstr($code, '=') == true)
                 {
                     $code = $cell->getOldCalculatedValue();
                 }

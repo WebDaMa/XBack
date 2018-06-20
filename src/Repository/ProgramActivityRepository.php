@@ -30,11 +30,9 @@ class ProgramActivityRepository extends ServiceEntityRepository
             ->where('pa.program_type_id = :programTypeId')
             ->andWhere("pa.activity_id = :activityId")
             ->setParameters(['programTypeId' => $programTypeId, 'activityId' => $activityId])
-            ->getQuery()
-            ->setMaxResults(1)
-            ->getOneOrNullResult();
+            ->execute()->fetch();
 
 
-        return is_null($pa) ? false : true;
+        return is_null($pa) || $pa == false ? false : true;
     }
 }

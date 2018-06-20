@@ -245,10 +245,8 @@ class CustomerRepository extends ServiceEntityRepository {
             ->andWhere("ca.activity_id = :activityId")
             ->setParameter("customerId", $customerId)
             ->setParameter("activityId", $activityId)
-            ->getQuery()
-            ->setMaxResults(1)
-            ->getOneOrNullResult();
+            ->execute()->fetch();
 
-        return is_null($ca) ? false : true;
+        return is_null($ca) || $ca == false ? false : true;
     }
 }

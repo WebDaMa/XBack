@@ -24,7 +24,7 @@ class GroepController extends FOSRestController {
         $dayNumber = $date->format("N");
 
         if($dayNumber > 5) {
-            $weekNumber -= 1;
+            $weekNumber += 1;
         }
 
         $periodId = $year . $weekNumber;

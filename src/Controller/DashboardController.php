@@ -238,7 +238,6 @@ class DashboardController extends Controller {
             $updateCustomer = new Customer();
         }
 
-        //TODO: check import dates!
         $updateCustomer->setCustomerId($row[0]);
         $updateCustomer->setFileId($row[1]);
         $updateCustomer->setPeriodId($row[3]);
@@ -417,11 +416,7 @@ class DashboardController extends Controller {
             $updatePlanning->setGroup($group);
         }
 
-        $activity = $this->getDoctrine()->getRepository(Activity::class)->findByName($row[5]);
-        if ($activity)
-        {
-            $updatePlanning->setActivity($activity);
-        }
+        $updatePlanning->setActivity($row[5]);
 
         $guide = $this->getDoctrine()->getRepository(Guide::class)->findByGuideShort($row[6]);
         if ($guide)

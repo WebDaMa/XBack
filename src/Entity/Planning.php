@@ -38,8 +38,7 @@ class Planning extends TypeTimestamps
     private $group;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Activity", inversedBy="plannings")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $activity;
 
@@ -105,7 +104,7 @@ class Planning extends TypeTimestamps
     /**
      * @return mixed
      */
-    public function getActivity(): ?Activity
+    public function getActivity(): ?string
     {
         return $this->activity;
     }
@@ -113,7 +112,7 @@ class Planning extends TypeTimestamps
     /**
      * @param mixed $activity
      */
-    public function setActivity(Activity $activity = null)
+    public function setActivity($activity = "")
     {
         $this->activity = $activity;
     }

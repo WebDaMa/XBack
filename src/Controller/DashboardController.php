@@ -196,22 +196,24 @@ class DashboardController extends Controller {
                 foreach ($planningSheet as $row)
                 {
                     $planning = $this->importPlanning($row, $periodId);
+                    if (!is_null($planning->getPlanningId()) && !is_null($planning->getDate())) {
+                        $plRep = $this->getDoctrine()->getRepository(Planning::class);
 
-                    $planningExists = $this->getDoctrine()->getRepository(Planning::class)
-                        ->findByPlanningIdAndDateAndGroepId($planning->getPlanningId(), $planning->getDate(), $row[12]);
+                        $planningExists = $plRep
+                            ->findByPlanningIdAndDateAndGroepId($planning->getPlanningId(), $planning->getDate(), $row[12]);
 
-                    if (!is_null($planningExists) || $planningExists)
-                    {
-                        //Update current
-                        $planning = $this->importPlanning($row, $periodId, $planningExists);
+                        if (!is_null($planningExists) || $planningExists)
+                        {
+                            //Update current
+                            $planning = $this->importPlanning($row, $periodId, $plRep->find($planningExists));
+                        }
+
+                        if (!is_null($planning->getGuide()) && !empty($planning->getGuide()))
+                        {
+                            //Don't add empty groeps
+                            $em->persist($planning);
+                        }
                     }
-
-                    if (!is_null($planning->getGuide()) && !empty($planning->getGuide()))
-                    {
-                        //Don't add empty groeps
-                        $em->persist($planning);
-                    }
-
                 }
             }
 
@@ -409,7 +411,7 @@ class DashboardController extends Controller {
             $updatePlanning = new Planning();
         }
 
-        $updatePlanning->setPlanningId($row[0]);
+        $updatePlanning->setPlanningId((int)$row[0]);
 
         $updatePlanning->setDate($this->convertExcelDateToDateTime($row[1]));
         $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[12], $periodId);

@@ -32,14 +32,20 @@ class PlanningRepository extends ServiceEntityRepository
             ;
     }
 
-    public function findByPlanningIdAndDateAndGroepId($planningId, $date, $groepId): ?Planning {
-        return $this->createQueryBuilder('e')
-            ->join('e.group','gr')
-            ->where('e.planningId = :planningId AND e.date = :date AND gr.id = :groepId')
+    public function findByPlanningIdAndDateAndGroepId($planningId, \DateTime $date, $groepId){
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $date = $date->format('Y-m-d');
+
+        return $qb
+            ->select("p.id")
+            ->from("planning", "p")
+            ->innerJoin("p", "groep", "g", "p.group_id = g.id")
+            ->where('p.planning_id = :planningId AND p.date = :date AND g.group_id = :groepId')
             ->setParameters(['planningId' => $planningId, 'date'=> $date, 'groepId' => $groepId])
-            ->getQuery()
-            ->setMaxResults(1)
-            ->getOneOrNullResult()
+            ->execute()
+            ->fetchColumn(0)
             ;
     }
 }

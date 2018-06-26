@@ -16,7 +16,20 @@ class GroepController extends FOSRestController {
      */
     public function getAllGroepsForWeekAndLocationAction($date, $locationId) {
         $rep = $this->getDoctrine()->getRepository(Groep::class);
-        $data = $rep->getAllByPeriodAndLocation($date, $locationId);
+
+        //Make periodId
+        $date = new \DateTime($date);
+        $year = $date->format('Y');
+        $weekNumber = $date->format('W');
+        $dayNumber = $date->format("N");
+
+        if($dayNumber > 5) {
+            $weekNumber -= 1;
+        }
+
+        $periodId = $year . $weekNumber;
+
+        $data = $rep->getAllByPeriodAndLocation($periodId, $locationId);
         $view = $this->view($data, Response::HTTP_OK);
 
         return $this->handleView($view);

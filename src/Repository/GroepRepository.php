@@ -33,14 +33,14 @@ class GroepRepository extends ServiceEntityRepository
             ;
     }
 
-    public function getAllByPeriodAndLocation($date, $locationId): array {
+    public function getAllByPeriodAndLocation($periodId, $locationId): array {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder()
             ->select('g.id, g.name')
             ->from('groep', 'g')
-            ->where("g.period_id = CONCAT(DATE_FORMAT(:date, '%y'), DATE_FORMAT(:date, '%u'))
+            ->where("g.period_id = :periodId
             AND g.location_id = :locationId")
-            ->setParameters(['date' => $date, 'locationId'=> $locationId])
+            ->setParameters(['periodId' => $periodId, 'locationId'=> $locationId])
             ;
 
         return $qb->execute()->fetchAll();

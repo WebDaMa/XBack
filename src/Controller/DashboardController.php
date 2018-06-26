@@ -19,6 +19,7 @@ use App\Entity\ProgramType;
 use App\Entity\TravelType;
 use App\Form\UploadType;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -84,7 +85,7 @@ class DashboardController extends Controller {
                     'Your Customers were saved!'
                 );
             }
-            return $this->redirect($this->generateUrl('admin'));
+            return $this->redirect($this->generateUrl('admin', array('entity' => 'Customer')));
         }
 
         return $this->render('dashboard/import.html.twig', array(
@@ -153,28 +154,30 @@ class DashboardController extends Controller {
                 foreach ($groupSheet as $row)
                 {
                     $groep = $this->importGroep($row);
-                    $periodId = $groep->getPeriodId();
-                    $location = $groep->getLocation();
 
-                    $groepExists = null;
+                    if (!is_null($groep->getPeriodId()) && !is_null($groep->getLocation())) {
+                        $periodId = $groep->getPeriodId();
+                        $location = $groep->getLocation();
 
-                    if (!is_null($location))
-                    {
-                        $groepExists = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodIdAndLocationId($groep->getGroupId(), $periodId, $location->getId());
+                        $groepExists = null;
+
+                        if (!is_null($location))
+                        {
+                            $groepExists = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodIdAndLocationId($groep->getGroupId(), $periodId, $location->getId());
+                        }
+
+                        if (!is_null($groepExists) || $groepExists)
+                        {
+                            //Update current
+                            $groep = $this->importGroep($row, $groepExists);
+                        }
+
+                        if (!is_null($groep->getName()) && !empty($groep->getName()) && $groep->getName() !== '')
+                        {
+                            //Don't add empty groeps
+                            $em->persist($groep);
+                        }
                     }
-
-                    if (!is_null($groepExists) || $groepExists)
-                    {
-                        //Update current
-                        $groep = $this->importGroep($row, $groepExists);
-                    }
-
-                    if (!is_null($groep->getName()) && !empty($groep->getName()) && $groep->getName() !== '')
-                    {
-                        //Don't add empty groeps
-                        $em->persist($groep);
-                    }
-
                 }
                 $em->flush();
             }
@@ -246,6 +249,10 @@ class DashboardController extends Controller {
         $updateCustomer->setLastName($row[6]);
         $updateCustomer->setFirstName($row[7]);
         $updateCustomer->setBirthdate($this->convertExcelDateToDateTime($row[8]));
+        var_dump('---------');
+        var_dump($row[8]);
+        var_dump($updateCustomer->getBirthdate());
+        var_dump('---------');
         $updateCustomer->setEmail($row[9]);
         $updateCustomer->setGsm($row[10]);
         $updateCustomer->setNationalRegisterNumber($row[11]);
@@ -409,7 +416,6 @@ class DashboardController extends Controller {
         $updatePlanning->setPlanningId($row[0]);
 
         $updatePlanning->setDate($this->convertExcelDateToDateTime($row[1]));
-
         $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[12], $periodId);
         if ($group)
         {
@@ -439,16 +445,7 @@ class DashboardController extends Controller {
 
     private function convertExcelDateToDateTime($dateValue)
     {
-
-        $unix = ($dateValue - 25569) * 86400;
-        if($unix > 0) {
-            $time = new \DateTime();
-            $time->setTimestamp($unix);
-            return $time;
-        }
-
-
-        return null;
+        return Date::excelToDateTimeObject($dateValue, new \DateTimeZone('Europe/Amsterdam'));
     }
 
     private function getStringBool($value)

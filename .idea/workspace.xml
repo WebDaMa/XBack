@@ -19,8 +19,8 @@
       <file leaf-file-name="DashboardController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="283">
-              <caret line="251" column="26" selection-start-line="251" selection-start-column="26" selection-end-line="251" selection-end-column="26" />
+            <state relative-caret-position="479">
+              <caret line="428" column="38" selection-start-line="428" selection-start-column="38" selection-end-line="428" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -426,12 +426,12 @@
       <workItem from="1529355566237" duration="15112000" />
       <workItem from="1529512987907" duration="14000" />
       <workItem from="1529513039658" duration="9372000" />
-      <workItem from="1530020735238" duration="3018000" />
+      <workItem from="1530020735238" duration="3138000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="196787000" />
+    <option name="totallyTimeSpent" value="196907000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -815,8 +815,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="283">
-          <caret line="251" column="26" selection-start-line="251" selection-start-column="26" selection-end-line="251" selection-end-column="26" />
+        <state relative-caret-position="479">
+          <caret line="428" column="38" selection-start-line="428" selection-start-column="38" selection-end-line="428" selection-end-column="38" />
         </state>
       </provider>
     </entry>

@@ -426,7 +426,7 @@ class DashboardController extends Controller {
             $updatePlanning->setGuide($guide);
         }
 
-        $guideFunction = is_int($row[7]) ? $row[7] : 0;
+        $guideFunction = (int) $row[7];
         $updatePlanning->setGuideFunction($guideFunction);
 
         return $updatePlanning;

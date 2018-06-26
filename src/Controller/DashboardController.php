@@ -249,10 +249,6 @@ class DashboardController extends Controller {
         $updateCustomer->setLastName($row[6]);
         $updateCustomer->setFirstName($row[7]);
         $updateCustomer->setBirthdate($this->convertExcelDateToDateTime($row[8]));
-        var_dump('---------');
-        var_dump($row[8]);
-        var_dump($updateCustomer->getBirthdate());
-        var_dump('---------');
         $updateCustomer->setEmail($row[9]);
         $updateCustomer->setGsm($row[10]);
         $updateCustomer->setNationalRegisterNumber($row[11]);

@@ -21,6 +21,7 @@ class ActivityRepository extends ServiceEntityRepository
 
     public function findByName($name)
     {
+        $name = strtolower($name);
         return $this->createQueryBuilder('a')
             ->where('a.name = :name')
             ->setParameter('name', $name)

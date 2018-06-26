@@ -66,7 +66,8 @@ class SuitSizeRepository extends ServiceEntityRepository {
 
         $plannings = $rep->findByGuideIdAndDate($guideId, $date);
 
-        $activity = "";
+        $activityName = "";
+        $activity = null;
         $customers = [];
         $groupName = "";
         $groupTotal = 0;
@@ -78,18 +79,18 @@ class SuitSizeRepository extends ServiceEntityRepository {
                 /**
                  * @var $planning Planning
                  */
-                $activity = $planning->getActivity();
+                $activityName = $planning->getActivity();
+                $activityName = str_replace("o_", "", $activityName);
+                $rep = $this->getEntityManager()->getRepository(Activity::class);
+
+                $activity = $rep->findByName($activityName);
 
                 $group = $planning->getGroup();
                 if (isset($group))
                 {
-                    //TODO: some plannings don't have a activity?
-
                     $groupName .= $group->getName() . " ";
                     $groupTotal += $group->getGroupCustomers()->count();
                     //Get all customers
-                    //TODO: check with JSc for full query
-
                     $customers = array_merge($customers, $group->getGroupCustomers()->toArray());
                 }
             }
@@ -113,18 +114,27 @@ class SuitSizeRepository extends ServiceEntityRepository {
 
             $programType = $customer->getProgramType();
 
-            $rep = $this->getEntityManager()->getRepository(ProgramActivity::class);
-            $hasActivityProgramType = $rep->hasProgramActivityByProgramTypeAndActivity($programType->getId(), $activity->getId());
+            $hasActivityProgramType = false;
+            if (!is_null($activity) || $activity)
+            {
+                $rep = $this->getEntityManager()->getRepository(ProgramActivity::class);
+                $hasActivityProgramType = $rep->hasProgramActivityByProgramTypeAndActivity($programType->getId(), $activity->getId());
 
-            if(!$hasActivityProgramType) {
+            }
+
+            if (!$hasActivityProgramType)
+            {
                 $customersIds[] = $customer->getId();
-            }else{
+            } else
+            {
                 // klant gaat optioneel mee
-
+                $hasOption = false;
                 //Kijken of hij deze optie geboekt heeft
-                $rep = $this->getEntityManager()->getRepository(Customer::class);
-
-                $hasOption = $rep->hasActivityForCustomer($customer->getId(), $activity->getId());
+                if (!is_null($activity) || $activity)
+                {
+                    $rep = $this->getEntityManager()->getRepository(Customer::class);
+                    $hasOption = $rep->hasActivityForCustomer($customer->getId(), $activity->getId());
+                }
 
                 if ($hasOption)
                 {
@@ -151,7 +161,7 @@ class SuitSizeRepository extends ServiceEntityRepository {
                 'short' => $guide->getGuideShort(),
                 'name' => $guide->getGuideFirstName() . ' ' . $guide->getGuideLastName()
             ],
-            'activity' => $activity,
+            'activity' => $activityName,
             'groupName' => $groupName,
             'groupTotal' => $groupTotal,
             'sizeTotals' => $suitSizesTotals,

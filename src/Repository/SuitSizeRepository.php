@@ -66,7 +66,7 @@ class SuitSizeRepository extends ServiceEntityRepository {
 
         $plannings = $rep->findByGuideIdAndDate($guideId, $date);
 
-        $activityName = "";
+        $activity = "";
         $customers = [];
         $groupName = "";
         $groupTotal = 0;
@@ -79,22 +79,18 @@ class SuitSizeRepository extends ServiceEntityRepository {
                  * @var $planning Planning
                  */
                 $activity = $planning->getActivity();
-                if (isset($activity))
+
+                $group = $planning->getGroup();
+                if (isset($group))
                 {
-                    $activityName = $activity->getName();
+                    //TODO: some plannings don't have a activity?
 
-                    $group = $planning->getGroup();
-                    if (isset($group))
-                    {
-                        //TODO: some plannings don't have a activity?
+                    $groupName .= $group->getName() . " ";
+                    $groupTotal += $group->getGroupCustomers()->count();
+                    //Get all customers
+                    //TODO: check with JSc for full query
 
-                        $groupName .= $group->getName() . " ";
-                        $groupTotal += $group->getGroupCustomers()->count();
-                        //Get all customers
-                        //TODO: check with JSc for full query
-
-                        $customers = array_merge($customers, $group->getGroupCustomers()->toArray());
-                    }
+                    $customers = array_merge($customers, $group->getGroupCustomers()->toArray());
                 }
             }
         }
@@ -155,7 +151,7 @@ class SuitSizeRepository extends ServiceEntityRepository {
                 'short' => $guide->getGuideShort(),
                 'name' => $guide->getGuideFirstName() . ' ' . $guide->getGuideLastName()
             ],
-            'activity' => $activityName,
+            'activity' => $activity,
             'groupName' => $groupName,
             'groupTotal' => $groupTotal,
             'sizeTotals' => $suitSizesTotals,

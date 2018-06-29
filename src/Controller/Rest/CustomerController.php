@@ -157,13 +157,13 @@ class CustomerController extends FOSRestController {
     }
 
     /**
-     * @Rest\Get("/customers/lodging/{agencyId}/{date}")
+     * @Rest\Get("/customers/lodging/{agencyId}/{locationId}/{date}")
      */
-    public function getAllByAgencyForLodgingAndPeriodAction($agencyId, $date): Response {
+    public function getAllByAgencyForLodgingAndPeriodAndLocationAction($agencyId, $locationId, $date): Response {
         $periodId = Calculations::generatePeriodFromDate($date);
 
         $rep = $this->getDoctrine()->getRepository(Customer::class);
-        $data = $rep->getAllByAgencyForLodgingAndPeriod($agencyId, $periodId);
+        $data = $rep->getAllByAgencyForLodgingAndLocationAndPeriod($agencyId, $locationId, $periodId);
 
         $res = [
             "date" => Calculations::getLastSaturdayFromDate($date),
@@ -171,6 +171,22 @@ class CustomerController extends FOSRestController {
         ];
 
         $view = $this->view($res, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Get("/customers/volpension/{locationId}/{date}")
+     */
+    public function getAllByVolpensionForLocationAndPeriodAction($locationId, $date): Response {
+        $periodId = Calculations::generatePeriodFromDate($date);
+
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $data = $rep->getAllByAllInTypeForLocationAndPeriod($locationId, $periodId);
+
+        $data["date"] = Calculations::getLastSaturdayFromDate($date);
+
+        $view = $this->view($data, Response::HTTP_OK);
 
         return $this->handleView($view);
     }

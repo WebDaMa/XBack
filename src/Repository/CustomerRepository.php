@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Activity;
+use App\Entity\Agency;
+use App\Entity\AllInType;
 use App\Entity\Customer;
 use App\Entity\TravelType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -102,7 +104,7 @@ class CustomerRepository extends ServiceEntityRepository {
         return $qb->execute()->fetchAll();
     }
 
-    public function getAllByAgencyForLodgingAndPeriod($agencyId, $periodId)
+    public function getAllByAgencyForLodgingAndLocationAndPeriod($agencyId, $locationId, $periodId)
     {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
@@ -114,7 +116,9 @@ class CustomerRepository extends ServiceEntityRepository {
             ->innerJoin('c', "lodging_type", "l", "c.lodging_type_id = l.id")
             ->where("c.agency_id = :agencyId")
             ->andWhere("c.period_id = :periodId")
+            ->andWhere("c.location_id = :locationId")
             ->setParameter("agencyId", $agencyId)
+            ->setParameter("locationId", $locationId)
             ->setParameter("periodId", $periodId);
 
         return $qb->execute()->fetchAll();
@@ -266,5 +270,71 @@ class CustomerRepository extends ServiceEntityRepository {
             ->execute()->fetch();
 
         return is_null($ca) || $ca == false ? false : true;
+    }
+
+    public function getAllByAllInTypeForLocationAndPeriod($locationId, $periodId): array {
+        $rep = $this->getEntityManager()->getRepository(AllInType::class);
+        $allInTypes = $rep->findAll();
+
+        $data = [
+            "total" => 0,
+            "allInTypes" => []
+        ];
+
+
+        foreach ($allInTypes as $allInType) {
+            /**
+             * @var $allInType AllInType
+             */
+
+            $customers = $this->getAllByAllInTypeForLocationAndPeriodCustomers($allInType->getId(), $locationId, $periodId);
+
+            if (!empty($customers)) {
+                $data["total"] += count($customers);
+
+                $totals = [];
+
+                $agencies = [];
+                foreach( $customers as $k => $row ) {
+                    $agencies[] = $row["agency"];
+                }
+
+                if(!empty($agencies)) {
+                    $agencyTotals = array_count_values( $agencies );
+
+                    $totals = $agencyTotals;
+                }
+
+                $data["allInTypes"][] = [
+                    "total" => count($customers),
+                    "totals" => $totals,
+                    "allInType" => $allInType->getCode(),
+                    "customers" => $customers
+                ];
+            }
+
+        }
+
+        return $data;
+    }
+
+    public function getAllByAllInTypeForLocationAndPeriodCustomers($allInTypeId, $locationId, $periodId): array {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+        $qb
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
+                'c.info_file AS infoFile', 'a.code AS allInType', "ag.code AS agency") //TODO: add bus yes/no
+            ->from('customer', 'c')
+            ->innerJoin('c', 'all_in_type', 'a', 'c.all_in_type_id = a.id')
+            ->innerJoin('c', 'agency', 'ag', 'c.agency_id = ag.id')
+            ->where("c.period_id = :periodId")
+            ->andWhere("c.location_id = :locationId")
+            ->andWhere("c.all_in_type_id = :allInTypeId")
+            ->setParameter("locationId", $locationId)
+            ->setParameter("periodId", $periodId)
+            ->setParameter("allInTypeId", $allInTypeId)
+            ->orderBy('customer');
+
+        return $qb->execute()->fetchAll();
     }
 }

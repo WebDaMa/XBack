@@ -4,20 +4,22 @@
 namespace App\Controller\Rest;
 
 
+use App\Entity\Agency;
 use App\Entity\Groep;
 use App\Logic\Calculations;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Response;
 
-class GroepController extends FOSRestController {
+class AgencyController extends FOSRestController {
 
     /**
-     * @Rest\Get("/groeps/week-and-location/{date}/{locationId}")
+     * @Rest\Get("/agencies/week-and-location/{date}/{locationId}")
      */
-    public function getAllGroepsForWeekAndLocationAction($date, $locationId) {
-        $rep = $this->getDoctrine()->getRepository(Groep::class);
+    public function getAllAgenciesForWeekAndLocationAction($date, $locationId) {
+        $rep = $this->getDoctrine()->getRepository(Agency::class);
 
+        //Make periodId
         $periodId = Calculations::generatePeriodFromDate($date);
 
         $data = $rep->getAllByPeriodAndLocation($periodId, $locationId);

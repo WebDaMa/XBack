@@ -7,6 +7,7 @@ namespace App\Controller\Rest;
 use App\Entity\Customer;
 use App\Entity\SuitSize;
 use App\Entity\TravelType;
+use App\Logic\Calculations;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
@@ -128,6 +129,48 @@ class CustomerController extends FOSRestController {
             "id" => $customer->getId(),
             "check" => $customer->getBusBackCheckedIn(),
         ], Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Put("/customers/lodging/layout/{customerId}")
+     */
+    public function putLodgingLayoutCustomerAction($customerId, Request $request): Response
+    {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $customer = $rep->find($customerId);
+        $lodgingLayout = $rep->find($request->get('lodgingLayout'));
+        if ($customer) {
+            $customer->setLodgingLayout($lodgingLayout);
+            $dm = $this->getDoctrine()->getManager();
+            $dm->persist($customer);
+            $dm->flush();
+        }
+        // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
+        $view = $this->view([
+            "id" => $customer->getId(),
+            "lodgingLayout" => $customer->getLodgingLayout(),
+        ], Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Get("/customers/lodging/{agencyId}/{date}")
+     */
+    public function getAllByAgencyForLodgingAndPeriodAction($agencyId, $date): Response {
+        $periodId = Calculations::generatePeriodFromDate($date);
+
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $data = $rep->getAllByAgencyForLodgingAndPeriod($agencyId, $periodId);
+
+        $res = [
+            "date" => Calculations::getLastSaturdayFromDate($date),
+            "customers" => $data
+        ];
+
+        $view = $this->view($res, Response::HTTP_OK);
 
         return $this->handleView($view);
     }

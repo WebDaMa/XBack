@@ -102,6 +102,24 @@ class CustomerRepository extends ServiceEntityRepository {
         return $qb->execute()->fetchAll();
     }
 
+    public function getAllByAgencyForLodgingAndPeriod($agencyId, $periodId)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
+                'l.code AS lodgingType', 'c.lodging_layout AS lodgingLayout')
+            ->from('customer', 'c')
+            ->innerJoin('c', "lodging_type", "l")
+            ->where("c.agency_id = :agencyId")
+            ->andWhere("c.period_id = :periodId")
+            ->setParameter("agencyId", $agencyId)
+            ->setParameter("periodId", $periodId);
+
+        return $qb->execute()->fetchAll();
+    }
+
     public function getAllByGroepIdWithRaftingOption($groepId)
     {
         $connection = $this->_em->getConnection();

@@ -111,7 +111,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
                 'l.code AS lodgingType', 'c.lodging_layout AS lodgingLayout')
             ->from('customer', 'c')
-            ->innerJoin('c', "lodging_type", "l")
+            ->innerJoin('c', "lodging_type", "l", "c.lodging_type_id = l.id")
             ->where("c.agency_id = :agencyId")
             ->andWhere("c.period_id = :periodId")
             ->setParameter("agencyId", $agencyId)

@@ -176,9 +176,9 @@ class CustomerController extends FOSRestController {
     }
 
     /**
-     * @Rest\Get("/customers/volpension/{locationId}/{date}")
+     * @Rest\Get("/customers/all-in-type/{locationId}/{date}")
      */
-    public function getAllByVolpensionForLocationAndPeriodAction($locationId, $date): Response {
+    public function getAllByAllInTypeForLocationAndPeriodAction($locationId, $date): Response {
         $periodId = Calculations::generatePeriodFromDate($date);
 
         $rep = $this->getDoctrine()->getRepository(Customer::class);

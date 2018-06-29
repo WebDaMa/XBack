@@ -323,10 +323,13 @@ class CustomerRepository extends ServiceEntityRepository {
         $qb = $connection->createQueryBuilder();
         $qb
             ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
-                'c.info_file AS infoFile', 'a.code AS allInType', "ag.code AS agency") //TODO: add bus yes/no
+                'c.info_file AS infoFile', 'a.code AS allInType', "ag.code AS agency",
+                "(CASE WHEN tt.name = 'bus' THEN 1 ELSE 0 END) AS hasBus")
             ->from('customer', 'c')
             ->innerJoin('c', 'all_in_type', 'a', 'c.all_in_type_id = a.id')
             ->innerJoin('c', 'agency', 'ag', 'c.agency_id = ag.id')
+            ->innerJoin('c', 'travel_type', 't', 'c.travel_back_type_id = t.id')
+            ->innerJoin('c', 'transport_type', 'tt', 't.transport_type_id = tt.id')
             ->where("c.period_id = :periodId")
             ->andWhere("c.location_id = :locationId")
             ->andWhere("c.all_in_type_id = :allInTypeId")

@@ -281,6 +281,19 @@ class CustomerRepository extends ServiceEntityRepository {
             "allInTypes" => []
         ];
 
+        $allTotals = [
+            "total" => 0,
+            "totals" => [],
+            "allInType" => "Totaal",
+            "customers" => []
+        ];
+
+        $busTotals = [
+            "total" => 0,
+            "totals" => [],
+            "allInType" => "Met Bus",
+            "customers" => []
+        ];
 
         foreach ($allInTypes as $allInType) {
             /**
@@ -297,15 +310,37 @@ class CustomerRepository extends ServiceEntityRepository {
                 $agencies = [];
                 foreach( $customers as $k => $row ) {
                     $agencies[] = $row["agency"];
-                    if( is_null($row["hasBus"])) {
+                    if (is_null($row["hasBus"])) {
                         $row["hasBus"] = false;
                     }
                     $row["hasBus"] = (boolean) $row["hasBus"];
+
+                    if (!isset($busTotals["totals"][$row["agency"]]))
+                    {
+                        $busTotals["totals"][$row["agency"]] = 0;
+                    }
+
+                    if ($row["hasBus"])
+                    {
+                        $busTotals["totals"][$row["agency"]] ++;
+                        $busTotals["total"] ++;
+                    }
+
                     $customers[$k] = $row;
                 }
 
                 if(!empty($agencies)) {
                     $agencyTotals = array_count_values( $agencies );
+
+                    foreach ($agencyTotals as $agency => $agencyTotal)
+                    {
+                        if(!isset($allTotals["totals"][$agency]))
+                        {
+                            $allTotals["totals"][$agency] = 0;
+                        }
+                        $allTotals["totals"][$agency] += $agencyTotal;
+                        $allTotals["total"] += $agencyTotal;
+                    }
 
                     $totals = $agencyTotals;
                 }
@@ -319,6 +354,10 @@ class CustomerRepository extends ServiceEntityRepository {
             }
 
         }
+
+        //Push 2 info rows
+        $data["allInTypes"][] = $allTotals;
+        $data["allInTypes"][] = $busTotals;
 
         return $data;
     }

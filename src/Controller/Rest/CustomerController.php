@@ -83,7 +83,7 @@ class CustomerController extends FOSRestController {
     {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
-        $check = $rep->find((bool) $request->get('busCheckedIn'));
+        $check = (bool) $request->get('busCheckedIn');
         if ($customer) {
             $customer->setBusToCheckedIn($check);
             $dm = $this->getDoctrine()->getManager();
@@ -117,7 +117,7 @@ class CustomerController extends FOSRestController {
     {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
-        $check = $rep->find((bool) $request->get('busCheckedIn'));
+        $check = (bool) $request->get('busCheckedIn');
         if ($customer) {
             $customer->setBusBackCheckedIn($check);
             $dm = $this->getDoctrine()->getManager();
@@ -140,7 +140,7 @@ class CustomerController extends FOSRestController {
     {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
-        $lodgingLayout = $rep->find($request->get('lodgingLayout'));
+        $lodgingLayout = $request->get('lodgingLayout');
         if ($customer) {
             $customer->setLodgingLayout($lodgingLayout);
             $dm = $this->getDoctrine()->getManager();

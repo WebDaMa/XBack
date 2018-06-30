@@ -10,7 +10,7 @@ class Calculations {
     {
         $date = new \DateTime($date);
         $year = $date->format('y');
-        $weekNumber = $date->format('W');
+        $weekNumber = $date->format('W') - 1;
         $dayNumber = $date->format("N");
 
         if($dayNumber > 5) {

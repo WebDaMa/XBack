@@ -59,19 +59,22 @@ class DashboardController extends Controller {
                 $em = $this->getDoctrine()->getManager();
                 foreach ($sheet as $row)
                 {
-                    $customer = $this->importCustomer($row);
+                    // Empty records bug fix
+                    if( !is_null($row[40])) {
+                        $customer = $this->importCustomer($row);
 
-                    if (!is_null($customer->getCustomerId()) && !is_null($customer->getPeriodId())) {
-                        $customerExists = $this->getDoctrine()->getRepository(Customer::class)->findByCustomerId($customer->getCustomerId());
+                        if (!is_null($customer->getCustomerId()) && !is_null($customer->getPeriodId())) {
+                            $customerExists = $this->getDoctrine()->getRepository(Customer::class)->findByCustomerId($customer->getCustomerId());
 
-                        if (!is_null($customerExists) || $customerExists)
-                        {
-                            //Update current
-                            $customer = $this->importCustomer($row, $customerExists);
-                        } else
-                        {
-                            //import
-                            $em->persist($customer);
+                            if (!is_null($customerExists) || $customerExists)
+                            {
+                                //Update current
+                                $customer = $this->importCustomer($row, $customerExists);
+                            } else
+                            {
+                                //import
+                                $em->persist($customer);
+                            }
                         }
                     }
 

@@ -61,16 +61,18 @@ class DashboardController extends Controller {
                 {
                     $customer = $this->importCustomer($row);
 
-                    $customerExists = $this->getDoctrine()->getRepository(Customer::class)->findByCustomerId($customer->getCustomerId());
+                    if (!is_null($customer->getCustomerId()) && !is_null($customer->getPeriodId())) {
+                        $customerExists = $this->getDoctrine()->getRepository(Customer::class)->findByCustomerId($customer->getCustomerId());
 
-                    if (!is_null($customerExists) || $customerExists)
-                    {
-                        //Update current
-                        $customer = $this->importCustomer($row, $customerExists);
-                    } else
-                    {
-                        //import
-                        $em->persist($customer);
+                        if (!is_null($customerExists) || $customerExists)
+                        {
+                            //Update current
+                            $customer = $this->importCustomer($row, $customerExists);
+                        } else
+                        {
+                            //import
+                            $em->persist($customer);
+                        }
                     }
 
                 }
@@ -350,10 +352,7 @@ class DashboardController extends Controller {
 
         $updateCustomer->setBookerPayed($this->getStringBool($row[39]));
 
-        if (!is_null($row[40]))
-        {
-            $updateCustomer->setPayerId($this->getDoctrine()->getRepository(Customer::class)->find($row[40]));
-        }
+        $updateCustomer->setPayerId($this->getDoctrine()->getRepository(Customer::class)->find($row[40]));
 
         $updateCustomer->setIsCamper($this->getStringBool($row[41]));
 

@@ -73,13 +73,11 @@ class CustomerController extends FOSRestController {
         $customer = $rep->find($customerId);
         $rep = $this->getDoctrine()->getRepository(Activity::class);
         $activity = $rep->find((int) $request->get('activityId'));
-        if ($customer && $activity) {
-            if($activity->getActivityGroup()->getName() == "raft") {
-                $customer->addActivity($activity);
-                $dm = $this->getDoctrine()->getManager();
-                $dm->persist($customer);
-                $dm->flush();
-            }
+        if ($customer && $activity && $activity->getActivityGroup()->getName() == "raft") {
+            $customer->addActivity($activity);
+            $dm = $this->getDoctrine()->getManager();
+            $dm->persist($customer);
+            $dm->flush();
 
             $view = $this->view([
                 "id" => $customer->getId(),
@@ -99,6 +97,55 @@ class CustomerController extends FOSRestController {
     }
 
     /**
+     * @Rest\Put("/customers/canyoning/{customerId}")
+     */
+    public function putCustomerCanyoningOptionAction($customerId, Request $request): Response
+    {
+        list($customer, $activities) = $this->putCustomerOptionsAction($customerId, "canyon", $request);
+        // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
+        $view = $this->view([
+            "id" => $customer->getId(),
+            "activityIds" => implode(",", $activities),
+        ], Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Put("/customers/special/{customerId}")
+     */
+    public function putCustomerSpecialOptionAction($customerId, Request $request): Response
+    {
+        list($customer, $activities) = $this->putCustomerOptionsAction($customerId, "special", $request);
+        // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
+        $view = $this->view([
+            "id" => $customer->getId(),
+            "activityIds" => implode(",", $activities),
+        ], Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    private function putCustomerOptionsAction($customerId, $activityOptionName, Request $request) {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $customer = $rep->find($customerId);
+        $rep = $this->getDoctrine()->getRepository(Activity::class);
+        $activities = explode(",", $request->get('activityIds'));
+        foreach ($activities as $activityId) {
+            $activity = $rep->find($activityId);
+
+            if ($customer && $activity && $activity->getActivityGroup()->getName() === $activityOptionName)
+            {
+                $customer->addActivity($activity);
+                $dm = $this->getDoctrine()->getManager();
+                $dm->persist($customer);
+                $dm->flush();
+            }
+        }
+        return [$customer, $activities];
+    }
+
+    /**
      * @Rest\Get("/customers/groep/rafting/{groepId}")
      */
     public function getAllByGroepWithRaftingOptionAction($groepId): Response {
@@ -114,7 +161,7 @@ class CustomerController extends FOSRestController {
      */
     public function getAllByGroepWithCanyoningOptionAction($groepId): Response {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
-        $data = $rep->getAllByGroepIdWithRaftingOption($groepId);
+        $data = $rep->getAllByGroepIdWithCanyoningOption($groepId);
         $view = $this->view($data, Response::HTTP_OK);
 
         return $this->handleView($view);
@@ -125,7 +172,7 @@ class CustomerController extends FOSRestController {
      */
     public function getAllByGroepWithSpecialOptionAction($groepId): Response {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
-        $data = $rep->getAllByGroepIdWithRaftingOption($groepId);
+        $data = $rep->getAllByGroepIdWithSpecialOption($groepId);
         $view = $this->view($data, Response::HTTP_OK);
 
         return $this->handleView($view);

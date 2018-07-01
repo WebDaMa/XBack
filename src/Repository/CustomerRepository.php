@@ -144,6 +144,65 @@ class CustomerRepository extends ServiceEntityRepository {
 
     }
 
+    public function getAllByGroepIdWithCanyoningOption($groepId)
+    {
+        $customers = $this->getAllByGroepIdWithProgramType($groepId);
+
+        return $this->getActivitiesForCustomersRaw($customers, 2);
+
+    }
+
+    public function getAllByGroepIdWithSpecialOption($groepId)
+    {
+        $customers = $this->getAllByGroepIdWithProgramType($groepId);
+
+        return $this->getActivitiesForCustomersRaw($customers, 3);
+
+    }
+
+    public function getAllByGroepIdWithProgramType($groepId) {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
+                'pt.code AS programType', "TIMESTAMPDIFF(YEAR,c.birthdate,CURDATE()) AS age",
+                "a.id AS activityId")
+            ->from('customer', 'c')
+            ->innerJoin('c', 'program_type', 'pt', 'c.program_type_id = pt.id')
+            ->where("c.group_layout_id = :groepId")
+            ->setParameter("groepId", $groepId);
+
+        return $qb->execute()->fetchAll();
+    }
+
+    private function getActivitiesForCustomersRaw(array $customers, $activityGroepId) {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        foreach ($customers as $k => $customer) {
+            $customerId = $customer["id"];
+            $activities = [];
+
+            $qb
+                ->select("a.id")
+                ->from('customers_activities', 'ca')
+                ->innerJoin('ca', 'activity', 'a', 'ca.activity_id = a.id')
+                ->where("ca.customer_id = :customerId")
+                ->andWhere("a.activity_group_id = :activityGroupId")
+                ->setParameter("customerId", $customerId)
+                ->setParameter("activityGroupId", $activityGroepId);
+
+            $rows = $qb->execute()->fetchAll();
+            foreach ($rows as $row) {
+                $activities[] = $row;
+            }
+            $customer["activityIds"] = implode(",", $activities);
+            $customers[$k] = $customer;
+        }
+        return $customers;
+    }
+
     public function getAllBusGoCustomersByDateAndTravelTypeCode($date, $travelTypeCode)
     {
         $connection = $this->_em->getConnection();

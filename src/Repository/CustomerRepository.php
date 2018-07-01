@@ -196,7 +196,7 @@ class CustomerRepository extends ServiceEntityRepository {
             foreach ($rows as $row) {
                 $activities[] = $row["id"];
             }
-            $customer["activityIds"] = implode(",", $activities);
+            $customer["activityIds"] = $activities;
             $customers[$k] = $customer;
         }
         return $customers;

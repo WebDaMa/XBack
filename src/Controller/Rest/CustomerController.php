@@ -127,6 +127,8 @@ class CustomerController extends FOSRestController {
     }
 
     private function putCustomerOptionsAction($customerId, $activityOptionName, Request $request) {
+        $dm = $this->getDoctrine()->getManager();
+
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
         $rep = $this->getDoctrine()->getRepository(Activity::class);
@@ -141,11 +143,12 @@ class CustomerController extends FOSRestController {
             if ($customer && $activity && $activity->getActivityGroup()->getName() === $activityOptionName)
             {
                 $customer->addActivity($activity);
-                $dm = $this->getDoctrine()->getManager();
                 $dm->persist($customer);
-                $dm->flush();
             }
         }
+
+        $dm->flush();
+
         return [$customer, $activities];
     }
 

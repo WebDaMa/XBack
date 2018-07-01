@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="" />
+    <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,13 +16,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CustomerRepository.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
+      <file leaf-file-name="CustomerController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="653">
-              <caret line="196" column="42" selection-start-line="196" selection-start-column="42" selection-end-line="196" selection-end-column="42" />
+            <state relative-caret-position="596">
+              <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
               <folding>
-                <element signature="e#34#58#0#PHP" expanded="true" />
+                <element signature="e#41#65#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -124,8 +126,8 @@
         <option value="$PROJECT_DIR$/src/Logic/Calculations.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/GroepController.php" />
         <option value="$PROJECT_DIR$/src/Entity/Customer.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
         <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
       </list>
     </option>
   </component>
@@ -423,12 +425,12 @@
       <workItem from="1529513039658" duration="9372000" />
       <workItem from="1530020735238" duration="9776000" />
       <workItem from="1530260382440" duration="16553000" />
-      <workItem from="1530431945764" duration="11857000" />
+      <workItem from="1530431945764" duration="12763000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="231955000" />
+    <option name="totallyTimeSpent" value="232861000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -805,22 +807,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
+    <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="477">
-          <caret line="167" column="41" lean-forward="true" selection-start-line="167" selection-start-column="41" selection-end-line="167" selection-end-column="41" />
+        <state relative-caret-position="303">
+          <caret line="196" column="42" selection-start-line="196" selection-start-column="42" selection-end-line="196" selection-end-column="42" />
           <folding>
-            <element signature="e#41#65#0#PHP" expanded="true" />
+            <element signature="e#34#58#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
+    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="653">
-          <caret line="196" column="42" selection-start-line="196" selection-start-column="42" selection-end-line="196" selection-end-column="42" />
+        <state relative-caret-position="596">
+          <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
           <folding>
-            <element signature="e#34#58#0#PHP" expanded="true" />
+            <element signature="e#41#65#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

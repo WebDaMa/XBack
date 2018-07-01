@@ -73,7 +73,19 @@ class CustomerController extends FOSRestController {
         $customer = $rep->find($customerId);
         $rep = $this->getDoctrine()->getRepository(Activity::class);
         $activity = $rep->find((int) $request->get('activityId'));
-        if ($customer && $activity && $activity->getActivityGroup()->getName() == "raft") {
+        if($activity == "0") {
+            //Remove all rafting activities, relation should b seperate, but yeah ;)
+            $activitiesCustomer = $customer->getActivities();
+
+            foreach ($activitiesCustomer as $activityCustomer) {
+                /**
+                 * @var $activitiesCustomer Activity
+                 */
+                if( $activitiesCustomer->getActivityGroup() == "raft") {
+                    $customer->removeActivity($activitiesCustomer);
+                }
+            }
+        }elseif ($customer && $activity && $activity->getActivityGroup()->getName() == "raft") {
             $customer->addActivity($activity);
             $dm = $this->getDoctrine()->getManager();
             $dm->persist($customer);

@@ -177,11 +177,11 @@ class CustomerRepository extends ServiceEntityRepository {
 
     private function getActivitiesForCustomersRaw(array $customers, $activityGroepId) {
         $connection = $this->_em->getConnection();
-        $qb = $connection->createQueryBuilder();
 
         foreach ($customers as $k => $customer) {
             $customerId = $customer["id"];
             $activities = [];
+            $qb = $connection->createQueryBuilder();
 
             $qb
                 ->select("a.id")

@@ -17,8 +17,8 @@
       <file leaf-file-name="CustomerRepository.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="189" column="40" selection-start-line="189" selection-start-column="40" selection-end-line="189" selection-end-column="40" />
+            <state relative-caret-position="506">
+              <caret line="190" column="68" selection-start-line="186" selection-start-column="16" selection-end-line="190" selection-end-column="68" />
               <folding>
                 <element signature="e#34#58#0#PHP" expanded="true" />
               </folding>
@@ -124,8 +124,8 @@
         <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
         <option value="$PROJECT_DIR$/src/Logic/Calculations.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/GroepController.php" />
-        <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
+        <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
       </list>
     </option>
   </component>
@@ -423,12 +423,12 @@
       <workItem from="1529513039658" duration="9372000" />
       <workItem from="1530020735238" duration="9776000" />
       <workItem from="1530260382440" duration="16553000" />
-      <workItem from="1530431945764" duration="8161000" />
+      <workItem from="1530431945764" duration="8399000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="228259000" />
+    <option name="totallyTimeSpent" value="228497000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -818,8 +818,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="189" column="40" selection-start-line="189" selection-start-column="40" selection-end-line="189" selection-end-column="40" />
+        <state relative-caret-position="506">
+          <caret line="190" column="68" selection-start-line="186" selection-start-column="16" selection-end-line="190" selection-end-column="68" />
           <folding>
             <element signature="e#34#58#0#PHP" expanded="true" />
           </folding>

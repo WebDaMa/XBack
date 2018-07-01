@@ -194,7 +194,7 @@ class CustomerRepository extends ServiceEntityRepository {
 
             $rows = $qb->execute()->fetchAll();
             foreach ($rows as $row) {
-                $activities[] = $row["id"];
+                $activities[] = $row["name"];
             }
             $customer["activityIds"] = $activities;
             $customers[$k] = $customer;

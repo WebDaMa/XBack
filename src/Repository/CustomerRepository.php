@@ -131,7 +131,7 @@ class CustomerRepository extends ServiceEntityRepository {
 
         $qb
             ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
-                'pt.name AS programType', "TIMESTAMPDIFF(YEAR,c.birthdate,CURDATE()) AS age")
+                'pt.code AS programType', "TIMESTAMPDIFF(YEAR,c.birthdate,CURDATE()) AS age")
             ->from('customer', 'c')
             ->innerJoin('c', 'program_type', 'pt', 'c.program_type_id = pt.id')
             ->innerJoin('c', 'customers_activities', 'ca', 'c.id = ca.customer_id')

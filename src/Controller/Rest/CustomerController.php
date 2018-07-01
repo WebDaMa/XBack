@@ -69,6 +69,8 @@ class CustomerController extends FOSRestController {
      */
     public function putCustomerRaftingOptionAction($customerId, Request $request): Response
     {
+        $dm = $this->getDoctrine()->getManager();
+
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
         $rep = $this->getDoctrine()->getRepository(Activity::class);
@@ -86,9 +88,10 @@ class CustomerController extends FOSRestController {
                     $customer->removeActivity($activityCustomer);
                 }
             }
+            $dm->persist($customer);
+            $dm->flush();
         }elseif ($customer && $activity && $activity->getActivityGroup()->getName() == "raft") {
             $customer->addActivity($activity);
-            $dm = $this->getDoctrine()->getManager();
             $dm->persist($customer);
             $dm->flush();
 

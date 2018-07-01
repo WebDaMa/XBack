@@ -131,15 +131,15 @@ class CustomerController extends FOSRestController {
         $customer = $rep->find($customerId);
         $rep = $this->getDoctrine()->getRepository(Activity::class);
         $activities = json_decode($request->get('activityIds'));
+        $activitiesCustomer = $customer->getActivities();
+        foreach($activitiesCustomer as $activity) {
+            $customer->removeActivity($activity);
+        }
         foreach ($activities as $activityId) {
             $activity = $rep->find($activityId);
 
             if ($customer && $activity && $activity->getActivityGroup()->getName() === $activityOptionName)
             {
-                $activitiesCustomer = $customer->getActivities();
-                foreach($activitiesCustomer as $activity) {
-                    $customer->removeActivity($activity);
-                }
                 $customer->addActivity($activity);
                 $dm = $this->getDoctrine()->getManager();
                 $dm->persist($customer);

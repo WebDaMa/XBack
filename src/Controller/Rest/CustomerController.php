@@ -130,7 +130,7 @@ class CustomerController extends FOSRestController {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
         $rep = $this->getDoctrine()->getRepository(Activity::class);
-        $activities = explode(",", $request->get('activityIds'));
+        $activities = json_decode($request->get('activityIds'));
         foreach ($activities as $activityId) {
             $activity = $rep->find($activityId);
 

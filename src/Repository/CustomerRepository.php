@@ -135,9 +135,8 @@ class CustomerRepository extends ServiceEntityRepository {
             ->from('customer', 'c')
             ->innerJoin('c', 'program_type', 'pt', 'c.program_type_id = pt.id')
             ->leftJoin('c', 'customers_activities', 'ca', 'c.id = ca.customer_id')
-            ->innerJoin('ca', 'activity', 'a', 'ca.activity_id = a.id')
+            ->leftJoin('ca', 'activity', 'a', 'ca.activity_id = a.id AND a.activity_group_id = 1')
             ->where("c.group_layout_id = :groepId")
-            ->andWhere("a.activity_group_id = 1")
             ->setParameter("groepId", $groepId);
 
         return $qb->execute()->fetchAll();

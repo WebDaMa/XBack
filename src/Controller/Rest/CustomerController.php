@@ -136,6 +136,10 @@ class CustomerController extends FOSRestController {
 
             if ($customer && $activity && $activity->getActivityGroup()->getName() === $activityOptionName)
             {
+                $activitiesCustomer = $customer->getActivities();
+                foreach($activitiesCustomer as $activity) {
+                    $customer->removeActivity($activity);
+                }
                 $customer->addActivity($activity);
                 $dm = $this->getDoctrine()->getManager();
                 $dm->persist($customer);

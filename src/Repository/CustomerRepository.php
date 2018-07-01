@@ -128,7 +128,7 @@ class CustomerRepository extends ServiceEntityRepository {
     {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
-        
+
         $qb
             ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
                 'pt.name AS programType', "TIMESTAMPDIFF(YEAR,c.birthdate,CURDATE()) AS age")
@@ -376,7 +376,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->from('customer', 'c')
             ->innerJoin('c', 'all_in_type', 'a', 'c.all_in_type_id = a.id')
             ->innerJoin('c', 'agency', 'ag', 'c.agency_id = ag.id')
-            ->innerJoin('c', 'travel_type', 't', 'c.travel_back_type_id = t.id')
+            ->innerJoin('c', 'travel_type', 't', 'c.travel_go_type_id = t.id')
             ->innerJoin('c', 'transport_type', 'tt', 't.transport_type_id = tt.id')
             ->where("c.period_id = :periodId")
             ->andWhere("c.location_id = :locationId")

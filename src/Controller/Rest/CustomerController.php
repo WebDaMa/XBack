@@ -68,7 +68,7 @@ class CustomerController extends FOSRestController {
     /**
      * @Rest\Get("/customers/groep/canyoning/{groepId}")
      */
-    public function getAllByGroepWithRaftingOptionAction($groepId): Response {
+    public function getAllByGroepWithCanyoningOptionAction($groepId): Response {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $data = $rep->getAllByGroepIdWithRaftingOption($groepId);
         $view = $this->view($data, Response::HTTP_OK);
@@ -79,7 +79,7 @@ class CustomerController extends FOSRestController {
     /**
      * @Rest\Get("/customers/groep/special/{groepId}")
      */
-    public function getAllByGroepWithRaftingOptionAction($groepId): Response {
+    public function getAllByGroepWithSpecialOptionAction($groepId): Response {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $data = $rep->getAllByGroepIdWithRaftingOption($groepId);
         $view = $this->view($data, Response::HTTP_OK);

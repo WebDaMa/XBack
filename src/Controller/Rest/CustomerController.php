@@ -97,7 +97,9 @@ class CustomerController extends FOSRestController {
                 "activityId" => $activity->getId(),
                 "sizeInfo" => $customer->getSizeInfo()
             ], Response::HTTP_OK);
-        }else{
+        }
+
+        if(!isset($view)){
             // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
             $view = $this->view([
                 "id" => 0,

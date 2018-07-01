@@ -83,7 +83,7 @@ class CustomerController extends FOSRestController {
                  * @var $activitiesCustomer Activity
                  */
                 if( $activitiesCustomer->getActivityGroup() == "raft") {
-                    $customer->removeActivity($activitiesCustomer);
+                    $customer->removeActivity($activityCustomer);
                 }
             }
         }elseif ($customer && $activity && $activity->getActivityGroup()->getName() == "raft") {

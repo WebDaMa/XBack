@@ -4,6 +4,7 @@
 namespace App\Controller\Rest;
 
 
+use App\Entity\Activity;
 use App\Entity\Customer;
 use App\Entity\SuitSize;
 use App\Entity\TravelType;
@@ -43,13 +44,56 @@ class CustomerController extends FOSRestController {
             $dm = $this->getDoctrine()->getManager();
             $dm->persist($customer);
             $dm->flush();
+
+            $view = $this->view([
+                "id" => $customer->getId(),
+                "size" => $customer->getSize()->getId(),
+                "sizeInfo" => $customer->getSizeInfo()
+            ], Response::HTTP_OK);
+        }else{
+            $view = $this->view([
+                "id" => 0,
+                "size" => 0,
+                "sizeInfo" => ""
+            ], Response::HTTP_OK);
         }
+
         // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
-        $view = $this->view([
-            "id" => $customer->getId(),
-            "size" => $customer->getSize()->getId(),
-            "sizeInfo" => $customer->getSizeInfo()
-        ], Response::HTTP_OK);
+
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Put("/customers/rafting/{customerId}")
+     */
+    public function putCustomerRaftingOptionAction($customerId, Request $request): Response
+    {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $customer = $rep->find($customerId);
+        $rep = $this->getDoctrine()->getRepository(Activity::class);
+        $activity = $rep->find((int) $request->get('activityId'));
+        if ($customer && $activity) {
+            if($activity->getActivityGroup()->getName() == "raft") {
+                $customer->addActivity($activity);
+                $dm = $this->getDoctrine()->getManager();
+                $dm->persist($customer);
+                $dm->flush();
+            }
+
+            $view = $this->view([
+                "id" => $customer->getId(),
+                "activityId" => $activity->getId(),
+                "sizeInfo" => $customer->getSizeInfo()
+            ], Response::HTTP_OK);
+        }else{
+            // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
+            $view = $this->view([
+                "id" => 0,
+                "activityId" => 0,
+                "sizeInfo" => ""
+            ], Response::HTTP_OK);
+        }
 
         return $this->handleView($view);
     }

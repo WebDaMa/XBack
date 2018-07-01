@@ -66,6 +66,28 @@ class CustomerController extends FOSRestController {
     }
 
     /**
+     * @Rest\Get("/customers/groep/canyoning/{groepId}")
+     */
+    public function getAllByGroepWithRaftingOptionAction($groepId): Response {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $data = $rep->getAllByGroepIdWithRaftingOption($groepId);
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Get("/customers/groep/special/{groepId}")
+     */
+    public function getAllByGroepWithRaftingOptionAction($groepId): Response {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $data = $rep->getAllByGroepIdWithRaftingOption($groepId);
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
      * @Rest\Get("/customers/bus/go/{date}")
      */
     public function getBusGoCustomersByWeek($date): Response {

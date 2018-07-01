@@ -166,7 +166,7 @@ class CustomerRepository extends ServiceEntityRepository {
 
         $qb
             ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
-                'pt.code AS programType', "TIMESTAMPDIFF(YEAR,c.birthdate,CURDATE()) AS age")
+                'pt.code AS programType')
             ->from('customer', 'c')
             ->innerJoin('c', 'program_type', 'pt', 'c.program_type_id = pt.id')
             ->where("c.group_layout_id = :groepId")

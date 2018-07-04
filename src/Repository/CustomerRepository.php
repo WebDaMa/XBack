@@ -219,7 +219,7 @@ class CustomerRepository extends ServiceEntityRepository {
          */
         $qb
             ->select("c.id", "c.bus_to_checked_in AS busCheckedIn", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
-                'tg.start_point AS place', 'a.code AS agency', 'c.gsm')
+                'a.code AS agency', 'c.gsm')
             ->from('customer', 'c')
             ->innerJoin('c', 'travel_type', 'tg', 'c.travel_go_type_id = tg.id')
             ->innerJoin('c', 'agency', 'a', 'c.agency_id = a.id')
@@ -238,7 +238,7 @@ class CustomerRepository extends ServiceEntityRepository {
         $qb = $connection->createQueryBuilder();
         $qb
             ->select("c.id", "c.bus_to_checked_in AS busCheckedIn", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
-                'tg.start_point AS place', 'a.code AS agency', 'c.gsm')
+                'a.code AS agency', 'c.gsm')
             ->from('customer', 'c')
             ->innerJoin('c', 'travel_type', 'tg', 'c.travel_go_type_id = tg.id')
             ->innerJoin('c', 'agency', 'a', 'c.agency_id = a.id')
@@ -294,6 +294,8 @@ class CustomerRepository extends ServiceEntityRepository {
                     }
                     $row["busCheckedIn"] = (boolean) $row["busCheckedIn"];
                     $agencies[] = $row["agency"];
+
+                    unset($row["agency"]);
 
                     $customers[$k] = $row;
                 }
@@ -386,7 +388,11 @@ class CustomerRepository extends ServiceEntityRepository {
                     {
                         $busTotals["totals"][$row["agency"]] ++;
                         $busTotals["total"] ++;
+
+                        unset($row["hasBus"]);
                     }
+
+                    unset($row["agency"]);
 
                     $customers[$k] = $row;
                 }
@@ -429,14 +435,14 @@ class CustomerRepository extends ServiceEntityRepository {
         $qb = $connection->createQueryBuilder();
         $qb
             ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
-                'c.info_file AS infoFile', 'a.code AS allInType', "ag.code AS agency",
+                'c.info_file AS infoFile', "ag.code AS agency",
                 "(CASE WHEN tt.name = 'bus' THEN 1 ELSE 0 END) AS hasBus")
             ->from('customer', 'c')
-            ->innerJoin('c', 'all_in_type', 'a', 'c.all_in_type_id = a.id')
             ->innerJoin('c', 'agency', 'ag', 'c.agency_id = ag.id')
             ->innerJoin('c', 'travel_type', 't', 'c.travel_go_type_id = t.id')
             ->innerJoin('c', 'transport_type', 'tt', 't.transport_type_id = tt.id')
             ->where("c.period_id = :periodId")
+            ->andWhere("(c.info_file IS NOT NULL OR c.info_file != ' ')")
             ->andWhere("c.location_id = :locationId")
             ->andWhere("c.all_in_type_id = :allInTypeId")
             ->setParameter("locationId", $locationId)

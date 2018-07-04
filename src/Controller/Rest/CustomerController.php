@@ -82,9 +82,9 @@ class CustomerController extends FOSRestController {
 
             foreach ($activitiesCustomer as $activityCustomer) {
                 /**
-                 * @var $activitiesCustomer Activity
+                 * @var $activityCustomer Activity
                  */
-                if( $activitiesCustomer->getActivityGroup() == "raft") {
+                if( $activityCustomer->getActivityGroup() == "raft") {
                     $customer->removeActivity($activityCustomer);
                 }
             }

@@ -1035,7 +1035,6 @@ class Customer extends TypeTimestamps
      */
     public function getActivities()
     {
-        // Filter $this->getAgency(); + On Program activity
         return $this->activities;
     }
 

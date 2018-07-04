@@ -395,6 +395,10 @@ class CustomerRepository extends ServiceEntityRepository {
                     unset($row["hasBus"]);
                     unset($row["agency"]);
 
+                    if (is_null($row["infoFile"]) || empty($row["infoFile"])) {
+                        unset($customers[$k]);
+                        continue;
+                    }
                     $customers[$k] = $row;
                 }
 
@@ -443,7 +447,6 @@ class CustomerRepository extends ServiceEntityRepository {
             ->innerJoin('c', 'travel_type', 't', 'c.travel_go_type_id = t.id')
             ->innerJoin('c', 'transport_type', 'tt', 't.transport_type_id = tt.id')
             ->where("c.period_id = :periodId")
-            ->andWhere("(c.info_file IS NOT NULL OR c.info_file != ' ')")
             ->andWhere("c.location_id = :locationId")
             ->andWhere("c.all_in_type_id = :allInTypeId")
             ->setParameter("locationId", $locationId)

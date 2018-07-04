@@ -390,9 +390,9 @@ class CustomerRepository extends ServiceEntityRepository {
                         $busTotals["totals"][$row["agency"]] ++;
                         $busTotals["total"] ++;
 
-                        unset($row["hasBus"]);
                     }
 
+                    unset($row["hasBus"]);
                     unset($row["agency"]);
 
                     $customers[$k] = $row;

@@ -99,6 +99,7 @@ class CustomerRepository extends ServiceEntityRepository {
                 'c.size_id AS size', 'c.size_info AS sizeInfo')
             ->from('customer', 'c')
             ->where("c.group_layout_id = :groepId")
+            ->orderBy("c.first_name")
             ->setParameter("groepId", $groepId);
 
         return $qb->execute()->fetchAll();

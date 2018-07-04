@@ -21,6 +21,7 @@ class Groep extends TypeTimestamps
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Customer", mappedBy="groupLayout")
+     * @ORM\OrderBy({"first_name" = "ASC"})
      */
     private $groupCustomers;
 

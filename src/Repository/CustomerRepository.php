@@ -373,7 +373,8 @@ class CustomerRepository extends ServiceEntityRepository {
                 $totals = [];
 
                 $agencies = [];
-                foreach( $customers as $k => $row ) {
+                $customerData = [];
+                foreach( $customers as $row ) {
                     $agencies[] = $row["agency"];
                     if (is_null($row["hasBus"])) {
                         $row["hasBus"] = false;
@@ -395,11 +396,9 @@ class CustomerRepository extends ServiceEntityRepository {
                     unset($row["hasBus"]);
                     unset($row["agency"]);
 
-                    if (is_null($row["infoFile"]) || empty($row["infoFile"])) {
-                        unset($customers[$k]);
-                        continue;
+                    if (!is_null($row["infoFile"]) && !empty($row["infoFile"])) {
+                        $customerData[] = $row;
                     }
-                    $customers[$k] = $row;
                 }
 
                 if(!empty($agencies)) {
@@ -422,7 +421,7 @@ class CustomerRepository extends ServiceEntityRepository {
                     "total" => count($customers),
                     "totals" => $totals,
                     "allInType" => $allInType->getCode(),
-                    "customers" => $customers
+                    "customers" => $customerData
                 ];
             }
 

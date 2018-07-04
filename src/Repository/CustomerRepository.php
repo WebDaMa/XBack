@@ -327,7 +327,7 @@ class CustomerRepository extends ServiceEntityRepository {
 
         $ca = $qb
             ->select("ca.id")
-            ->from('customer_activity', 'ca')
+            ->from('customers_activities', 'ca')
             ->where("ca.customer_id = :customerId")
             ->andWhere("ca.activity_id = :activityId")
             ->setParameter("customerId", $customerId)

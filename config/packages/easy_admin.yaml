@@ -6,6 +6,8 @@ easy_admin:
                 - { label: 'Imports' }
                 - { label: 'Planning Import', route: 'admin_planning_upload' }
                 - { label: 'BO Import', route: 'admin_bo_upload' }
+                - { label: 'Exports' }
+                - { label: 'Rafting Export', route: 'admin_export_rafting' }
                 - { label: 'Forms' }
                 - FormCheckin
                 - FormSizes
@@ -65,11 +67,15 @@ easy_admin:
               - { property: 'firstName'}
               - { property: 'email'}
               - { property: 'birthdate',
-                  type: 'Symfony\Component\Form\Extension\Core\Type\BirthdayType' }
+                  type: 'Symfony\Component\Form\Extension\Core\Type\BirthdayType',
+                  type_options: { widget: 'single_text'}
+                  }
               - { property: 'gsm'}
               - { property: 'nationalRegisterNumber'}
               - { property: 'expireDate',
-                  type: 'App\Form\DateFutureType'}
+                  type: 'App\Form\DateFutureType',
+                  type_options: { widget: 'single_text'}
+                  }
               - { property: 'size'}
               - { property: 'sizeInfo'}
               - { property: 'nameShortage'}
@@ -80,16 +86,24 @@ easy_admin:
               - { property: 'infoFile'}
               - { property: 'agency'}
               - { property: 'location'}
-              - { property: 'startDay'}
-              - { property: 'endDay'}
+              - { property: 'startDay',
+                  type_options: { widget: 'single_text'}
+                  }
+              - { property: 'endDay',
+                  type_options: { widget: 'single_text'}
+                  }
               - { property: 'programType'}
               - { property: 'lodgingType'}
               - { property: 'allInType'}
               - { property: 'insuranceType'}
               - { property: 'travelGoType'}
-              - { property: 'travelGoDate'}
+              - { property: 'travelGoDate',
+                  type_options: { widget: 'single_text'}
+                  }
               - { property: 'travelBackType'}
-              - { property: 'travelBackDate'}
+              - { property: 'travelBackDate',
+                  type_options: { widget: 'single_text'}
+                  }
               - { property: 'boardingPoint'}
               - { property: 'activityOption'}
               - { property: 'groupName'}
@@ -129,8 +143,7 @@ easy_admin:
                 - { property: 'groupName'}
                 - { property: 'birthdate'}
                 - { property: 'nationalRegisterNumber'}
-                - { property: 'expireDate',
-                      type: 'App\Form\DateFutureType'}
+                - { property: 'expireDate'}
                 - { property: 'lodgingLayout'}
                 - { property: 'allInType'}
                 - { property: 'groupLayout'}
@@ -142,10 +155,14 @@ easy_admin:
                 - { property: 'booker'}
                 - { property: 'groupName'}
                 - { property: 'birthdate',
-                    type: 'Symfony\Component\Form\Extension\Core\Type\BirthdayType' }
+                    type: 'Symfony\Component\Form\Extension\Core\Type\BirthdayType',
+                    type_options: { widget: 'single_text'}
+                  }
                 - { property: 'nationalRegisterNumber'}
                 - { property: 'expireDate',
-                      type: 'App\Form\DateFutureType'}
+                    type: 'App\Form\DateFutureType',
+                    type_options: { widget: 'single_text'}
+                  }
                 - { property: 'lodgingLayout'}
                 - { property: 'allInType'}
                 - { property: 'groupLayout'}
@@ -425,7 +442,9 @@ easy_admin:
           form:
             fields:
               - { property: 'planningId'}
-              - { property: 'date'}
+              - { property: 'date',
+                  type_options: { widget: 'single_text'}
+                }
               - { property: 'group', type_options: { by_reference: false }}
               - { property: 'activity', type_options: { by_reference: false }}
               - { property: 'guide', type_options: { by_reference: false }}

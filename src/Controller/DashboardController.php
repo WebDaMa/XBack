@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Activity;
 use App\Entity\Agency;
 use App\Entity\AllInType;
+use App\Entity\ExportRaft;
 use App\Entity\Groep;
 use App\Entity\Guide;
 use App\Entity\Planning;
@@ -17,6 +18,7 @@ use App\Entity\Location;
 use App\Entity\LodgingType;
 use App\Entity\ProgramType;
 use App\Entity\TravelType;
+use App\Form\ExportRaftType;
 use App\Form\UploadType;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
@@ -29,6 +31,39 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class DashboardController extends Controller {
+
+    /**
+     * @Route("admin/export/rafting", name="admin_export_rafting")
+     */
+    public function exportRaftingAction(Request $request)
+    {
+        $exportRaft = new ExportRaft();
+        $form = $this->createForm(ExportRaftType::class, $exportRaft);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            // $file stores the uploaded file
+            /** @var UploadedFile $file */
+            $date = $exportRaft->getDate();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $exportRaft->setCreatedBy($this->getUser());
+            $em->persist($exportRaft);
+            $em->flush();
+
+            $this->addFlash(
+                "notice",
+                "Rafting list exported for " . $date . "!"
+            );
+            return $this->redirect($this->generateUrl('admin', array('entity' => 'Customer')));
+        }
+
+        return $this->render('dashboard/export.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 
     /**
      * @Route("admin/bo-upload", name="admin_bo_upload")
@@ -80,6 +115,7 @@ class DashboardController extends Controller {
 
                 }
                 $upload->setFile($file->getClientOriginalName());
+                $upload->setCreatedBy($this->getUser());
 
                 $em->persist($upload);
 

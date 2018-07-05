@@ -17,6 +17,18 @@ class TypeTimestamps
     protected $modified_at;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $created_by;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    protected $updated_by;
+
+    /**
      * @return mixed
      */
     public function getCreatedAt()
@@ -46,6 +58,38 @@ class TypeTimestamps
     public function setModifiedAt($modified_at): void
     {
         $this->modified_at = $modified_at;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCreatedBy()
+    {
+        return $this->created_by;
+    }
+
+    /**
+     * @param mixed $created_by
+     */
+    public function setCreatedBy($created_by): void
+    {
+        $this->created_by = $created_by;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdatedBy()
+    {
+        return $this->updated_by;
+    }
+
+    /**
+     * @param mixed $updated_by
+     */
+    public function setUpdatedBy($updated_by): void
+    {
+        $this->updated_by = $updated_by;
     }
 
     /**

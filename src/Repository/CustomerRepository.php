@@ -455,4 +455,21 @@ class CustomerRepository extends ServiceEntityRepository {
 
         return $qb->execute()->fetchAll();
     }
+
+    public function getAllByDateWithRafting($periodId): array {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+        $qb
+            ->select("c.first_name", "c.last_name", "c.national_register_number", "c.expire_date",
+                "c.birthdate", "a.name AS activity_name")
+            ->from('customer', 'c')
+            ->innerJoin('c', 'customers_activities', 'ca', 'c.id = ca.customer_id')
+            ->innerJoin('ca', 'activity', 'a', 'ca.activity_id = a.id')
+            ->where("c.period_id = :periodId")
+            ->andWhere("a.activity_group_id = 1")
+            ->setParameter("periodId", $periodId)
+            ->orderBy('a.name');
+
+        return $qb->execute()->fetchAll();
+    }
 }

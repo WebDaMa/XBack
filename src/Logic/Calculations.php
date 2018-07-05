@@ -33,4 +33,9 @@ class Calculations {
         return $date;
 
     }
+
+    public static function getNextSaturdayFromDate(string $date) : string
+    {
+        return date('Y/m/d', strtotime('next Saturday', strtotime($date)));
+    }
 }

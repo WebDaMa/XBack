@@ -20,6 +20,7 @@ use App\Entity\ProgramType;
 use App\Entity\TravelType;
 use App\Form\ExportRaftType;
 use App\Form\UploadType;
+use App\Logic\Calculations;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -46,6 +47,7 @@ class DashboardController extends Controller {
             // $file stores the uploaded file
             /** @var UploadedFile $file */
             $date = $exportRaft->getDate();
+            $periodId = Calculations::generatePeriodFromDate($date->format("Y-m-d"));
 
             $em = $this->getDoctrine()->getManager();
 
@@ -53,11 +55,13 @@ class DashboardController extends Controller {
             $em->persist($exportRaft);
             $em->flush();
 
-            $this->addFlash(
-                "notice",
-                "Rafting list exported for " . $date . "!"
-            );
-            return $this->redirect($this->generateUrl('admin', array('entity' => 'Customer')));
+            $spreadsheet = $this->generateRaftingExportSheet($date);
+
+            $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment; filename="raftingCustomers-' . $periodId . '.xlsx"');
+            $writer->save("php://output");
+
         }
 
         return $this->render('dashboard/export.html.twig', array(
@@ -522,5 +526,68 @@ class DashboardController extends Controller {
         }
 
         return $rows;
+    }
+
+    private function generateRaftingExportSheet(\DateTime $date) {
+        $curDay = $date->format("d/m/Y");
+        $dateString = $date->format("Y-m-d");
+        $lastSaturday = Calculations::getLastSaturdayFromDate($dateString);
+        $nextSaturday = Calculations::getNextSaturdayFromDate($dateString);
+
+        $periodId = Calculations::generatePeriodFromDate($dateString);
+
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+
+        $customers = $rep->getAllByDateWithRafting($periodId);
+        $total = count($customers);
+
+        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $active = $spreadsheet->getActiveSheet();
+
+        $active->setTitle("raftingCustomers");
+
+        $active->getCell("B1")->setValue("Rafting: Family-Adventure")
+            ->getStyle()->getFont()->setSize(20);
+        $active->getCell("C1")->setValue("Semana: ". $lastSaturday . " - " . $nextSaturday)
+            ->getStyle()->getFont()->setSize(20);
+        $active->getCell("D1")->setValue($curDay)
+            ->getStyle()->getFont()->setSize(20);
+        $active->getCell("E1")->setValue("Total: " . $total)
+            ->getStyle()->getFont()->setSize(20);
+
+        $active->getCell("A2")->setValue("Voornaam")
+            ->getStyle()->getFont()->setBold(true);
+        $active->getCell("B2")->setValue("Naam")
+            ->getStyle()->getFont()->setBold(true);
+        $active->getCell("C2")->setValue("RijksregisterNummer")
+            ->getStyle()->getFont()->setBold(true);
+        $active->getCell("D2")->setValue("VervaldatumId")
+            ->getStyle()->getFont()->setBold(true);
+        $active->getCell("E2")->setValue("Geboortedatum")
+            ->getStyle()->getFont()->setBold(true);
+        $active->getCell("F2")->setValue("OptieOmschrijving")
+            ->getStyle()->getFont()->setBold(true);
+
+        $active->getColumnDimension("A")->setAutoSize(true);
+        $active->getColumnDimension("B")->setAutoSize(true);
+        $active->getColumnDimension("C")->setAutoSize(true);
+        $active->getColumnDimension("D")->setAutoSize(true);
+        $active->getColumnDimension("E")->setAutoSize(true);
+        $active->getColumnDimension("F")->setAutoSize(true);
+
+        $rowIndex = 3;
+
+        foreach ($customers as $customer) {
+            $active->getCell("A" . $rowIndex)->setValue($customer["first_name"]);
+            $active->getCell("B" . $rowIndex)->setValue($customer["last_name"]);
+            $active->getCell("C" . $rowIndex)->setValue($customer["national_register_number"]);
+            $active->getCell("D" . $rowIndex)->setValue($customer["expire_date"]);
+            $active->getCell("E" . $rowIndex)->setValue($customer["birthdate"]);
+            $active->getCell("F" . $rowIndex)->setValue($customer["activity_name"]);
+            $rowIndex++;
+        }
+
+        return $spreadsheet;
+
     }
 }

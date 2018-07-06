@@ -45,4 +45,21 @@ class ActivityRepository extends ServiceEntityRepository
         return $qb->execute()->fetchAll();
     }
 
+    public function findAllByActivityGroupIdForProgramTypeId($activityGroupId, $programTypeId)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select('a.id', 'a.name')
+            ->from('activity', "a")
+            ->innerJoin("a", "program_activity", "pa", "pa.activity_id = a.id")
+            ->where("pa.program_type_id = :programTypeId")
+            ->andWhere("a.activity_group_id = :activityGroupId")
+            ->setParameters(["programTypeId" => $programTypeId])
+            ->setParameters(["activityGroupId" => $activityGroupId]);
+
+        return $qb->execute()->fetchAll();
+    }
+
 }

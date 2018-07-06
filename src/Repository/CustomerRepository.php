@@ -164,10 +164,10 @@ class CustomerRepository extends ServiceEntityRepository {
     public function getAllByGroepIdWithProgramTypeAndNo6d($groepId) {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
-        
+
         $qb
-            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
-                'pt.code AS programType')
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", "c.program_type_id",
+                "pt.code AS programType")
             ->from('customer', 'c')
             ->innerJoin('c', 'program_type', 'pt', 'c.program_type_id = pt.id')
             ->innerJoin('pt', 'program', 'p', 'pt.id = p.program_type_id')
@@ -200,6 +200,10 @@ class CustomerRepository extends ServiceEntityRepository {
                 $activities[] = $row["name"];
             }
             $customer["activityIds"] = $activities;
+            $rep = $this->getEntityManager()->getRepository(Activity::class);
+
+            $customer["possibleActivities"] = $rep->findAllByActivityGroupIdForProgramTypeId($activityGroepId, $customer["program_type_id"]);
+            unset($customer["program_type_id"]);
             $customers[$k] = $customer;
         }
         return $customers;

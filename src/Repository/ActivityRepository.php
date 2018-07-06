@@ -56,8 +56,7 @@ class ActivityRepository extends ServiceEntityRepository
             ->innerJoin("a", "program_activity", "pa", "pa.activity_id = a.id")
             ->where("pa.program_type_id = :programTypeId")
             ->andWhere("a.activity_group_id = :activityGroupId")
-            ->setParameters(["programTypeId" => $programTypeId])
-            ->setParameters(["activityGroupId" => $activityGroupId]);
+            ->setParameters(["activityGroupId" => $activityGroupId, "programTypeId" => $programTypeId]);
 
         return $qb->execute()->fetchAll();
     }

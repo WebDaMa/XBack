@@ -184,6 +184,17 @@ class CustomerRepository extends ServiceEntityRepository {
         foreach ($customers as $k => $customer) {
             $customerId = $customer["id"];
             $activities = [];
+            $rep = $this->getEntityManager()->getRepository(Activity::class);
+
+            $customer["possibleActivities"] = $rep->findAllByActivityGroupIdForProgramTypeId($activityGroepId, $customer["program_type_id"]);
+            unset($customer["program_type_id"]);
+
+            if (empty($customer["possibleActivities"])) {
+                // No need
+                unset($customers[$k]);
+                continue;
+            }
+
             $qb = $connection->createQueryBuilder();
 
             $qb
@@ -200,10 +211,7 @@ class CustomerRepository extends ServiceEntityRepository {
                 $activities[] = $row["name"];
             }
             $customer["activityIds"] = $activities;
-            $rep = $this->getEntityManager()->getRepository(Activity::class);
 
-            $customer["possibleActivities"] = $rep->findAllByActivityGroupIdForProgramTypeId($activityGroepId, $customer["program_type_id"]);
-            unset($customer["program_type_id"]);
             $customers[$k] = $customer;
         }
         return $customers;

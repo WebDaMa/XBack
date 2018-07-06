@@ -147,7 +147,7 @@ class CustomerRepository extends ServiceEntityRepository {
 
     public function getAllByGroepIdWithCanyoningOption($groepId)
     {
-        $customers = $this->getAllByGroepIdWithProgramType($groepId);
+        $customers = $this->getAllByGroepIdWithProgramTypeAndNo6d($groepId);
 
         return $this->getActivitiesForCustomersRaw($customers, 2);
 
@@ -155,22 +155,24 @@ class CustomerRepository extends ServiceEntityRepository {
 
     public function getAllByGroepIdWithSpecialOption($groepId)
     {
-        $customers = $this->getAllByGroepIdWithProgramType($groepId);
+        $customers = $this->getAllByGroepIdWithProgramTypeAndNo6d($groepId);
 
         return $this->getActivitiesForCustomersRaw($customers, 3);
 
     }
 
-    public function getAllByGroepIdWithProgramType($groepId) {
+    public function getAllByGroepIdWithProgramTypeAndNo6d($groepId) {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
-
+        
         $qb
             ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
                 'pt.code AS programType')
             ->from('customer', 'c')
             ->innerJoin('c', 'program_type', 'pt', 'c.program_type_id = pt.id')
+            ->innerJoin('pt', 'program', 'p', 'pt.id = p.program_type_id')
             ->where("c.group_layout_id = :groepId")
+            ->andWhere("p.days < 6")
             ->setParameter("groepId", $groepId);
 
         return $qb->execute()->fetchAll();

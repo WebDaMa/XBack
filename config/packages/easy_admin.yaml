@@ -504,7 +504,6 @@ easy_admin:
             fields:
               - { property: 'id'}
               - { property: 'name'}
-              - { property: 'activityPrograms'}
               - { property: 'agency'}
               - { property: 'programGroup'}
               - { property: 'days'}
@@ -513,7 +512,6 @@ easy_admin:
           form:
             fields:
               - { property: 'name'}
-              - { property: 'activityPrograms', type_options: { by_reference: false }}
               - { property: 'agency'}
               - { property: 'programGroup'}
               - { property: 'days'}

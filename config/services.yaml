@@ -3,6 +3,7 @@
 parameters:
     locale: 'nl'
     mailer_user: 'danny.matthi@gmail.com'
+    #MAILER_URL: 'gmail://username:password@localhost'
     jms_serializer.doctrine_proxy_subscriber.class: App\Serializer\EventDispatcher\Subscriber\DoctrineProxySubscriber
 services:
     # default configuration for services in *this* file

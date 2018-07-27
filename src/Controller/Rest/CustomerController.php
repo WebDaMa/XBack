@@ -28,6 +28,17 @@ class CustomerController extends FOSRestController {
     }
 
     /**
+     * @Rest\Get("/customers/groep/bill/{groepId}")
+     */
+    public function getAllByGroepForBillAction($groepId): Response {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $data = $rep->getAllByGroepIdForBill($groepId);
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
      * @Rest\Put("/customers/suitsize/{customerId}")
      */
     public function putCustomerSizeAction($customerId, Request $request): Response

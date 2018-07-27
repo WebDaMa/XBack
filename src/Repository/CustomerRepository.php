@@ -105,6 +105,33 @@ class CustomerRepository extends ServiceEntityRepository {
         return $qb->execute()->fetchAll();
     }
 
+    public function getAllByGroepIdForBill($groepId)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
+                'c.payed AS size')
+            ->from('customer', 'c')
+            ->where("c.group_layout_id = :groepId")
+            ->orderBy("c.first_name")
+            ->setParameter("groepId", $groepId);
+
+        $res = $qb->execute()->fetchAll();
+
+        foreach( $res as $k => $row ) {
+            if( is_null($row["payed"])) {
+                $row["payed"] = false;
+            }
+            $row["payed"] = (boolean) $row["payed"];
+
+            $res[$k] = $row;
+        }
+
+        return $res;
+    }
+
     public function getAllByAgencyForLodgingAndLocationAndPeriod($agencyId, $locationId, $periodId)
     {
         $connection = $this->_em->getConnection();

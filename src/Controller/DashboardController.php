@@ -395,7 +395,7 @@ class DashboardController extends Controller {
 
         $updateCustomer->setBookerPayed($this->getStringBool($row[39]));
 
-        $updateCustomer->setPayerId($this->getDoctrine()->getRepository(Customer::class)->find($row[40]));
+        $updateCustomer->setPayerId($this->getDoctrine()->getRepository(Customer::class)->findByCustomerId($row[40]));
 
         $updateCustomer->setIsCamper($this->getStringBool($row[41]));
 

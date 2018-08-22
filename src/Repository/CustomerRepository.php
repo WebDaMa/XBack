@@ -114,7 +114,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
                 "CONCAT(c2.first_name, ' ', c2.last_name) AS booker", 'c.payed')
             ->from('customer', 'c')
-            ->innerJoin("c", "customer", "c2", "c.booker_id = c2.id")
+            ->innerJoin("c", "customer", "c2", "c.booker_id = c2.customer_id")
             ->where("c.group_layout_id = :groepId")
             ->orderBy("c2.first_name")
             ->setParameter("groepId", $groepId);

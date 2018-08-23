@@ -142,8 +142,8 @@ class CustomerRepository extends ServiceEntityRepository {
         $qb = $connection->createQueryBuilder();
 
         $qb
-            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", "c2.customer_id AS bookerId",
-                "CONCAT(c2.first_name, ' ', c2.last_name) AS booker", 'c.payed')
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", "c2.customer_id AS bookerId"
+                )
             ->from('customer', 'c')
             ->innerJoin("c", "customer", "c2", "c.booker_id = c2.customer_id")
             ->where("c.id = :customerId")
@@ -151,12 +151,7 @@ class CustomerRepository extends ServiceEntityRepository {
 
         $res = $qb->execute()->fetch();
 
-        if (is_null($res["payed"]))
-        {
-            $res["payed"] = false;
-        }
 
-        $res["payed"] = (boolean) $res["payed"];
 
         //get all the costs from booker
 
@@ -179,6 +174,13 @@ class CustomerRepository extends ServiceEntityRepository {
 
         foreach ($customers as $customer)
         {
+            if (is_null($customer["payed"]))
+            {
+                $customer["payed"] = false;
+            }
+
+            $customer["payed"] = (boolean) $customer["payed"];
+
             $rep = $this->getEntityManager()->getRepository(Payment::class);
             $payments = $rep->getPaymentsForCustomerId($customer["id"]);
 
@@ -213,13 +215,19 @@ class CustomerRepository extends ServiceEntityRepository {
 
             if ($customer["customer_id"] == $res["bookerId"])
             {
+                unset($customer["customer_id"]);
+
                 $res["booker"] = $customer;
+            } else
+            {
+                unset($customer["customer_id"]);
             }
 
-            unset($customer["customer_id"]);
         }
 
         $res["booker"]["total"] = $bookerTotal;
+
+        unset($res["bookerId"]);
 
         return $res;
     }

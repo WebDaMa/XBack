@@ -147,7 +147,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->from('customer', 'c')
             ->innerJoin("c", "customer", "c2", "c.booker_id = c2.customer_id")
             ->where("c.id = :customerId")
-            ->setParameter("groepId", $customerId);
+            ->setParameter("customerId", $customerId);
 
         $res = $qb->execute()->fetch();
 

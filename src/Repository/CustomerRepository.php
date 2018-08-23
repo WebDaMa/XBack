@@ -174,9 +174,11 @@ class CustomerRepository extends ServiceEntityRepository {
         $res["totals"] = [];
         $res["options"] = [];
 
-        $res["bookerTotal"] = 0;
+        $bookerTotal = 0;
+        $res["booker"] = [];
 
-        foreach ($customers as $customer) {
+        foreach ($customers as $customer)
+        {
             $rep = $this->getEntityManager()->getRepository(Payment::class);
             $payments = $rep->getPaymentsForCustomerId($customer["id"]);
 
@@ -189,7 +191,8 @@ class CustomerRepository extends ServiceEntityRepository {
             foreach ($payments as $payment)
             {
                 $total += $payment["price"];
-                if($customerId === $customer["id"]) {
+                if ($customerId === $customer["id"])
+                {
                     $res["options"][] = $payment;
                 }
             }
@@ -197,7 +200,7 @@ class CustomerRepository extends ServiceEntityRepository {
             foreach ($options as $option)
             {
                 $total += $option["price"];
-                if($customerId === $customer["id"])
+                if ($customerId === $customer["id"])
                 {
                     $res["options"][] = $option;
                 }
@@ -206,9 +209,15 @@ class CustomerRepository extends ServiceEntityRepository {
             $customer["total"] = $total;
 
             $res["totals"][] = $customer;
+            $bookerTotal += $total;
 
-            $res["bookerTotal"] += $total;
+            if ($customer["id"] == $res["bookerId"])
+            {
+                $res["booker"] = $customer;
+            }
         }
+
+        $res["booker"]["total"] = $bookerTotal;
 
         return $res;
     }

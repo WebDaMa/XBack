@@ -142,7 +142,7 @@ class CustomerRepository extends ServiceEntityRepository {
         $qb = $connection->createQueryBuilder();
 
         $qb
-            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", "c2.id AS bookerId",
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", "c2.customer_id AS bookerId",
                 "CONCAT(c2.first_name, ' ', c2.last_name) AS booker", 'c.payed')
             ->from('customer', 'c')
             ->innerJoin("c", "customer", "c2", "c.booker_id = c2.customer_id")
@@ -211,7 +211,7 @@ class CustomerRepository extends ServiceEntityRepository {
             $res["totals"][] = $customer;
             $bookerTotal += $total;
 
-            if ($customer["id"] == $res["bookerId"])
+            if ($customer["customer_id"] == $res["bookerId"])
             {
                 $res["booker"] = $customer;
             }

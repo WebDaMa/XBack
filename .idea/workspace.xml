@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/ActivityRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ActivityRepository.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/PaymentRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PaymentRepository.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,11 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CustomerRepository.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
+      <file leaf-file-name="CustomerController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="292">
-              <caret line="116" column="76" selection-start-line="116" selection-start-column="76" selection-end-line="116" selection-end-column="76" />
+            <state relative-caret-position="404">
+              <caret line="43" column="39" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -31,7 +33,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>activityOption</find>
       <find>checkedIn</find>
       <find>convertExcelDateToDateTime</find>
       <find>_em</find>
@@ -61,6 +62,7 @@
       <find>bus</find>
       <find>payer</find>
       <find>booker</find>
+      <find>bill</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -76,7 +78,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/config/packages/fos_user.yaml" />
         <option value="$PROJECT_DIR$/src/Controller/APIController.php" />
         <option value="$PROJECT_DIR$/config/routes/annotations.yaml" />
         <option value="$PROJECT_DIR$/config/packages/fos_oauth_server.yaml" />
@@ -121,12 +122,13 @@
         <option value="$PROJECT_DIR$/src/Entity/ExportRaft.php" />
         <option value="$PROJECT_DIR$/src/Form/ExportRaftType.php" />
         <option value="$PROJECT_DIR$/src/Logic/Calculations.php" />
-        <option value="$PROJECT_DIR$/src/Repository/ActivityRepository.php" />
         <option value="$PROJECT_DIR$/config/packages/easy_admin.yaml" />
         <option value="$PROJECT_DIR$/config/services.yaml" />
-        <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
         <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
+        <option value="$PROJECT_DIR$/src/Repository/PaymentRepository.php" />
+        <option value="$PROJECT_DIR$/src/Repository/ActivityRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
       </list>
     </option>
   </component>
@@ -252,8 +254,9 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="y" value="23" />
     <option name="width" value="1440" />
-    <option name="height" value="900" />
+    <option name="height" value="797" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -445,12 +448,12 @@
       <workItem from="1532695830971" duration="791000" />
       <workItem from="1534357054505" duration="485000" />
       <workItem from="1534412305169" duration="614000" />
-      <workItem from="1534954440391" duration="348000" />
+      <workItem from="1534954440391" duration="6946000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="261020000" />
+    <option name="totallyTimeSpent" value="267618000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -510,6 +513,9 @@
         <option value="$PROJECT_DIR$/../XApp/app/shared/models/canyoningCustomer.model.js" />
         <option value="$PROJECT_DIR$/../XApp/app/shared/models/specialCustomer.model.js" />
         <option value="$PROJECT_DIR$/../XApp/app/shared/models/billCustomer.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/billCustomerDetail.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/option.model.js" />
+        <option value="$PROJECT_DIR$/../XApp/app/shared/models/billCustomerTotal.model.js" />
       </list>
     </option>
   </component>
@@ -522,13 +528,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Entity/Planning.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2029">
-          <caret line="114" column="46" selection-start-line="114" selection-start-column="46" selection-end-line="114" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/PlanningRepository.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="276">
@@ -602,13 +601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="17" column="18" selection-start-line="17" selection-start-column="18" selection-end-line="17" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Payment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="35" column="37" lean-forward="true" selection-start-line="34" selection-start-column="5" selection-end-line="35" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -690,13 +682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="31" column="40" lean-forward="true" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/ActivityRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="383">
-          <caret line="58" column="31" selection-start-line="58" selection-start-column="31" selection-end-line="58" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -803,17 +788,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
+    <entry file="file://$PROJECT_DIR$/src/Entity/Payment.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="34" column="37" lean-forward="true" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+        <state relative-caret-position="346">
+          <caret line="47" column="7" lean-forward="true" selection-start-line="47" selection-start-column="7" selection-end-line="47" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/PaymentRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="449">
+          <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/ActivityRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="63" column="39" selection-start-line="63" selection-start-column="20" selection-end-line="63" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="292">
-          <caret line="116" column="76" selection-start-line="116" selection-start-column="76" selection-end-line="116" selection-end-column="76" />
+        <state relative-caret-position="1532">
+          <caret line="211" lean-forward="true" selection-start-line="211" selection-end-line="211" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="43" column="39" selection-start-line="43" selection-start-column="39" selection-end-line="43" selection-end-column="39" />
         </state>
       </provider>
     </entry>

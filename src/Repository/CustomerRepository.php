@@ -6,6 +6,7 @@ use App\Entity\Activity;
 use App\Entity\Agency;
 use App\Entity\AllInType;
 use App\Entity\Customer;
+use App\Entity\Payment;
 use App\Entity\TravelType;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -121,13 +122,92 @@ class CustomerRepository extends ServiceEntityRepository {
 
         $res = $qb->execute()->fetchAll();
 
-        foreach( $res as $k => $row ) {
-            if( is_null($row["payed"])) {
+        foreach ($res as $k => $row)
+        {
+            if (is_null($row["payed"]))
+            {
                 $row["payed"] = false;
             }
             $row["payed"] = (boolean) $row["payed"];
 
             $res[$k] = $row;
+        }
+
+        return $res;
+    }
+
+    public function getBillByCustomerId($customerId)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", "c2.id AS bookerId",
+                "CONCAT(c2.first_name, ' ', c2.last_name) AS booker", 'c.payed')
+            ->from('customer', 'c')
+            ->innerJoin("c", "customer", "c2", "c.booker_id = c2.customer_id")
+            ->where("c.id = :customerId")
+            ->setParameter("groepId", $customerId);
+
+        $res = $qb->execute()->fetch();
+
+        if (is_null($res["payed"]))
+        {
+            $res["payed"] = false;
+        }
+
+        $res["payed"] = (boolean) $res["payed"];
+
+        //get all the costs from booker
+
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", 'c.payed')
+            ->from('customer', 'c')
+            ->where("c.booker_id = :bookerId")
+            ->setParameter("bookerId", $res["bookerId"]);
+
+        $customers = $qb->execute()->fetchAll();
+
+        $res["totals"] = [];
+        $res["options"] = [];
+
+        $res["bookerTotal"] = 0;
+
+        foreach ($customers as $customer) {
+            $rep = $this->getEntityManager()->getRepository(Payment::class);
+            $payments = $rep->getPaymentsForCustomerId($customer["id"]);
+
+            $rep = $this->getEntityManager()->getRepository(Activity::class);
+
+            $options = $rep->findAllByCustomerId($customer["id"]);
+
+            $total = 0;
+
+            foreach ($payments as $payment)
+            {
+                $total += $payment["price"];
+                if($customerId === $customer["id"]) {
+                    $res["options"][] = $payment;
+                }
+            }
+
+            foreach ($options as $option)
+            {
+                $total += $option["price"];
+                if($customerId === $customer["id"])
+                {
+                    $res["options"][] = $option;
+                }
+            }
+
+            $customer["total"] = $total;
+
+            $res["totals"][] = $customer;
+
+            $res["bookerTotal"] += $total;
         }
 
         return $res;
@@ -189,7 +269,8 @@ class CustomerRepository extends ServiceEntityRepository {
 
     }
 
-    public function getAllByGroepIdWithProgramTypeAndNo6d($groepId) {
+    public function getAllByGroepIdWithProgramTypeAndNo6d($groepId)
+    {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
 
@@ -206,10 +287,12 @@ class CustomerRepository extends ServiceEntityRepository {
         return $qb->execute()->fetchAll();
     }
 
-    private function getActivitiesForCustomersRaw(array $customers, $activityGroepId) {
+    private function getActivitiesForCustomersRaw(array $customers, $activityGroepId)
+    {
         $connection = $this->_em->getConnection();
 
-        foreach ($customers as $k => $customer) {
+        foreach ($customers as $k => $customer)
+        {
             $customerId = $customer["id"];
             $activities = [];
             $rep = $this->getEntityManager()->getRepository(Activity::class);
@@ -217,7 +300,8 @@ class CustomerRepository extends ServiceEntityRepository {
             $customer["possibleActivities"] = $rep->findAllByActivityGroupIdForProgramTypeId($activityGroepId, $customer["program_type_id"]);
             unset($customer["program_type_id"]);
 
-            if (empty($customer["possibleActivities"])) {
+            if (empty($customer["possibleActivities"]))
+            {
                 // No need
                 unset($customers[$k]);
                 continue;
@@ -235,13 +319,15 @@ class CustomerRepository extends ServiceEntityRepository {
                 ->setParameter("activityGroupId", $activityGroepId);
 
             $rows = $qb->execute()->fetchAll();
-            foreach ($rows as $row) {
+            foreach ($rows as $row)
+            {
                 $activities[] = $row["name"];
             }
             $customer["activityIds"] = $activities;
 
             $customers[$k] = $customer;
         }
+
         return $customers;
     }
 
@@ -294,17 +380,20 @@ class CustomerRepository extends ServiceEntityRepository {
         return $qb->execute()->fetchAll();
     }
 
-    public function getBusGoCustomersByWeek($date): array {
+    public function getBusGoCustomersByWeek($date): array
+    {
 
         return $this->getBusCustomersByWeekAndType($date, "go");
     }
 
-    public function getBusBackCustomersByWeek($date): array {
+    public function getBusBackCustomersByWeek($date): array
+    {
 
         return $this->getBusCustomersByWeekAndType($date, "back");
     }
 
-    public function getBusCustomersByWeekAndType($date, $type): array {
+    public function getBusCustomersByWeekAndType($date, $type): array
+    {
         $rep = $this->getEntityManager()->getRepository(TravelType::class);
         $busTypes = $rep->getAllBusTypes();
 
@@ -314,25 +403,31 @@ class CustomerRepository extends ServiceEntityRepository {
             "places" => []
         ];
 
-        foreach ($busTypes as $busType) {
+        foreach ($busTypes as $busType)
+        {
             /**
              * @var $busType TravelType
              */
 
-            if($type === "go") {
+            if ($type === "go")
+            {
                 $customers = $this->getAllBusGoCustomersByDateAndTravelTypeCode($date, $busType->getCode());
-            }elseif ($type === "back"){
+            } elseif ($type === "back")
+            {
                 $customers = $this->getAllBusBackCustomersByDateAndTravelTypeCode($date, $busType->getCode());
             }
 
-            if (!empty($customers)) {
+            if (!empty($customers))
+            {
                 $data["total"] += count($customers);
 
                 $totals = [];
 
                 $agencies = [];
-                foreach( $customers as $k => $row ) {
-                    if( is_null($row["busCheckedIn"])) {
+                foreach ($customers as $k => $row)
+                {
+                    if (is_null($row["busCheckedIn"]))
+                    {
                         $row["busCheckedIn"] = false;
                     }
                     $row["busCheckedIn"] = (boolean) $row["busCheckedIn"];
@@ -343,8 +438,9 @@ class CustomerRepository extends ServiceEntityRepository {
                     $customers[$k] = $row;
                 }
 
-                if(!empty($agencies)) {
-                    $agencyTotals = array_count_values( $agencies );
+                if (!empty($agencies))
+                {
+                    $agencyTotals = array_count_values($agencies);
 
                     $totals = $agencyTotals;
                 }
@@ -362,7 +458,7 @@ class CustomerRepository extends ServiceEntityRepository {
         return $data;
     }
 
-    public function hasActivityForCustomer($customerId, $activityId) : bool
+    public function hasActivityForCustomer($customerId, $activityId): bool
     {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
@@ -379,7 +475,8 @@ class CustomerRepository extends ServiceEntityRepository {
         return is_null($ca) || $ca == false ? false : true;
     }
 
-    public function getAllByAllInTypeForLocationAndPeriod($locationId, $periodId): array {
+    public function getAllByAllInTypeForLocationAndPeriod($locationId, $periodId): array
+    {
         $rep = $this->getEntityManager()->getRepository(AllInType::class);
         $allInTypes = $rep->findAll();
 
@@ -402,23 +499,27 @@ class CustomerRepository extends ServiceEntityRepository {
             "customers" => []
         ];
 
-        foreach ($allInTypes as $allInType) {
+        foreach ($allInTypes as $allInType)
+        {
             /**
              * @var $allInType AllInType
              */
 
             $customers = $this->getAllByAllInTypeForLocationAndPeriodCustomers($allInType->getId(), $locationId, $periodId);
 
-            if (!empty($customers)) {
+            if (!empty($customers))
+            {
                 $data["total"] += count($customers);
 
                 $totals = [];
 
                 $agencies = [];
                 $customerData = [];
-                foreach( $customers as $row ) {
+                foreach ($customers as $row)
+                {
                     $agencies[] = $row["agency"];
-                    if (is_null($row["hasBus"])) {
+                    if (is_null($row["hasBus"]))
+                    {
                         $row["hasBus"] = false;
                     }
                     $row["hasBus"] = (boolean) $row["hasBus"];
@@ -438,17 +539,19 @@ class CustomerRepository extends ServiceEntityRepository {
                     unset($row["hasBus"]);
                     unset($row["agency"]);
 
-                    if (!is_null($row["infoFile"]) && !empty($row["infoFile"])) {
+                    if (!is_null($row["infoFile"]) && !empty($row["infoFile"]))
+                    {
                         $customerData[] = $row;
                     }
                 }
 
-                if(!empty($agencies)) {
-                    $agencyTotals = array_count_values( $agencies );
+                if (!empty($agencies))
+                {
+                    $agencyTotals = array_count_values($agencies);
 
                     foreach ($agencyTotals as $agency => $agencyTotal)
                     {
-                        if(!isset($allTotals["totals"][$agency]))
+                        if (!isset($allTotals["totals"][$agency]))
                         {
                             $allTotals["totals"][$agency] = 0;
                         }
@@ -476,7 +579,8 @@ class CustomerRepository extends ServiceEntityRepository {
         return $data;
     }
 
-    public function getAllByAllInTypeForLocationAndPeriodCustomers($allInTypeId, $locationId, $periodId): array {
+    public function getAllByAllInTypeForLocationAndPeriodCustomers($allInTypeId, $locationId, $periodId): array
+    {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
         $qb
@@ -498,7 +602,8 @@ class CustomerRepository extends ServiceEntityRepository {
         return $qb->execute()->fetchAll();
     }
 
-    public function getAllByDateWithRafting($periodId): array {
+    public function getAllByDateWithRafting($periodId): array
+    {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
         $qb

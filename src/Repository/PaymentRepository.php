@@ -31,4 +31,19 @@ class PaymentRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function getPaymentsForCustomerId($customerId) {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("p.description", "p.price")
+            ->from('payment', 'p')
+            ->where("p.customer_id = :customerId")
+            ->setParameter("customerId", $customerId);
+
+        $res = $qb->execute()->fetchAll();
+
+        return $res;
+    }
 }

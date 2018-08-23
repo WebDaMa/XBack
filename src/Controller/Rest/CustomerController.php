@@ -39,6 +39,17 @@ class CustomerController extends FOSRestController {
     }
 
     /**
+     * @Rest\Get("/customers/bill/{customerId}")
+     */
+    public function getBillByCustomerId($customerId): Response {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $data = $rep->getBillByCustomerId($customerId);
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
      * @Rest\Put("/customers/suitsize/{customerId}")
      */
     public function putCustomerSizeAction($customerId, Request $request): Response

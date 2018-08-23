@@ -61,4 +61,20 @@ class ActivityRepository extends ServiceEntityRepository
         return $qb->execute()->fetchAll();
     }
 
+    public function findAllByCustomerId($customerId)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select('ag.name AS type', 'a.name', 'a.price')
+            ->from('customers_activities', "ca")
+            ->innerJoin("ca", "activity", "a", "ca.activity_id = a.id")
+            ->innerJoin("a", "activity_group", "ag", "a.activity_group_id = ag.id")
+            ->where("ca.customer_id = :customerId")
+            ->setParameters(["customerId" => $customerId]);
+
+        return $qb->execute()->fetchAll();
+    }
+
 }

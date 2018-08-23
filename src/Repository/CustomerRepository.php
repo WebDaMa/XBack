@@ -164,7 +164,7 @@ class CustomerRepository extends ServiceEntityRepository {
         $qb = $connection->createQueryBuilder();
 
         $qb
-            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", 'c.payed')
+            ->select("c.id", "c.customer_id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", 'c.payed')
             ->from('customer', 'c')
             ->where("c.booker_id = :bookerId")
             ->setParameter("bookerId", $res["bookerId"]);
@@ -215,6 +215,8 @@ class CustomerRepository extends ServiceEntityRepository {
             {
                 $res["booker"] = $customer;
             }
+
+            unset($customer["customer_id"]);
         }
 
         $res["booker"]["total"] = $bookerTotal;

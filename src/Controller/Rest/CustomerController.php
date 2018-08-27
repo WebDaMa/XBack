@@ -68,6 +68,8 @@ class CustomerController extends FOSRestController {
         // get all customers in case of booker
         $customers = $rep->GetAllCostsForCustomersByBookerId($customerId);
 
+        var_dump($customers);
+
         foreach ($customers as $c) {
             $customerBooker = $rep->find($c["id"]);
             if ($customerBooker) {

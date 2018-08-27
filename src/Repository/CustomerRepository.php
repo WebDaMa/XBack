@@ -155,16 +155,7 @@ class CustomerRepository extends ServiceEntityRepository {
 
         //get all the costs from booker
 
-        $connection = $this->_em->getConnection();
-        $qb = $connection->createQueryBuilder();
-
-        $qb
-            ->select("c.id", "c.customer_id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", 'c.payed')
-            ->from('customer', 'c')
-            ->where("c.booker_id = :bookerId")
-            ->setParameter("bookerId", $res["bookerId"]);
-
-        $customers = $qb->execute()->fetchAll();
+        $customers = $this->GetAllCostsForCustomersByBookerId($res["bookerId"]);
 
         $res["totals"] = [];
         $res["options"] = [];
@@ -211,16 +202,20 @@ class CustomerRepository extends ServiceEntityRepository {
             $customer["total"] = $total;
 
             $res["totals"][] = $customer;
-            $bookerTotal += $total;
 
             if ($customer["customer_id"] == $res["bookerId"])
             {
                 unset($customer["customer_id"]);
 
                 $res["booker"] = $customer;
+                $bookerTotal += $total;
+
             } else
             {
                 unset($customer["customer_id"]);
+                if(! $customer["payed"]) {
+                    $bookerTotal += $total;
+                }
             }
 
         }
@@ -637,5 +632,25 @@ class CustomerRepository extends ServiceEntityRepository {
             ->orderBy('a.name');
 
         return $qb->execute()->fetchAll();
+    }
+
+    /**
+     * @param $bookerId
+     * @return array
+     */
+    private function GetAllCostsForCustomersByBookerId($bookerId): array
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("c.id", "c.customer_id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", 'c.payed')
+            ->from('customer', 'c')
+            ->where("c.booker_id = :bookerId")
+            ->setParameter("bookerId", $bookerId);
+
+        $customers = $qb->execute()->fetchAll();
+
+        return $customers;
     }
 }

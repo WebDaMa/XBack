@@ -50,6 +50,44 @@ class CustomerController extends FOSRestController {
     }
 
     /**
+     * @Rest\Put("/customers/bill/{customerId}")
+     */
+    public function putBillPayedAction($customerId, Request $request): Response
+    {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $customer = $rep->find($customerId);
+        $payed = (bool) $request->get('payed');
+        $dm = $this->getDoctrine()->getManager();
+
+        if ($customer) {
+            $customer->setPayed($payed);
+            $customer->setPayerId($customer);
+            $dm->persist($customer);
+        }
+
+        // get all customers in case of booker
+        $customers = $rep->GetAllCostsForCustomersByBookerId($customerId);
+
+        foreach ($customers as $c) {
+            $customerBooker = $rep->find($c["id"]);
+            if ($customerBooker) {
+                $customerBooker->setPayed($payed);
+                $customerBooker->setPayerId($customer);
+                $dm->persist($customerBooker);
+            }
+        }
+        $dm->flush();
+
+        // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
+        $view = $this->view([
+            "id" => $customer->getId(),
+            "payed" => $customer->getPayed(),
+        ], Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
      * @Rest\Put("/customers/suitsize/{customerId}")
      */
     public function putCustomerSizeAction($customerId, Request $request): Response
@@ -350,4 +388,5 @@ class CustomerController extends FOSRestController {
 
         return $this->handleView($view);
     }
+
 }

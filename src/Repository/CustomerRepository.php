@@ -637,7 +637,7 @@ class CustomerRepository extends ServiceEntityRepository {
      * @param $bookerId
      * @return array
      */
-    private function GetAllCostsForCustomersByBookerId($bookerId): array
+    public function GetAllCostsForCustomersByBookerId($bookerId): array
     {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();

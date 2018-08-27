@@ -905,7 +905,7 @@ class Customer extends TypeTimestamps
     /**
      * @return mixed
      */
-    public function getPayerId()
+    public function getPayerId() : ?Customer
     {
         return $this->payerId;
     }
@@ -913,7 +913,7 @@ class Customer extends TypeTimestamps
     /**
      * @param mixed $payerId
      */
-    public function setPayerId($payerId): void
+    public function setPayerId(Customer $payerId = null): void
     {
         $this->payerId = $payerId;
     }

@@ -228,11 +228,6 @@ class Customer extends TypeTimestamps
     private $bookerPayed;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Customer")
-     */
-    private $payerId;
-
-    /**
      * One Payer has Many Customers.
      * @ORM\OneToMany(targetEntity="Customer", mappedBy="payer")
      */
@@ -918,17 +913,17 @@ class Customer extends TypeTimestamps
     /**
      * @return mixed
      */
-    public function getPayerId() : ?Customer
+    public function getPayer() : ?Customer
     {
-        return $this->payerId;
+        return $this->payer;
     }
 
     /**
      * @param mixed $payerId
      */
-    public function setPayerId(Customer $payerId = null): void
+    public function setPayer(Customer $payer = null): void
     {
-        $this->payerId = $payerId;
+        $this->payer = $payer;
     }
 
     /**
@@ -1148,6 +1143,8 @@ class Customer extends TypeTimestamps
     {
         $this->payed = $payed;
     }
+
+
 
     public function __toString() : string
     {

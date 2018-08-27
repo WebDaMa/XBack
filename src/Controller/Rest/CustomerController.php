@@ -61,7 +61,7 @@ class CustomerController extends FOSRestController {
 
         if ($customer) {
             $customer->setPayed($payed);
-            $customer->setPayerId($customer);
+            $customer->setPayer($customer);
             $dm->persist($customer);
         }
 

@@ -1114,7 +1114,7 @@ class Customer extends TypeTimestamps
 
         $this->payerCustomers->add($customer);
         // set the *owning* side!
-        $customer->setPayerId($this);
+        $customer->setPayer($this);
     }
 
     public function removePayerCustomer(Customer $customer)
@@ -1125,7 +1125,7 @@ class Customer extends TypeTimestamps
 
         $this->payerCustomers->removeElement($customer);
         // set the owning side to null
-        $customer->setPayerId(null);
+        $customer->setPayer(null);
     }
 
     /**

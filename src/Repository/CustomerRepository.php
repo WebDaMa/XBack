@@ -113,7 +113,7 @@ class CustomerRepository extends ServiceEntityRepository {
 
         $qb
             ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
-                "CONCAT(c2.first_name, ' ', c2.last_name) AS booker", 'c.payed')
+                "CONCAT(c2.first_name, ' ', c2.last_name) AS booker", "c2.id AS bookerId", 'c.payed')
             ->from('customer', 'c')
             ->innerJoin("c", "customer", "c2", "c.booker_id = c2.customer_id")
             ->where("c.group_layout_id = :groepId")
@@ -201,8 +201,6 @@ class CustomerRepository extends ServiceEntityRepository {
 
             $customer["total"] = $total;
 
-            $res["totals"][] = $customer;
-
             if ($customer["customer_id"] == $res["bookerId"])
             {
                 unset($customer["customer_id"]);
@@ -217,6 +215,7 @@ class CustomerRepository extends ServiceEntityRepository {
                     $bookerTotal += $total;
                 }
             }
+            $res["totals"][] = $customer;
 
         }
 

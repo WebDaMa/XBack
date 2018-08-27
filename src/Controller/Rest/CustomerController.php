@@ -72,7 +72,7 @@ class CustomerController extends FOSRestController {
             $customerBooker = $rep->find($c["id"]);
             if ($customerBooker) {
                 $customerBooker->setPayed($payed);
-                $customerBooker->setPayerId($customer);
+                $customer->addPayerCustomer($customerBooker);
                 $dm->persist($customerBooker);
             }
         }

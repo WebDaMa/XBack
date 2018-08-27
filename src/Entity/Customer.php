@@ -233,6 +233,18 @@ class Customer extends TypeTimestamps
     private $payerId;
 
     /**
+     * One Payer has Many Customers.
+     * @ORM\OneToMany(targetEntity="Customer", mappedBy="payer")
+     */
+    private $payerCustomers;
+
+    /**
+     * Many payerCustomer have One Customer(Payer).
+     * @ORM\ManyToOne(targetEntity="Customer", inversedBy="payerCustomers")
+     */
+    private $payer;
+
+    /**
      * @ORM\Column(type="boolean", nullable=true)
      */
     private $isCamper;
@@ -284,6 +296,7 @@ class Customer extends TypeTimestamps
     {
         $this->activities = new ArrayCollection();
         $this->payments = new ArrayCollection();
+        $this->payerCustomers = new ArrayCollection();
     }
 
     /**
@@ -1088,6 +1101,36 @@ class Customer extends TypeTimestamps
         $this->payments->removeElement($payment);
         // set the owning side to null
         $payment->setCustomer(null);
+    }
+
+    /**
+     * @return Collection|Customer[]
+     */
+    public function getPayerCustomers()
+    {
+        return $this->payerCustomers;
+    }
+
+    public function addPayerCustomer(Customer $customer)
+    {
+        if ($this->payerCustomers->contains($customer)) {
+            return;
+        }
+
+        $this->payerCustomers->add($customer);
+        // set the *owning* side!
+        $customer->setPayerId($this);
+    }
+
+    public function removePayerCustomer(Customer $customer)
+    {
+        if (!$this->payerCustomers->contains($customer)) {
+            return;
+        }
+
+        $this->payerCustomers->removeElement($customer);
+        // set the owning side to null
+        $customer->setPayerId(null);
     }
 
     /**

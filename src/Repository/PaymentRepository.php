@@ -37,7 +37,7 @@ class PaymentRepository extends ServiceEntityRepository
         $qb = $connection->createQueryBuilder();
 
         $qb
-            ->select("p.description", "p.price")
+            ->select("p.description AS name", "p.price")
             ->from('payment', 'p')
             ->where("p.customer_id = :customerId")
             ->setParameter("customerId", $customerId);

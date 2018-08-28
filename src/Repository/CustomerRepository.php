@@ -154,11 +154,11 @@ class CustomerRepository extends ServiceEntityRepository {
         {
             $rep = $this->getEntityManager()->getRepository(Payment::class);
 
-            $k["payments"] = "";
-            $payments = $rep->getPaymentsForCustomerId($k["id"]);
+            $row["payments"] = "";
+            $payments = $rep->getPaymentsForCustomerId($row["id"]);
 
             foreach ($payments as $payment) {
-                $k["payments"] .= "- " . $payment["name"] . " €" . $payment["price"] ."\n";
+                $row["payments"] .= "- " . $payment["name"] . " €" . $payment["price"] ."\n";
             }
 
             $res[$k] = $row;

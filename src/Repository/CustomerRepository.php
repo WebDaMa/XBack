@@ -136,6 +136,37 @@ class CustomerRepository extends ServiceEntityRepository {
         return $res;
     }
 
+    public function getAllByGroepIdForPayments($groepId)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer")
+            ->from('customer', 'c')
+            ->where("c.group_layout_id = :groepId")
+            ->orderBy("c2.first_name")
+            ->setParameter("groepId", $groepId);
+
+        $res = $qb->execute()->fetchAll();
+
+        foreach ($res as $k => $row)
+        {
+            $rep = $this->getEntityManager()->getRepository(Payment::class);
+
+            $k["payments"] = "";
+            $payments = $rep->getPaymentsForCustomerId($k["id"]);
+
+            foreach ($payments as $payment) {
+                $k["payments"] .= "- " . $payment["name"] . " €" . $payment["price"] ."\n";
+            }
+
+            $res[$k] = $row;
+        }
+
+        return $res;
+    }
+
     public function getBillByCustomerId($customerId)
     {
         $connection = $this->_em->getConnection();

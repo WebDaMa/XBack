@@ -6,6 +6,7 @@ namespace App\Controller\Rest;
 
 use App\Entity\Activity;
 use App\Entity\Customer;
+use App\Entity\Payment;
 use App\Entity\SuitSize;
 use App\Entity\TravelType;
 use App\Logic\Calculations;
@@ -33,6 +34,17 @@ class CustomerController extends FOSRestController {
     public function getAllByGroepForBillAction($groepId): Response {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $data = $rep->getAllByGroepIdForBill($groepId);
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Get("/customers/groep/costs/{groepId}")
+     */
+    public function getAllByGroepForCostsAction($groepId): Response {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $data = $rep->getAllByGroepIdForPayments($groepId);
         $view = $this->view($data, Response::HTTP_OK);
 
         return $this->handleView($view);
@@ -385,6 +397,34 @@ class CustomerController extends FOSRestController {
         $data["date"] = Calculations::getLastSaturdayFromDate($date);
 
         $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Put("/customers/payments/{customerId}")
+     */
+    public function putPaymentToCustomerAction($customerId, Request $request): Response
+    {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $customer = $rep->find($customerId);
+
+        if ($customer) {
+            $payment = new Payment();
+            $payment->setDescription($request->get('description'));
+            $payment->setPrice($request->get('price'));
+            $customer->addPayment($payment);
+            $dm = $this->getDoctrine()->getManager();
+            $dm->persist($customer);
+            $dm->flush();
+        }
+
+        // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
+        $view = $this->view([
+            "id" => $customer->getId(),
+            "payment" => $payment->getDescription(),
+            "price" => $payment->getPrice()
+        ], Response::HTTP_OK);
 
         return $this->handleView($view);
     }

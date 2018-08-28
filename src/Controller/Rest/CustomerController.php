@@ -413,7 +413,7 @@ class CustomerController extends FOSRestController {
             $payment = new Payment();
             $payment->setDescription($request->get('description'));
             $payment->setPrice($request->get('price'));
-            $customer->addPayment($payment);
+            $payment->setCustomer($customer);
             $dm = $this->getDoctrine()->getManager();
             $dm->persist($customer);
             $dm->flush();

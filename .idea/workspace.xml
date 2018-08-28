@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/Rest/PlanningController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/PlanningRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PlanningRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Rest/PlanningController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Rest/PlanningController.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +19,8 @@
       <file leaf-file-name="PlanningController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/Rest/PlanningController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="366">
-              <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+            <state relative-caret-position="248">
+              <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
               <folding>
                 <element signature="e#41#62#0#PHP" expanded="true" />
               </folding>
@@ -34,7 +32,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>planning</find>
       <find>$planningGuide</find>
       <find>var_</find>
       <find>----</find>
@@ -52,7 +49,6 @@
       <find>customer_activity</find>
       <find>allin</find>
       <find>birth</find>
-      <find>date</find>
       <find>poss</find>
       <find>bus</find>
       <find>payer</find>
@@ -64,6 +60,8 @@
       <find>forbill</find>
       <find>getrep</find>
       <find>/costs</find>
+      <find>day</find>
+      <find>date</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -450,16 +448,15 @@
       <workItem from="1534357054505" duration="485000" />
       <workItem from="1534412305169" duration="614000" />
       <workItem from="1534954440391" duration="12039000" />
-      <workItem from="1535358787437" duration="16972000" />
+      <workItem from="1535358787437" duration="17758000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="289683000" />
+    <option name="totallyTimeSpent" value="290469000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="PHP-CGI Server" />
@@ -473,7 +470,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Nativescript Palette" order="3" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" visible="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
@@ -801,13 +798,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="430" column="5" lean-forward="true" selection-start-line="403" selection-start-column="4" selection-end-line="430" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Guide.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="305">
@@ -822,10 +812,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="314" column="51" selection-start-line="314" selection-start-column="47" selection-end-line="314" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Rest/PlanningController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="366">
-          <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+        <state relative-caret-position="248">
+          <caret line="22" column="37" selection-start-line="22" selection-start-column="37" selection-end-line="22" selection-end-column="37" />
           <folding>
             <element signature="e#41#62#0#PHP" expanded="true" />
           </folding>

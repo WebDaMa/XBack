@@ -20,6 +20,7 @@ class PlanningController extends FOSRestController {
     public function getAllByDayAndLocationAction($date, $locationId) {
         $rep = $this->getDoctrine()->getRepository(Planning::class);
 
+        $date = new \DateTime($date);
         $data = $rep->findByLocationIdAndDate($locationId, $date);
         $view = $this->view($data, Response::HTTP_OK);
 

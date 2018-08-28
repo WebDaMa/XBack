@@ -19,8 +19,8 @@
       <file leaf-file-name="CustomerController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="415" column="43" selection-start-line="415" selection-start-column="43" selection-end-line="415" selection-end-column="43" />
+            <state relative-caret-position="224">
+              <caret line="418" column="33" selection-start-line="418" selection-start-column="33" selection-end-line="418" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -445,12 +445,12 @@
       <workItem from="1534357054505" duration="485000" />
       <workItem from="1534412305169" duration="614000" />
       <workItem from="1534954440391" duration="12039000" />
-      <workItem from="1535358787437" duration="12600000" />
+      <workItem from="1535358787437" duration="12761000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="285311000" />
+    <option name="totallyTimeSpent" value="285472000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
@@ -601,13 +601,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="8" column="26" selection-start-line="8" selection-start-column="26" selection-end-line="8" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Base/TypeTimestamps.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="26" lean-forward="true" selection-start-line="8" selection-start-column="4" selection-end-line="11" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -812,10 +805,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/Base/TypeTimestamps.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="415" column="43" selection-start-line="415" selection-start-column="43" selection-end-line="415" selection-end-column="43" />
+        <state relative-caret-position="224">
+          <caret line="418" column="33" selection-start-line="418" selection-start-column="33" selection-end-line="418" selection-end-column="33" />
         </state>
       </provider>
     </entry>

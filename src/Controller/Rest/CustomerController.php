@@ -40,9 +40,9 @@ class CustomerController extends FOSRestController {
     }
 
     /**
-     * @Rest\Get("/customers/groep/costs/{groepId}")
+     * @Rest\Get("/customers/groep/payments/{groepId}")
      */
-    public function getAllByGroepForCostsAction($groepId): Response {
+    public function getAllByGroepForPaymentsAction($groepId): Response {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $data = $rep->getAllByGroepIdForPayments($groepId);
         $view = $this->view($data, Response::HTTP_OK);

@@ -145,7 +145,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer")
             ->from('customer', 'c')
             ->where("c.group_layout_id = :groepId")
-            ->orderBy("c2.first_name")
+            ->orderBy("c.first_name")
             ->setParameter("groepId", $groepId);
 
         $res = $qb->execute()->fetchAll();

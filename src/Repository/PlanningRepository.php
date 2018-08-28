@@ -48,4 +48,21 @@ class PlanningRepository extends ServiceEntityRepository
             ->fetchColumn(0)
             ;
     }
+
+    public function findByLocationIdAndDate($locationId, \DateTime $date){
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $date = $date->format('Y-m-d');
+
+        return $qb
+            ->select("p.id", "g.name AS groepName", "p.activity", "p.guide_id AS guideId")
+            ->from("planning", "p")
+            ->innerJoin("p", "groep", "g", "p.group_id = g.id")
+            ->where('g.location_id = :locationId AND p.date = :date')
+            ->setParameters(['locationId' => $locationId, 'date'=> $date])
+            ->execute()
+            ->fetchAll()
+            ;
+    }
 }

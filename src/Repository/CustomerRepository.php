@@ -173,7 +173,7 @@ class CustomerRepository extends ServiceEntityRepository {
         $qb = $connection->createQueryBuilder();
 
         $qb
-            ->select("c.id", "c.first_name AS firstName", "c.last_name as LastName",
+            ->select("c.id", "c.first_name AS firstName", "c.last_name as lastName",
                 "c.email", "c.birthdate", "c.gsm", "c.emergency_number AS emergencyNumber",
                 "c.license_plate AS licensePlate", "c.national_register_number AS nationalRegisterNumber",
                 "c.expire_date AS expireDate")

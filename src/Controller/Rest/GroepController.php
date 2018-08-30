@@ -25,4 +25,5 @@ class GroepController extends FOSRestController {
 
         return $this->handleView($view);
     }
+
 }

@@ -6,6 +6,7 @@ namespace App\Controller\Rest;
 
 use App\Entity\Activity;
 use App\Entity\Customer;
+use App\Entity\Groep;
 use App\Entity\Payment;
 use App\Entity\SuitSize;
 use App\Entity\TravelType;
@@ -34,6 +35,19 @@ class CustomerController extends FOSRestController {
     public function getAllByGroepForCheckinAction($groepId): Response {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $data = $rep->getAllByGroepIdForCheckin($groepId);
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Get("/customers/period/{date}/{locationId}")
+     */
+    public function getAllByPeriodIdAndLocationIdForGroupLayoutAction($date, $locationId): Response {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $periodId = Calculations::generatePeriodFromDate($date);
+
+        $data = $rep->getAllByPeriodIdAndLocationIdForGroupLayout($periodId, $locationId);
         $view = $this->view($data, Response::HTTP_OK);
 
         return $this->handleView($view);
@@ -515,6 +529,36 @@ class CustomerController extends FOSRestController {
         $view = $this->view([
             "id" => $customer->getId(),
             "firstName" => $customer->getCheckedIn(),
+        ], Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Put("/customers/groep/{customerId}")
+     */
+    public function putGroepCustomerAction($customerId, Request $request): Response
+    {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $customer = $rep->find($customerId);
+        $rep = $this->getDoctrine()->getRepository(Groep::class);
+
+
+        if ($customer) {
+            $groep = $rep->find($request->get('groupLayoutId'));
+            if($groep) {
+                $customer->setGroupLayout($groep);
+                $dm = $this->getDoctrine()->getManager();
+                $dm->persist($customer);
+                $dm->flush();
+            }
+
+        }
+
+        // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
+        $view = $this->view([
+            "id" => $customer->getId(),
+            "groep" => $customer->getGroupLayout()->getName(),
         ], Response::HTTP_OK);
 
         return $this->handleView($view);

@@ -188,6 +188,32 @@ class CustomerRepository extends ServiceEntityRepository {
         return $res;
     }
 
+    public function getAllByPeriodIdAndLocationIdForGroupLayout($periodId, $locationId)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
+                "CONCAT(c2.first_name, ' ', c2.last_name) AS booker", "c.birthdate",
+                "gt.code AS gtCode", "c.group_layout_id AS groupLayoutId", "pt.code AS ptCode", "pt.description AS ptDescription",
+                "tt.code AS ttCode")
+            ->from('customer', 'c')
+            ->innerJoin("c", "customer", "c2", "c.booker_id = c2.customer_id")
+            ->innerJoin("c", "group_type", "gt", "c.group_preference_id = gt.id")
+            ->innerJoin("c", "program_type", "pt", "c.program_type_id = pt.id")
+            ->innerJoin("c", "travel_type", "tt", "c.travel_go_type = tt.id")
+            ->where("c.period_id = :periodId")
+            ->where("c.location_id = :locationId")
+            ->orderBy("c2.first_name")
+            ->setParameter("periodId", $periodId)
+            ->setParameter("locationId", $locationId);
+
+        $res = $qb->execute()->fetchAll();
+
+        return $res;
+    }
+
     public function getAllByGroepIdForPayments($groepId)
     {
         $connection = $this->_em->getConnection();

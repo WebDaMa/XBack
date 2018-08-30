@@ -155,11 +155,11 @@ class CustomerRepository extends ServiceEntityRepository {
 
         foreach ($res as $k => $row)
         {
-            if (is_null($row["checked_in"]))
+            if (is_null($row["checkedin"]))
             {
-                $row["checked_in"] = false;
+                $row["checkedin"] = false;
             }
-            $row["checked_in"] = (boolean) $row["checked_in"];
+            $row["checkedin"] = (boolean) $row["checkedin"];
 
             $res[$k] = $row;
         }

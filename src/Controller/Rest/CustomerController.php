@@ -442,9 +442,9 @@ class CustomerController extends FOSRestController {
     }
 
     /**
-     * @Rest\Put("/customers/checkin/{customerId}")
+     * @Rest\Put("/customers/checkin/detail/{customerId}")
      */
-    public function putCheckinCustomerAction($customerId, Request $request): Response
+    public function putCheckinCustomerDetailAction($customerId, Request $request): Response
     {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
@@ -476,6 +476,30 @@ class CustomerController extends FOSRestController {
             "gsm" => $customer->getGsm(),
             "licensePlate" => $customer->getLicensePlate(),
             "email" => $customer->getEmail()
+        ], Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Put("/customers/checkin/{customerId}")
+     */
+    public function putCheckinCustomerAction($customerId, Request $request): Response
+    {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $customer = $rep->find($customerId);
+
+        if ($customer) {
+            $customer->setCheckedIn($request->get('checkedin'));
+            $dm = $this->getDoctrine()->getManager();
+            $dm->persist($customer);
+            $dm->flush();
+        }
+
+        // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
+        $view = $this->view([
+            "id" => $customer->getId(),
+            "firstName" => $customer->getCheckedIn(),
         ], Response::HTTP_OK);
 
         return $this->handleView($view);

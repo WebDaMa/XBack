@@ -202,7 +202,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->innerJoin("c", "customer", "c2", "c.booker_id = c2.customer_id")
             ->innerJoin("c", "group_type", "gt", "c.group_preference_id = gt.id")
             ->innerJoin("c", "program_type", "pt", "c.program_type_id = pt.id")
-            ->innerJoin("c", "travel_type", "tt", "c.travel_go_type = tt.id")
+            ->innerJoin("c", "travel_type", "tt", "c.travel_go_type_id = tt.id")
             ->where("c.period_id = :periodId")
             ->where("c.location_id = :locationId")
             ->orderBy("c2.first_name")

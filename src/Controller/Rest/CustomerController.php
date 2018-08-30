@@ -41,7 +41,7 @@ class CustomerController extends FOSRestController {
     }
 
     /**
-     * @Rest\Get("/customers/period/{date}/{locationId}")
+     * @Rest\Get("/customers/groep/{date}/{locationId}")
      */
     public function getAllByPeriodIdAndLocationIdForGroupLayoutAction($date, $locationId): Response {
         $rep = $this->getDoctrine()->getRepository(Customer::class);

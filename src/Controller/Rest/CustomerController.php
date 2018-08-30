@@ -33,6 +33,7 @@ class CustomerController extends FOSRestController {
      * @Rest\Get("/customers/groep/checkin/{groepId}")
      */
     public function getAllByGroepForCheckinAction($groepId): Response {
+        $this->denyAccessUnlessGranted('ROLE_KV');
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $data = $rep->getAllByGroepIdForCheckin($groepId);
         $view = $this->view($data, Response::HTTP_OK);
@@ -44,6 +45,8 @@ class CustomerController extends FOSRestController {
      * @Rest\Get("/customers/groep/{date}/{locationId}")
      */
     public function getAllByPeriodIdAndLocationIdForGroupLayoutAction($date, $locationId): Response {
+        $this->denyAccessUnlessGranted('ROLE_STV');
+
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $periodId = Calculations::generatePeriodFromDate($date);
 
@@ -57,6 +60,8 @@ class CustomerController extends FOSRestController {
      * @Rest\Get("/customers/checkin/detail/{customerId}")
      */
     public function getByCustomerIdForCheckinAction($customerId): Response {
+        $this->denyAccessUnlessGranted('ROLE_KV');
+
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $data = $rep->getByCustomerIdForCheckin($customerId);
         $view = $this->view($data, Response::HTTP_OK);
@@ -68,6 +73,8 @@ class CustomerController extends FOSRestController {
      * @Rest\Get("/customers/groep/bill/{groepId}")
      */
     public function getAllByGroepForBillAction($groepId): Response {
+        $this->denyAccessUnlessGranted('ROLE_STV');
+
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $data = $rep->getAllByGroepIdForBill($groepId);
         $view = $this->view($data, Response::HTTP_OK);
@@ -90,6 +97,8 @@ class CustomerController extends FOSRestController {
      * @Rest\Get("/customers/bill/{customerId}")
      */
     public function getBillByCustomerId($customerId): Response {
+        $this->denyAccessUnlessGranted('ROLE_STV');
+
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $data = $rep->getBillByCustomerId($customerId);
         $view = $this->view($data, Response::HTTP_OK);
@@ -102,6 +111,8 @@ class CustomerController extends FOSRestController {
      */
     public function putBillPayedAction($customerId, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_STV');
+
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
         $payed = (bool) $request->get('payed');
@@ -384,6 +395,8 @@ class CustomerController extends FOSRestController {
      */
     public function putLodgingLayoutCustomerAction($customerId, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_KV');
+
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
         $lodgingLayout = $request->get('lodgingLayout');
@@ -406,6 +419,8 @@ class CustomerController extends FOSRestController {
      * @Rest\Get("/customers/lodging/{agencyId}/{locationId}/{date}")
      */
     public function getAllByAgencyForLodgingAndPeriodAndLocationAction($agencyId, $locationId, $date): Response {
+        $this->denyAccessUnlessGranted('ROLE_KV');
+
         $periodId = Calculations::generatePeriodFromDate($date);
 
         $rep = $this->getDoctrine()->getRepository(Customer::class);
@@ -425,6 +440,8 @@ class CustomerController extends FOSRestController {
      * @Rest\Get("/customers/all-in-type/{locationId}/{date}")
      */
     public function getAllByAllInTypeForLocationAndPeriodAction($locationId, $date): Response {
+        $this->denyAccessUnlessGranted('ROLE_KV');
+
         $periodId = Calculations::generatePeriodFromDate($date);
 
         $rep = $this->getDoctrine()->getRepository(Customer::class);
@@ -471,6 +488,8 @@ class CustomerController extends FOSRestController {
      */
     public function putCheckinCustomerDetailAction($customerId, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_KV');
+
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
 
@@ -515,6 +534,8 @@ class CustomerController extends FOSRestController {
      */
     public function putCheckinCustomerAction($customerId, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_KV');
+
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
 
@@ -539,6 +560,8 @@ class CustomerController extends FOSRestController {
      */
     public function putGroepCustomerAction($customerId, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_STV');
+
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
         $rep = $this->getDoctrine()->getRepository(Groep::class);

@@ -195,7 +195,7 @@ class CustomerRepository extends ServiceEntityRepository {
 
         $qb
             ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
-                "CONCAT(c2.first_name, ' ', c2.last_name) AS booker", "c.birthdate",
+                "CONCAT(c2.first_name, ' ', c2.last_name) AS booker", "TIMESTAMPDIFF(YEAR,c.birthdate,CURDATE()) AS birthdate",
                 "gt.code AS gtCode", "c.group_layout_id AS groupLayoutId", "pt.code AS ptCode", "pt.description AS ptDescription",
                 "tt.code AS ttCode")
             ->from('customer', 'c')

@@ -136,6 +136,58 @@ class CustomerRepository extends ServiceEntityRepository {
         return $res;
     }
 
+    public function getAllByGroepIdForCheckin($groepId)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("c.id", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
+                "CONCAT(c2.first_name, ' ', c2.last_name) AS booker", "c2.id AS bookerId", 'c.checked_in AS checkedin',
+                "c.email", "c.birthdate", "c.national_register_number AS nationalRegisterNumber", "c.expire_date AS expireDate")
+            ->from('customer', 'c')
+            ->innerJoin("c", "customer", "c2", "c.booker_id = c2.customer_id")
+            ->where("c.group_layout_id = :groepId")
+            ->orderBy("c2.first_name")
+            ->setParameter("groepId", $groepId);
+
+        $res = $qb->execute()->fetchAll();
+
+        foreach ($res as $k => $row)
+        {
+            if (is_null($row["checked_in"]))
+            {
+                $row["checked_in"] = false;
+            }
+            $row["checked_in"] = (boolean) $row["checked_in"];
+
+            $res[$k] = $row;
+        }
+
+        return $res;
+    }
+
+    public function getByCustomerIdForCheckin($customerId)
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("c.id", "c.first_name AS firstName", "c.last_name as LastName",
+                "c.email", "c.birthdate", "c.gsm", "c.emergency_number AS emergencyNumber",
+                "c.license_plate AS licensePlate", "c.national_register_number AS nationalRegisterNumber",
+                "c.expire_date AS expireDate")
+            ->from('customer', 'c')
+            ->innerJoin("c", "customer", "c2", "c.booker_id = c2.customer_id")
+            ->where("c.id = :customerId")
+            ->orderBy("c2.first_name")
+            ->setParameter("customerId", $customerId);
+
+        $res = $qb->execute()->fetch();
+
+        return $res;
+    }
+
     public function getAllByGroepIdForPayments($groepId)
     {
         $connection = $this->_em->getConnection();

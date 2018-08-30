@@ -29,6 +29,17 @@ class CustomerController extends FOSRestController {
     }
 
     /**
+     * @Rest\Get("/customers/groep/checkin/{groepId}")
+     */
+    public function getAllByGroepForCheckinAction($groepId): Response {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $data = $rep->getAllByGroepIdForCheckin($groepId);
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
      * @Rest\Get("/customers/groep/bill/{groepId}")
      */
     public function getAllByGroepForBillAction($groepId): Response {
@@ -425,6 +436,46 @@ class CustomerController extends FOSRestController {
             "id" => $customer->getId(),
             "payment" => $payment->getDescription(),
             "price" => $payment->getPrice()
+        ], Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Put("/customers/checkin/{customerId}")
+     */
+    public function putCheckinCustomerAction($customerId, Request $request): Response
+    {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $customer = $rep->find($customerId);
+
+        if ($customer) {
+            $customer->setFirstName($request->get('firstName'));
+            $customer->setLastName($request->get('lastName'));
+            $customer->setBirthdate($request->get('birthdate'));
+            $customer->setNationalRegisterNumber($request->get('nationalRegisterNumber'));
+            $customer->setExpireDate($request->get('expireDate'));
+            $customer->setEmergencyNumber($request->get('emergencyNumber'));
+            $customer->setGsm($request->get('gsm'));
+            $customer->setLicensePlate($request->get('licensePlate'));
+            $customer->setEmail($request->get('email'));
+            $dm = $this->getDoctrine()->getManager();
+            $dm->persist($customer);
+            $dm->flush();
+        }
+
+        // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
+        $view = $this->view([
+            "id" => $customer->getId(),
+            "firstName" => $customer->getFirstName(),
+            "lastName" => $customer->getLastName(),
+            "birthdate" => $customer->getBirthdate(),
+            "nationalRegisterNumber" => $customer->getNationalRegisterNumber(),
+            "expireDate" => $customer->getExpireDate(),
+            "emergencyNumber" => $customer->getEmergencyNumber(),
+            "gsm" => $customer->getGsm(),
+            "licensePlate" => $customer->getLicensePlate(),
+            "email" => $customer->getEmail()
         ], Response::HTTP_OK);
 
         return $this->handleView($view);

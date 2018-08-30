@@ -463,9 +463,9 @@ class CustomerController extends FOSRestController {
         if ($customer) {
             $customer->setFirstName($request->get('firstName'));
             $customer->setLastName($request->get('lastName'));
-            $customer->setBirthdate($request->get('birthdate'));
+            $customer->setBirthdate(new \DateTime($request->get('birthdate')));
             $customer->setNationalRegisterNumber($request->get('nationalRegisterNumber'));
-            $customer->setExpireDate($request->get('expireDate'));
+            $customer->setExpireDate(new \DateTime($request->get('expireDate')));
             $customer->setEmergencyNumber($request->get('emergencyNumber'));
             $customer->setGsm($request->get('gsm'));
             $customer->setLicensePlate($request->get('licensePlate'));

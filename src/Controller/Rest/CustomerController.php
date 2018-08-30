@@ -40,6 +40,17 @@ class CustomerController extends FOSRestController {
     }
 
     /**
+     * @Rest\Get("/customers/checkin/detail/{customerId}")
+     */
+    public function getByCustomerIdForCheckinAction($customerId): Response {
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $data = $rep->getByCustomerIdForCheckin($customerId);
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
      * @Rest\Get("/customers/groep/bill/{groepId}")
      */
     public function getAllByGroepForBillAction($groepId): Response {

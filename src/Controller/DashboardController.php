@@ -473,8 +473,22 @@ class DashboardController extends Controller {
             $updatePlanning->setGuide($guide);
         }
 
-        $guideFunction = (int) $row[7];
+        $cag1 = $this->getDoctrine()->getRepository(Guide::class)->findByGuideShort($row[7]);
+        if ($cag1)
+        {
+            $updatePlanning->setGuide($cag1);
+        }
+
+        $cag2 = $this->getDoctrine()->getRepository(Guide::class)->findByGuideShort($row[8]);
+        if ($cag2)
+        {
+            $updatePlanning->setGuide($cag2);
+        }
+
+        $guideFunction = (int) $row[9];
         $updatePlanning->setGuideFunction($guideFunction);
+
+        $updatePlanning->setTransport($row[10]);
 
         return $updatePlanning;
     }

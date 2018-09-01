@@ -49,6 +49,23 @@ class Planning extends TypeTimestamps
     private $guide;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Guide", inversedBy="planningsCag1")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $cag1;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Guide", inversedBy="planningsCag2")
+     * @ORM\JoinColumn(nullable=true)
+     */
+    private $cag2;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $transport;
+
+    /**
      * @ORM\Column(type="integer", nullable=true)
      */
     private $guideFunction;
@@ -147,6 +164,54 @@ class Planning extends TypeTimestamps
     public function setGuide(Guide $guide = null)
     {
         $this->guide = $guide;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCag1() : ?Guide
+    {
+        return $this->cag1;
+    }
+
+    /**
+     * @param mixed $cag1
+     */
+    public function setCag1(Guide $cag1 = null): void
+    {
+        $this->cag1 = $cag1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCag2() : ?Guide
+    {
+        return $this->cag2;
+    }
+
+    /**
+     * @param mixed $cag2
+     */
+    public function setCag2(Guide $cag2 = null): void
+    {
+        $this->cag2 = $cag2;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getTransport()
+    {
+        return $this->transport;
+    }
+
+    /**
+     * @param mixed $transport
+     */
+    public function setTransport($transport): void
+    {
+        $this->transport = $transport;
     }
 
     /**

@@ -476,13 +476,13 @@ class DashboardController extends Controller {
         $cag1 = $this->getDoctrine()->getRepository(Guide::class)->findByGuideShort($row[7]);
         if ($cag1)
         {
-            $updatePlanning->setGuide($cag1);
+            $updatePlanning->setCag1($cag1);
         }
 
         $cag2 = $this->getDoctrine()->getRepository(Guide::class)->findByGuideShort($row[8]);
         if ($cag2)
         {
-            $updatePlanning->setGuide($cag2);
+            $updatePlanning->setCag2($cag2);
         }
 
         $guideFunction = (int) $row[9];

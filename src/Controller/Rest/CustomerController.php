@@ -42,21 +42,6 @@ class CustomerController extends FOSRestController {
     }
 
     /**
-     * @Rest\Get("/customers/groep/{date}/{locationId}")
-     */
-    public function getAllByPeriodIdAndLocationIdForGroupLayoutAction($date, $locationId): Response {
-        $this->denyAccessUnlessGranted('ROLE_STV');
-
-        $rep = $this->getDoctrine()->getRepository(Customer::class);
-        $periodId = Calculations::generatePeriodFromDate($date);
-
-        $data = $rep->getAllByPeriodIdAndLocationIdForGroupLayout($periodId, $locationId);
-        $view = $this->view($data, Response::HTTP_OK);
-
-        return $this->handleView($view);
-    }
-
-    /**
      * @Rest\Get("/customers/checkin/detail/{customerId}")
      */
     public function getByCustomerIdForCheckinAction($customerId): Response {
@@ -92,6 +77,7 @@ class CustomerController extends FOSRestController {
 
         return $this->handleView($view);
     }
+
 
     /**
      * @Rest\Get("/customers/bill/{customerId}")
@@ -449,6 +435,21 @@ class CustomerController extends FOSRestController {
 
         $data["date"] = Calculations::getLastSaturdayFromDate($date);
 
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
+     * @Rest\Get("/customers/groep/{date}/{locationId}")
+     */
+    public function getAllByPeriodIdAndLocationIdForGroupLayoutAction($date, $locationId): Response {
+        $this->denyAccessUnlessGranted('ROLE_STV');
+
+        $rep = $this->getDoctrine()->getRepository(Customer::class);
+        $periodId = Calculations::generatePeriodFromDate($date);
+
+        $data = $rep->getAllByPeriodIdAndLocationIdForGroupLayout($periodId, $locationId);
         $view = $this->view($data, Response::HTTP_OK);
 
         return $this->handleView($view);

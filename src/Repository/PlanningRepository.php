@@ -56,7 +56,8 @@ class PlanningRepository extends ServiceEntityRepository
         $date = $date->format('Y-m-d');
 
         return $qb
-            ->select("p.id", "g.name AS groepName", "p.activity", "p.guide_id AS guideId")
+            ->select("p.id", "g.name AS groepName", "p.activity", "p.guide_id AS guideId",
+                "p.cag1_id AS cag1Id", "p.cag2_id AS cag2Id")
             ->from("planning", "p")
             ->innerJoin("p", "groep", "g", "p.group_id = g.id")
             ->where('g.location_id = :locationId AND p.date = :date')

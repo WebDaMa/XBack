@@ -41,6 +41,12 @@ class PlanningController extends FOSRestController {
             $guide = $rep->find($request->get('guideId'));
             $planning->setGuide($guide);
 
+            $cag1 = $rep->find($request->get('cag1Id'));
+            $planning->setCag1($cag1);
+
+            $cag2 = $rep->find($request->get('cag2Id'));
+            $planning->setCag2($cag2);
+
             $planning->setUpdatedBy($this->getUser());
             $dm = $this->getDoctrine()->getManager();
             $dm->persist($planning);

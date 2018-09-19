@@ -459,7 +459,7 @@ class DashboardController extends Controller {
         $updatePlanning->setPlanningId((int)$row[0]);
 
         $updatePlanning->setDate($this->convertExcelDateToDateTime($row[1]));
-        $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[12], $periodId);
+        $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[15], $periodId);
         if ($group)
         {
             $updatePlanning->setGroup($group);

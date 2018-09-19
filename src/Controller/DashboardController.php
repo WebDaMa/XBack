@@ -200,10 +200,6 @@ class DashboardController extends Controller {
                 {
                     $groep = $this->importGroep($row);
 
-                    var_dump($groep->getPeriodId());
-                    var_dump($groep->getName());
-                    var_dump($groep->getGroupId());
-
                     if (!is_null($groep->getPeriodId()) && !is_null($groep->getLocation())) {
                         $periodId = $groep->getPeriodId();
                         $location = $groep->getLocation();
@@ -221,8 +217,9 @@ class DashboardController extends Controller {
                             $groep = $this->importGroep($row, $groepExists);
                         }
 
-                        if (!is_null($groep->getName()) && !empty($groep->getName()) && $groep->getName() !== '')
+                        if (!empty($groep->getName()))
                         {
+                            var_dump("insert: " .$groep->getName());
                             //Don't add empty groeps
                             $em->persist($groep);
                         }

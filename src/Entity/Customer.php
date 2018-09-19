@@ -919,7 +919,7 @@ class Customer extends TypeTimestamps
     }
 
     /**
-     * @param mixed $payerId
+     * @param mixed $payer
      */
     public function setPayer(Customer $payer = null): void
     {

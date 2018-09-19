@@ -78,8 +78,6 @@ class GuideRepository extends ServiceEntityRepository
 
         $cag1s = $qb->execute()->fetchAll();
 
-        var_dump($cag1s);
-
         $qb = $connection->createQueryBuilder();
 
         // CAG2

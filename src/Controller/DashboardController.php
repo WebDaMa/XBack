@@ -201,7 +201,6 @@ class DashboardController extends Controller {
                     $groep = $this->importGroep($row);
 
                     var_dump($groep->getPeriodId());
-                    var_dump($groep->getLocation());
                     var_dump($groep->getName());
                     var_dump($groep->getGroupId());
 

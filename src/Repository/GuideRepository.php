@@ -78,6 +78,8 @@ class GuideRepository extends ServiceEntityRepository
 
         $cag1s = $qb->execute()->fetchAll();
 
+        var_dump($cag1s);
+
         $qb = $connection->createQueryBuilder();
 
         // CAG2
@@ -95,6 +97,8 @@ class GuideRepository extends ServiceEntityRepository
             ->setParameter('locationId', $locationId);
 
         $cag2s = $qb->execute()->fetchAll();
+
+        var_dump($cag2s);die();
 
         //Have unique guides
 

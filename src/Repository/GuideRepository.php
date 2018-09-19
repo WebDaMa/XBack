@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Guide;
+use App\Logic\Extensions;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -57,7 +58,47 @@ class GuideRepository extends ServiceEntityRepository
             ->setParameter('date', $date)
             ->setParameter('locationId', $locationId);
 
-        return $qb->execute()->fetchAll();
+        $guides = $qb->execute()->fetchAll();
+
+        $qb = $connection->createQueryBuilder();
+
+        // CAG1
+        $qb
+            ->select('g.id AS id, g.guide_short AS guideShort, g.guide_first_name AS guideFirstName, 
+            g.guide_last_name AS guideLastName')
+            ->from('planning', 'p')
+            ->innerJoin('p', 'guide', 'g', 'p.cag1_id = g.id')
+            ->innerJoin('p', 'groep', 'gr', 'p.group_id = gr.id')
+            ->where('WEEK(p.date) = WEEK(:date)')
+            ->andWhere('YEAR(p.date) = YEAR(:date)')
+            ->andWhere('gr.location_id = :locationId')
+            ->groupBy('g.id')
+            ->setParameter('date', $date)
+            ->setParameter('locationId', $locationId);
+
+        $cag1s = $qb->execute()->fetchAll();
+
+        // CAG1
+        $qb
+            ->select('g.id AS id, g.guide_short AS guideShort, g.guide_first_name AS guideFirstName, 
+        g.guide_last_name AS guideLastName')
+            ->from('planning', 'p')
+            ->innerJoin('p', 'guide', 'g', 'p.cag2_id = g.id')
+            ->innerJoin('p', 'groep', 'gr', 'p.group_id = gr.id')
+            ->where('WEEK(p.date) = WEEK(:date)')
+            ->andWhere('YEAR(p.date) = YEAR(:date)')
+            ->andWhere('gr.location_id = :locationId')
+            ->groupBy('g.id')
+            ->setParameter('date', $date)
+            ->setParameter('locationId', $locationId);
+
+        $cag2s = $qb->execute()->fetchAll();
+
+        //Have unique guides
+
+        $guides = Extensions::unique_multidim_array(array_merge($guides, $cag1s, $cag2s), "id");
+
+        return $guides;
     }
 
 

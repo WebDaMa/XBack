@@ -78,7 +78,9 @@ class GuideRepository extends ServiceEntityRepository
 
         $cag1s = $qb->execute()->fetchAll();
 
-        // CAG1
+        $qb = $connection->createQueryBuilder();
+
+        // CAG2
         $qb
             ->select('g.id AS id, g.guide_short AS guideShort, g.guide_first_name AS guideFirstName, 
         g.guide_last_name AS guideLastName')

@@ -98,8 +98,6 @@ class GuideRepository extends ServiceEntityRepository
 
         $cag2s = $qb->execute()->fetchAll();
 
-        var_dump($cag2s);die();
-
         //Have unique guides
 
         $guides = Extensions::unique_multidim_array(array_merge($guides, $cag1s, $cag2s), "id");

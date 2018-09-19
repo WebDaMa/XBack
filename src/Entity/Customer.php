@@ -217,7 +217,7 @@ class Customer extends TypeTimestamps
     private $lodgingLayout;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Groep", inversedBy="customers")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Groep", inversedBy="groupCustomers")
      * @ORM\JoinColumn(nullable=true)
      */
     private $groupLayout;

@@ -219,13 +219,11 @@ class DashboardController extends Controller {
 
                         if (!empty($groep->getName()))
                         {
-                            var_dump("insert: " .$groep->getName());
                             //Don't add empty groeps
                             $em->persist($groep);
                         }
                     }
                 }
-                die();
                 $em->flush();
             }
 

@@ -200,6 +200,8 @@ class DashboardController extends Controller {
                 {
                     $groep = $this->importGroep($row);
 
+                    var_dump($groep);
+
                     if (!is_null($groep->getPeriodId()) && !is_null($groep->getLocation())) {
                         $periodId = $groep->getPeriodId();
                         $location = $groep->getLocation();
@@ -224,6 +226,7 @@ class DashboardController extends Controller {
                         }
                     }
                 }
+                die();
                 $em->flush();
             }
 

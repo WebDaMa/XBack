@@ -25,7 +25,7 @@ class PlanningRepository extends ServiceEntityRepository
 
     public function findByGuideIdAndDate($guideId, $date): array {
         return $this->createQueryBuilder('e')
-            ->where('(e.guide = :guideId OR e.cag1 = :guideID OR e.cag2 = :guideID) AND e.date = :date')
+            ->where('(e.guide = :guideId OR e.cag1 = :guideId OR e.cag2 = :guideId) AND e.date = :date')
             ->setParameters(['guideId' => $guideId, 'date'=> $date])
             ->getQuery()
             ->getResult()

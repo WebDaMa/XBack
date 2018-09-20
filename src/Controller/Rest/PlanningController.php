@@ -28,6 +28,19 @@ class PlanningController extends FOSRestController {
     }
 
     /**
+     * @Rest\Get("/planning/{guideId}/{date}/{locationId}")
+     */
+    public function getAllByGuideAndWeekAndLocationAction($guideId ,$date, $locationId) {
+        $rep = $this->getDoctrine()->getRepository(Planning::class);
+
+        $date = new \DateTime($date);
+        $data = $rep->findByGuideIdAndLocationIdAndDate($guideId, $locationId, $date);
+        $view = $this->view($data, Response::HTTP_OK);
+
+        return $this->handleView($view);
+    }
+
+    /**
      * @Rest\Put("/planning/{planningId}")
      */
     public function putPlanningUpdateAction($planningId, Request $request): Response

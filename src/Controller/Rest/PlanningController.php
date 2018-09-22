@@ -52,16 +52,24 @@ class PlanningController extends FOSRestController {
             $planning->setActivity($request->get('activity'));
             $rep = $this->getDoctrine()->getRepository(Guide::class);
             $guide = $rep->find($request->get('guideId'));
-            $planning->setGuide($guide);
+            if($guide) {
+                $planning->setGuide($guide);
+            }
 
             $cag1 = $rep->find($request->get('cag1Id'));
-            $planning->setCag1($cag1);
+            if($cag1) {
+                $planning->setCag1($cag1);
+            }
 
             $cag2 = $rep->find($request->get('cag2Id'));
-            $planning->setCag2($cag2);
+            if($cag2) {
+                $planning->setCag2($cag2);
+            }
 
             $transport = $rep->find($request->get('transport'));
-            $planning->setTransport($transport);
+            if(!empty($transport)) {
+                $planning->setTransport($transport);
+            }
 
             $planning->setUpdatedBy($this->getUser());
             $dm = $this->getDoctrine()->getManager();

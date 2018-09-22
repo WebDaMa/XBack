@@ -48,10 +48,16 @@ class PlanningController extends FOSRestController {
         $rep = $this->getDoctrine()->getRepository(Planning::class);
         $planning = $rep->find($planningId);
 
+        $activity = $request->get('activity');
+        $guideId = $request->get('guideId');
+        $cag1Id = $request->get('cag1Id');
+        $cag2Id = $request->get('cag2Id');
+        $transport = $rep->find($request->get('transport'));
+
         if ($planning) {
-            $planning->setActivity($request->get('activity'));
+            $planning->setActivity($activity);
+
             $rep = $this->getDoctrine()->getRepository(Guide::class);
-            $guideId = $request->get('guideId');
             if(!empty($guideId)) {
                 $guide = $rep->find($guideId);
                 if($guide) {
@@ -59,8 +65,6 @@ class PlanningController extends FOSRestController {
                 }
             }
 
-
-            $cag1Id = $request->get('cag1Id');
             if(!empty($cag1Id)) {
                 $cag1 = $rep->find($cag1Id);
                 if($cag1) {
@@ -68,7 +72,6 @@ class PlanningController extends FOSRestController {
                 }
             }
 
-            $cag2Id = $request->get('cag2Id');
             if(!empty($cag2Id)) {
                 $cag2 = $rep->find($cag2Id);
                 if($cag2) {
@@ -76,10 +79,7 @@ class PlanningController extends FOSRestController {
                 }
             }
 
-            $transport = $rep->find($request->get('transport'));
-            if(!empty($transport)) {
-                $planning->setTransport($transport);
-            }
+            $planning->setTransport($transport);
 
             $planning->setUpdatedBy($this->getUser());
             $dm = $this->getDoctrine()->getManager();
@@ -98,6 +98,8 @@ class PlanningController extends FOSRestController {
                 "guide" => $guideShort,
                 "activity" => $planning->getActivity()
             ], Response::HTTP_OK);
+
+            return $this->handleView($view);
         }
 
         $view = $this->view([

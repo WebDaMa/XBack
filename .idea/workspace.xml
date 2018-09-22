@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/PlanningRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/PlanningRepository.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,8 +19,8 @@
       <file leaf-file-name="PlanningRepository.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Repository/PlanningRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="555">
-              <caret line="80" column="80" selection-start-line="80" selection-start-column="80" selection-end-line="80" selection-end-column="80" />
+            <state relative-caret-position="631">
+              <caret line="60" column="84" selection-start-line="60" selection-start-column="84" selection-end-line="60" selection-end-column="84" />
             </state>
           </provider>
         </entry>
@@ -273,17 +272,6 @@
             <path>
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
               <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
               <item name="public" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -457,18 +445,18 @@
       <workItem from="1534412305169" duration="614000" />
       <workItem from="1534954440391" duration="12039000" />
       <workItem from="1535358787437" duration="41621000" />
-      <workItem from="1537619621334" duration="77000" />
+      <workItem from="1537619621334" duration="418000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="314409000" />
+    <option name="totallyTimeSpent" value="314750000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18402778" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18402778" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Nativescript Palette" order="3" />
@@ -831,15 +819,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Rest/PlanningController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="479">
-          <caret line="36" column="41" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+        <state relative-caret-position="359">
+          <caret line="23" column="38" selection-start-line="23" selection-start-column="38" selection-end-line="23" selection-end-column="38" />
+          <folding>
+            <element signature="e#41#62#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/PlanningRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="80" column="80" selection-start-line="80" selection-start-column="80" selection-end-line="80" selection-end-column="80" />
+        <state relative-caret-position="631">
+          <caret line="60" column="84" selection-start-line="60" selection-start-column="84" selection-end-line="60" selection-end-column="84" />
         </state>
       </provider>
     </entry>

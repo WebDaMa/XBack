@@ -51,19 +51,29 @@ class PlanningController extends FOSRestController {
         if ($planning) {
             $planning->setActivity($request->get('activity'));
             $rep = $this->getDoctrine()->getRepository(Guide::class);
-            $guide = $rep->find($request->get('guideId'));
-            if($guide) {
-                $planning->setGuide($guide);
+            $guideId = $request->get('guideId');
+            if(!empty($guideId)) {
+                $guide = $rep->find($guideId);
+                if($guide) {
+                    $planning->setGuide($guide);
+                }
             }
 
-            $cag1 = $rep->find($request->get('cag1Id'));
-            if($cag1) {
-                $planning->setCag1($cag1);
+
+            $cag1Id = $request->get('cag1Id');
+            if(!empty($cag1Id)) {
+                $cag1 = $rep->find($cag1Id);
+                if($cag1) {
+                    $planning->setCag1($cag1);
+                }
             }
 
-            $cag2 = $rep->find($request->get('cag2Id'));
-            if($cag2) {
-                $planning->setCag2($cag2);
+            $cag2Id = $request->get('cag2Id');
+            if(!empty($cag2Id)) {
+                $cag2 = $rep->find($cag2Id);
+                if($cag2) {
+                    $planning->setCag2($cag2);
+                }
             }
 
             $transport = $rep->find($request->get('transport'));
@@ -75,20 +85,24 @@ class PlanningController extends FOSRestController {
             $dm = $this->getDoctrine()->getManager();
             $dm->persist($planning);
             $dm->flush();
+
+            $guideShort = "";
+
+            if(isset($guide)) {
+                $guideShort = $guide->getGuideShort();
+            }
+
+            // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
+            $view = $this->view([
+                "id" => $planning->getId(),
+                "guide" => $guideShort,
+                "activity" => $planning->getActivity()
+            ], Response::HTTP_OK);
         }
 
-        $guideShort = "";
-
-        if(isset($guide)) {
-            $guideShort = $guide->getGuideShort();
-        }
-
-        // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT
         $view = $this->view([
-            "id" => $planning->getId(),
-            "guide" => $guideShort,
-            "activity" => $planning->getActivity()
-        ], Response::HTTP_OK);
+            "message" => "No planning was found!",
+        ], Response::HTTP_NO_CONTENT);
 
         return $this->handleView($view);
     }

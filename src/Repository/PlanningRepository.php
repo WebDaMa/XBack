@@ -78,11 +78,12 @@ class PlanningRepository extends ServiceEntityRepository
 
         return $qb
             ->select("p.id", "g.name AS groepName", "p.activity", "p.guide_id AS guideId",
-                "p.cag1_id AS cag1Id", "p.cag2_id AS cag2Id", "p.transport")
+                "p.cag1_id AS cag1Id", "p.cag2_id AS cag2Id", "p.transport", "p.date")
             ->from("planning", "p")
             ->innerJoin("p", "groep", "g", "p.group_id = g.id")
             ->where('g.location_id = :locationId AND (p.date BETWEEN :lastSaturday and :nextSaturday)')
             ->andWhere('(p.guide_id = :guideId OR p.cag1_id = :guideId OR p.cag2_id = :guideId)')
+            ->orderBy("p.date", "ASC")
             ->setParameters(['locationId' => $locationId, 'guideId' => $guideId, 'lastSaturday'=> $lastSaturday, 'nextSaturday' => $nextSaturday])
             ->execute()
             ->fetchAll()

@@ -52,7 +52,7 @@ class PlanningController extends FOSRestController {
         $guideId = $request->get('guideId');
         $cag1Id = $request->get('cag1Id');
         $cag2Id = $request->get('cag2Id');
-        $transport = $rep->find($request->get('transport'));
+        $transport = $request->get('transport');
 
         if ($planning) {
             $planning->setActivity($activity);

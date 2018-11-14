@@ -3,9 +3,9 @@ security:
         FOS\UserBundle\Model\UserInterface: bcrypt
 
     role_hierarchy:
-        ROLE_KV:       ROLE_USER
-        ROLE_STV:       ROLE_KV
-        ROLE_ADMIN:       ROLE_STV
+        ROLE_KV: ROLE_USER
+        ROLE_STV: ROLE_KV
+        ROLE_ADMIN: ROLE_STV
         ROLE_SUPER_ADMIN: ROLE_ADMIN
 
     providers:
@@ -27,12 +27,12 @@ security:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
 
-            logout:       true
-            anonymous:    true
+            logout: true
+            anonymous: true
 
         dev:
-                    pattern: ^/(_(profiler|wdt)|css|images|js)/
-                    security: false
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
 
         oauth_token:                                   # Everyone can access the access token URL.
             pattern: ^/oauth/v2/token

@@ -204,7 +204,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->innerJoin("c", "program_type", "pt", "c.program_type_id = pt.id")
             ->innerJoin("c", "travel_type", "tt", "c.travel_go_type_id = tt.id")
             ->where("c.period_id = :periodId")
-            ->where("c.location_id = :locationId")
+            ->andWhere("c.location_id = :locationId")
             ->orderBy("c2.first_name")
             ->setParameter("periodId", $periodId)
             ->setParameter("locationId", $locationId);

@@ -45,6 +45,12 @@ easy_admin:
 
         User:
           class: App\Entity\User
+          list:
+              fields:
+                - { property: 'username'}
+                - { property: 'email'}
+                - { property: 'enabled'}
+                - { property: 'last_login'}
           form:
               fields:
                   - username

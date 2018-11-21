@@ -498,11 +498,19 @@ class CustomerController extends FOSRestController {
             $customer->setFirstName($request->get('firstName'));
             $customer->setLastName($request->get('lastName'));
             if(!empty($request->get('birthdate'))) {
-                $customer->setBirthdate(new \DateTime($request->get('birthdate')));
+                $date = $request->get('birthdate');
+                if(is_numeric($date)) {
+                    $date = date("Y-m-d", $date);
+                }
+                $customer->setBirthdate(new \DateTime($date));
             }
             $customer->setNationalRegisterNumber($request->get('nationalRegisterNumber'));
             if(!empty($request->get('expireDate'))) {
-                $customer->setExpireDate(new \DateTime($request->get('expireDate')));
+                $date = $request->get('expireDate');
+                if(is_numeric($date)) {
+                    $date = date("Y-m-d", $date);
+                }
+                $customer->setExpireDate(new \DateTime($date));
             }
             $customer->setEmergencyNumber($request->get('emergencyNumber'));
             $customer->setGsm($request->get('gsm'));

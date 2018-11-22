@@ -34,8 +34,27 @@ class Calculations {
 
     }
 
+    public static function getLastFridayFromDate(string $date) : string
+    {
+        $dateTime = new \DateTime($date);
+        $dayNumber = $dateTime->format("N");
+
+        if ($dayNumber != 5)
+        {
+            return date('Y/m/d', strtotime('last Friday', strtotime($date)));
+        }
+
+        return $date;
+
+    }
+
     public static function getNextSaturdayFromDate(string $date) : string
     {
         return date('Y/m/d', strtotime('next Saturday', strtotime($date)));
+    }
+
+    public static function getNextSundayFromDate(string $date) : string
+    {
+        return date('Y/m/d', strtotime('next Sunday', strtotime($date)));
     }
 }

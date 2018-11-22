@@ -313,6 +313,8 @@ class CustomerController extends FOSRestController {
      */
     public function getBusGoCustomersByWeek($date): Response {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
+        //Get last friday
+        $date = Calculations::getLastFridayFromDate($date);
         $data = $rep->getBusGoCustomersByWeek($date);
         $view = $this->view($data, Response::HTTP_OK);
 
@@ -347,6 +349,8 @@ class CustomerController extends FOSRestController {
      */
     public function getBusBackCustomersByWeek($date): Response {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
+        //Get next Sunday
+        $date = Calculations::getNextSundayFromDate($date);
         $data = $rep->getBusBackCustomersByWeek($date);
         $view = $this->view($data, Response::HTTP_OK);
 

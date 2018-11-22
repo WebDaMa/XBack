@@ -181,18 +181,20 @@ class CustomerController extends FOSRestController {
         $rep = $this->getDoctrine()->getRepository(Activity::class);
         $activityId = (int) $request->get('activityId');
         $activity = $rep->find($activityId);
+
+        $activitiesCustomer = $customer->getActivities();
+
+        foreach ($activitiesCustomer as $activityCustomer) {
+            /**
+             * @var $activityCustomer Activity
+             */
+            if( $activityCustomer->getActivityGroup() == "raft") {
+                $customer->removeActivity($activityCustomer);
+            }
+        }
+
         if($activityId === 0) {
             //Remove all rafting activities, relation should b seperate, but yeah ;)
-            $activitiesCustomer = $customer->getActivities();
-
-            foreach ($activitiesCustomer as $activityCustomer) {
-                /**
-                 * @var $activityCustomer Activity
-                 */
-                if( $activityCustomer->getActivityGroup() == "raft") {
-                    $customer->removeActivity($activityCustomer);
-                }
-            }
             $dm->persist($customer);
             $dm->flush();
         }elseif ($customer && $activity && $activity->getActivityGroup()->getName() == "raft") {
@@ -200,12 +202,16 @@ class CustomerController extends FOSRestController {
             $dm->persist($customer);
             $dm->flush();
 
+
             $view = $this->view([
                 "id" => $customer->getId(),
                 "activityId" => $activity->getId(),
                 "sizeInfo" => $customer->getSizeInfo()
             ], Response::HTTP_OK);
         }
+
+
+
 
         if(!isset($view)){
             // In case our PUT was a success we need to return a 200 HTTP OK response with the object as a result of PUT

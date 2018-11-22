@@ -488,7 +488,7 @@ class CustomerRepository extends ServiceEntityRepository {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
         $qb
-            ->select("c.id", "c.bus_to_checked_in AS busCheckedIn", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
+            ->select("c.id", "c.bus_back_checked_in AS busCheckedIn", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
                 'a.code AS agency', 'c.gsm')
             ->from('customer', 'c')
             ->innerJoin('c', 'travel_type', 'tg', 'c.travel_go_type_id = tg.id')

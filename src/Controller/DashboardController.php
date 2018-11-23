@@ -245,7 +245,7 @@ class DashboardController extends Controller {
                         $plRep = $this->getDoctrine()->getRepository(Planning::class);
 
                         $planningExists = $plRep
-                            ->findByPlanningIdAndDateAndGroepId($planning->getPlanningId(), $planning->getDate(), $row[12]);
+                            ->findByPlanningIdAndDateAndGroepId($planning->getPlanningId(), $planning->getDate(), $row[15]);
 
                         if (!is_null($planningExists) || $planningExists)
                         {
@@ -255,7 +255,7 @@ class DashboardController extends Controller {
 
                         if (!is_null($planning->getGuide()) && !empty($planning->getGuide()))
                         {
-                            //Don't add empty groeps
+                            //Don't add empty planning
                             $em->persist($planning);
                         }
                     }

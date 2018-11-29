@@ -451,8 +451,8 @@ easy_admin:
               - { property: 'date',
                   type_options: { widget: 'single_text'}
                 }
-              - { property: 'group', type_options: { by_reference: false }}
               - { property: 'activity'}
+              - { property: 'group'}
               - { property: 'guide', type_options: { by_reference: false }}
               - { property: 'cag1', type_options: { by_reference: false }}
               - { property: 'cag2', type_options: { by_reference: false }}

@@ -69,6 +69,7 @@ class Groep extends TypeTimestamps
     public function __construct()
     {
         $this->plannings = new ArrayCollection();
+        $this->groupCustomers = new ArrayCollection();
     }
 
     /**
@@ -191,22 +192,22 @@ class Groep extends TypeTimestamps
 
     public function addGroupCustomer(Customer $customer)
     {
-        if ($this->plannings->contains($customer)) {
+        if ($this->groupCustomers->contains($customer)) {
             return;
         }
 
-        $this->plannings->add($customer);
+        $this->groupCustomers->add($customer);
         // set the *owning* side!
         $customer->setGroupLayout($this);
     }
 
     public function removeGroupCustomer(Customer $customer)
     {
-        if (!$this->plannings->contains($customer)) {
+        if (!$this->groupCustomers->contains($customer)) {
             return;
         }
 
-        $this->plannings->removeElement($customer);
+        $this->groupCustomers->removeElement($customer);
         // set the owning side to null
         $customer->setGroupLayout(null);
     }

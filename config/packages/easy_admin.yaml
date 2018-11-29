@@ -453,7 +453,7 @@ easy_admin:
                 }
               - { property: 'activity'}
               - { property: 'group'}
-              - { property: 'guide'}}
+              - { property: 'guide'}
               - { property: 'cag1'}
               - { property: 'cag2'}
               - { property: 'transport'}

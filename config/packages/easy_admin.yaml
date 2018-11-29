@@ -117,7 +117,6 @@ easy_admin:
               - { property: 'lodgingLayout'}
               - { property: 'groupLayout'}
               - { property: 'bookerPayed'}
-              - { property: 'payerId'}
               - { property: 'isCamper'}
               - { property: 'checkedIn'}
               - { property: 'totalExclInsurance'}

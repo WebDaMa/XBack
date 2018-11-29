@@ -362,18 +362,16 @@ easy_admin:
               - { property: 'periodId'}
               - { property: 'name'}
               - { property: 'location'}
-              - { property: 'groupPlannings'}
+              - { property: 'plannings'}
               - { property: 'groupCustomers'}
-              - { property: 'groupActivities'}
           form:
             fields:
               - { property: 'groupId'}
               - { property: 'periodId'}
               - { property: 'name'}
               - { property: 'location'}
-              - { property: 'groupPlannings', type_options: { by_reference: false }}
+              - { property: 'plannings', type_options: { by_reference: false }}
               - { property: 'groupCustomers', type_options: { by_reference: false }}
-              - { property: 'groupActivities', type_options: { by_reference: false }}
 
         Guide:
           class: App\Entity\Guide

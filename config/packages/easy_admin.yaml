@@ -453,9 +453,9 @@ easy_admin:
                 }
               - { property: 'activity'}
               - { property: 'group'}
-              - { property: 'guide', type_options: { by_reference: false }}
-              - { property: 'cag1', type_options: { by_reference: false }}
-              - { property: 'cag2', type_options: { by_reference: false }}
+              - { property: 'guide'}}
+              - { property: 'cag1'}
+              - { property: 'cag2'}
               - { property: 'transport'}
               - { property: 'guideFunction'}
 

@@ -369,6 +369,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->leftJoin('c', 'customers_activities', 'ca', 'c.id = ca.customer_id')
             ->leftJoin('ca', 'activity', 'a', 'ca.activity_id = a.id AND a.activity_group_id = 1')
             ->where("c.group_layout_id = :groepId")
+            ->orderBy("c.customer")
             ->setParameter("groepId", $groepId);
 
         return $qb->execute()->fetchAll();
@@ -404,6 +405,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->innerJoin('pt', 'program', 'p', 'pt.id = p.program_type_id')
             ->where("c.group_layout_id = :groepId")
             ->andWhere("p.days < 6")
+            ->orderBy("c.customer")
             ->setParameter("groepId", $groepId);
 
         return $qb->execute()->fetchAll();

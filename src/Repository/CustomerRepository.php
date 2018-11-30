@@ -405,7 +405,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->innerJoin('pt', 'program', 'p', 'pt.id = p.program_type_id')
             ->where("c.group_layout_id = :groepId")
             ->andWhere("p.days < 6")
-            ->orderBy("c.customer")
+            ->orderBy("c.first_name", "ASC")
             ->setParameter("groepId", $groepId);
 
         return $qb->execute()->fetchAll();
@@ -478,7 +478,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->innerJoin('c', 'agency', 'a', 'c.agency_id = a.id')
             ->where("c.travel_go_date = :date")
             ->andWhere('tg.code = :travelTypeCode')
-            ->orderBy('customer')
+            ->orderBy('c.first_name', "ASC")
             ->setParameter("date", $date)
             ->setParameter("travelTypeCode", $travelTypeCode);
 

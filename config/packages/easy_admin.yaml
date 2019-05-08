@@ -1,5 +1,5 @@
 easy_admin:
-    site_name: 'X-Adventure Administration'
+    site_name: 'LifeLong Exploring Administration'
     design:
             brand_color: '#70b32e'
             menu:
@@ -50,7 +50,7 @@ easy_admin:
                 - { property: 'username'}
                 - { property: 'email'}
                 - { property: 'enabled'}
-                - { property: 'last_login'}
+                - { property: 'roles'}
           form:
               fields:
                   - username

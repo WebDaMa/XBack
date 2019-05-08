@@ -25,11 +25,11 @@ use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends Controller {
 
@@ -160,9 +160,7 @@ class DashboardController extends Controller {
 
             /**
              * Note toArray() only works on static cells, otherwise use getDynamicSheetAsArray
-             *
              */
-
             $guideSheet = $spreadsheet->getSheetByName('Gids-Afkorting')->toArray();
 
             //Remove headers

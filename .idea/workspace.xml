@@ -2,16 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/ChangePassword/change_password.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/ChangePassword/change_password_content.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/edit.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/edit_content.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/list.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/list_content.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/new.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/new_content.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/show.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/show_content.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Profile/edit.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Profile/edit_content.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Profile/show.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Profile/show_content.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/check_email.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/confirmed.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/email.txt.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/register.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/register_content.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/check_email.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/email.txt.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/request.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/request_content.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/reset.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/reset_content.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Security/login.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Security/login_content.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/x.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/x.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/bundles.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/bundles.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/easy_admin.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/easy_admin.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/AdminController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AdminController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/symfony.lock" beforeDir="false" afterPath="$PROJECT_DIR$/symfony.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -25,11 +44,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Activity.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Entity/Activity.php">
+      <file leaf-file-name="reset_content.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/reset_content.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="380">
-              <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+            <state relative-caret-position="95">
+              <caret line="5" column="66" selection-start-line="5" selection-start-column="66" selection-end-line="5" selection-end-column="66" />
             </state>
           </provider>
         </entry>
@@ -38,7 +57,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>age</find>
       <find>groep</find>
       <find>alli</find>
       <find>getRoles</find>
@@ -68,7 +86,11 @@
       <find>exportR</find>
       <find>extra</find>
       <find>exportrafting</find>
+      <find>signin</find>
     </findStrings>
+    <replaceStrings>
+      <replace>signup</replace>
+    </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
       <dir>$PROJECT_DIR$/src/Command</dir>
@@ -83,14 +105,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Serializer/EventDispatcher/Subscriber/DoctrineProxySubscriber.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Rest/APIController.php" />
-        <option value="$PROJECT_DIR$/config/routes.yaml" />
-        <option value="$PROJECT_DIR$/src/Repository/LocationRepository.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Rest/LocationController.php" />
-        <option value="$PROJECT_DIR$/src/Entity/Program.php" />
-        <option value="$PROJECT_DIR$/src/Entity/ProgramType.php" />
-        <option value="$PROJECT_DIR$/src/Repository/GroupTypeRepository.php" />
         <option value="$PROJECT_DIR$/config/packages/doctrine.yaml" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/SuitSizeController.php" />
         <option value="$PROJECT_DIR$/config/packages/fos_rest.yaml" />
@@ -134,6 +148,14 @@
         <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/src/Controller/AdminController.php" />
         <option value="$PROJECT_DIR$/config/packages/easy_admin.yaml" />
+        <option value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Security/login.html.twig" />
+        <option value="$PROJECT_DIR$/templates/base.html.twig" />
+        <option value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/register.html.twig" />
+        <option value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Security/login_content.html.twig" />
+        <option value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/register_content.html.twig" />
+        <option value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/confirmed.html.twig" />
+        <option value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/request_content.html.twig" />
+        <option value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/reset_content.html.twig" />
       </list>
     </option>
   </component>
@@ -309,6 +331,17 @@
             <path>
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
               <item name="x" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="x" type="b2602c69:ProjectViewProjectNode" />
+              <item name="x" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="css" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="x" type="b2602c69:ProjectViewProjectNode" />
+              <item name="x" type="462c0819:PsiDirectoryNode" />
               <item name="config" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -320,19 +353,8 @@
             <path>
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
               <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Entity" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
@@ -362,7 +384,33 @@
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
               <item name="x" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="bundles" type="462c0819:PsiDirectoryNode" />
+              <item name="FOSUserBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="ChangePassword" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="x" type="b2602c69:ProjectViewProjectNode" />
+              <item name="x" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="bundles" type="462c0819:PsiDirectoryNode" />
+              <item name="FOSUserBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Registration" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="x" type="b2602c69:ProjectViewProjectNode" />
+              <item name="x" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="bundles" type="462c0819:PsiDirectoryNode" />
+              <item name="FOSUserBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Resetting" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="x" type="b2602c69:ProjectViewProjectNode" />
+              <item name="x" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="bundles" type="462c0819:PsiDirectoryNode" />
+              <item name="FOSUserBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Security" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
@@ -386,16 +434,16 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Serializer/EventDispatcher/Subscriber" />
+      <recent name="$PROJECT_DIR$/src/Controller/Rest" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/bundles/FOSUserBundle" />
       <recent name="$PROJECT_DIR$/src/Logic" />
       <recent name="$PROJECT_DIR$/src/Controller/Rest" />
       <recent name="$PROJECT_DIR$/src/Form" />
       <recent name="$PROJECT_DIR$/src/Repository" />
-      <recent name="$PROJECT_DIR$/templates/dashboard" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/Serializer/EventDispatcher/Subscriber" />
-      <recent name="$PROJECT_DIR$/src/Controller/Rest" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -524,12 +572,12 @@
       <workItem from="1543515031695" duration="5348000" />
       <workItem from="1556362944208" duration="383000" />
       <workItem from="1556905093569" duration="549000" />
-      <workItem from="1556987389591" duration="4355000" />
+      <workItem from="1556987389591" duration="9415000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="337130000" />
+    <option name="totallyTimeSpent" value="342190000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -545,7 +593,7 @@
       <window_info anchor="bottom" id="NativeScript" order="7" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.27888888" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.27888888" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -611,144 +659,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/packages/swiftmailer.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="17" lean-forward="true" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/twig.yaml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/twig_extensions.yaml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.yaml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Agency.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="99">
-          <caret line="15" column="71" lean-forward="true" selection-start-line="15" selection-start-column="71" selection-end-line="15" selection-end-column="71" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/LocationController.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/AgencyController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="24" column="38" selection-start-line="24" selection-start-column="38" selection-end-line="24" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/PaymentRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="34" column="28" selection-start-line="34" selection-start-column="28" selection-end-line="34" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Payment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-252">
-          <caret line="66" column="20" selection-start-line="66" selection-start-column="20" selection-end-line="66" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Base/TypeTimestamps.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/ActivityRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="63" selection-start-line="63" selection-end-line="63" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/ActivityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/framework-bundle/Controller/ControllerTrait.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="473">
-          <caret line="361" column="42" lean-forward="true" selection-start-line="361" selection-start-column="42" selection-end-line="361" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/symfony/security/Core/Authentication/Token/TokenInterface.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="50" column="49" selection-start-line="50" selection-start-column="49" selection-end-line="50" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/CodeBaseRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="16" column="20" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/GuideRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="350">
-          <caret line="100" column="44" lean-forward="true" selection-start-line="100" selection-start-column="44" selection-end-line="100" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/GroupTypeRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="21" column="16" selection-start-line="21" selection-start-column="16" selection-end-line="21" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/services.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="18" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/GuideController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="494">
-          <caret line="30" column="39" lean-forward="true" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/PlanningController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1264">
-          <caret line="94" column="30" selection-start-line="94" selection-start-column="30" selection-end-line="94" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="10" column="48" lean-forward="true" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Rest/SuitSizeController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
@@ -865,9 +775,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
@@ -882,15 +789,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="5" lean-forward="true" selection-start-line="9" selection-start-column="5" selection-end-line="9" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/layout.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#12#26#0#Twig" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -921,13 +819,6 @@
     <entry file="file://$PROJECT_DIR$/config/packages/translation.yaml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Program.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
@@ -942,10 +833,159 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Entity/ActivityGroup.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Activity.php">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="27" column="79" selection-start-line="27" selection-start-column="79" selection-end-line="27" selection-end-column="79" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/layout.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/ChangePassword/change_password.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/css/global.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/Security/login_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="17" column="77" selection-start-line="17" selection-start-column="4" selection-end-line="17" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/layout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="30" column="14" lean-forward="true" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
-          <caret line="30" column="12" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+          <caret line="20" column="26" lean-forward="true" selection-start-line="20" selection-start-column="26" selection-end-line="20" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Security/login.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="41" selection-end-column="14" />
+          <folding>
+            <element signature="e#12#37#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/register.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+          <folding>
+            <element signature="e#12#37#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Security/login_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="7" selection-start-line="6" selection-start-column="7" selection-end-line="6" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/confirmed.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="783">
+          <caret line="78" column="23" selection-start-line="78" selection-start-column="23" selection-end-line="78" selection-end-column="23" />
+          <folding>
+            <element signature="e#12#37#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/fos_oauth_server.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/fos_user.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/routing.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes/easy_admin.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes/annotations.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="726">
+          <caret line="47" column="29" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/swiftmailer.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/request.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#12#37#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/register_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="55" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/request_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/reset_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="66" selection-start-line="5" selection-start-column="66" selection-end-line="5" selection-end-column="66" />
         </state>
       </provider>
     </entry>

@@ -5,6 +5,13 @@
         <title>{% block title %}X-App{% endblock %}</title>
         {% block stylesheets %}
             <link href="{{ asset('build/css/global.css') }}" rel="stylesheet" />
+            <style>
+                body {
+                    padding-top: 40px;
+                    padding-bottom: 40px;
+                    background-color: #e3e7ed;
+                }
+            </style>
         {% endblock %}
     </head>
     <body>

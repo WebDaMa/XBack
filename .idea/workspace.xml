@@ -2,35 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/ChangePassword/change_password.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/ChangePassword/change_password_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/edit_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/list.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/list_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/new.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/new_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/show.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Group/show_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Profile/edit.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Profile/edit_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Profile/show.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Profile/show_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/check_email.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/confirmed.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/email.txt.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/register.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/register_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/check_email.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/email.txt.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/request.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/request_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/reset.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/reset_content.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Security/login.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Security/login_content.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -44,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="reset_content.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/reset_content.html.twig">
+      <file leaf-file-name="services.yaml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/services.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="5" column="66" selection-start-line="5" selection-start-column="66" selection-end-line="5" selection-end-column="66" />
+            <state relative-caret-position="76">
+              <caret line="4" column="50" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -105,8 +77,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/config/packages/doctrine.yaml" />
-        <option value="$PROJECT_DIR$/src/Controller/Rest/SuitSizeController.php" />
         <option value="$PROJECT_DIR$/config/packages/fos_rest.yaml" />
         <option value="$PROJECT_DIR$/src/Repository/ActivityGroupRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/TravelTypeRepository.php" />
@@ -123,7 +93,6 @@
         <option value="$PROJECT_DIR$/src/Repository/ExportRaftRepository.php" />
         <option value="$PROJECT_DIR$/src/Entity/ExportRaft.php" />
         <option value="$PROJECT_DIR$/src/Form/ExportRaftType.php" />
-        <option value="$PROJECT_DIR$/config/services.yaml" />
         <option value="$PROJECT_DIR$/src/Repository/PaymentRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/ActivityRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/ActivityController.php" />
@@ -156,6 +125,9 @@
         <option value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Registration/confirmed.html.twig" />
         <option value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/request_content.html.twig" />
         <option value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/reset_content.html.twig" />
+        <option value="$PROJECT_DIR$/templates/bundles/FOSUserBundle/ChangePassword/change_password_content.html.twig" />
+        <option value="$PROJECT_DIR$/.env" />
+        <option value="$PROJECT_DIR$/config/services.yaml" />
       </list>
     </option>
   </component>
@@ -394,6 +366,14 @@
               <item name="templates" type="462c0819:PsiDirectoryNode" />
               <item name="bundles" type="462c0819:PsiDirectoryNode" />
               <item name="FOSUserBundle" type="462c0819:PsiDirectoryNode" />
+              <item name="Profile" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="x" type="b2602c69:ProjectViewProjectNode" />
+              <item name="x" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="bundles" type="462c0819:PsiDirectoryNode" />
+              <item name="FOSUserBundle" type="462c0819:PsiDirectoryNode" />
               <item name="Registration" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -572,12 +552,12 @@
       <workItem from="1543515031695" duration="5348000" />
       <workItem from="1556362944208" duration="383000" />
       <workItem from="1556905093569" duration="549000" />
-      <workItem from="1556987389591" duration="9415000" />
+      <workItem from="1556987389591" duration="10725000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="342190000" />
+    <option name="totallyTimeSpent" value="343500000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -659,34 +639,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/SuitSizeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="20" column="39" lean-forward="true" selection-start-line="20" selection-start-column="39" selection-end-line="20" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/SuitSizeRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="160" column="33" selection-start-line="160" selection-start-column="27" selection-end-line="160" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/GroepController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="22" column="34" lean-forward="true" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Logic/Extensions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="35" lean-forward="true" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Logic/Calculations.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="678">
@@ -850,9 +802,6 @@
     <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/Resources/views/layout.html.twig">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/ChangePassword/change_password.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/assets/css/global.scss">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -927,9 +876,6 @@
     <entry file="file://$PROJECT_DIR$/config/packages/fos_oauth_server.yaml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/fos_user.yaml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/routing.yaml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -939,25 +885,12 @@
     <entry file="file://$PROJECT_DIR$/config/routes/annotations.yaml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/services.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="5" selection-start-line="5" selection-start-column="5" selection-end-line="5" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/security.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="726">
           <caret line="47" column="29" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="29" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/swiftmailer.yaml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/request.html.twig">
       <provider selected="true" editor-type-id="text-editor">
@@ -975,17 +908,72 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/request_content.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/reset_content.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="7" column="7" lean-forward="true" selection-start-line="7" selection-start-column="7" selection-end-line="7" selection-end-column="7" />
+        <state relative-caret-position="114">
+          <caret line="6" column="20" lean-forward="true" selection-start-line="6" selection-start-column="20" selection-end-line="6" selection-end-column="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/reset_content.html.twig">
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/email.txt.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/check_email.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#12#37#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/reset.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#12#37#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/ChangePassword/change_password.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/Resetting/request_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="6" column="51" lean-forward="true" selection-start-line="6" selection-start-column="19" selection-end-line="6" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/bundles/FOSUserBundle/ChangePassword/change_password_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/swiftmailer.yaml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="22" column="51" selection-start-line="22" selection-start-column="19" selection-end-line="22" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/fos_user.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
-          <caret line="5" column="66" selection-start-line="5" selection-start-column="66" selection-end-line="5" selection-end-column="66" />
+          <caret line="5" column="26" lean-forward="true" selection-start-line="5" selection-start-column="18" selection-end-line="5" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/services.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="4" column="50" selection-start-line="4" selection-start-column="50" selection-end-line="4" selection-end-column="50" />
         </state>
       </provider>
     </entry>

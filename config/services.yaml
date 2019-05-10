@@ -2,7 +2,7 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'nl'
-    mailer_user: 'danny.matthi@gmail.com'
+    mailer_user: 'team.lifelongexploring@gmail.com'
     #MAILER_URL: 'gmail://username:password@localhost'
     jms_serializer.doctrine_proxy_subscriber.class: App\Serializer\EventDispatcher\Subscriber\DoctrineProxySubscriber
 services:

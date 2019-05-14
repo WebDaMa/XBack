@@ -14,11 +14,11 @@ use Symfony\Component\HttpFoundation\Response;
 class SuitSizeController extends FOSRestController {
 
     /**
-     * @Rest\Get("/suitsize/total/{guideId}/{date}")
+     * @Rest\Get("/suitsize/total/{guideId}/{date}/{locationId}")
      */
-    public function getTotalForGuideAndDateAction($guideId, $date) {
+    public function getTotalForGuideDateAndLocationAction($guideId, $date, $locationId) {
         $rep = $this->getDoctrine()->getRepository(SuitSize::class);
-        $data = $rep->findSuitSizesFullFromDateAndGuide($date, $guideId);
+        $data = $rep->findSuitSizesFullFromDateAndGuide($date, $guideId, $locationId);
         $view = $this->view($data, Response::HTTP_OK);
 
         return $this->handleView($view);

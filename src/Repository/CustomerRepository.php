@@ -8,6 +8,7 @@ use App\Entity\AllInType;
 use App\Entity\Customer;
 use App\Entity\Payment;
 use App\Entity\TravelType;
+use App\Logic\Calculations;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -522,7 +523,7 @@ class CustomerRepository extends ServiceEntityRepository {
         $busTypes = $rep->getAllBusTypes();
 
         $data = [
-            "date" => $date,
+            "date" => Calculations::getLastSaturdayFromDate($date),
             "total" => 0,
             "places" => []
         ];

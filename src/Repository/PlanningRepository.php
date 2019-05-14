@@ -24,12 +24,18 @@ class PlanningRepository extends ServiceEntityRepository
             ;
     }
 
-    public function findByGuideIdAndDate($guideId, $date): array {
-        return $this->createQueryBuilder('e')
-            ->where('(e.guide = :guideId OR e.cag1 = :guideId OR e.cag2 = :guideId) AND e.date = :date')
-            ->setParameters(['guideId' => $guideId, 'date'=> $date])
-            ->getQuery()
-            ->getResult()
+    public function findByGuideIdDateAndLocationId($guideId, $date, $locationId): array {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        return $qb
+            ->select("p.*")
+            ->from("planning", "p")
+            ->innerJoin("p", "groep", "g", "p.group_id = g.id")
+            ->where('g.location_id = :locationId AND (p.guide = :guideId OR p.cag1 = :guideId OR p.cag2 = :guideId) AND p.date = :date')
+            ->setParameters(['locationId' => $locationId,'guideId' => $guideId, 'date'=> $date])
+            ->execute()
+            ->fetchAll()
             ;
     }
 

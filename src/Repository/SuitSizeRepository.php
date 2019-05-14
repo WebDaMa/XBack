@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Activity;
 use App\Entity\Customer;
 use App\Entity\Guide;
+use App\Entity\Location;
 use App\Entity\Planning;
 use App\Entity\ProgramActivity;
 use App\Entity\SuitSize;
@@ -56,15 +57,15 @@ class SuitSizeRepository extends ServiceEntityRepository {
         return $qb->execute()->fetchAll();
     }
 
-    public function findSuitSizesFullFromDateAndGuide($date, $guideId)
+    public function findSuitSizesFullFromDateAndGuide($date, $guideId, $locationId)
     {
 
+
         $rep = $this->getEntityManager()->getRepository(Guide::class);
-
         $guide = $rep->find($guideId);
-        $rep = $this->getEntityManager()->getRepository(Planning::class);
 
-        $plannings = $rep->findByGuideIdAndDate($guideId, $date);
+        $rep = $this->getEntityManager()->getRepository(Planning::class);
+        $plannings = $rep->findByGuideIdDateAndLocationId($guideId, $date, $locationId);
 
         $activityName = "";
         $activity = null;

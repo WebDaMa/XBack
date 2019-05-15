@@ -494,7 +494,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->select("c.id", "c.bus_back_checked_in AS busCheckedIn", "CONCAT(c.first_name, ' ', c.last_name) AS customer",
                 'a.code AS agency', 'c.gsm')
             ->from('customer', 'c')
-            ->innerJoin('c', 'travel_type', 'tg', 'c.travel_go_type_id = tg.id')
+            ->innerJoin('c', 'travel_type', 'tg', 'c.travel_back_type_id = tg.id')
             ->innerJoin('c', 'agency', 'a', 'c.agency_id = a.id')
             ->where("c.travel_back_date = :date")
             ->andWhere('tg.code = :travelTypeCode')

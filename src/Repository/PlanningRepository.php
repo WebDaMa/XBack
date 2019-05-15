@@ -32,7 +32,7 @@ class PlanningRepository extends ServiceEntityRepository
             ->select("p.*")
             ->from("planning", "p")
             ->innerJoin("p", "groep", "g", "p.group_id = g.id")
-            ->where('g.location_id = :locationId AND (p.guide = :guideId OR p.cag1 = :guideId OR p.cag2 = :guideId) AND p.date = :date')
+            ->where('g.location_id = :locationId AND (p.guide_id = :guideId OR p.cag1_id = :guideId OR p.cag2_id = :guideId) AND p.date = :date')
             ->setParameters(['locationId' => $locationId,'guideId' => $guideId, 'date'=> $date])
             ->execute()
             ->fetchAll()

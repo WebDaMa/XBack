@@ -29,7 +29,7 @@ class PlanningRepository extends ServiceEntityRepository
         $qb = $connection->createQueryBuilder();
 
         return $qb
-            ->select("p.*")
+            ->select("p.id")
             ->from("planning", "p")
             ->innerJoin("p", "groep", "g", "p.group_id = g.id")
             ->where('g.location_id = :locationId AND (p.guide_id = :guideId OR p.cag1_id = :guideId OR p.cag2_id = :guideId) AND p.date = :date')

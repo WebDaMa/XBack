@@ -77,6 +77,7 @@ class SuitSizeRepository extends ServiceEntityRepository {
         {
             foreach ($plannings as $planning)
             {
+                $planning = $rep->find($planning["id"]);
                 /**
                  * @var $planning Planning
                  */

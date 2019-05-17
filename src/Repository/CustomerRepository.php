@@ -524,7 +524,7 @@ class CustomerRepository extends ServiceEntityRepository {
         $busTypes = $rep->getAllBusTypes();
 
         $data = [
-            "date" => Calculations::getLastSaturdayFromDate($date),
+            "date" => $date,
             "total" => 0,
             "places" => []
         ];

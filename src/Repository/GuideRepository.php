@@ -36,7 +36,7 @@ class GuideRepository extends ServiceEntityRepository
         return $qb->execute()->fetch();
     }
 
-    public function getAllByPeriodAndLocation($date, $locationId): array {
+    public function getAllByPeriodAndLocation($period, $locationId): array {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
 
@@ -51,11 +51,10 @@ class GuideRepository extends ServiceEntityRepository
             ->from('planning', 'p')
             ->innerJoin('p', 'guide', 'g', 'p.guide_id = g.id')
             ->innerJoin('p', 'groep', 'gr', 'p.group_id = gr.id')
-            ->where('WEEK(p.date) = WEEK(:date)')
-            ->andWhere('YEAR(p.date) = YEAR(:date)')
+            ->where('gr.period_id = :period')
             ->andWhere('gr.location_id = :locationId')
             ->groupBy('g.id')
-            ->setParameter('date', $date)
+            ->setParameter('period', $period)
             ->setParameter('locationId', $locationId);
 
         $guides = $qb->execute()->fetchAll();
@@ -69,11 +68,10 @@ class GuideRepository extends ServiceEntityRepository
             ->from('planning', 'p')
             ->innerJoin('p', 'guide', 'g', 'p.cag1_id = g.id')
             ->innerJoin('p', 'groep', 'gr', 'p.group_id = gr.id')
-            ->where('WEEK(p.date) = WEEK(:date)')
-            ->andWhere('YEAR(p.date) = YEAR(:date)')
+            ->where('gr.period_id = :period')
             ->andWhere('gr.location_id = :locationId')
             ->groupBy('g.id')
-            ->setParameter('date', $date)
+            ->setParameter('period', $period)
             ->setParameter('locationId', $locationId);
 
         $cag1s = $qb->execute()->fetchAll();
@@ -87,11 +85,10 @@ class GuideRepository extends ServiceEntityRepository
             ->from('planning', 'p')
             ->innerJoin('p', 'guide', 'g', 'p.cag2_id = g.id')
             ->innerJoin('p', 'groep', 'gr', 'p.group_id = gr.id')
-            ->where('WEEK(p.date) = WEEK(:date)')
-            ->andWhere('YEAR(p.date) = YEAR(:date)')
+            ->where('gr.period_id = :period')
             ->andWhere('gr.location_id = :locationId')
             ->groupBy('g.id')
-            ->setParameter('date', $date)
+            ->setParameter('period', $period)
             ->setParameter('locationId', $locationId);
 
         $cag2s = $qb->execute()->fetchAll();

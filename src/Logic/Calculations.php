@@ -3,6 +3,7 @@
 
 namespace App\Logic;
 
+use PhpOffice\PhpSpreadsheet\Shared\Date;
 
 class Calculations {
 
@@ -56,5 +57,31 @@ class Calculations {
     public static function getNextSundayFromDate(string $date) : string
     {
         return date('Y/m/d', strtotime('next Sunday', strtotime($date)));
+    }
+
+    public static function getDateOrNull($date, $format = 'j/n/Y')
+    {
+        $date = \DateTime::createFromFormat($format, $date);
+
+        return $date ? $date : null;
+    }
+
+    public static function convertExcelDateToDateTime($dateValue)
+    {
+        return Date::excelToDateTimeObject($dateValue, new \DateTimeZone('Europe/Amsterdam'));
+    }
+
+    public static function getStringBool($value)
+    {
+        if (is_string($value))
+        {
+            $value = strtolower($value);
+
+            return $value === 'true';
+        } else
+        {
+            return $value;
+        }
+
     }
 }

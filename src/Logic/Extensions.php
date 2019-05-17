@@ -3,6 +3,9 @@
 
 namespace App\Logic;
 
+use PhpOffice\PhpSpreadsheet\Shared\Date;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class Extensions {
 
@@ -18,5 +21,28 @@ class Extensions {
             $i++;
         }
         return $temp_array;
+    }
+
+    public static function getDynamicSheetAsArray(Worksheet $sheet)
+    {
+        $rows = [];
+        foreach ($sheet->getRowIterator() AS $row)
+        {
+            $cellIterator = $row->getCellIterator();
+            $cellIterator->setIterateOnlyExistingCells(false); // This loops through all cells,
+            $cells = [];
+            foreach ($cellIterator as $cell)
+            {
+                $code = $cell->getValue();
+                if (strstr($code, '=') == true)
+                {
+                    $code = $cell->getOldCalculatedValue();
+                }
+                $cells[] = $code;
+            }
+            $rows[] = $cells;
+        }
+
+        return $rows;
     }
 }

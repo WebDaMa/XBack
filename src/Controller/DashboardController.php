@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Activity;
 use App\Entity\Agency;
 use App\Entity\AllInType;
 use App\Entity\ExportRaft;
@@ -21,10 +20,8 @@ use App\Entity\TravelType;
 use App\Form\ExportRaftType;
 use App\Form\UploadType;
 use App\Logic\Calculations;
+use App\Logic\Extensions;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use PhpOffice\PhpSpreadsheet\Shared\Date;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -87,7 +84,7 @@ class DashboardController extends Controller {
             $rp = $file->getRealPath();
 
             $spreadsheet = IOFactory::load($rp);
-            $sheet = $this->getDynamicSheetAsArray($spreadsheet->getActiveSheet());
+            $sheet = Extensions::getDynamicSheetAsArray($spreadsheet->getActiveSheet());
 
             //Remove headers
             array_shift($sheet);
@@ -130,7 +127,7 @@ class DashboardController extends Controller {
                     'Your Customers were saved!'
                 );
             }
-            return $this->redirect($this->generateUrl('admin', array('entity' => 'Customer')));
+            return $this->redirect($this->generateUrl('easyadmin', array('entity' => 'Customer')));
         }
 
         return $this->render('dashboard/import.html.twig', array(
@@ -185,7 +182,7 @@ class DashboardController extends Controller {
             }
 
             $groupSheet = $spreadsheet->getSheetByName('tblGroep');
-            $groupSheet = $this->getDynamicSheetAsArray($groupSheet);
+            $groupSheet = Extensions::getDynamicSheetAsArray($groupSheet);
 
             //Remove headers
             array_shift($groupSheet);
@@ -227,7 +224,7 @@ class DashboardController extends Controller {
 
             $planningSheet = $spreadsheet->getSheetByName('tblPlanning');
 
-            $planningSheet = $this->getDynamicSheetAsArray($planningSheet);
+            $planningSheet = Extensions::getDynamicSheetAsArray($planningSheet);
 
             //Remove headers
             array_shift($planningSheet);
@@ -271,7 +268,7 @@ class DashboardController extends Controller {
                 'Your plannings were saved!'
             );
 
-            return $this->redirect($this->generateUrl('admin', array('entity' => 'Planning')));
+            return $this->redirect($this->generateUrl('easyadmin', array('entity' => 'Planning')));
         }
 
         return $this->render('dashboard/import.html.twig', array(
@@ -293,11 +290,11 @@ class DashboardController extends Controller {
         $updateCustomer->setBooker($row[5]);
         $updateCustomer->setLastName($row[6]);
         $updateCustomer->setFirstName($row[7]);
-        $updateCustomer->setBirthdate($this->convertExcelDateToDateTime($row[8]));
+        $updateCustomer->setBirthdate(Calculations::convertExcelDateToDateTime($row[8]));
         $updateCustomer->setEmail($row[9]);
         $updateCustomer->setGsm($row[10]);
         $updateCustomer->setNationalRegisterNumber($row[11]);
-        $updateCustomer->setExpireDate($this->getDateOrNull($row[12], 'j/m/Y'));
+        $updateCustomer->setExpireDate(Calculations::getDateOrNull($row[12], 'j/m/Y'));
 
         $size = $this->getDoctrine()->getRepository(SuitSize::class)->findBySizeId($row[13]);
         if ($size)
@@ -327,8 +324,8 @@ class DashboardController extends Controller {
             $updateCustomer->setLocation($location);
         }
 
-        $updateCustomer->setStartDay($this->convertExcelDateToDateTime($row[23]));
-        $updateCustomer->setEndDay($this->convertExcelDateToDateTime($row[24]));
+        $updateCustomer->setStartDay(Calculations::convertExcelDateToDateTime($row[23]));
+        $updateCustomer->setEndDay(Calculations::convertExcelDateToDateTime($row[24]));
 
         $program = $this->getDoctrine()->getRepository(ProgramType::class)->findByCode($row[25]);
         if ($program)
@@ -360,7 +357,7 @@ class DashboardController extends Controller {
             $updateCustomer->setTravelGoType($travelGo);
         }
 
-        $updateCustomer->setTravelGoDate($this->convertExcelDateToDateTime($row[30]));
+        $updateCustomer->setTravelGoDate(Calculations::convertExcelDateToDateTime($row[30]));
 
         $travelBack = $this->getDoctrine()->getRepository(TravelType::class)->findByCode($row[31]);
         if ($travelBack)
@@ -368,7 +365,7 @@ class DashboardController extends Controller {
             $updateCustomer->setTravelBackType($travelBack);
         }
 
-        $updateCustomer->setTravelBackDate($this->convertExcelDateToDateTime($row[32]));
+        $updateCustomer->setTravelBackDate(Calculations::convertExcelDateToDateTime($row[32]));
 
         $updateCustomer->setBoardingPoint($row[33]);
 
@@ -391,15 +388,15 @@ class DashboardController extends Controller {
             $updateCustomer->setGroupLayout($group);
         }
 
-        $updateCustomer->setBookerPayed($this->getStringBool($row[39]));
+        $updateCustomer->setBookerPayed(Calculations::getStringBool($row[39]));
 
         $updateCustomer->setPayer($this->getDoctrine()->getRepository(Customer::class)->findByCustomerId($row[40]));
 
-        $updateCustomer->setIsCamper($this->getStringBool($row[41]));
+        $updateCustomer->setIsCamper(Calculations::getStringBool($row[41]));
 
-        $updateCustomer->setPayed($this->getStringBool($row[42]));
+        $updateCustomer->setPayed(Calculations::getStringBool($row[42]));
 
-        $updateCustomer->setCheckedIn($this->getStringBool($row[43]));
+        $updateCustomer->setCheckedIn(Calculations::getStringBool($row[43]));
 
         $updateCustomer->setTotalExclInsurance(is_float($row[44]) ? $row[44] : 0);
 
@@ -456,7 +453,7 @@ class DashboardController extends Controller {
 
         $updatePlanning->setPlanningId((int)$row[0]);
 
-        $updatePlanning->setDate($this->convertExcelDateToDateTime($row[1]));
+        $updatePlanning->setDate(Calculations::convertExcelDateToDateTime($row[1]));
         $group = $this->getDoctrine()->getRepository(Groep::class)->findByGroupIdAndPeriodId($row[15], $periodId);
         if ($group)
         {
@@ -491,55 +488,6 @@ class DashboardController extends Controller {
         return $updatePlanning;
     }
 
-    private function getDateOrNull($date, $format = 'd/m/Y')
-    {
-        $date = \DateTime::createFromFormat('j/n/Y', $date);
-
-        return $date ? $date : null;
-    }
-
-    private function convertExcelDateToDateTime($dateValue)
-    {
-        return Date::excelToDateTimeObject($dateValue, new \DateTimeZone('Europe/Amsterdam'));
-    }
-
-    private function getStringBool($value)
-    {
-        if (is_string($value))
-        {
-            $value = strtolower($value);
-
-            return $value === 'true';
-        } else
-        {
-            return $value;
-        }
-
-    }
-
-    private function getDynamicSheetAsArray(Worksheet $sheet)
-    {
-        $rows = [];
-        foreach ($sheet->getRowIterator() AS $row)
-        {
-            $cellIterator = $row->getCellIterator();
-            $cellIterator->setIterateOnlyExistingCells(false); // This loops through all cells,
-            $cells = [];
-            foreach ($cellIterator as $cell)
-            {
-                $code = $cell->getValue();
-                if (strstr($code, '=') == true)
-                {
-                    $code = $cell->getOldCalculatedValue();
-                }
-                $cells[] = $code;
-            }
-            $rows[] = $cells;
-        }
-
-        return $rows;
-    }
-
     private function generateRaftingExportSheet(\DateTime $date) {
         $curDay = $date->format("d/m/Y");
         $dateString = $date->format("Y-m-d");
@@ -550,8 +498,9 @@ class DashboardController extends Controller {
 
         $rep = $this->getDoctrine()->getRepository(Customer::class);
 
-        $customers = $rep->getAllByDateWithRafting($periodId);
+        $customers = array_merge($rep->getAllExtraByDateWithRafting($periodId), $rep->getAllByDateWithRafting($periodId));
         $total = count($customers);
+        die();
 
         $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
         $active = $spreadsheet->getActiveSheet();

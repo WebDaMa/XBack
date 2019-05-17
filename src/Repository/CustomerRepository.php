@@ -761,7 +761,6 @@ class CustomerRepository extends ServiceEntityRepository {
             ->setParameter("periodId", $periodId)
             ->orderBy('a.name');
 
-        var_dump($qb->getSQL());
         return $qb->execute()->fetchAll();
     }
 

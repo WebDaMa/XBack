@@ -500,7 +500,6 @@ class DashboardController extends Controller {
 
         $customers = array_merge($rep->getAllExtraByDateWithRafting($periodId), $rep->getAllByDateWithRafting($periodId));
         $total = count($customers);
-        die();
 
         $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
         $active = $spreadsheet->getActiveSheet();

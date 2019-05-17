@@ -11,7 +11,7 @@ class Calculations {
     {
         $date = new \DateTime($date);
         $year = $date->format('y');
-        $weekNumber = $date->format('W') - 1;
+        $weekNumber = $date->format('W');
         $dayNumber = $date->format("N");
 
         if($dayNumber > 5) {

@@ -12,7 +12,7 @@ class Calculations {
         $date = new \DateTime($date);
         $year = $date->format('y');
         $weekNumber = $date->format('W');
-        $dayNumber = $date->format("N");
+        $dayNumber = $date->format('N');
 
         if($dayNumber > 5) {
             $weekNumber += 1;
@@ -24,7 +24,7 @@ class Calculations {
     public static function getLastSaturdayFromDate(string $date) : string
     {
         $dateTime = new \DateTime($date);
-        $dayNumber = $dateTime->format("N");
+        $dayNumber = $dateTime->format('N');
 
         if ($dayNumber != 6)
         {
@@ -38,7 +38,7 @@ class Calculations {
     public static function getLastFridayFromDate(string $date) : string
     {
         $dateTime = new \DateTime($date);
-        $dayNumber = $dateTime->format("N");
+        $dayNumber = $dateTime->format('N');
 
         if ($dayNumber != 5)
         {
@@ -57,6 +57,22 @@ class Calculations {
     public static function getNextSundayFromDate(string $date) : string
     {
         return date('Y/m/d', strtotime('next Sunday', strtotime($date)));
+    }
+
+    public static function getWednesdayThisWeekFromDate(string $date) : string
+    {
+        $dateTime = new \DateTime($date);
+        $dayNumber = $dateTime->format('N');
+        $format = 'Y-m-d';
+
+        if ($dayNumber == 3)
+        {
+            return date($format, strtotime($date));
+        } elseif ($dayNumber < 3) {
+            return date($format, strtotime('next Wednesday', strtotime($date)));
+        } elseif ($dayNumber > 3) {
+            return date($format, strtotime('last Wednesday', strtotime($date)));
+        }
     }
 
     public static function getDateOrNull($date, $format = 'j/n/Y')

@@ -22,6 +22,7 @@ use App\Form\UploadType;
 use App\Logic\Calculations;
 use App\Logic\Extensions;
 use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,6 +59,7 @@ class DashboardController extends Controller {
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
             header('Content-Disposition: attachment; filename="raftingCustomers-' . $periodId . '.xlsx"');
             $writer->save("php://output");
+            exit();
 
         }
 
@@ -489,7 +491,6 @@ class DashboardController extends Controller {
     }
 
     private function generateRaftingExportSheet(\DateTime $date) {
-        $curDay = $date->format("d/m/Y");
         $dateString = $date->format("Y-m-d");
         $lastSaturday = Calculations::getLastSaturdayFromDate($dateString);
         $nextSaturday = Calculations::getNextSaturdayFromDate($dateString);
@@ -498,56 +499,76 @@ class DashboardController extends Controller {
 
         $rep = $this->getDoctrine()->getRepository(Customer::class);
 
-        $customers = array_merge($rep->getAllExtraByDateWithRafting($periodId), $rep->getAllByDateWithRafting($periodId));
-        $total = count($customers);
+        $customers = array_merge($rep->getAllExtraByDateWithRafting($periodId, $dateString), $rep->getAllByDateWithRafting($periodId));
+        $customersByDate = $this->groupCustomersByDate($customers);
 
         $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
-        $active = $spreadsheet->getActiveSheet();
 
-        $active->setTitle("raftingCustomers");
+        foreach ($customersByDate as $date => $groupedCustomers) {
+            $worksheet = new Worksheet($spreadsheet, substr($date, 8, 2));
+            $spreadsheet->addSheet($worksheet);
 
-        $active->getCell("B1")->setValue("Rafting: Family-Adventure")
-            ->getStyle()->getFont()->setSize(20);
-        $active->getCell("C1")->setValue("Semana: ". $lastSaturday . " - " . $nextSaturday)
-            ->getStyle()->getFont()->setSize(20);
-        $active->getCell("D1")->setValue($curDay)
-            ->getStyle()->getFont()->setSize(20);
-        $active->getCell("E1")->setValue("Total: " . $total)
-            ->getStyle()->getFont()->setSize(20);
+            $worksheet->getCell("B1")->setValue("Rafting LifeLong Explore:")
+                ->getStyle()->getFont()->setSize(20);
+            $worksheet->getCell("C1")->setValue("Semana: ". $lastSaturday . " - " . $nextSaturday)
+                ->getStyle()->getFont()->setSize(20);
+            $worksheet->getCell("D1")->setValue($date)
+                ->getStyle()->getFont()->setSize(20);
+            $worksheet->getCell("E1")->setValue("Total: " . count($customersByDate[$date]))
+                ->getStyle()->getFont()->setSize(20);
 
-        $active->getCell("A2")->setValue("Voornaam")
-            ->getStyle()->getFont()->setBold(true);
-        $active->getCell("B2")->setValue("Naam")
-            ->getStyle()->getFont()->setBold(true);
-        $active->getCell("C2")->setValue("RijksregisterNummer")
-            ->getStyle()->getFont()->setBold(true);
-        $active->getCell("D2")->setValue("VervaldatumId")
-            ->getStyle()->getFont()->setBold(true);
-        $active->getCell("E2")->setValue("Geboortedatum")
-            ->getStyle()->getFont()->setBold(true);
-        $active->getCell("F2")->setValue("OptieOmschrijving")
-            ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("A2")->setValue("Voornaam")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("B2")->setValue("Naam")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("C2")->setValue("RijksregisterNummer")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("D2")->setValue("VervaldatumId")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("E2")->setValue("Geboortedatum")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("F2")->setValue("OptieOmschrijving")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("G2")->setValue("Datum")
+                ->getStyle()->getFont()->setBold(true);
 
-        $active->getColumnDimension("A")->setAutoSize(true);
-        $active->getColumnDimension("B")->setAutoSize(true);
-        $active->getColumnDimension("C")->setAutoSize(true);
-        $active->getColumnDimension("D")->setAutoSize(true);
-        $active->getColumnDimension("E")->setAutoSize(true);
-        $active->getColumnDimension("F")->setAutoSize(true);
+            $worksheet->getColumnDimension("A")->setAutoSize(true);
+            $worksheet->getColumnDimension("B")->setAutoSize(true);
+            $worksheet->getColumnDimension("C")->setAutoSize(true);
+            $worksheet->getColumnDimension("D")->setAutoSize(true);
+            $worksheet->getColumnDimension("E")->setAutoSize(true);
+            $worksheet->getColumnDimension("F")->setAutoSize(true);
+            $worksheet->getColumnDimension("G")->setAutoSize(true);
 
-        $rowIndex = 3;
+            $rowIndex = 3;
 
-        foreach ($customers as $customer) {
-            $active->getCell("A" . $rowIndex)->setValue($customer["first_name"]);
-            $active->getCell("B" . $rowIndex)->setValue($customer["last_name"]);
-            $active->getCell("C" . $rowIndex)->setValue($customer["national_register_number"]);
-            $active->getCell("D" . $rowIndex)->setValue($customer["expire_date"]);
-            $active->getCell("E" . $rowIndex)->setValue($customer["birthdate"]);
-            $active->getCell("F" . $rowIndex)->setValue($customer["activity_name"]);
-            $rowIndex++;
+            foreach ($groupedCustomers as $customer) {
+                $worksheet->getCell("A" . $rowIndex)->setValue($customer["first_name"]);
+                $worksheet->getCell("B" . $rowIndex)->setValue($customer["last_name"]);
+                $worksheet->getCell("C" . $rowIndex)->setValue($customer["national_register_number"]);
+                $worksheet->getCell("D" . $rowIndex)->setValue($customer["expire_date"]);
+                $worksheet->getCell("E" . $rowIndex)->setValue($customer["birthdate"]);
+                $worksheet->getCell("F" . $rowIndex)->setValue($customer["activity_name"]);
+                $worksheet->getCell("G" . $rowIndex)->setValue($customer["date"]);
+                $rowIndex++;
+            }
         }
 
+        //Remove default sheet
+        $spreadsheet->removeSheetByIndex(0);
         return $spreadsheet;
 
+    }
+
+    private function groupCustomersByDate($customers) {
+        $customersByDate = [];
+        foreach ($customers as $customer) {
+            if( !isset($customersByDate[$customer['date']])) {
+                $customersByDate[$customer['date']] = [];
+            }
+
+            $customersByDate[$customer['date']][] = $customer;
+        }
+        return $customersByDate;
     }
 }

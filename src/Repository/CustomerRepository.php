@@ -728,13 +728,15 @@ class CustomerRepository extends ServiceEntityRepository {
         return $qb->execute()->fetchAll();
     }
 
-    public function getAllExtraByDateWithRafting($periodId): array
+    public function getAllExtraByDateWithRafting($periodId, $date): array
     {
+        //Default on a Wednesday
+        $wednesday = Calculations::getWednesdayThisWeekFromDate($date);
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
         $qb
             ->select("c.first_name", "c.last_name", "c.national_register_number", "c.expire_date",
-                "c.birthdate", "a.name AS activity_name")
+                "c.birthdate", "a.name AS activity_name", "DATE('" . $wednesday . "') AS date")
             ->from('customer', 'c')
             ->innerJoin('c', 'customers_activities', 'ca', 'c.id = ca.customer_id')
             ->innerJoin('ca', 'activity', 'a', 'ca.activity_id = a.id')
@@ -750,7 +752,7 @@ class CustomerRepository extends ServiceEntityRepository {
     {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
-        $qb
+        /*$qb
             ->select("c.first_name", "c.last_name", "c.national_register_number", "c.expire_date",
                 "c.birthdate", "a.name AS activity_name")
             ->from('customer', 'c')
@@ -760,7 +762,19 @@ class CustomerRepository extends ServiceEntityRepository {
             ->where("c.period_id = :periodId")
             ->andWhere("a.activity_group_id = 1")
             ->setParameter("periodId", $periodId)
-            ->orderBy('a.name');
+            ->orderBy('a.name');*/
+
+        $qb
+            ->select("c.first_name", "c.last_name", "c.national_register_number", "c.expire_date",
+                "c.birthdate", "p.activity AS activity_name", "p.date")
+            ->from('planning', 'p')
+            ->innerJoin('p', 'groep', 'g', 'p.group_id = g.id')
+            ->innerJoin('g', 'customer', 'c', 'g.id = c.group_layout_id')
+            ->where("c.period_id = :periodId")
+            ->andWhere("p.activity LIKE '%raft%'")
+            ->setParameter("periodId", $periodId)
+            ->orderBy('p.activity')
+            ->addOrderBy('c.last_name');
 
         return $qb->execute()->fetchAll();
     }

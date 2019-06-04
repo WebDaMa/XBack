@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Logic/Calculations.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Logic/Calculations.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" afterDir="false" />
-    </list>
+    <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="DashboardController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
+      <file leaf-file-name="CacheController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Controller/CacheController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-595">
-              <caret line="510" column="74" selection-start-line="510" selection-start-column="74" selection-end-line="510" selection-end-column="74" />
+            <state relative-caret-position="266">
+              <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
             </state>
           </provider>
         </entry>
@@ -82,8 +77,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Repository/ActivityGroupRepository.php" />
-        <option value="$PROJECT_DIR$/src/Repository/TravelTypeRepository.php" />
         <option value="$PROJECT_DIR$/src/Entity/ProgramActivity.php" />
         <option value="$PROJECT_DIR$/src/Repository/ProgramActivityRepository.php" />
         <option value="$PROJECT_DIR$/src/Entity/Agency.php" />
@@ -133,6 +126,8 @@
         <option value="$PROJECT_DIR$/src/Logic/Calculations.php" />
         <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
         <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
+        <option value="$PROJECT_DIR$/templates/cache/index.html.twig" />
+        <option value="$PROJECT_DIR$/src/Controller/CacheController.php" />
       </list>
     </option>
   </component>
@@ -331,14 +326,13 @@
             <path>
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
               <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Logic" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
               <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Repository" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="cache" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
@@ -507,12 +501,12 @@
       <workItem from="1558082653556" duration="2516000" />
       <workItem from="1558091493086" duration="4887000" />
       <workItem from="1558177590435" duration="555000" />
-      <workItem from="1559125898882" duration="5845000" />
+      <workItem from="1559125898882" duration="6427000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="363969000" />
+    <option name="totallyTimeSpent" value="364551000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -524,11 +518,11 @@
       <window_info anchor="bottom" id="NativeScript" order="7" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.27888888" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18402778" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18402778" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Nativescript Palette" order="3" />
       <window_info anchor="right" id="Database" order="3" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.19777778" />
+      <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.19777778" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -594,20 +588,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Entity/ProgramGroup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="15" column="74" selection-start-line="15" selection-start-column="74" selection-end-line="15" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/ActivityGroup.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="17" column="12" selection-start-line="17" selection-start-column="12" selection-end-line="17" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Activity.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -878,8 +858,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-595">
+        <state relative-caret-position="-589">
           <caret line="510" column="74" selection-start-line="510" selection-start-column="74" selection-end-line="510" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/cache/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+          <folding>
+            <element signature="e#12#26#0#Twig" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/CacheController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
         </state>
       </provider>
     </entry>

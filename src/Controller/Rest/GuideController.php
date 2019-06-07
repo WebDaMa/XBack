@@ -7,11 +7,11 @@ namespace App\Controller\Rest;
 use App\Entity\Guide;
 use App\Entity\Location;
 use App\Logic\Calculations;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Response;
 
-class GuideController extends FOSRestController {
+class GuideController extends AbstractFOSRestController {
 
     /**
      * @Rest\Get("/guide/{guideShort}")

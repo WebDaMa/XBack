@@ -5,11 +5,11 @@ namespace App\Controller\Rest;
 
 
 use App\Entity\Location;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Response;
 
-class LocationController extends FOSRestController {
+class LocationController extends AbstractFOSRestController {
 
     /**
      * @Rest\Get("/locations")

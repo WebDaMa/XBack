@@ -6,13 +6,12 @@ namespace App\Controller\Rest;
 
 use App\Entity\Guide;
 use App\Entity\Planning;
-use App\Logic\Calculations;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class PlanningController extends FOSRestController {
+class PlanningController extends AbstractFOSRestController {
 
     /**
      * @Rest\Get("/planning/{date}/{locationId}")

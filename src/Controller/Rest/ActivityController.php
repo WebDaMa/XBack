@@ -7,11 +7,11 @@ namespace App\Controller\Rest;
 use App\Entity\Activity;
 use App\Entity\ActivityGroup;
 use App\Entity\Groep;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Response;
 
-class ActivityController extends FOSRestController {
+class ActivityController extends AbstractFOSRestController {
 
     /**
      * @Rest\Get("/activities/groups")

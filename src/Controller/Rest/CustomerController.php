@@ -9,14 +9,13 @@ use App\Entity\Customer;
 use App\Entity\Groep;
 use App\Entity\Payment;
 use App\Entity\SuitSize;
-use App\Entity\TravelType;
 use App\Logic\Calculations;
-use FOS\RestBundle\Controller\FOSRestController;
+use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class CustomerController extends FOSRestController {
+class CustomerController extends AbstractFOSRestController {
 
     /**
      * @Rest\Get("/customers/groep/{groepId}")

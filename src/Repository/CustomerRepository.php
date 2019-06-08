@@ -771,7 +771,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->innerJoin('p', 'groep', 'g', 'p.group_id = g.id')
             ->innerJoin('g', 'customer', 'c', 'g.id = c.group_layout_id')
             ->where("c.period_id = :periodId")
-            ->andWhere("p.activity LIKE '%raft%'")
+            ->andWhere("p.activity LIKE '%raft%' OR p.activity LIKE %hydro%")
             ->setParameter("periodId", $periodId)
             ->orderBy('p.activity')
             ->addOrderBy('c.last_name');

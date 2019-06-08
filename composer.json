@@ -24,8 +24,6 @@
         "symfony/framework-bundle": "^4.0",
         "symfony/http-client": "^4.0",
         "symfony/lts": "^4@dev",
-        "symfony/mailer": "^4.0",
-        "symfony/mailgun-mailer": "^4.0",
         "symfony/maker-bundle": "^1.0",
         "symfony/monolog-bundle": "^3.2",
         "symfony/orm-pack": "^1.0",

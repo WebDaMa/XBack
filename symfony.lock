@@ -356,27 +356,6 @@
     "symfony/lts": {
         "version": "4-dev"
     },
-    "symfony/mailer": {
-        "version": "4.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "4.3",
-            "ref": "6e5921f710bec05533f664e0b9a3d838545edd82"
-        },
-        "files": [
-            "config/packages/mailer.yaml"
-        ]
-    },
-    "symfony/mailgun-mailer": {
-        "version": "4.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "4.3",
-            "ref": "6bc658403c6fa894c0c467419f5830b5f7ac186c"
-        }
-    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {

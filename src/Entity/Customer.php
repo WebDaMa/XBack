@@ -252,6 +252,11 @@ class Customer extends TypeTimestamps
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
+    private $payedPayconiq;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
     private $checkedIn;
 
     /**
@@ -1144,7 +1149,21 @@ class Customer extends TypeTimestamps
         $this->payed = $payed;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPayedPayconiq()
+    {
+        return $this->payedPayconiq;
+    }
 
+    /**
+     * @param mixed $payedPayconiq
+     */
+    public function setPayedPayconiq($payedPayconiq): void
+    {
+        $this->payedPayconiq = $payedPayconiq;
+    }
 
     public function __toString() : string
     {

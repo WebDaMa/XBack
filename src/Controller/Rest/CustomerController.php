@@ -101,10 +101,12 @@ class CustomerController extends AbstractFOSRestController {
         $rep = $this->getDoctrine()->getRepository(Customer::class);
         $customer = $rep->find($customerId);
         $payed = (bool) $request->get('payed');
+        $payedPayconiq = (bool) $request->get('payedPayconiq');
         $dm = $this->getDoctrine()->getManager();
 
         if ($customer) {
             $customer->setPayed($payed);
+            $customer->setPayedPayconiq($payedPayconiq);
             $customer->setPayer($customer);
             $dm->persist($customer);
         }
@@ -116,6 +118,7 @@ class CustomerController extends AbstractFOSRestController {
             $customerBooker = $rep->find($c["id"]);
             if ($customerBooker) {
                 $customerBooker->setPayed($payed);
+                $customerBooker->setPayedPayconiq($payedPayconiq);
                 $customer->addPayerCustomer($customerBooker);
                 $dm->persist($customerBooker);
             }
@@ -126,6 +129,7 @@ class CustomerController extends AbstractFOSRestController {
         $view = $this->view([
             "id" => $customer->getId(),
             "payed" => $customer->getPayed(),
+            "payedPayconiq" => $customer->getPayedPayconiq(),
         ], Response::HTTP_OK);
 
         return $this->handleView($view);

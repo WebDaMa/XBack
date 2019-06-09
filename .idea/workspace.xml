@@ -1,64 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Entity/Customer.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Customer.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20171222165358.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20171222165358.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20171222170238.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20171222170238.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20171222171341.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20171222171341.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20171230143635.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20171230143635.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180106134413.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180106134413.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180106140918.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180106140918.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180107120505.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180107120505.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180109153638.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180109153638.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180117172502.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180117172502.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180125181011.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180125181011.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180127155707.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180127155707.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180222112924.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180222112924.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180224110450.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180224110450.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180224114226.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180224114226.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180224123108.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180224123108.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180224123236.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180224123236.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180224123922.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180224123922.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180224130503.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180224130503.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180224133406.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180224133406.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180226173514.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180226173514.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180307180518.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180307180518.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180308175831.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180308175831.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180310120419.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180310120419.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180310122223.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180310122223.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180310125433.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180310125433.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180310142808.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180310142808.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180312152623.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180312152623.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180317123722.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180317123722.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180317130815.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180317130815.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180321125428.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180321125428.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180322185539.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180322185539.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180323173156.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180323173156.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180326190026.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180326190026.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180326194217.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180326194217.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180326195119.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180326195119.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180326195617.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180326195617.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180326195944.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180326195944.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180409181253.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180409181253.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180414115756.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180414115756.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180417130300.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180417130300.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180417152032.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180417152032.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180417154146.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180417154146.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180603130652.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180603130652.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180614174525.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180614174525.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180619190759.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180619190759.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180620184956.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180620184956.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180620194548.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180620194548.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180620195917.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180620195917.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180620200830.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180620200830.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180626135259.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180626135259.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180705145347.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180705145347.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180827133804.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180827133804.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180827141101.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180827141101.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Migrations/Version20180901094530.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Migrations/Version20180901094530.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" afterDir="false" />
-    </list>
+    <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -74,8 +17,8 @@
       <file leaf-file-name="CustomerRepository.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="109" column="42" selection-start-line="109" selection-start-column="38" selection-end-line="109" selection-end-column="42" />
+            <state relative-caret-position="231">
+              <caret line="109" column="20" selection-start-line="109" selection-start-column="20" selection-end-line="109" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -157,7 +100,6 @@
         <option value="$PROJECT_DIR$/config/packages/swiftmailer.yaml" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/AgencyController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/ActivityController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/GroepController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/GuideController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/LocationController.php" />
@@ -190,6 +132,7 @@
         <option value="$PROJECT_DIR$/src/Migrations/Version20180226173514.php" />
         <option value="$PROJECT_DIR$/src/Migrations/Version20171222170238.php" />
         <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
       </list>
     </option>
   </component>
@@ -612,12 +555,12 @@
       <workItem from="1558177590435" duration="555000" />
       <workItem from="1559125898882" duration="7795000" />
       <workItem from="1559929076616" duration="989000" />
-      <workItem from="1559931328561" duration="12061000" />
+      <workItem from="1559931328561" duration="12918000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="378969000" />
+    <option name="totallyTimeSpent" value="379826000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -847,16 +790,6 @@
         <state relative-caret-position="-9" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="106" column="27" selection-start-line="106" selection-start-column="27" selection-end-line="106" selection-end-column="27" />
-          <folding>
-            <element signature="e#41#65#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Entity/Customer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="233">
@@ -1064,10 +997,20 @@
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20180620200830.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="62" column="34" selection-start-line="62" selection-start-column="34" selection-end-line="62" selection-end-column="34" />
+          <folding>
+            <element signature="e#41#65#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="109" column="42" selection-start-line="109" selection-start-column="38" selection-end-line="109" selection-end-column="42" />
+        <state relative-caret-position="231">
+          <caret line="109" column="20" selection-start-line="109" selection-start-column="20" selection-end-line="109" selection-end-column="20" />
         </state>
       </provider>
     </entry>

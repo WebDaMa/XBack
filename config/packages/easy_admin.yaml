@@ -181,11 +181,13 @@ easy_admin:
                 - { property: 'firstName'}
                 - { property: 'lastName'}
                 - { property: 'payments'}
-                - { property: 'bookerPayed'}
+                - { property: 'payed'}
+                - { property: 'payedPayconiq'}
             form:
               fields:
                 - { property: 'payments'}
-                - { property: 'bookerPayed'}
+                - { property: 'payed'}
+                - { property: 'payedPayconiq'}
 
         FormGroupLayout:
             class: App\Entity\Customer

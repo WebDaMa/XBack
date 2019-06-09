@@ -100,4 +100,13 @@ class Calculations {
         }
 
     }
+
+    public static function nullToBooleanFalse($var)
+    {
+        if (is_null($var))
+        {
+            $var = false;
+        }
+        return (boolean) $var;
+    }
 }

@@ -125,11 +125,8 @@ class CustomerRepository extends ServiceEntityRepository {
 
         foreach ($res as $k => $row)
         {
-            if (is_null($row["payed"]))
-            {
-                $row["payed"] = false;
-            }
-            $row["payed"] = (boolean) $row["payed"];
+            $row["payed"] =Calculations::nullToBooleanFalse($row["payed"]);
+            $row["payedPayconiq"] =Calculations::nullToBooleanFalse($row["payedPayconiq"]);
 
             $res[$k] = $row;
         }

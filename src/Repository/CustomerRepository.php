@@ -273,12 +273,8 @@ class CustomerRepository extends ServiceEntityRepository {
 
         foreach ($customers as $customer)
         {
-            if (is_null($customer["payed"]))
-            {
-                $customer["payed"] = false;
-            }
-
-            $customer["payed"] = (boolean) $customer["payed"];
+            $customer["payed"] = Calculations::nullToBooleanFalse($customer["payed"]);
+            $customer["payedPayconiq"] = Calculations::nullToBooleanFalse($customer["payedPayconiq"]);
 
             $rep = $this->getEntityManager()->getRepository(Payment::class);
             $payments = $rep->getPaymentsForCustomerId($customer["id"]);
@@ -786,7 +782,7 @@ class CustomerRepository extends ServiceEntityRepository {
         $qb = $connection->createQueryBuilder();
 
         $qb
-            ->select("c.id", "c.customer_id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", 'c.payed')
+            ->select("c.id", "c.customer_id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", 'c.payed', 'c.payed_payconiq AS payedPayconiq')
             ->from('customer', 'c')
             ->where("c.booker_id = :bookerId")
             ->setParameter("bookerId", $bookerId);

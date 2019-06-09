@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="" />
+    <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,8 +19,8 @@
       <file leaf-file-name="CustomerRepository.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="116" column="136" selection-start-line="116" selection-start-column="136" selection-end-line="116" selection-end-column="136" />
+            <state relative-caret-position="424">
+              <caret line="784" column="138" selection-start-line="784" selection-start-column="138" selection-end-line="784" selection-end-column="138" />
             </state>
           </provider>
         </entry>
@@ -93,7 +95,6 @@
         <option value="$PROJECT_DIR$/src/Repository/PlanningRepository.php" />
         <option value="$PROJECT_DIR$/src/Logic/Extensions.php" />
         <option value="$PROJECT_DIR$/src/Repository/GuideRepository.php" />
-        <option value="$PROJECT_DIR$/src/Logic/Calculations.php" />
         <option value="$PROJECT_DIR$/templates/cache/index.html.twig" />
         <option value="$PROJECT_DIR$/src/Controller/CacheController.php" />
         <option value="$PROJECT_DIR$/config/packages/mailgun.yaml" />
@@ -132,6 +133,7 @@
         <option value="$PROJECT_DIR$/src/Migrations/Version20180226173514.php" />
         <option value="$PROJECT_DIR$/src/Migrations/Version20171222170238.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
+        <option value="$PROJECT_DIR$/src/Logic/Calculations.php" />
         <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
       </list>
     </option>
@@ -363,6 +365,12 @@
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
               <item name="x" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Logic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="x" type="b2602c69:ProjectViewProjectNode" />
+              <item name="x" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Repository" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -555,12 +563,12 @@
       <workItem from="1558177590435" duration="555000" />
       <workItem from="1559125898882" duration="7795000" />
       <workItem from="1559929076616" duration="989000" />
-      <workItem from="1559931328561" duration="13540000" />
+      <workItem from="1559931328561" duration="14121000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="380448000" />
+    <option name="totallyTimeSpent" value="381029000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -642,11 +650,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9750" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/fos_oauth_server.yaml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -997,10 +1000,17 @@
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20180620200830.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Logic/Calculations.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="548">
+          <caret line="109" column="30" lean-forward="true" selection-start-line="109" selection-start-column="30" selection-end-line="109" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="62" column="34" selection-start-line="62" selection-start-column="34" selection-end-line="62" selection-end-column="34" />
+        <state relative-caret-position="299">
+          <caret line="87" column="36" lean-forward="true" selection-start-line="87" selection-start-column="36" selection-end-line="87" selection-end-column="36" />
           <folding>
             <element signature="e#41#65#0#PHP" expanded="true" />
           </folding>
@@ -1009,8 +1019,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="116" column="136" selection-start-line="116" selection-start-column="136" selection-end-line="116" selection-end-column="136" />
+        <state relative-caret-position="424">
+          <caret line="784" column="138" selection-start-line="784" selection-start-column="138" selection-end-line="784" selection-end-column="138" />
         </state>
       </provider>
     </entry>

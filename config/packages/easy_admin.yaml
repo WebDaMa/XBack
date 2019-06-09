@@ -46,22 +46,31 @@ easy_admin:
         User:
           class: App\Entity\User
           list:
-              fields:
-                - { property: 'username'}
-                - { property: 'email'}
-                - { property: 'enabled'}
-                - { property: 'roles'}
+            fields:
+              - { property: 'username'}
+              - { property: 'email'}
+              - { property: 'enabled'}
+              - { property: 'roles'}
           form:
-              fields:
-                  - username
-                  - email
-                  - enabled
-                  # if administrators are allowed to edit users' passwords and roles, add this:
-                  - { property: 'plainPassword', type: 'text', type_options: { required: false } }
-                  - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_KV': 'ROLE_KV', 'ROLE_STV': 'ROLE_STV', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
+            fields:
+                - username
+                - email
+                - enabled
+                # if administrators are allowed to edit users' passwords and roles, add this:
+                - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+                - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_KV': 'ROLE_KV', 'ROLE_STV': 'ROLE_STV', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
 
         Customer:
           class: App\Entity\Customer
+          list:
+            fields:
+              - { property: 'customerId'}
+              - { property: 'firstName'}
+              - { property: 'lastName'}
+              - { property: 'email'}
+              - { property: 'periodId'}
+              - { property: 'gsm'}
+              - { property: 'nationalRegisterNumber'}
           form:
             fields:
               - { property: 'customerId'}
@@ -116,7 +125,8 @@ easy_admin:
               - { property: 'groupPreference'}
               - { property: 'lodgingLayout'}
               - { property: 'groupLayout'}
-              - { property: 'bookerPayed'}
+              - { property: 'payed'}
+              - { property: 'payedPayconiq'}
               - { property: 'isCamper'}
               - { property: 'checkedIn'}
               - { property: 'totalExclInsurance'}

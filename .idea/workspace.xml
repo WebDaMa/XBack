@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/easy_admin.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/easy_admin.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/GroepRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/GroepRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/LocationRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/LocationRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/dashboard/export.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard/export.html.twig" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -26,8 +20,8 @@
       <file leaf-file-name="DashboardController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-701">
-              <caret line="694" column="30" selection-start-line="694" selection-start-column="30" selection-end-line="694" selection-end-column="30" />
+            <state relative-caret-position="502">
+              <caret line="643" column="38" selection-start-line="643" selection-start-column="38" selection-end-line="643" selection-end-column="38" />
               <folding>
                 <element signature="e#34#56#0#PHP" expanded="true" />
               </folding>
@@ -39,7 +33,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>exportR</find>
       <find>extra</find>
       <find>exportrafting</find>
       <find>signin</find>
@@ -69,6 +62,7 @@
       <find>&quot;</find>
       <find>fetch(</find>
       <find>payc</find>
+      <find>getAllForPaymentExportByCustomerId</find>
     </findStrings>
     <replaceStrings>
       <replace>signup</replace>
@@ -592,12 +586,12 @@
       <workItem from="1559125898882" duration="7795000" />
       <workItem from="1559929076616" duration="989000" />
       <workItem from="1559931328561" duration="15157000" />
-      <workItem from="1560764960029" duration="16520000" />
+      <workItem from="1560764960029" duration="16938000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="398585000" />
+    <option name="totallyTimeSpent" value="399003000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1000,15 +994,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="128" column="31" selection-start-line="128" selection-start-column="18" selection-end-line="128" selection-end-column="31" />
+        <state relative-caret-position="347">
+          <caret line="792" column="67" selection-start-line="792" selection-start-column="67" selection-end-line="792" selection-end-column="67" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-701">
-          <caret line="694" column="30" selection-start-line="694" selection-start-column="30" selection-end-line="694" selection-end-column="30" />
+        <state relative-caret-position="502">
+          <caret line="643" column="38" selection-start-line="643" selection-start-column="38" selection-end-line="643" selection-end-column="38" />
           <folding>
             <element signature="e#34#56#0#PHP" expanded="true" />
           </folding>

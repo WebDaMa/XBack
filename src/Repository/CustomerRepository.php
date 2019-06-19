@@ -790,7 +790,7 @@ class CustomerRepository extends ServiceEntityRepository {
         return $customers;
     }
 
-    public function getAllForPaymentExportByCustomerId($customerId) : array
+    public function getAllForPaymentExportByCustomerId($customerId)
     {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();

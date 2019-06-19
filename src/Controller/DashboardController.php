@@ -637,7 +637,12 @@ class DashboardController extends AbstractController {
             $customerBill = $rep->getBillByCustomerId($id);
             // Get more info from customer
             $customerExtra = $rep->getAllForPaymentExportByCustomerId($id);
-            $customers[$k] = array_merge($customerBill, $customerExtra);;
+            if(is_array($customerBill) && is_array($customerExtra)) {
+                $customers[$k] = array_merge($customerBill, $customerExtra);;
+            }else{
+                //Remove invalid data
+                unset($customers[$k]);
+            }
         }
 
         $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();

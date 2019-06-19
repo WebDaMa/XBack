@@ -26,4 +26,17 @@ class LocationRepository extends CodeBaseRepository
         return $qb->execute()->fetchAll();
     }
 
+    public function findAllAsChoicesForForm()
+    {
+        $choices = [];
+        $choices['Alle locaties'] = null;
+        $locations = $this->findAllRaw();
+
+        foreach ($locations as $location) {
+            $choices[$location['code']] = $this->find($location['id']);
+        }
+
+        return $choices;
+    }
+
 }

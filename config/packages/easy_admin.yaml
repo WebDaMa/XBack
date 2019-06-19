@@ -8,6 +8,7 @@ easy_admin:
                 - { label: 'BO Import', route: 'admin_bo_upload' }
                 - { label: 'Exports' }
                 - { label: 'Rafting Export', route: 'admin_export_rafting' }
+                - { label: 'Afrekening Export', route: 'admin_export_bill' }
                 - { label: 'Forms' }
                 - FormCheckin
                 - FormSizes

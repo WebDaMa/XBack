@@ -181,9 +181,8 @@ class CustomerRepository extends ServiceEntityRepository {
             ->orderBy("c2.first_name")
             ->setParameter("customerId", $customerId);
 
-        $res = $qb->execute()->fetch();
+        return $qb->execute()->fetch();
 
-        return $res;
     }
 
     public function getAllByPeriodIdAndLocationIdForGroupLayout($periodId, $locationId)
@@ -208,9 +207,8 @@ class CustomerRepository extends ServiceEntityRepository {
             ->setParameter("periodId", $periodId)
             ->setParameter("locationId", $locationId);
 
-        $res = $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAll();
 
-        return $res;
     }
 
     public function getAllByGroepIdForPayments($groepId)
@@ -263,7 +261,7 @@ class CustomerRepository extends ServiceEntityRepository {
 
         //get all the costs from booker
 
-        $customers = $this->GetAllCostsForCustomersByBookerId($res["bookerId"]);
+        $customers = $this->getAllCostsForCustomersByBookerId($res["bookerId"]);
 
         $res["totals"] = [];
         $res["options"] = [];
@@ -776,7 +774,7 @@ class CustomerRepository extends ServiceEntityRepository {
      * @param $bookerId
      * @return array
      */
-    public function GetAllCostsForCustomersByBookerId($bookerId): array
+    public function getAllCostsForCustomersByBookerId($bookerId): array
     {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
@@ -791,4 +789,30 @@ class CustomerRepository extends ServiceEntityRepository {
 
         return $customers;
     }
+
+    public function getAllForPaymentExportByCustomerId($customerId) : array
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select("c.id", "c.customer_id", "c.file_id", "c.period_id", "c.booker_id", "c.booker", "c.last_name",
+                "c.first_name", "a.code AS agency",
+                "l.code AS location", "c.start_day", "c.end_day", "pt.code AS program", "lt.code AS lodging",
+                "ait.code AS all_in", "tgt.code AS travel_go", "g.group_id AS groep")
+            ->from('customer', 'c')
+            ->innerJoin('c', 'agency', 'a', 'c.agency_id = a.id')
+            ->innerJoin('c', 'location', 'l', 'c.location_id = l.id')
+            ->innerJoin('c', 'program_type', 'pt', 'c.program_type_id = pt.id')
+            ->innerJoin('c', 'lodging_type', 'lt', 'c.lodging_type_id = lt.id')
+            ->innerJoin('c', 'all_in_type', 'ait', 'c.all_in_type_id = ait.id')
+            ->innerJoin('c', 'travel_type', 'tgt', 'c.travel_go_type_id = tgt.id')
+            ->innerJoin('c', 'groep', 'g', 'c.group_layout_id = g.id')
+            ->where("c.id = :customerId")
+            ->setParameter("customerId", $customerId);
+
+        return $qb->execute()->fetch();
+
+    }
+
 }

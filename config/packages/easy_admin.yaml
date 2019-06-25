@@ -23,6 +23,7 @@ easy_admin:
                 - Customer
                 - Groep
                 - Guide
+                - IncludeOption
                 - Location
                 - Planning
                 - Program
@@ -64,6 +65,7 @@ easy_admin:
         Customer:
           class: App\Entity\Customer
           list:
+            filters: ['periodId']
             fields:
               - { property: 'customerId'}
               - { property: 'firstName'}
@@ -137,6 +139,7 @@ easy_admin:
         FormSizes:
           class: App\Entity\Customer
           list:
+            filters: ['periodId']
             fields:
               - { property: 'groupLayout'}
               - { property: 'firstName'}
@@ -151,6 +154,7 @@ easy_admin:
         FormCheckin:
             class: App\Entity\Customer
             list:
+              filters: ['periodId']
               fields:
                 - { property: 'checkedIn'}
                 - { property: 'firstName'}
@@ -186,6 +190,7 @@ easy_admin:
         FormBill:
             class: App\Entity\Customer
             list:
+              filters: ['periodId']
               fields:
                 - { property: 'groupLayout'}
                 - { property: 'booker'}
@@ -203,6 +208,7 @@ easy_admin:
         FormGroupLayout:
             class: App\Entity\Customer
             list:
+              filters: ['periodId']
               fields:
                 - { property: 'groupLayout'}
                 - { property: 'groupPreference'}
@@ -220,6 +226,7 @@ easy_admin:
         FormLodgingLayout:
             class: App\Entity\Customer
             list:
+              filters: ['periodId']
               fields:
                 - { property: 'groupName'}
                 - { property: 'booker'}
@@ -235,6 +242,7 @@ easy_admin:
         FormOptions:
             class: App\Entity\Customer
             list:
+              filters: ['periodId']
               fields:
                 - { property: 'groupLayout'}
                 - { property: 'programType'}
@@ -555,3 +563,12 @@ easy_admin:
               - { property: 'description'}
               - { property: 'price'}
 
+        IncludeOption:
+                  class: App\Entity\IncludeOption
+                  help: "Alle programma's waarbij de opties(raft/canyon) reeds inbegrepen zijn."
+                  list:
+                    fields:
+                      - { property: 'programType'}
+                  form:
+                    fields:
+                      - { property: 'programType'}

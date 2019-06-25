@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Agency;
 use App\Entity\AllInType;
-use App\Entity\ExportBill;
-use App\Entity\ExportRaft;
+use App\Entity\ExportPeriodAndLocation;
+use App\Entity\ExportDate;
 use App\Entity\Groep;
 use App\Entity\Guide;
 use App\Entity\Planning;
@@ -18,8 +18,8 @@ use App\Entity\Location;
 use App\Entity\LodgingType;
 use App\Entity\ProgramType;
 use App\Entity\TravelType;
-use App\Form\ExportBillType;
-use App\Form\ExportRaftType;
+use App\Form\ExportPeriodAndLocationType;
+use App\Form\ExportDateType;
 use App\Form\UploadType;
 use App\Logic\Calculations;
 use App\Logic\Extensions;
@@ -38,16 +38,32 @@ class DashboardController extends AbstractController {
      */
     public function exportRaftingAction(Request $request)
     {
-        $exportRaft = new ExportRaft();
-        $form = $this->createForm(ExportRaftType::class, $exportRaft);
+        $exportRaft = new ExportPeriodAndLocation();
+
+        $locations = $this->getDoctrine()->getRepository(Location::class)->findAllAsChoicesForForm();
+        $periods = $this->getDoctrine()->getRepository(Groep::class)->getAllPeriodIdsAsChoicesForForm();
+        if(!empty($periods)) {
+            unset($periods["Alle periodes"]);
+            $periods = array_reverse($periods, true);
+            $periods["Huidige Periode"] = Calculations::generatePeriodFromDate(date('Y-m-d H:i:s'));
+            $periods = array_reverse($periods, true);
+        }
+        $options = [
+            'periods' => $periods,
+            'locations' => $locations
+        ];
+
+        $form = $this->createForm(ExportPeriodAndLocationType::class, $exportRaft, $options);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
             // $file stores the uploaded file
             /** @var UploadedFile $file */
-            $date = $exportRaft->getDate();
-            $periodId = Calculations::generatePeriodFromDate($date->format("Y-m-d"));
+            // $file stores the uploaded file
+            /** @var UploadedFile $file */
+            $location = $exportRaft->getLocation();
+            $periodId = $exportRaft->getPeriod();
 
             $em = $this->getDoctrine()->getManager();
 
@@ -55,7 +71,7 @@ class DashboardController extends AbstractController {
             $em->persist($exportRaft);
             $em->flush();
 
-            $spreadsheet = $this->generateRaftingExportSheet($date);
+            $spreadsheet = $this->generateRaftingExportSheet($location, $periodId);
 
             $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -75,7 +91,7 @@ class DashboardController extends AbstractController {
      */
     public function exportBillAction(Request $request)
     {
-        $exportBill = new ExportBill();
+        $exportBill = new ExportPeriodAndLocation();
 
         $locations = $this->getDoctrine()->getRepository(Location::class)->findAllAsChoicesForForm();
         $periods = $this->getDoctrine()->getRepository(Groep::class)->getAllPeriodIdsAsChoicesForForm();
@@ -84,7 +100,7 @@ class DashboardController extends AbstractController {
             'locations' => $locations
         ];
 
-        $form = $this->createForm(ExportBillType::class, $exportBill, $options);
+        $form = $this->createForm(ExportPeriodAndLocationType::class, $exportBill, $options);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
@@ -302,11 +318,12 @@ class DashboardController extends AbstractController {
                             $planning = $this->importPlanning($row, $periodId, $plRep->find($planningExists));
                         }
 
-                        if (!is_null($planning->getGuide()) && !empty($planning->getGuide()))
+                        if (!is_null($planning->getActivity()) && !empty($planning->getActivity()))
                         {
                             //Don't add empty planning
                             $em->persist($planning);
                         }
+
                     }
                 }
             }
@@ -542,21 +559,23 @@ class DashboardController extends AbstractController {
         return $updatePlanning;
     }
 
-    private function generateRaftingExportSheet(\DateTime $date)
+    private function generateRaftingExportSheet($location, $periodId)
     {
-        $dateString = $date->format("Y-m-d");
+        $week = substr($periodId, 2, 2);
+        //This will bug in 2100 ;)
+        $year = '20' . substr($periodId, 0, 2);
+        $dateString = date('Y-m-d',strtotime($year . 'W' . $week));
+
         $lastSaturday = Calculations::getLastSaturdayFromDate($dateString);
         $nextSaturday = Calculations::getNextSaturdayFromDate($dateString);
 
-        $periodId = Calculations::generatePeriodFromDate($dateString);
-
         $rep = $this->getDoctrine()->getRepository(Customer::class);
-
-        $customers = array_merge($rep->getAllExtraByDateWithRafting($periodId, $dateString), $rep->getAllByDateWithRafting($periodId));
+        $customers = array_merge($rep->getAllExtraByDateWithRafting($periodId, $dateString, $location), $rep->getAllByDateWithRafting($periodId, $location));
         $customersByDate = $this->groupCustomersByDate($customers);
 
         $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 
+        $semana = "Semana: " . $lastSaturday . " - " . $nextSaturday;
         foreach ($customersByDate as $date => $groupedCustomers)
         {
             $worksheet = new Worksheet($spreadsheet, substr($date, 8, 2));
@@ -564,7 +583,7 @@ class DashboardController extends AbstractController {
 
             $worksheet->getCell("B1")->setValue("Rafting LifeLong Explore:")
                 ->getStyle()->getFont()->setSize(20);
-            $worksheet->getCell("C1")->setValue("Semana: " . $lastSaturday . " - " . $nextSaturday)
+            $worksheet->getCell("C1")->setValue($semana)
                 ->getStyle()->getFont()->setSize(20);
             $worksheet->getCell("D1")->setValue($date)
                 ->getStyle()->getFont()->setSize(20);
@@ -610,7 +629,9 @@ class DashboardController extends AbstractController {
         }
 
         //Remove default sheet
-        $spreadsheet->removeSheetByIndex(0);
+        if(!empty($customersByDate)) {
+            $spreadsheet->removeSheetByIndex(0);
+        }
 
         return $spreadsheet;
 

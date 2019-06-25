@@ -2,21 +2,21 @@
 
 namespace App\Repository;
 
-use App\Entity\ExportBill;
+use App\Entity\ExportPeriodAndLocation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * @method ExportBill|null find($id, $lockMode = null, $lockVersion = null)
- * @method ExportBill|null findOneBy(array $criteria, array $orderBy = null)
- * @method ExportBill[]    findAll()
- * @method ExportBill[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method ExportPeriodAndLocation|null find($id, $lockMode = null, $lockVersion = null)
+ * @method ExportPeriodAndLocation|null findOneBy(array $criteria, array $orderBy = null)
+ * @method ExportPeriodAndLocation[]    findAll()
+ * @method ExportPeriodAndLocation[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ExportBillRepository extends ServiceEntityRepository
+class ExportPeriodAndLocationRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, ExportBill::class);
+        parent::__construct($registry, ExportPeriodAndLocation::class);
     }
 
     // /**

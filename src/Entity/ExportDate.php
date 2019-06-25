@@ -8,9 +8,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="App\Repository\ExportRaftRepository")
+ * @ORM\Entity(repositoryClass="ExportDateRepository")
  */
-class ExportRaft extends TypeTimestamps
+class ExportDate extends TypeTimestamps
 {
     /**
      * @ORM\Id

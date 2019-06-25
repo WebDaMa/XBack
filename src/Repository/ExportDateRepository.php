@@ -2,15 +2,15 @@
 
 namespace App\Repository;
 
-use App\Entity\ExportRaft;
+use App\Entity\ExportDate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class ExportRaftRepository extends ServiceEntityRepository
+class ExportDateRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, ExportRaft::class);
+        parent::__construct($registry, ExportDate::class);
     }
 
     /*

@@ -7,9 +7,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="App\Repository\ExportBillRepository")
+ * @ORM\Entity(repositoryClass="ExportPeriodAndLocationRepository")
  */
-class ExportBill extends TypeTimestamps
+class ExportPeriodAndLocation extends TypeTimestamps
 {
     /**
      * @ORM\Id()

@@ -232,7 +232,7 @@ class Planning extends TypeTimestamps
 
     public function __toString() : string
     {
-        return (string) $this->getGuide()->__toString() . ' - ' . $this->getActivity()
+        return (string) $this->getId(). ' - ' . $this->getActivity()
             . ' - ' . $this->getGroup()->__toString();
     }
 

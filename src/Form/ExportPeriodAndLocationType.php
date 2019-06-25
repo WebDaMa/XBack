@@ -2,14 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\ExportBill;
+use App\Entity\ExportPeriodAndLocation;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ExportBillType extends AbstractType
+class ExportPeriodAndLocationType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -38,7 +38,7 @@ class ExportBillType extends AbstractType
     {
         $resolver->setDefaults([
             // Configure your form options here
-            'data_class' => ExportBill::class,
+            'data_class' => ExportPeriodAndLocation::class,
             'periods' => [],
             'locations' => []
         ]);

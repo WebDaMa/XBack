@@ -2,14 +2,14 @@
 
 namespace App\Form;
 
-use App\Entity\ExportRaft;
+use App\Entity\ExportDate;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ExportRaftType extends AbstractType
+class ExportDateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -26,7 +26,7 @@ class ExportRaftType extends AbstractType
     {
         $resolver->setDefaults([
             // uncomment if you want to bind to a class
-            'data_class' => ExportRaft::class,
+            'data_class' => ExportDate::class,
         ]);
     }
 }

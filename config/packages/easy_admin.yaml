@@ -10,37 +10,37 @@ easy_admin:
                 - { label: 'Rafting Export', route: 'admin_export_rafting' }
                 - { label: 'Afrekening Export', route: 'admin_export_bill' }
                 - { label: 'Forms' }
+                - FormBill
                 - FormCheckin
-                - FormSizes
                 - FormGroupLayout
                 - FormLodgingLayout
                 - FormOptions
                 - FormPayment
-                - FormBill
+                - FormSizes
                 - { label: 'Entities' }
-                - User
-                - Customer
-                - Guide
-                - Groep
-                - Planning
-                - Agency
-                - Location
                 - Activity
+                - Agency
+                - Customer
+                - Groep
+                - Guide
+                - Location
+                - Planning
                 - Program
                 - ProgramActivity
+                - User
                 - { label: 'Types' }
+                - ActivityGroup
                 - AllInType
+                - BeltSize
                 - InsuranceType
+                - HelmSize
                 - GroupType
                 - LodgingType
+                - ProgramGroup
                 - ProgramType
+                - SuitSize
                 - TransportType
                 - TravelType
-                - SuitSize
-                - HelmSize
-                - BeltSize
-                - ProgramGroup
-                - ActivityGroup
     entities:
         # List the entity class name you want to manage
 

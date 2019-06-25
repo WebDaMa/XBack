@@ -37,23 +37,17 @@ class GroepRepository extends ServiceEntityRepository {
     {
         $connection = $this->_em->getConnection();
 
+        $qb = $connection->createQueryBuilder()
+            ->select('g.id, g.name')
+            ->from('groep', 'g')
+            ->where('g.period_id = :periodId')
+            ->setParameter('periodId', $periodId);
+
         if (!is_null($locationId))
         {
-            $qb = $connection->createQueryBuilder()
-                ->select('g.id, g.name')
-                ->from('groep', 'g')
-                ->where("g.period_id = :periodId
-            AND g.location_id = :locationId")
-                ->setParameters(['periodId' => $periodId, 'locationId' => $locationId]);
-        } else
-        {
-            $qb = $connection->createQueryBuilder()
-                ->select('g.id, g.name')
-                ->from('groep', 'g')
-                ->where("g.period_id = :periodId")
-                ->setParameters(['periodId' => $periodId]);
+         $qb->andWhere('g.location_id = :locationId')
+            ->setParameter("locationId", $locationId);
         }
-
 
         return $qb->execute()->fetchAll();
     }

@@ -47,4 +47,16 @@ class IncludeOptionRepository extends ServiceEntityRepository
         ;
     }
     */
+
+    public function findAllRaw()
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select('i.program_type_id')
+            ->from('include_option', 'i');
+
+        return $qb->execute()->fetchAll();
+    }
 }

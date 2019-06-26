@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/packages/easy_admin.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/easy_admin.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DashboardController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/ActivityRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ActivityRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Repository/IncludeOptionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/IncludeOptionRepository.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,11 +21,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="easy_admin.yaml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
+      <file leaf-file-name="CustomerRepository.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="291">
-              <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
+            <state relative-caret-position="395">
+              <caret line="277" selection-start-line="277" selection-end-line="277" />
             </state>
           </provider>
         </entry>
@@ -31,12 +34,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>getDateOrNull</find>
-      <find>convertExcelDateToDateTime</find>
-      <find>getStringBool</find>
-      <find>getDynamicSheetAsArray</find>
-      <find>bus</find>
-      <find>groep</find>
       <find>$active</find>
       <find>MAILER_URL</find>
       <find>mailer_user</find>
@@ -61,6 +58,12 @@
       <find>getAge</find>
       <find>by_reference</find>
       <find>raft</find>
+      <find>$rep</find>
+      <find>exclude</find>
+      <find>exc</find>
+      <find>excl</find>
+      <find>findAllRaw</find>
+      <find>inc</find>
     </findStrings>
     <replaceStrings>
       <replace>signup</replace>
@@ -73,11 +76,11 @@
     <dirStrings>
       <dir>$PROJECT_DIR$/src/Command</dir>
       <dir>$PROJECT_DIR$/src/Entity</dir>
-      <dir>$PROJECT_DIR$/src/Repository</dir>
       <dir>$PROJECT_DIR$/config/packages</dir>
       <dir>$PROJECT_DIR$/config</dir>
       <dir>$PROJECT_DIR$/src/Migrations</dir>
       <dir>$PROJECT_DIR$/src</dir>
+      <dir>$PROJECT_DIR$/src/Repository</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -86,9 +89,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Controller/Rest/GroepController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Rest/GuideController.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Rest/LocationController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/PlanningController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/SuitSizeController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/UserController.php" />
@@ -116,7 +116,6 @@
         <option value="$PROJECT_DIR$/src/Migrations/Version20180224133406.php" />
         <option value="$PROJECT_DIR$/src/Migrations/Version20180226173514.php" />
         <option value="$PROJECT_DIR$/src/Migrations/Version20171222170238.php" />
-        <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
         <option value="$PROJECT_DIR$/src/Logic/Calculations.php" />
         <option value="$PROJECT_DIR$/src/Form/ExportBillType.php" />
         <option value="$PROJECT_DIR$/templates/dashboard/export.html.twig" />
@@ -133,10 +132,14 @@
         <option value="$PROJECT_DIR$/src/Repository/ExportBillRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/ExportPeriodAndLocationRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/GroepRepository.php" />
-        <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
-        <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
         <option value="$PROJECT_DIR$/src/Entity/IncludeOption.php" />
         <option value="$PROJECT_DIR$/config/packages/easy_admin.yaml" />
+        <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
+        <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
+        <option value="$PROJECT_DIR$/src/Repository/ClientRepository.php" />
+        <option value="$PROJECT_DIR$/src/Repository/IncludeOptionRepository.php" />
+        <option value="$PROJECT_DIR$/src/Repository/ActivityRepository.php" />
+        <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
       </list>
     </option>
   </component>
@@ -331,76 +334,13 @@
             <path>
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
               <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-              <item name="packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
               <item name="x" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
-              <item name="Rest" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="admin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="cache" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="translations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="var" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="x" type="b2602c69:ProjectViewProjectNode" />
-              <item name="x" type="462c0819:PsiDirectoryNode" />
-              <item name="var" type="462c0819:PsiDirectoryNode" />
-              <item name="log" type="462c0819:PsiDirectoryNode" />
+              <item name="Repository" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -567,39 +507,40 @@
       <workItem from="1559929076616" duration="989000" />
       <workItem from="1559931328561" duration="15157000" />
       <workItem from="1560764960029" duration="19075000" />
-      <workItem from="1561487380626" duration="7458000" />
+      <workItem from="1561487380626" duration="7819000" />
+      <workItem from="1561580907386" duration="3861000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="408598000" />
+    <option name="totallyTimeSpent" value="412820000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18402778" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Nativescript Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32904884" />
-      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="NativeScript" order="7" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.27888888" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18402778" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Nativescript Palette" order="3" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.19777778" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="7" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.19777778" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -654,36 +595,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/config/bundles.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/MailController.php" />
-    <entry file="file://$PROJECT_DIR$/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="23" column="177" lean-forward="true" selection-start-line="23" selection-end-line="23" selection-end-column="177" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Entity/Payment.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20171222165358.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Migrations/Version20171222171341.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="20" column="47" selection-start-line="20" selection-start-column="47" selection-end-line="20" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20171230143635.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
@@ -813,13 +724,6 @@
     <entry file="file://$PROJECT_DIR$/src/Migrations/Version20180620200830.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="121" column="37" lean-forward="true" selection-start-line="121" selection-start-column="37" selection-end-line="121" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Controller/AdminController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -906,13 +810,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="741" column="44" selection-start-line="741" selection-start-column="44" selection-end-line="741" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Form/ExportPeriodAndLocationType.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -931,16 +828,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="501">
           <caret line="66" column="20" selection-start-line="66" selection-start-column="20" selection-end-line="66" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="49" column="9" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
-          <folding>
-            <element signature="e#34#56#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -983,8 +870,70 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
+        <state relative-caret-position="178">
+          <caret line="244" column="35" selection-start-line="244" selection-start-column="35" selection-end-line="244" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/Rest/CustomerController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="114" column="86" lean-forward="true" selection-start-line="114" selection-start-column="86" selection-end-line="114" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="654" column="48" selection-start-line="654" selection-start-column="48" selection-end-line="654" selection-end-column="48" />
+          <folding>
+            <element signature="e#34#56#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/PaymentRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="34" column="20" selection-start-line="34" selection-start-column="20" selection-end-line="34" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/CodeBaseRepository.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/ActivityGroupRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="21" column="20" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/ClientRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="745">
+          <caret line="49" selection-start-line="49" selection-end-line="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/IncludeOptionRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="785">
+          <caret line="59" column="42" lean-forward="true" selection-start-line="59" selection-start-column="42" selection-end-line="59" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/ActivityRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="69" column="77" selection-start-line="69" selection-start-column="77" selection-end-line="69" selection-end-column="77" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="395">
+          <caret line="277" selection-start-line="277" selection-end-line="277" />
         </state>
       </provider>
     </entry>

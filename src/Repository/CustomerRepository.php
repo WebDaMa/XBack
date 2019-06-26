@@ -6,6 +6,7 @@ use App\Entity\Activity;
 use App\Entity\Agency;
 use App\Entity\AllInType;
 use App\Entity\Customer;
+use App\Entity\IncludeOption;
 use App\Entity\Payment;
 use App\Entity\TravelType;
 use App\Logic\Calculations;
@@ -261,13 +262,18 @@ class CustomerRepository extends ServiceEntityRepository {
 
         //get all the costs from booker
 
-        $customers = $this->getAllCostsForCustomersByBookerId($res["bookerId"]);
+        $customers = $this->getPayedForCustomersByBookerId($res["bookerId"]);
 
         $res["totals"] = [];
         $res["options"] = [];
 
         $bookerTotal = 0;
         $res["booker"] = [];
+        $rep = $this->getEntityManager()->getRepository(IncludeOption::class);
+        $includeOptions = $rep->findAllRaw();
+        if(!empty($includeOptions)) {
+            $includeOptions = array_column($includeOptions, 'program_type_id');
+        }
 
         foreach ($customers as $customer)
         {
@@ -294,6 +300,10 @@ class CustomerRepository extends ServiceEntityRepository {
 
             foreach ($options as $option)
             {
+                //Hook for includeOptions table program types
+                if(in_array($customer['program_type_id'], $includeOptions) === true && $option['activity_group_id'] == 1) {
+                    $option["price"] = 0;
+                }
                 $total += $option["price"];
                 if ($customerId === $customer["id"])
                 {
@@ -775,13 +785,13 @@ class CustomerRepository extends ServiceEntityRepository {
      * @param $bookerId
      * @return array
      */
-    public function getAllCostsForCustomersByBookerId($bookerId): array
+    public function getPayedForCustomersByBookerId($bookerId): array
     {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
 
         $qb
-            ->select("c.id", "c.customer_id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", 'c.payed', 'c.payed_payconiq AS payedPayconiq')
+            ->select("c.id", "c.customer_id", "CONCAT(c.first_name, ' ', c.last_name) AS customer", 'c.payed', 'c.payed_payconiq AS payedPayconiq', 'c.program_type_id')
             ->from('customer', 'c')
             ->where("c.booker_id = :bookerId")
             ->setParameter("bookerId", $bookerId);

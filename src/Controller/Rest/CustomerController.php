@@ -112,7 +112,7 @@ class CustomerController extends AbstractFOSRestController {
         }
 
         // get all customers in case of booker
-        $customers = $rep->getAllCostsForCustomersByBookerId($customer->getCustomerId());
+        $customers = $rep->getPayedForCustomersByBookerId($customer->getCustomerId());
 
         foreach ($customers as $c) {
             $customerBooker = $rep->find($c["id"]);

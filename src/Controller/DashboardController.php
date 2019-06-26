@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Agency;
 use App\Entity\AllInType;
 use App\Entity\ExportPeriodAndLocation;
-use App\Entity\ExportDate;
 use App\Entity\Groep;
 use App\Entity\Guide;
 use App\Entity\Planning;
@@ -19,7 +18,6 @@ use App\Entity\LodgingType;
 use App\Entity\ProgramType;
 use App\Entity\TravelType;
 use App\Form\ExportPeriodAndLocationType;
-use App\Form\ExportDateType;
 use App\Form\UploadType;
 use App\Logic\Calculations;
 use App\Logic\Extensions;
@@ -28,7 +26,6 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class DashboardController extends AbstractController {
@@ -770,7 +767,6 @@ class DashboardController extends AbstractController {
             $totCanyon = 0;
             $totSpecial = 0;
             $specialDescriptions = [];
-            $specialDescription = "";
 
             foreach ($customer['options'] as $option)
             {

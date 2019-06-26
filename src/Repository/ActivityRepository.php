@@ -67,7 +67,7 @@ class ActivityRepository extends ServiceEntityRepository
         $qb = $connection->createQueryBuilder();
 
         $qb
-            ->select('ag.name AS type', 'a.name', 'a.price')
+            ->select('ag.name AS type', 'a.name', 'a.price', 'a.activity_group_id')
             ->from('customers_activities', "ca")
             ->innerJoin("ca", "activity", "a", "ca.activity_id = a.id")
             ->innerJoin("a", "activity_group", "ag", "a.activity_group_id = ag.id")

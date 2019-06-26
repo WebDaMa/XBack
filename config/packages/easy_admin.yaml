@@ -42,6 +42,9 @@ easy_admin:
                 - SuitSize
                 - TransportType
                 - TravelType
+
+    list:
+        max_results: 200
     entities:
         # List the entity class name you want to manage
 
@@ -140,6 +143,7 @@ easy_admin:
           class: App\Entity\Customer
           list:
             filters: ['periodId']
+            sort: 'customerId'
             fields:
               - { property: 'groupLayout'}
               - { property: 'firstName'}
@@ -154,6 +158,7 @@ easy_admin:
         FormCheckin:
             class: App\Entity\Customer
             list:
+              sort: 'customerId'
               filters: ['periodId']
               fields:
                 - { property: 'checkedIn'}
@@ -190,6 +195,7 @@ easy_admin:
         FormBill:
             class: App\Entity\Customer
             list:
+              sort: 'customerId'
               filters: ['periodId']
               fields:
                 - { property: 'groupLayout'}
@@ -208,6 +214,7 @@ easy_admin:
         FormGroupLayout:
             class: App\Entity\Customer
             list:
+              sort: 'customerId'
               filters: ['periodId']
               fields:
                 - { property: 'groupLayout'}
@@ -226,6 +233,7 @@ easy_admin:
         FormLodgingLayout:
             class: App\Entity\Customer
             list:
+              sort: 'customerId'
               filters: ['periodId']
               fields:
                 - { property: 'groupName'}
@@ -242,6 +250,7 @@ easy_admin:
         FormOptions:
             class: App\Entity\Customer
             list:
+              sort: 'customerId'
               filters: ['periodId']
               fields:
                 - { property: 'groupLayout'}
@@ -256,8 +265,8 @@ easy_admin:
         Agency:
           class: App\Entity\Agency
           list:
+            sort: ['code', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'code'}
               - { property: 'description'}
               - { property: 'agencyCustomers'}
@@ -270,8 +279,8 @@ easy_admin:
         AllInType:
           class: App\Entity\AllInType
           list:
+            sort: ['code', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'code'}
               - { property: 'description'}
               - { property: 'price'}
@@ -286,8 +295,8 @@ easy_admin:
         InsuranceType:
           class: App\Entity\InsuranceType
           list:
+            sort: ['code', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'code'}
               - { property: 'description'}
               - { property: 'insuranceCode'}
@@ -304,8 +313,8 @@ easy_admin:
         LodgingType:
           class: App\Entity\LodgingType
           list:
+            sort: ['code', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'code'}
               - { property: 'description'}
               - { property: 'lodgingCustomers'}
@@ -318,8 +327,8 @@ easy_admin:
         ProgramType:
           class: App\Entity\ProgramType
           list:
+            sort: ['code', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'code'}
               - { property: 'description'}
               - { property: 'programCustomers'}
@@ -335,8 +344,8 @@ easy_admin:
         TransportType:
           class: App\Entity\TransportType
           list:
+            sort: ['name', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'name'}
               - { property: 'travelTypes'}
           form:
@@ -347,8 +356,8 @@ easy_admin:
         Location:
           class: App\Entity\Location
           list:
+            sort: ['code', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'code'}
               - { property: 'description'}
               - { property: 'locCustomers'}
@@ -361,8 +370,8 @@ easy_admin:
         GroupType:
           class: App\Entity\GroupType
           list:
+            sort: ['code', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'code'}
               - { property: 'description'}
               - { property: 'agency'}
@@ -378,7 +387,6 @@ easy_admin:
           class: App\Entity\Groep
           list:
             fields:
-              - { property: 'id'}
               - { property: 'groupId'}
               - { property: 'periodId'}
               - { property: 'name'}
@@ -397,8 +405,8 @@ easy_admin:
         Guide:
           class: App\Entity\Guide
           list:
+            sort: ['guideShort', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'guideShort'}
               - { property: 'guideFirstName'}
               - { property: 'guideLastName'}
@@ -413,8 +421,8 @@ easy_admin:
         SuitSize:
           class: App\Entity\SuitSize
           list:
+            sort: ['name', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'sizeId'}
               - { property: 'name'}
               - { property: 'beltSize'}
@@ -431,8 +439,8 @@ easy_admin:
         HelmSize:
           class: App\Entity\HelmSize
           list:
+            sort: ['name', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'name'}
               - { property: 'helmSuitSizes'}
           form:
@@ -443,8 +451,8 @@ easy_admin:
         BeltSize:
           class: App\Entity\BeltSize
           list:
+            sort: ['name', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'name'}
               - { property: 'beltSuitSizes'}
           form:
@@ -455,8 +463,8 @@ easy_admin:
         Planning:
           class: App\Entity\Planning
           list:
+            sort: 'id'
             fields:
-              - { property: 'id'}
               - { property: 'planningId'}
               - { property: 'date'}
               - { property: 'group'}
@@ -483,8 +491,8 @@ easy_admin:
         ActivityGroup:
           class: App\Entity\ActivityGroup
           list:
+            sort: ['name', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'name'}
               - { property: 'activities'}
           form:
@@ -495,8 +503,8 @@ easy_admin:
         ProgramGroup:
           class: App\Entity\ProgramGroup
           list:
+            sort: ['name', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'name'}
               - { property: 'programs'}
           form:
@@ -507,8 +515,8 @@ easy_admin:
         Activity:
           class: App\Entity\Activity
           list:
+            sort: ['name', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'name'}
               - { property: 'programActivities'}
               - { property: 'agency'}
@@ -530,8 +538,8 @@ easy_admin:
         Program:
           class: App\Entity\Program
           list:
+            sort: ['name', 'ASC']
             fields:
-              - { property: 'id'}
               - { property: 'name'}
               - { property: 'agency'}
               - { property: 'programGroup'}
@@ -553,6 +561,7 @@ easy_admin:
         FormPayment:
           class: App\Entity\Payment
           list:
+            sort: 'created_at'
             fields:
               - { property: 'customer'}
               - { property: 'description'}
@@ -567,6 +576,7 @@ easy_admin:
                   class: App\Entity\IncludeOption
                   help: "Alle programma's waarbij de opties(raft/canyon) reeds inbegrepen zijn."
                   list:
+                    sort: ['programType.code', 'ASC']
                     fields:
                       - { property: 'programType'}
                   form:

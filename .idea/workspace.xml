@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DashboardController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DashboardController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/ActivityRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/ActivityRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/CustomerRepository.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Repository/IncludeOptionRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Repository/IncludeOptionRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/easy_admin.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/easy_admin.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CustomerRepository.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
+      <file leaf-file-name="easy_admin.yaml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="395">
-              <caret line="277" selection-start-line="277" selection-end-line="277" />
+            <state relative-caret-position="-5245">
+              <caret line="267" column="24" selection-start-line="267" selection-start-column="24" selection-end-line="267" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -133,13 +129,13 @@
         <option value="$PROJECT_DIR$/src/Repository/ExportPeriodAndLocationRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/GroepRepository.php" />
         <option value="$PROJECT_DIR$/src/Entity/IncludeOption.php" />
-        <option value="$PROJECT_DIR$/config/packages/easy_admin.yaml" />
         <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
         <option value="$PROJECT_DIR$/src/Controller/Rest/CustomerController.php" />
         <option value="$PROJECT_DIR$/src/Repository/ClientRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/IncludeOptionRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/ActivityRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
+        <option value="$PROJECT_DIR$/config/packages/easy_admin.yaml" />
       </list>
     </option>
   </component>
@@ -334,6 +330,17 @@
             <path>
               <item name="x" type="b2602c69:ProjectViewProjectNode" />
               <item name="x" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="x" type="b2602c69:ProjectViewProjectNode" />
+              <item name="x" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="packages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="x" type="b2602c69:ProjectViewProjectNode" />
+              <item name="x" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -508,39 +515,40 @@
       <workItem from="1559931328561" duration="15157000" />
       <workItem from="1560764960029" duration="19075000" />
       <workItem from="1561487380626" duration="7819000" />
-      <workItem from="1561580907386" duration="3861000" />
+      <workItem from="1561580907386" duration="4208000" />
+      <workItem from="1561587869806" duration="1219000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="412820000" />
+    <option name="totallyTimeSpent" value="414386000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18402778" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Nativescript Palette" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.32904884" />
+      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="NativeScript" order="7" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.27888888" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18402778" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="right" id="Nativescript Palette" order="3" />
-      <window_info anchor="right" id="Database" order="3" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.19777778" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.27888888" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="7" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.19777778" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -797,9 +805,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="152">
           <caret line="9" column="53" selection-start-line="9" selection-start-column="53" selection-end-line="9" selection-end-column="53" />
-          <folding>
-            <element signature="e#30#65#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -862,16 +867,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
           <caret line="10" column="16" selection-start-line="10" selection-start-column="16" selection-end-line="10" selection-end-column="16" />
-          <folding>
-            <element signature="e#30#78#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="244" column="35" selection-start-line="244" selection-start-column="35" selection-end-line="244" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -886,9 +881,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="359">
           <caret line="654" column="48" selection-start-line="654" selection-start-column="48" selection-end-line="654" selection-end-column="48" />
-          <folding>
-            <element signature="e#34#56#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -932,8 +924,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="395">
-          <caret line="277" selection-start-line="277" selection-end-line="277" />
+        <state relative-caret-position="645">
+          <caret line="302" column="58" selection-start-line="302" selection-start-column="58" selection-end-line="302" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-5245">
+          <caret line="267" column="24" selection-start-line="267" selection-start-column="24" selection-end-line="267" selection-end-column="24" />
         </state>
       </provider>
     </entry>

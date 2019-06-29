@@ -68,7 +68,7 @@ easy_admin:
         Customer:
           class: App\Entity\Customer
           list:
-            filters: ['periodId']
+            filters: ['periodId', 'agency', 'groupLayout']
             fields:
               - { property: 'customerId'}
               - { property: 'firstName'}
@@ -142,7 +142,7 @@ easy_admin:
         FormSizes:
           class: App\Entity\Customer
           list:
-            filters: ['periodId']
+            filters: ['periodId', 'agency', 'groupLayout']
             sort: 'customerId'
             fields:
               - { property: 'groupLayout'}
@@ -159,7 +159,7 @@ easy_admin:
             class: App\Entity\Customer
             list:
               sort: 'customerId'
-              filters: ['periodId']
+              filters: ['periodId', 'agency', 'groupLayout']
               fields:
                 - { property: 'checkedIn'}
                 - { property: 'firstName'}
@@ -196,7 +196,7 @@ easy_admin:
             class: App\Entity\Customer
             list:
               sort: 'customerId'
-              filters: ['periodId']
+              filters: ['periodId', 'agency', 'groupLayout']
               fields:
                 - { property: 'groupLayout'}
                 - { property: 'booker'}
@@ -215,7 +215,7 @@ easy_admin:
             class: App\Entity\Customer
             list:
               sort: 'customerId'
-              filters: ['periodId']
+              filters: ['periodId', 'agency', 'groupLayout']
               fields:
                 - { property: 'groupLayout'}
                 - { property: 'groupPreference'}
@@ -234,7 +234,7 @@ easy_admin:
             class: App\Entity\Customer
             list:
               sort: 'customerId'
-              filters: ['periodId']
+              filters: ['periodId', 'agency', 'groupLayout']
               fields:
                 - { property: 'groupName'}
                 - { property: 'booker'}
@@ -251,7 +251,7 @@ easy_admin:
             class: App\Entity\Customer
             list:
               sort: 'customerId'
-              filters: ['periodId']
+              filters: ['periodId', 'agency', 'groupLayout']
               fields:
                 - { property: 'groupLayout'}
                 - { property: 'programType'}

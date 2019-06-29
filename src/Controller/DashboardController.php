@@ -575,7 +575,6 @@ class DashboardController extends AbstractController {
         $semana = "Semana: " . $lastSaturday . " - " . $nextSaturday;
         foreach ($customersByDate as $date => $groupedCustomers)
         {
-            dump($groupedCustomers);die();
             $worksheet = new Worksheet($spreadsheet, substr($date, 8, 2));
             $spreadsheet->addSheet($worksheet);
 

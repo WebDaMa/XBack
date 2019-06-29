@@ -84,6 +84,9 @@ class Calculations {
 
     public static function convertExcelDateToDateTime($dateValue)
     {
+        if ($dateValue < 1.0) {
+            return null;
+        }
         return Date::excelToDateTimeObject($dateValue, new \DateTimeZone('Europe/Amsterdam'));
     }
 

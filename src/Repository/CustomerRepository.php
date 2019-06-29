@@ -763,12 +763,16 @@ class CustomerRepository extends ServiceEntityRepository {
 
         $qb
             ->select('c.first_name', 'c.last_name', 'c.national_register_number', 'c.expire_date',
-                'c.birthdate', 'p.activity AS activity_name', 'p.date')
+                'c.birthdate', 'a.name AS activity_name', 'p.date')
             ->from('planning', 'p')
             ->innerJoin('p', 'groep', 'g', 'p.group_id = g.id')
             ->innerJoin('g', 'customer', 'c', 'g.id = c.group_layout_id')
-            ->where("c.period_id = :periodId")
+            ->innerJoin('c', 'customers_activities', 'ca', 'ca.customer_id = c.id')
+            ->innerJoin('ca', 'activity', 'a', 'ca.activity_id = a.id')
+            ->where('c.period_id = :periodId')
             ->andWhere("p.activity LIKE '%raft%' OR p.activity LIKE '%hydro%'")
+            //1 is raft
+            ->andWhere('a.activity_group_id = 1')
             ->setParameter('periodId', $periodId)
             ->orderBy('p.activity')
             ->addOrderBy('c.last_name');

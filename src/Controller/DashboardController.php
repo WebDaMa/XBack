@@ -362,7 +362,7 @@ class DashboardController extends AbstractController {
         $updateCustomer->setEmail($row[9]);
         $updateCustomer->setGsm($row[10]);
         $updateCustomer->setNationalRegisterNumber($row[11]);
-        $updateCustomer->setExpireDate(Calculations::getDateOrNull($row[12], 'j/m/Y'));
+        $updateCustomer->setExpireDate(Calculations::convertExcelDateToDateTime($row[12]));
 
         $size = $this->getDoctrine()->getRepository(SuitSize::class)->findBySizeId($row[13]);
         if ($size)
@@ -575,6 +575,7 @@ class DashboardController extends AbstractController {
         $semana = "Semana: " . $lastSaturday . " - " . $nextSaturday;
         foreach ($customersByDate as $date => $groupedCustomers)
         {
+            dump($groupedCustomers);die();
             $worksheet = new Worksheet($spreadsheet, substr($date, 8, 2));
             $spreadsheet->addSheet($worksheet);
 

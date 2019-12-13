@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="28003c11-d650-495f-a348-aeda715ddc53" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,11 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="easy_admin.yaml" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
+      <file leaf-file-name="CustomerRepository.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4048">
-              <caret line="253" column="60" selection-start-line="253" selection-start-column="60" selection-end-line="253" selection-end-column="60" />
+            <state relative-caret-position="108">
+              <caret line="758" column="20" selection-start-line="758" selection-start-column="20" selection-end-line="758" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -131,10 +129,10 @@
         <option value="$PROJECT_DIR$/src/Repository/ClientRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/IncludeOptionRepository.php" />
         <option value="$PROJECT_DIR$/src/Repository/ActivityRepository.php" />
-        <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
         <option value="$PROJECT_DIR$/src/Logic/Calculations.php" />
-        <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
         <option value="$PROJECT_DIR$/config/packages/easy_admin.yaml" />
+        <option value="$PROJECT_DIR$/src/Repository/CustomerRepository.php" />
+        <option value="$PROJECT_DIR$/src/Controller/DashboardController.php" />
       </list>
     </option>
   </component>
@@ -524,16 +522,18 @@
       <workItem from="1561587869806" duration="1551000" />
       <workItem from="1561796615643" duration="1761000" />
       <workItem from="1564242896305" duration="56000" />
+      <workItem from="1564770349176" duration="1103000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="416535000" />
+    <option name="totallyTimeSpent" value="417638000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18402778" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18402778" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="right" id="Nativescript Palette" order="3" />
@@ -543,62 +543,22 @@
       <window_info anchor="bottom" id="NativeScript" order="7" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.27888888" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.27888888" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="7" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" visible="true" weight="0.19777778" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-    <option name="exactExcludedFiles">
-      <list>
-        <option value="$PROJECT_DIR$/../XApp/app/shared/services/location.service.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/services/service.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/services/guide.service.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/services/material.service.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/guide.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/location.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/services/customer.service.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/services/suitSize.service.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/suitSize.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/services/option.service.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/raftingCustomer.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/activity.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/optionCategory.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/base/typeName.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/lodgingCustomer.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/volpension.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/busCustomer.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/lodging.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/checkinBus.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/busPlace.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/agency.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/services/agency.service.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/settings/settings.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/allInType.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/canyoningCustomer.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/specialCustomer.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/billCustomer.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/billCustomerDetail.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/option.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/billCustomerTotal.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/payment.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/planning.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/services/planning.service.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/checkinCustomer.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/checkinCustomerDetail.model.js" />
-        <option value="$PROJECT_DIR$/../XApp/app/shared/models/groepCustomer.model.js" />
-      </list>
-    </option>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -912,13 +872,6 @@
         <state relative-caret-position="-91" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="398">
-          <caret line="768" column="39" selection-start-line="768" selection-start-column="39" selection-end-line="768" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Logic/Calculations.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -926,17 +879,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
+    <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="577" column="30" selection-start-line="577" selection-start-column="30" selection-end-line="577" selection-end-column="30" />
+        <state relative-caret-position="589">
+          <caret line="253" column="60" selection-start-line="253" selection-start-column="60" selection-end-line="253" selection-end-column="60" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/packages/easy_admin.yaml">
+    <entry file="file://$PROJECT_DIR$/src/Controller/DashboardController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4048">
-          <caret line="253" column="60" selection-start-line="253" selection-start-column="60" selection-end-line="253" selection-end-column="60" />
+        <state relative-caret-position="613">
+          <caret line="569" column="120" lean-forward="true" selection-start-line="569" selection-start-column="120" selection-end-line="569" selection-end-column="120" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Repository/CustomerRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="758" column="20" selection-start-line="758" selection-start-column="20" selection-end-line="758" selection-end-column="20" />
         </state>
       </provider>
     </entry>

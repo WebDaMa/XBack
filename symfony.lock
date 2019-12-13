@@ -305,6 +305,9 @@
     "symfony/dotenv": {
         "version": "v4.0.1"
     },
+    "symfony/error-handler": {
+        "version": "v4.4.1"
+    },
     "symfony/event-dispatcher": {
         "version": "v4.0.1"
     },
@@ -525,15 +528,6 @@
     },
     "symplify/package-builder": {
         "version": "v5.4.16"
-    },
-    "twig/extensions": {
-        "version": "1.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "1.0",
-            "ref": "4851df0afc426b8f07204379d21fca25b6df5d68"
-        }
     },
     "twig/twig": {
         "version": "v2.4.4"

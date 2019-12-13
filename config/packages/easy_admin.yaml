@@ -1,584 +1,936 @@
 easy_admin:
-    site_name: 'LifeLong Exploring Administration'
-    design:
-            brand_color: '#70b32e'
-            menu:
-                - { label: 'Imports' }
-                - { label: 'Planning Import', route: 'admin_planning_upload' }
-                - { label: 'BO Import', route: 'admin_bo_upload' }
-                - { label: 'Exports' }
-                - { label: 'Rafting Export', route: 'admin_export_rafting' }
-                - { label: 'Afrekening Export', route: 'admin_export_bill' }
-                - { label: 'Forms' }
-                - FormBill
-                - FormCheckin
-                - FormGroupLayout
-                - FormLodgingLayout
-                - FormOptions
-                - FormPayment
-                - FormSizes
-                - { label: 'Entities' }
-                - Activity
-                - Agency
-                - Customer
-                - Groep
-                - Guide
-                - IncludeOption
-                - Location
-                - Planning
-                - Program
-                - ProgramActivity
-                - User
-                - { label: 'Types' }
-                - ActivityGroup
-                - AllInType
-                - BeltSize
-                - InsuranceType
-                - HelmSize
-                - GroupType
-                - LodgingType
-                - ProgramGroup
-                - ProgramType
-                - SuitSize
-                - TransportType
-                - TravelType
-
-    list:
-        max_results: 200
-    entities:
-        # List the entity class name you want to manage
-
-        User:
-          class: App\Entity\User
-          list:
-            fields:
-              - { property: 'username'}
-              - { property: 'email'}
-              - { property: 'enabled'}
-              - { property: 'roles'}
-          form:
-            fields:
-                - username
-                - email
-                - enabled
-                # if administrators are allowed to edit users' passwords and roles, add this:
-                - { property: 'plainPassword', type: 'text', type_options: { required: false } }
-                - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_KV': 'ROLE_KV', 'ROLE_STV': 'ROLE_STV', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
-
-        Customer:
-          class: App\Entity\Customer
-          list:
-            filters: ['periodId', 'agency', 'groupLayout']
-            fields:
-              - { property: 'customerId'}
-              - { property: 'firstName'}
-              - { property: 'lastName'}
-              - { property: 'email'}
-              - { property: 'periodId'}
-              - { property: 'gsm'}
-              - { property: 'nationalRegisterNumber'}
-          form:
-            fields:
-              - { property: 'customerId'}
-              - { property: 'fileId'}
-              - { property: 'periodId'}
-              - { property: 'bookerId'}
-              - { property: 'booker'}
-              - { property: 'lastName'}
-              - { property: 'firstName'}
-              - { property: 'email'}
-              - { property: 'birthdate',
-                  type: 'Symfony\Component\Form\Extension\Core\Type\BirthdayType',
-                  type_options: { widget: 'single_text'}
-                  }
-              - { property: 'gsm'}
-              - { property: 'nationalRegisterNumber'}
-              - { property: 'expireDate',
-                  type: 'App\Form\DateFutureType',
-                  type_options: { widget: 'single_text'}
-                  }
-              - { property: 'size'}
-              - { property: 'sizeInfo'}
-              - { property: 'nameShortage'}
-              - { property: 'emergencyNumber'}
-              - { property: 'licensePlate'}
-              - { property: 'typePerson'}
-              - { property: 'infoCustomer'}
-              - { property: 'infoFile'}
-              - { property: 'agency'}
-              - { property: 'location'}
-              - { property: 'startDay',
-                  type_options: { widget: 'single_text'}
-                  }
-              - { property: 'endDay',
-                  type_options: { widget: 'single_text'}
-                  }
-              - { property: 'programType'}
-              - { property: 'lodgingType'}
-              - { property: 'allInType'}
-              - { property: 'insuranceType'}
-              - { property: 'travelGoType'}
-              - { property: 'travelGoDate',
-                  type_options: { widget: 'single_text'}
-                  }
-              - { property: 'travelBackType'}
-              - { property: 'travelBackDate',
-                  type_options: { widget: 'single_text'}
-                  }
-              - { property: 'boardingPoint'}
-              - { property: 'activityOption'}
-              - { property: 'groupName'}
-              - { property: 'groupPreference'}
-              - { property: 'lodgingLayout'}
-              - { property: 'groupLayout'}
-              - { property: 'payed'}
-              - { property: 'payedPayconiq'}
-              - { property: 'isCamper'}
-              - { property: 'checkedIn'}
-              - { property: 'totalExclInsurance'}
-              - { property: 'insuranceValue'}
-              - { property: 'activities'}
-
-        FormSizes:
-          class: App\Entity\Customer
-          list:
-            filters: ['periodId', 'agency', 'groupLayout']
-            sort: 'customerId'
-            fields:
-              - { property: 'groupLayout'}
-              - { property: 'firstName'}
-              - { property: 'lastName'}
-              - { property: 'size'}
-              - { property: 'sizeInfo'}
-          form:
-            fields:
-              - { property: 'size'}
-              - { property: 'sizeInfo'}
-
-        FormCheckin:
-            class: App\Entity\Customer
-            list:
-              sort: 'customerId'
-              filters: ['periodId', 'agency', 'groupLayout']
-              fields:
-                - { property: 'checkedIn'}
-                - { property: 'firstName'}
-                - { property: 'lastName'}
-                - { property: 'booker'}
-                - { property: 'groupName'}
-                - { property: 'birthdate'}
-                - { property: 'nationalRegisterNumber'}
-                - { property: 'expireDate'}
-                - { property: 'lodgingLayout'}
-                - { property: 'allInType'}
-                - { property: 'groupLayout'}
-            form:
-              fields:
-                - { property: 'checkedIn'}
-                - { property: 'firstName'}
-                - { property: 'lastName'}
-                - { property: 'booker'}
-                - { property: 'groupName'}
-                - { property: 'birthdate',
-                    type: 'Symfony\Component\Form\Extension\Core\Type\BirthdayType',
-                    type_options: { widget: 'single_text'}
-                  }
-                - { property: 'nationalRegisterNumber'}
-                - { property: 'expireDate',
-                    type: 'App\Form\DateFutureType',
-                    type_options: { widget: 'single_text'}
-                  }
-                - { property: 'lodgingLayout'}
-                - { property: 'allInType'}
-                - { property: 'groupLayout'}
-
-        FormBill:
-            class: App\Entity\Customer
-            list:
-              sort: 'customerId'
-              filters: ['periodId', 'agency', 'groupLayout']
-              fields:
-                - { property: 'groupLayout'}
-                - { property: 'booker'}
-                - { property: 'firstName'}
-                - { property: 'lastName'}
-                - { property: 'payments'}
-                - { property: 'payed'}
-                - { property: 'payedPayconiq'}
-            form:
-              fields:
-                - { property: 'payments'}
-                - { property: 'payed'}
-                - { property: 'payedPayconiq'}
-
-        FormGroupLayout:
-            class: App\Entity\Customer
-            list:
-              sort: 'customerId'
-              filters: ['periodId', 'agency', 'groupLayout']
-              fields:
-                - { property: 'groupLayout'}
-                - { property: 'groupPreference'}
-                - { property: 'programType'}
-                - { property: 'groupName'}
-                - { property: 'booker'}
-                - { property: 'travelGoType'}
-                - { property: 'birthdate'}
-                - { property: 'firstName'}
-                - { property: 'lastName'}
-            form:
-              fields:
-                - { property: 'groupLayout'}
-
-        FormLodgingLayout:
-            class: App\Entity\Customer
-            list:
-              sort: 'customerId'
-              filters: ['periodId', 'agency', 'groupLayout']
-              fields:
-                - { property: 'groupName'}
-                - { property: 'booker'}
-                - { property: 'firstName'}
-                - { property: 'lastName'}
-                - { property: 'lodgingType'}
-                - { property: 'lodgingLayout'}
-
-            form:
-              fields:
-                - { property: 'lodgingLayout'}
-
-        FormOptions:
-            class: App\Entity\Customer
-            list:
-              sort: 'customerId'
-              filters: ['periodId', 'agency', 'groupLayout']
-              fields:
-                - { property: 'groupLayout'}
-                - { property: 'programType'}
-                - { property: 'firstName'}
-                - { property: 'lastName'}
-                - { property: 'activities'}
-            form:
-              fields:
-                - { property: 'activities'}
-
-        Agency:
-          class: App\Entity\Agency
-          list:
-            sort: ['code', 'ASC']
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'agencyCustomers'}
-          form:
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'agencyCustomers', type_options: { by_reference: false }}
-
-        AllInType:
-          class: App\Entity\AllInType
-          list:
-            sort: ['code', 'ASC']
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'price'}
-              - { property: 'allCustomers'}
-          form:
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'price'}
-              - { property: 'allCustomers', type_options: { by_reference: false }}
-
-        InsuranceType:
-          class: App\Entity\InsuranceType
-          list:
-            sort: ['code', 'ASC']
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'insuranceCode'}
-              - { property: 'insuranceName'}
-              - { property: 'insCustomers'}
-          form:
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'insuranceCode'}
-              - { property: 'insuranceName'}
-              - { property: 'insCustomers', type_options: { by_reference: false }}
-
-        LodgingType:
-          class: App\Entity\LodgingType
-          list:
-            sort: ['code', 'ASC']
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'lodgingCustomers'}
-          form:
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'lodgingCustomers', type_options: { by_reference: false }}
-
-        ProgramType:
-          class: App\Entity\ProgramType
-          list:
-            sort: ['code', 'ASC']
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'programCustomers'}
-          form:
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'programCustomers', type_options: { by_reference: false }}
-
-        TravelType:
-          class: App\Entity\TravelType
-
-        TransportType:
-          class: App\Entity\TransportType
-          list:
-            sort: ['name', 'ASC']
-            fields:
-              - { property: 'name'}
-              - { property: 'travelTypes'}
-          form:
-            fields:
-              - { property: 'name'}
-              - { property: 'travelTypes', type_options: { by_reference: false }}
-
-        Location:
-          class: App\Entity\Location
-          list:
-            sort: ['code', 'ASC']
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'locCustomers'}
-          form:
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'locCustomers', type_options: { by_reference: false }}
-
-        GroupType:
-          class: App\Entity\GroupType
-          list:
-            sort: ['code', 'ASC']
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'agency'}
-              - { property: 'customers'}
-          form:
-            fields:
-              - { property: 'code'}
-              - { property: 'description'}
-              - { property: 'agency'}
-              - { property: 'customers', type_options: { by_reference: false }}
-
-        Groep:
-          class: App\Entity\Groep
-          list:
-            fields:
-              - { property: 'groupId'}
-              - { property: 'periodId'}
-              - { property: 'name'}
-              - { property: 'location'}
-              - { property: 'plannings'}
-              - { property: 'groupCustomers'}
-          form:
-            fields:
-              - { property: 'groupId'}
-              - { property: 'periodId'}
-              - { property: 'name'}
-              - { property: 'location'}
-              - { property: 'plannings', type_options: { by_reference: false }}
-              - { property: 'groupCustomers', type_options: { by_reference: false }}
-
-        Guide:
-          class: App\Entity\Guide
-          list:
-            sort: ['guideShort', 'ASC']
-            fields:
-              - { property: 'guideShort'}
-              - { property: 'guideFirstName'}
-              - { property: 'guideLastName'}
-              - { property: 'plannings'}
-          form:
-            fields:
-              - { property: 'guideShort'}
-              - { property: 'guideFirstName'}
-              - { property: 'guideLastName'}
-              - { property: 'plannings', type_options: { by_reference: false }}
-
-        SuitSize:
-          class: App\Entity\SuitSize
-          list:
-            sort: ['name', 'ASC']
-            fields:
-              - { property: 'sizeId'}
-              - { property: 'name'}
-              - { property: 'beltSize'}
-              - { property: 'helmSize'}
-              - { property: 'suitCustomers'}
-          form:
-            fields:
-              - { property: 'sizeId'}
-              - { property: 'name'}
-              - { property: 'beltSize'}
-              - { property: 'helmSize'}
-              - { property: 'suitCustomers', type_options: { by_reference: false }}
-
-        HelmSize:
-          class: App\Entity\HelmSize
-          list:
-            sort: ['name', 'ASC']
-            fields:
-              - { property: 'name'}
-              - { property: 'helmSuitSizes'}
-          form:
-            fields:
-              - { property: 'name'}
-              - { property: 'helmSuitSizes', type_options: { by_reference: false }}
-
-        BeltSize:
-          class: App\Entity\BeltSize
-          list:
-            sort: ['name', 'ASC']
-            fields:
-              - { property: 'name'}
-              - { property: 'beltSuitSizes'}
-          form:
-            fields:
-              - { property: 'name'}
-              - { property: 'beltSuitSizes', type_options: { by_reference: false }}
-
-        Planning:
-          class: App\Entity\Planning
-          list:
-            sort: 'id'
-            fields:
-              - { property: 'planningId'}
-              - { property: 'date'}
-              - { property: 'group'}
-              - { property: 'activity'}
-              - { property: 'guide'}
-              - { property: 'cag1'}
-              - { property: 'cag2'}
-              - { property: 'transport'}
-              - { property: 'guideFunction'}
-          form:
-            fields:
-              - { property: 'planningId'}
-              - { property: 'date',
-                  type_options: { widget: 'single_text'}
-                }
-              - { property: 'activity'}
-              - { property: 'group'}
-              - { property: 'guide'}
-              - { property: 'cag1'}
-              - { property: 'cag2'}
-              - { property: 'transport'}
-              - { property: 'guideFunction'}
-
-        ActivityGroup:
-          class: App\Entity\ActivityGroup
-          list:
-            sort: ['name', 'ASC']
-            fields:
-              - { property: 'name'}
-              - { property: 'activities'}
-          form:
-            fields:
-              - { property: 'name'}
-              - { property: 'activities', type_options: { by_reference: false }}
-
-        ProgramGroup:
-          class: App\Entity\ProgramGroup
-          list:
-            sort: ['name', 'ASC']
-            fields:
-              - { property: 'name'}
-              - { property: 'programs'}
-          form:
-            fields:
-              - { property: 'name'}
-              - { property: 'programs', type_options: { by_reference: false }}
-
-        Activity:
-          class: App\Entity\Activity
-          list:
-            sort: ['name', 'ASC']
-            fields:
-              - { property: 'name'}
-              - { property: 'programActivities'}
-              - { property: 'agency'}
-              - { property: 'activityGroup'}
-              - { property: 'customers'}
-              - { property: 'location'}
-              - { property: 'price'}
-
-          form:
-            fields:
-              - { property: 'name'}
-              - { property: 'programActivities', type_options: { by_reference: false }}
-              - { property: 'agency'}
-              - { property: 'activityGroup'}
-              - { property: 'price'}
-              - { property: 'customers', type_options: { by_reference: false }}
-              - { property: 'location'}
-
-        Program:
-          class: App\Entity\Program
-          list:
-            sort: ['name', 'ASC']
-            fields:
-              - { property: 'name'}
-              - { property: 'agency'}
-              - { property: 'programGroup'}
-              - { property: 'days'}
-              - { property: 'programType'}
-              - { property: 'location'}
-          form:
-            fields:
-              - { property: 'name'}
-              - { property: 'agency'}
-              - { property: 'programGroup'}
-              - { property: 'days'}
-              - { property: 'programType'}
-              - { property: 'location'}
-
-        ProgramActivity:
-          class: App\Entity\ProgramActivity
-
-        FormPayment:
-          class: App\Entity\Payment
-          list:
-            sort: 'created_at'
-            fields:
-              - { property: 'customer'}
-              - { property: 'description'}
-              - { property: 'price'}
-          form:
-            fields:
-              - { property: 'customer'}
-              - { property: 'description'}
-              - { property: 'price'}
-
-        IncludeOption:
-                  class: App\Entity\IncludeOption
-                  help: "Alle programma's waarbij de opties(raft/canyon) reeds inbegrepen zijn."
-                  list:
-                    sort: ['programType.code', 'ASC']
-                    fields:
-                      - { property: 'programType'}
-                  form:
-                    fields:
-                      - { property: 'programType'}
+  design:
+    brand_color: "#70b32e"
+    menu:
+      -
+        label: Imports
+      -
+        label: "Planning Import"
+        route: admin_planning_upload
+      -
+        label: "BO Import"
+        route: admin_bo_upload
+      -
+        label: Exports
+      -
+        label: "Rafting Export"
+        route: admin_export_rafting
+      -
+        label: "Afrekening Export"
+        route: admin_export_bill
+      -
+        label: Forms
+      - FormBill
+      - FormCheckin
+      - FormGroupLayout
+      - FormLodgingLayout
+      - FormOptions
+      - FormPayment
+      - FormSizes
+      -
+        label: Entities
+      - Activity
+      - Agency
+      - Customer
+      - Groep
+      - Guide
+      - IncludeOption
+      - Location
+      - Planning
+      - Program
+      - ProgramActivity
+      - User
+      -
+        label: Types
+      - ActivityGroup
+      - AllInType
+      - BeltSize
+      - InsuranceType
+      - HelmSize
+      - GroupType
+      - LodgingType
+      - ProgramGroup
+      - ProgramType
+      - SuitSize
+      - TransportType
+      - TravelType
+  entities:
+    Activity:
+      class: App\Entity\Activity
+      form:
+        fields:
+          -
+            property: name
+          -
+            property: programActivities
+            type_options:
+              by_reference: false
+          -
+            property: agency
+          -
+            property: activityGroup
+          -
+            property: price
+          -
+            property: customers
+            type_options:
+              by_reference: false
+          -
+            property: location
+      list:
+        fields:
+          -
+            property: name
+          -
+            property: programActivities
+          -
+            property: agency
+          -
+            property: activityGroup
+          -
+            property: customers
+          -
+            property: location
+          -
+            property: price
+        sort:
+          - name
+          - ASC
+    ActivityGroup:
+      class: App\Entity\ActivityGroup
+      form:
+        fields:
+          -
+            property: name
+          -
+            property: activities
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: name
+          -
+            property: activities
+        sort:
+          - name
+          - ASC
+    Agency:
+      class: App\Entity\Agency
+      form:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: agencyCustomers
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: agencyCustomers
+        sort:
+          - code
+          - ASC
+    AllInType:
+      class: App\Entity\AllInType
+      form:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: price
+          -
+            property: allCustomers
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: price
+          -
+            property: allCustomers
+        sort:
+          - code
+          - ASC
+    BeltSize:
+      class: App\Entity\BeltSize
+      form:
+        fields:
+          -
+            property: name
+          -
+            property: beltSuitSizes
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: name
+          -
+            property: beltSuitSizes
+        sort:
+          - name
+          - ASC
+    Customer:
+      class: App\Entity\Customer
+      form:
+        fields:
+          -
+            property: customerId
+          -
+            property: fileId
+          -
+            property: periodId
+          -
+            property: bookerId
+          -
+            property: booker
+          -
+            property: lastName
+          -
+            property: firstName
+          -
+            property: email
+          -
+            property: birthdate
+            type: Symfony\Component\Form\Extension\Core\Type\BirthdayType
+            type_options:
+              widget: single_text
+          -
+            property: gsm
+          -
+            property: nationalRegisterNumber
+          -
+            property: expireDate
+            type: App\Form\DateFutureType
+            type_options:
+              widget: single_text
+          -
+            property: size
+          -
+            property: sizeInfo
+          -
+            property: nameShortage
+          -
+            property: emergencyNumber
+          -
+            property: licensePlate
+          -
+            property: typePerson
+          -
+            property: infoCustomer
+          -
+            property: infoFile
+          -
+            property: agency
+          -
+            property: location
+          -
+            property: startDay
+            type_options:
+              widget: single_text
+          -
+            property: endDay
+            type_options:
+              widget: single_text
+          -
+            property: programType
+          -
+            property: lodgingType
+          -
+            property: allInType
+          -
+            property: insuranceType
+          -
+            property: travelGoType
+          -
+            property: travelGoDate
+            type_options:
+              widget: single_text
+          -
+            property: travelBackType
+          -
+            property: travelBackDate
+            type_options:
+              widget: single_text
+          -
+            property: boardingPoint
+          -
+            property: activityOption
+          -
+            property: groupName
+          -
+            property: groupPreference
+          -
+            property: lodgingLayout
+          -
+            property: groupLayout
+          -
+            property: payed
+          -
+            property: payedPayconiq
+          -
+            property: isCamper
+          -
+            property: checkedIn
+          -
+            property: totalExclInsurance
+          -
+            property: insuranceValue
+          -
+            property: activities
+      list:
+        fields:
+          -
+            property: customerId
+          -
+            property: firstName
+          -
+            property: lastName
+          -
+            property: email
+          -
+            property: periodId
+          -
+            property: gsm
+          -
+            property: nationalRegisterNumber
+        filters:
+          - periodId
+          - agency
+          - groupLayout
+    FormBill:
+      class: App\Entity\Customer
+      form:
+        fields:
+          -
+            property: payments
+          -
+            property: payed
+          -
+            property: payedPayconiq
+      list:
+        fields:
+          -
+            property: groupLayout
+          -
+            property: booker
+          -
+            property: firstName
+          -
+            property: lastName
+          -
+            property: payments
+          -
+            property: payed
+          -
+            property: payedPayconiq
+        filters:
+          - periodId
+          - agency
+          - groupLayout
+        sort: customerId
+    FormCheckin:
+      class: App\Entity\Customer
+      form:
+        fields:
+          -
+            property: checkedIn
+          -
+            property: firstName
+          -
+            property: lastName
+          -
+            property: booker
+          -
+            property: groupName
+          -
+            property: birthdate
+            type: Symfony\Component\Form\Extension\Core\Type\BirthdayType
+            type_options:
+              widget: single_text
+          -
+            property: nationalRegisterNumber
+          -
+            property: expireDate
+            type: App\Form\DateFutureType
+            type_options:
+              widget: single_text
+          -
+            property: lodgingLayout
+          -
+            property: allInType
+          -
+            property: groupLayout
+      list:
+        fields:
+          -
+            property: checkedIn
+          -
+            property: firstName
+          -
+            property: lastName
+          -
+            property: booker
+          -
+            property: groupName
+          -
+            property: birthdate
+          -
+            property: nationalRegisterNumber
+          -
+            property: expireDate
+          -
+            property: lodgingLayout
+          -
+            property: allInType
+          -
+            property: groupLayout
+        filters:
+          - periodId
+          - agency
+          - groupLayout
+        sort: customerId
+    FormGroupLayout:
+      class: App\Entity\Customer
+      form:
+        fields:
+          -
+            property: groupLayout
+      list:
+        fields:
+          -
+            property: groupLayout
+          -
+            property: groupPreference
+          -
+            property: programType
+          -
+            property: groupName
+          -
+            property: booker
+          -
+            property: travelGoType
+          -
+            property: birthdate
+          -
+            property: firstName
+          -
+            property: lastName
+        filters:
+          - periodId
+          - agency
+          - groupLayout
+        sort: customerId
+    FormLodgingLayout:
+      class: App\Entity\Customer
+      form:
+        fields:
+          -
+            property: lodgingLayout
+      list:
+        fields:
+          -
+            property: groupName
+          -
+            property: booker
+          -
+            property: firstName
+          -
+            property: lastName
+          -
+            property: lodgingType
+          -
+            property: lodgingLayout
+        filters:
+          - periodId
+          - agency
+          - groupLayout
+        sort: customerId
+    FormOptions:
+      class: App\Entity\Customer
+      form:
+        fields:
+          -
+            property: activities
+      list:
+        fields:
+          -
+            property: groupLayout
+          -
+            property: programType
+          -
+            property: firstName
+          -
+            property: lastName
+          -
+            property: activities
+        filters:
+          - periodId
+          - agency
+          - groupLayout
+        sort: customerId
+    FormPayment:
+      class: App\Entity\Payment
+      form:
+        fields:
+          -
+            property: customer
+          -
+            property: description
+          -
+            property: price
+      list:
+        fields:
+          -
+            property: customer
+          -
+            property: description
+          -
+            property: price
+        sort: created_at
+    FormSizes:
+      class: App\Entity\Customer
+      form:
+        fields:
+          -
+            property: size
+          -
+            property: sizeInfo
+      list:
+        fields:
+          -
+            property: groupLayout
+          -
+            property: firstName
+          -
+            property: lastName
+          -
+            property: size
+          -
+            property: sizeInfo
+        filters:
+          - periodId
+          - agency
+          - groupLayout
+        sort: customerId
+    Groep:
+      class: App\Entity\Groep
+      form:
+        fields:
+          -
+            property: groupId
+          -
+            property: periodId
+          -
+            property: name
+          -
+            property: location
+          -
+            property: plannings
+            type_options:
+              by_reference: false
+          -
+            property: groupCustomers
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: groupId
+          -
+            property: periodId
+          -
+            property: name
+          -
+            property: location
+          -
+            property: plannings
+          -
+            property: groupCustomers
+    GroupType:
+      class: App\Entity\GroupType
+      form:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: agency
+          -
+            property: customers
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: agency
+          -
+            property: customers
+        sort:
+          - code
+          - ASC
+    Guide:
+      class: App\Entity\Guide
+      form:
+        fields:
+          -
+            property: guideShort
+          -
+            property: guideFirstName
+          -
+            property: guideLastName
+          -
+            property: plannings
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: guideShort
+          -
+            property: guideFirstName
+          -
+            property: guideLastName
+          -
+            property: plannings
+        sort:
+          - guideShort
+          - ASC
+    HelmSize:
+      class: App\Entity\HelmSize
+      form:
+        fields:
+          -
+            property: name
+          -
+            property: helmSuitSizes
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: name
+          -
+            property: helmSuitSizes
+        sort:
+          - name
+          - ASC
+    IncludeOption:
+      class: App\Entity\IncludeOption
+      form:
+        fields:
+          -
+            property: programType
+      help: "Alle programma's waarbij de opties(raft/canyon) reeds inbegrepen zijn."
+      list:
+        fields:
+          -
+            property: programType
+        sort:
+          - programType.code
+          - ASC
+    InsuranceType:
+      class: App\Entity\InsuranceType
+      form:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: insuranceCode
+          -
+            property: insuranceName
+          -
+            property: insCustomers
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: insuranceCode
+          -
+            property: insuranceName
+          -
+            property: insCustomers
+        sort:
+          - code
+          - ASC
+    Location:
+      class: App\Entity\Location
+      form:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: locCustomers
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: locCustomers
+        sort:
+          - code
+          - ASC
+    LodgingType:
+      class: App\Entity\LodgingType
+      form:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: lodgingCustomers
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: lodgingCustomers
+        sort:
+          - code
+          - ASC
+    Planning:
+      class: App\Entity\Planning
+      form:
+        fields:
+          -
+            property: planningId
+          -
+            property: date
+            type_options:
+              widget: single_text
+          -
+            property: activity
+          -
+            property: group
+          -
+            property: guide
+          -
+            property: cag1
+          -
+            property: cag2
+          -
+            property: transport
+          -
+            property: guideFunction
+      list:
+        fields:
+          -
+            property: planningId
+          -
+            property: date
+          -
+            property: group
+          -
+            property: activity
+          -
+            property: guide
+          -
+            property: cag1
+          -
+            property: cag2
+          -
+            property: transport
+          -
+            property: guideFunction
+        sort: id
+    Program:
+      class: App\Entity\Program
+      form:
+        fields:
+          -
+            property: name
+          -
+            property: agency
+          -
+            property: programGroup
+          -
+            property: days
+          -
+            property: programType
+          -
+            property: location
+      list:
+        fields:
+          -
+            property: name
+          -
+            property: agency
+          -
+            property: programGroup
+          -
+            property: days
+          -
+            property: programType
+          -
+            property: location
+        sort:
+          - name
+          - ASC
+    ProgramActivity:
+      class: App\Entity\ProgramActivity
+    ProgramGroup:
+      class: App\Entity\ProgramGroup
+      form:
+        fields:
+          -
+            property: name
+          -
+            property: programs
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: name
+          -
+            property: programs
+        sort:
+          - name
+          - ASC
+    ProgramType:
+      class: App\Entity\ProgramType
+      form:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: programCustomers
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: code
+          -
+            property: description
+          -
+            property: programCustomers
+        sort:
+          - code
+          - ASC
+    SuitSize:
+      class: App\Entity\SuitSize
+      form:
+        fields:
+          -
+            property: sizeId
+          -
+            property: name
+          -
+            property: beltSize
+          -
+            property: helmSize
+          -
+            property: suitCustomers
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: sizeId
+          -
+            property: name
+          -
+            property: beltSize
+          -
+            property: helmSize
+          -
+            property: suitCustomers
+        sort:
+          - name
+          - ASC
+    TransportType:
+      class: App\Entity\TransportType
+      form:
+        fields:
+          -
+            property: name
+          -
+            property: travelTypes
+            type_options:
+              by_reference: false
+      list:
+        fields:
+          -
+            property: name
+          -
+            property: travelTypes
+        sort:
+          - name
+          - ASC
+    TravelType:
+      class: App\Entity\TravelType
+    User:
+      class: App\Entity\User
+      form:
+        fields:
+          - username
+          - email
+          - enabled
+          -
+            property: plainPassword
+            type: text
+            type_options:
+              required: false
+          -
+            property: roles
+            type: choice
+            type_options:
+              choices:
+                ROLE_ADMIN: ROLE_ADMIN
+                ROLE_KV: ROLE_KV
+                ROLE_STV: ROLE_STV
+                ROLE_USER: ROLE_USER
+              multiple: true
+      list:
+        fields:
+          -
+            property: username
+          -
+            property: email
+          -
+            property: enabled
+          -
+            property: roles
+  list:
+    max_results: 200
+  site_name: "LifeLong Exploring Administration"

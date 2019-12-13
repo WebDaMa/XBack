@@ -362,6 +362,7 @@ class DashboardController extends AbstractController {
         $updateCustomer->setEmail($row[9]);
         $updateCustomer->setGsm($row[10]);
         $updateCustomer->setNationalRegisterNumber($row[11]);
+        //TODO: Change to string
         $updateCustomer->setExpireDate(Calculations::convertExcelDateToDateTime($row[12]));
 
         $size = $this->getDoctrine()->getRepository(SuitSize::class)->findBySizeId($row[13]);

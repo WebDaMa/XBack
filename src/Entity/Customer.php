@@ -76,7 +76,7 @@ class Customer extends TypeTimestamps
     private $nationalRegisterNumber;
 
     /**
-     * @ORM\Column(type="date", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $expireDate;
 

@@ -729,7 +729,8 @@ class CustomerRepository extends ServiceEntityRepository {
         return $qb->execute()->fetchAll();
     }
 
-    public function getAllExtraByDateWithRafting($periodId, $date, $location): array
+    //Todo: still needed?
+    public function getAllExtraByDateWithRafting($periodId, $date): array
     {
         //Default on a Wednesday
         $wednesday = Calculations::getWednesdayThisWeekFromDate($date);
@@ -737,10 +738,13 @@ class CustomerRepository extends ServiceEntityRepository {
         $qb = $connection->createQueryBuilder();
         $qb
             ->select('c.first_name', 'c.last_name', 'c.national_register_number', 'c.expire_date',
-                'c.birthdate', 'a.name AS activity_name', "DATE('" . $wednesday . "') AS date")
+                'c.birthdate', 'a.name AS activity_name', "DATE('" . $wednesday . "') AS date", 'ag.code AS agency',
+                'l.code AS location')
             ->from('customer', 'c')
             ->innerJoin('c', 'customers_activities', 'ca', 'c.id = ca.customer_id')
             ->innerJoin('ca', 'activity', 'a', 'ca.activity_id = a.id')
+            ->innerJoin('c', 'agency', 'ag', 'c.agency_id = ag.id')
+            ->innerJoin('c', 'location', 'l', 'c.location_id = l.id')
             ->where("c.period_id = :periodId")
             ->andWhere('a.activity_group_id = 1')
             //Only XAD
@@ -748,27 +752,25 @@ class CustomerRepository extends ServiceEntityRepository {
             ->setParameter('periodId', $periodId)
             ->orderBy('a.name');
 
-        if(!is_null($location)) {
-            $qb->andWhere('c.location_id = :location')
-                ->setParameter('location', $location);
-        }
-
         return $qb->execute()->fetchAll();
     }
 
-    public function getAllByDateWithRafting($periodId, $location): array
+    public function getAllByDateWithRafting($periodId): array
     {
         $connection = $this->_em->getConnection();
         $qb = $connection->createQueryBuilder();
 
         $qb
             ->select('c.first_name', 'c.last_name', 'c.national_register_number', 'c.expire_date',
-                'c.birthdate', 'a.name AS activity_name', 'p.date')
+                'c.birthdate', 'a.name AS activity_name', 'p.date', 'ag.code AS agency',
+                'l.code AS location')
             ->from('planning', 'p')
             ->innerJoin('p', 'groep', 'g', 'p.group_id = g.id')
             ->innerJoin('g', 'customer', 'c', 'g.id = c.group_layout_id')
             ->innerJoin('c', 'customers_activities', 'ca', 'ca.customer_id = c.id')
             ->innerJoin('ca', 'activity', 'a', 'ca.activity_id = a.id')
+            ->innerJoin('c', 'agency', 'ag', 'c.agency_id = ag.id')
+            ->innerJoin('c', 'location', 'l', 'c.location_id = l.id')
             ->where('c.period_id = :periodId')
             ->andWhere("p.activity LIKE '%raft%' OR p.activity LIKE '%hydro%'")
             //1 is raft
@@ -776,11 +778,6 @@ class CustomerRepository extends ServiceEntityRepository {
             ->setParameter('periodId', $periodId)
             ->orderBy('p.activity')
             ->addOrderBy('c.last_name');
-
-        if(!is_null($location)) {
-            $qb->andWhere("c.location_id = :location")
-                ->setParameter("location", $location);
-        }
 
         return $qb->execute()->fetchAll();
     }

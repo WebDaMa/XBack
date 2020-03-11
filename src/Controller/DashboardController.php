@@ -18,6 +18,7 @@ use App\Entity\LodgingType;
 use App\Entity\ProgramType;
 use App\Entity\TravelType;
 use App\Form\ExportPeriodAndLocationType;
+use App\Form\ExportPeriodType;
 use App\Form\UploadType;
 use App\Logic\Calculations;
 use App\Logic\Extensions;
@@ -37,29 +38,23 @@ class DashboardController extends AbstractController {
     {
         $exportRaft = new ExportPeriodAndLocation();
 
-        $locations = $this->getDoctrine()->getRepository(Location::class)->findAllAsChoicesForForm();
         $periods = $this->getDoctrine()->getRepository(Groep::class)->getAllPeriodIdsAsChoicesForForm();
-        if(!empty($periods)) {
+        if (!empty($periods))
+        {
             unset($periods["Alle periodes"]);
             $periods = array_reverse($periods, true);
             $periods["Huidige Periode"] = Calculations::generatePeriodFromDate(date('Y-m-d H:i:s'));
             $periods = array_reverse($periods, true);
         }
         $options = [
-            'periods' => $periods,
-            'locations' => $locations
+            'periods' => $periods
         ];
 
-        $form = $this->createForm(ExportPeriodAndLocationType::class, $exportRaft, $options);
+        $form = $this->createForm(ExportPeriodType::class, $exportRaft, $options);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            // $file stores the uploaded file
-            /** @var UploadedFile $file */
-            // $file stores the uploaded file
-            /** @var UploadedFile $file */
-            $location = $exportRaft->getLocation();
             $periodId = $exportRaft->getPeriod();
 
             $em = $this->getDoctrine()->getManager();
@@ -68,7 +63,7 @@ class DashboardController extends AbstractController {
             $em->persist($exportRaft);
             $em->flush();
 
-            $spreadsheet = $this->generateRaftingExportSheet($location, $periodId);
+            $spreadsheet = $this->generateRaftingExportSheet($periodId);
 
             $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
@@ -117,7 +112,7 @@ class DashboardController extends AbstractController {
 
             $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment; filename="EindAfrekening-' . $periodId . '-' . $location .'.xlsx"');
+            header('Content-Disposition: attachment; filename="EindAfrekening-' . $periodId . '-' . $location . '.xlsx"');
             $writer->save("php://output");
             exit();
 
@@ -557,77 +552,82 @@ class DashboardController extends AbstractController {
         return $updatePlanning;
     }
 
-    private function generateRaftingExportSheet($location, $periodId)
+    private function generateRaftingExportSheet($periodId)
     {
         $week = substr($periodId, 2, 2);
         //This will bug in 2100 ;)
         $year = '20' . substr($periodId, 0, 2);
-        $dateString = date('Y-m-d',strtotime($year . 'W' . $week));
+        $dateString = date('Y-m-d', strtotime($year . 'W' . $week));
 
         $lastSaturday = Calculations::getLastSaturdayFromDate($dateString);
         $nextSaturday = Calculations::getNextSaturdayFromDate($dateString);
 
         $rep = $this->getDoctrine()->getRepository(Customer::class);
-        $customers = array_merge($rep->getAllExtraByDateWithRafting($periodId, $dateString, $location), $rep->getAllByDateWithRafting($periodId, $location));
-        $customersByDate = $this->groupCustomersByDate($customers);
+        //TODO: Extra still needed?
+        $customers = array_merge($rep->getAllExtraByDateWithRafting($periodId, $dateString), $rep->getAllByDateWithRafting($periodId));
 
         $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
 
         $semana = "Semana: " . $lastSaturday . " - " . $nextSaturday;
-        foreach ($customersByDate as $date => $groupedCustomers)
+
+        $worksheet = new Worksheet($spreadsheet, "Rafting " . $periodId);
+        $spreadsheet->addSheet($worksheet);
+
+        $worksheet->getCell("B1")->setValue("Rafting LifeLong Explore:")
+            ->getStyle()->getFont()->setSize(20);
+        $worksheet->getCell("C1")->setValue($semana)
+            ->getStyle()->getFont()->setSize(20);
+        $worksheet->getCell("D1")->setValue("Total: " . count($customers))
+            ->getStyle()->getFont()->setSize(20);
+
+        $worksheet->getCell("A2")->setValue("Apellido")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("B2")->setValue("Nombre")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("C2")->setValue("Numero dni")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("D2")->setValue("Fecha de validez")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("E2")->setValue("Fecha nacimiento")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("F2")->setValue("Actividad")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("G2")->setValue("Fecha actividad")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("H2")->setValue("Agencia")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("I2")->setValue("Residencia")
+            ->getStyle()->getFont()->setBold(true);
+
+        $worksheet->getColumnDimension("A")->setAutoSize(true);
+        $worksheet->getColumnDimension("B")->setAutoSize(true);
+        $worksheet->getColumnDimension("C")->setAutoSize(true);
+        $worksheet->getColumnDimension("D")->setAutoSize(true);
+        $worksheet->getColumnDimension("E")->setAutoSize(true);
+        $worksheet->getColumnDimension("F")->setAutoSize(true);
+        $worksheet->getColumnDimension("G")->setAutoSize(true);
+        $worksheet->getColumnDimension("H")->setAutoSize(true);
+        $worksheet->getColumnDimension("I")->setAutoSize(true);
+
+        $rowIndex = 3;
+
+        foreach ($customers as $customer)
         {
-            $worksheet = new Worksheet($spreadsheet, substr($date, 8, 2));
-            $spreadsheet->addSheet($worksheet);
-
-            $worksheet->getCell("B1")->setValue("Rafting LifeLong Explore:")
-                ->getStyle()->getFont()->setSize(20);
-            $worksheet->getCell("C1")->setValue($semana)
-                ->getStyle()->getFont()->setSize(20);
-            $worksheet->getCell("D1")->setValue($date)
-                ->getStyle()->getFont()->setSize(20);
-            $worksheet->getCell("E1")->setValue("Total: " . count($customersByDate[$date]))
-                ->getStyle()->getFont()->setSize(20);
-
-            $worksheet->getCell("A2")->setValue("Voornaam")
-                ->getStyle()->getFont()->setBold(true);
-            $worksheet->getCell("B2")->setValue("Naam")
-                ->getStyle()->getFont()->setBold(true);
-            $worksheet->getCell("C2")->setValue("RijksregisterNummer")
-                ->getStyle()->getFont()->setBold(true);
-            $worksheet->getCell("D2")->setValue("VervaldatumId")
-                ->getStyle()->getFont()->setBold(true);
-            $worksheet->getCell("E2")->setValue("Geboortedatum")
-                ->getStyle()->getFont()->setBold(true);
-            $worksheet->getCell("F2")->setValue("OptieOmschrijving")
-                ->getStyle()->getFont()->setBold(true);
-            $worksheet->getCell("G2")->setValue("Datum")
-                ->getStyle()->getFont()->setBold(true);
-
-            $worksheet->getColumnDimension("A")->setAutoSize(true);
-            $worksheet->getColumnDimension("B")->setAutoSize(true);
-            $worksheet->getColumnDimension("C")->setAutoSize(true);
-            $worksheet->getColumnDimension("D")->setAutoSize(true);
-            $worksheet->getColumnDimension("E")->setAutoSize(true);
-            $worksheet->getColumnDimension("F")->setAutoSize(true);
-            $worksheet->getColumnDimension("G")->setAutoSize(true);
-
-            $rowIndex = 3;
-
-            foreach ($groupedCustomers as $customer)
-            {
-                $worksheet->getCell("A" . $rowIndex)->setValue($customer["first_name"]);
-                $worksheet->getCell("B" . $rowIndex)->setValue($customer["last_name"]);
-                $worksheet->getCell("C" . $rowIndex)->setValue($customer["national_register_number"]);
-                $worksheet->getCell("D" . $rowIndex)->setValue($customer["expire_date"]);
-                $worksheet->getCell("E" . $rowIndex)->setValue($customer["birthdate"]);
-                $worksheet->getCell("F" . $rowIndex)->setValue($customer["activity_name"]);
-                $worksheet->getCell("G" . $rowIndex)->setValue($customer["date"]);
-                $rowIndex ++;
-            }
+            $worksheet->getCell("A" . $rowIndex)->setValue($customer["first_name"]);
+            $worksheet->getCell("B" . $rowIndex)->setValue($customer["last_name"]);
+            $worksheet->getCell("C" . $rowIndex)->setValue($customer["national_register_number"]);
+            $worksheet->getCell("D" . $rowIndex)->setValue($customer["expire_date"]);
+            $worksheet->getCell("E" . $rowIndex)->setValue($customer["birthdate"]);
+            $worksheet->getCell("F" . $rowIndex)->setValue($customer["activity_name"]);
+            $worksheet->getCell("G" . $rowIndex)->setValue($customer["date"]);
+            $worksheet->getCell("H" . $rowIndex)->setValue($customer["agency"]);
+            $worksheet->getCell("I" . $rowIndex)->setValue($customer["location"]);
+            $rowIndex ++;
         }
 
         //Remove default sheet
-        if(!empty($customersByDate)) {
+        if (!empty($customers))
+        {
             $spreadsheet->removeSheetByIndex(0);
         }
 
@@ -656,9 +656,11 @@ class DashboardController extends AbstractController {
             $customerBill = $rep->getBillByCustomerId($id);
             // Get more info from customer
             $customerExtra = $rep->getAllForPaymentExportByCustomerId($id);
-            if(is_array($customerBill) && is_array($customerExtra)) {
+            if (is_array($customerBill) && is_array($customerExtra))
+            {
                 $customers[$k] = array_merge($customerBill, $customerExtra);;
-            }else{
+            } else
+            {
                 //Remove invalid data
                 unset($customers[$k]);
             }
@@ -802,8 +804,10 @@ class DashboardController extends AbstractController {
             $totalCost = 0;
             $payed = false;
             $payconiq = false;
-            foreach ($customer["totals"] as $total) {
-                if ($total["customer"] === $customer["customer"]) {
+            foreach ($customer["totals"] as $total)
+            {
+                if ($total["customer"] === $customer["customer"])
+                {
                     $totalCost = $total["total"];
                     $payed = $total["payed"];
                     $payconiq = $total["payedPayconiq"];

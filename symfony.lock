@@ -146,6 +146,9 @@
             "ref": "fe60ce509ef04a3f40da96e3979bc8d9b13b2372"
         }
     },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.0.3"
+    },
     "markbaker/complex": {
         "version": "1.4.7"
     },
@@ -193,6 +196,9 @@
     },
     "paragonie/random_compat": {
         "version": "v2.0.12"
+    },
+    "php": {
+        "version": "7.4"
     },
     "php-http/guzzle6-adapter": {
         "version": "v1.1.1"
@@ -531,6 +537,9 @@
     },
     "twig/twig": {
         "version": "v2.4.4"
+    },
+    "webimpress/safe-writer": {
+        "version": "2.0.1"
     },
     "willdurand/jsonp-callback-validator": {
         "version": "v1.1.0"

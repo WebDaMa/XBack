@@ -104,7 +104,6 @@ class SuitSizeRepository extends ServiceEntityRepository {
         $beltSizesTotals = [];
         $userSizes = [];
 
-        //TODO: test customer with all types
         foreach ($customers as $customer)
         {
             //Filter
@@ -130,7 +129,7 @@ class SuitSizeRepository extends ServiceEntityRepository {
             } else
             {
                 // klant gaat optioneel mee
-                $hasOption = false;
+                /*$hasOption = false;
                 //Kijken of hij deze optie geboekt heeft
                 if (!is_null($activity) || $activity)
                 {
@@ -142,6 +141,7 @@ class SuitSizeRepository extends ServiceEntityRepository {
                 {
                     $customersIds[] = $customer->getId();
                 }
+                */
             }
 
         }

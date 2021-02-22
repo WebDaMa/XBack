@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\ProgramActivity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method ProgramActivity|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ProgramActivityRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, ProgramActivity::class);
     }
@@ -30,7 +30,7 @@ class ProgramActivityRepository extends ServiceEntityRepository
             ->where('pa.program_type_id = :programTypeId')
             ->andWhere("pa.activity_id = :activityId")
             ->setParameters(['programTypeId' => $programTypeId, 'activityId' => $activityId])
-            ->execute()->fetch();
+            ->execute()->fetchAssociative();
 
 
         return is_null($pa) || $pa == false ? false : true;

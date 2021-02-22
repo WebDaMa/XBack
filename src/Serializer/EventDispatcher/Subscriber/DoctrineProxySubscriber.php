@@ -6,10 +6,10 @@ use Doctrine\Common\Persistence\Proxy;
 use Doctrine\ODM\MongoDB\PersistentCollection as MongoDBPersistentCollection;
 use Doctrine\ODM\PHPCR\PersistentCollection as PHPCRPersistentCollection;
 use Doctrine\ORM\PersistentCollection;
-use Doctrine\ORM\Proxy\Proxy as ORMProxy;
 use JMS\Serializer\EventDispatcher\EventDispatcherInterface;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
 use JMS\Serializer\EventDispatcher\PreSerializeEvent;
+use ProxyManager\Proxy\LazyLoadingInterface;
 
 class DoctrineProxySubscriber implements EventSubscriberInterface
 {
@@ -51,7 +51,7 @@ class DoctrineProxySubscriber implements EventSubscriberInterface
         }
 
         if (($this->skipVirtualTypeInit && $virtualType) ||
-            (!$object instanceof Proxy && !$object instanceof ORMProxy)
+            (!$object instanceof Proxy && !$object instanceof LazyLoadingInterface)
         ) {
             return;
         }

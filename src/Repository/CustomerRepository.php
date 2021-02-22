@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Activity;
-use App\Entity\Agency;
 use App\Entity\AllInType;
 use App\Entity\Customer;
 use App\Entity\IncludeOption;
@@ -11,11 +10,11 @@ use App\Entity\Payment;
 use App\Entity\TravelType;
 use App\Logic\Calculations;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class CustomerRepository extends ServiceEntityRepository {
 
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Customer::class);
     }
@@ -42,7 +41,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->innerJoin('c', 'suit_size', 's', 'c.size_id = s.id')
             ->add('where', $qb->expr()->in('c.id', $customerIds));
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function getSuitSizeTotalsByCustomerIds(array $customerIds)
@@ -57,7 +56,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->groupBy('s.id')
             ->add('where', $qb->expr()->in('c.id', $customerIds));
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function getBeltSizeTotalsByCustomerIds(array $customerIds)
@@ -73,7 +72,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->groupBy('bs.id')
             ->add('where', $qb->expr()->in('c.id', $customerIds));
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function getHelmetSizeTotalsByCustomerIds(array $customerIds)
@@ -89,7 +88,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->groupBy('hs.id')
             ->add('where', $qb->expr()->in('c.id', $customerIds));
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function getAllByGroepId($groepId)
@@ -105,7 +104,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->orderBy("c.first_name")
             ->setParameter("groepId", $groepId);
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function getAllByGroepIdForBill($groepId)
@@ -122,7 +121,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->orderBy("c2.first_name")
             ->setParameter("groepId", $groepId);
 
-        $res = $qb->execute()->fetchAll();
+        $res = $qb->execute()->fetchAllAssociative();
 
         foreach ($res as $k => $row)
         {
@@ -150,7 +149,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->orderBy("c2.first_name")
             ->setParameter("groepId", $groepId);
 
-        $res = $qb->execute()->fetchAll();
+        $res = $qb->execute()->fetchAllAssociative();
 
         foreach ($res as $k => $row)
         {
@@ -182,7 +181,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->orderBy("c2.first_name")
             ->setParameter("customerId", $customerId);
 
-        return $qb->execute()->fetch();
+        return $qb->execute()->fetchAssociative();
 
     }
 
@@ -208,7 +207,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->setParameter("periodId", $periodId)
             ->setParameter("locationId", $locationId);
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
 
     }
 
@@ -224,7 +223,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->orderBy("c.first_name")
             ->setParameter("groepId", $groepId);
 
-        $res = $qb->execute()->fetchAll();
+        $res = $qb->execute()->fetchAllAssociative();
 
         foreach ($res as $k => $row)
         {
@@ -256,7 +255,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->where("c.id = :customerId")
             ->setParameter("customerId", $customerId);
 
-        $res = $qb->execute()->fetch();
+        $res = $qb->execute()->fetchAssociative();
 
 
 
@@ -355,7 +354,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->setParameter("locationId", $locationId)
             ->setParameter("periodId", $periodId);
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function getAllByGroepIdWithRaftingOption($groepId)
@@ -375,7 +374,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->orderBy("customer")
             ->setParameter("groepId", $groepId);
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
 
     }
 
@@ -411,7 +410,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->setParameter("groepId", $groepId)
             ->orderBy("customer", "ASC");
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     private function getActivitiesForCustomersRaw(array $customers, $activityGroepId)
@@ -445,7 +444,7 @@ class CustomerRepository extends ServiceEntityRepository {
                 ->setParameter("customerId", $customerId)
                 ->setParameter("activityGroupId", $activityGroepId);
 
-            $rows = $qb->execute()->fetchAll();
+            $rows = $qb->execute()->fetchAllAssociative();
             foreach ($rows as $row)
             {
                 $activities[] = $row["name"];
@@ -485,7 +484,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->setParameter("date", $date)
             ->setParameter("travelTypeCode", $travelTypeCode);
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function getAllBusBackCustomersByDateAndTravelTypeCode($date, $travelTypeCode)
@@ -504,7 +503,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->setParameter("date", $date)
             ->setParameter("travelTypeCode", $travelTypeCode);
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function getBusGoCustomersByWeek($date): array
@@ -597,7 +596,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->andWhere("ca.activity_id = :activityId")
             ->setParameter("customerId", $customerId)
             ->setParameter("activityId", $activityId)
-            ->execute()->fetch();
+            ->execute()->fetchAssociative();
 
         return is_null($ca) || $ca == false ? false : true;
     }
@@ -726,7 +725,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->setParameter("allInTypeId", $allInTypeId)
             ->orderBy('customer');
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     //Todo: still needed?
@@ -752,7 +751,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->setParameter('periodId', $periodId)
             ->orderBy('a.name');
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function getAllByDateWithRafting($periodId): array
@@ -779,7 +778,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->orderBy('p.activity')
             ->addOrderBy('c.last_name');
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     /**
@@ -797,7 +796,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->where("c.booker_id = :bookerId")
             ->setParameter("bookerId", $bookerId);
 
-        $customers = $qb->execute()->fetchAll();
+        $customers = $qb->execute()->fetchAllAssociative();
 
         return $customers;
     }
@@ -823,7 +822,7 @@ class CustomerRepository extends ServiceEntityRepository {
             ->where("c.id = :customerId")
             ->setParameter("customerId", $customerId);
 
-        return $qb->execute()->fetch();
+        return $qb->execute()->fetchAssociative();
 
     }
 

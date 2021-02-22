@@ -5,11 +5,11 @@ namespace App\Repository;
 use App\Entity\Guide;
 use App\Logic\Extensions;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class GuideRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Guide::class);
     }
@@ -33,7 +33,7 @@ class GuideRepository extends ServiceEntityRepository
             ->where('guide_short = :guide_short')
             ->setParameter('guide_short', $guideShort);
 
-        return $qb->execute()->fetch();
+        return $qb->execute()->fetchAssociative();
     }
 
     public function getAllByPeriodAndLocation($period, $locationId): array {
@@ -57,7 +57,7 @@ class GuideRepository extends ServiceEntityRepository
             ->setParameter('period', $period)
             ->setParameter('locationId', $locationId);
 
-        $guides = $qb->execute()->fetchAll();
+        $guides = $qb->execute()->fetchAllAssociative();
 
         $qb = $connection->createQueryBuilder();
 
@@ -74,7 +74,7 @@ class GuideRepository extends ServiceEntityRepository
             ->setParameter('period', $period)
             ->setParameter('locationId', $locationId);
 
-        $cag1s = $qb->execute()->fetchAll();
+        $cag1s = $qb->execute()->fetchAllAssociative();
 
         $qb = $connection->createQueryBuilder();
 
@@ -91,7 +91,7 @@ class GuideRepository extends ServiceEntityRepository
             ->setParameter('period', $period)
             ->setParameter('locationId', $locationId);
 
-        $cag2s = $qb->execute()->fetchAll();
+        $cag2s = $qb->execute()->fetchAllAssociative();
 
         //Have unique guides
 

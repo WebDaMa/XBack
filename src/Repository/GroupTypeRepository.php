@@ -3,12 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\GroupType;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class GroupTypeRepository extends CodeBaseRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, GroupType::class);
     }
@@ -35,6 +34,6 @@ class GroupTypeRepository extends CodeBaseRepository
             ->setParameter('date', $date)
             ->setParameter('locationId', $locationId);
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 }

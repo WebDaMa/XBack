@@ -4,11 +4,11 @@ namespace App\Repository;
 
 use App\Entity\Groep;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class GroepRepository extends ServiceEntityRepository {
 
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Groep::class);
     }
@@ -49,7 +49,7 @@ class GroepRepository extends ServiceEntityRepository {
             ->setParameter("locationId", $locationId);
         }
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function getAllPeriodIds()
@@ -61,7 +61,7 @@ class GroepRepository extends ServiceEntityRepository {
             ->select('DISTINCT g.period_id')
             ->from('groep', 'g');
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function getAllPeriodIdsAsChoicesForForm()

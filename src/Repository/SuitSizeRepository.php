@@ -5,12 +5,11 @@ namespace App\Repository;
 use App\Entity\Activity;
 use App\Entity\Customer;
 use App\Entity\Guide;
-use App\Entity\Location;
 use App\Entity\Planning;
 use App\Entity\ProgramActivity;
 use App\Entity\SuitSize;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method SuitSize|null find($id, $lockMode = null, $lockVersion = null)
@@ -20,7 +19,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class SuitSizeRepository extends ServiceEntityRepository {
 
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, SuitSize::class);
     }
@@ -54,7 +53,7 @@ class SuitSizeRepository extends ServiceEntityRepository {
             ->select("sz.id, sz.name")
             ->from("suit_size", "sz");
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function findSuitSizesFullFromDateAndGuide($date, $guideId, $locationId)

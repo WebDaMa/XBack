@@ -2,14 +2,13 @@
 
 namespace App\Repository;
 
-use App\Entity\Agency;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class CodeBaseRepository extends ServiceEntityRepository
 {
 
-    public function __construct(RegistryInterface $registry, $entityClass = null)
+    public function __construct(ManagerRegistry $registry, $entityClass = null)
     {
         parent::__construct($registry, $entityClass);
     }

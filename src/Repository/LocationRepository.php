@@ -3,12 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Location;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class LocationRepository extends CodeBaseRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Location::class);
     }
@@ -23,7 +22,7 @@ class LocationRepository extends CodeBaseRepository
             ->select('id', 'code')
             ->from('location');
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function findAllAsChoicesForForm()

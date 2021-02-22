@@ -5,10 +5,8 @@ namespace App\Controller\Rest;
 
 
 use App\Entity\Agency;
-use App\Entity\Groep;
 use App\Logic\Calculations;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
-use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Response;
 

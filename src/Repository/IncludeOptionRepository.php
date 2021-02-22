@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\IncludeOption;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method IncludeOption|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class IncludeOptionRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, IncludeOption::class);
     }
@@ -57,6 +57,6 @@ class IncludeOptionRepository extends ServiceEntityRepository
             ->select('i.program_type_id')
             ->from('include_option', 'i');
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 }

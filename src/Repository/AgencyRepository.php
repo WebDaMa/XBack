@@ -3,12 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Agency;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class AgencyRepository extends CodeBaseRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Agency::class);
     }
@@ -25,6 +24,6 @@ class AgencyRepository extends CodeBaseRepository
             ->setParameters(['periodId' => $periodId, 'locationId'=> $locationId])
         ;
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 }

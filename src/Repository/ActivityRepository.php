@@ -4,7 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Activity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Activity|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,7 +14,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ActivityRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Activity::class);
     }
@@ -42,7 +42,7 @@ class ActivityRepository extends ServiceEntityRepository
             ->where("activity_group_id = :activityGroupId")
             ->setParameters(["activityGroupId" => $activityGroupId]);
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function findAllByActivityGroupIdForProgramTypeId($activityGroupId, $programTypeId)
@@ -58,7 +58,7 @@ class ActivityRepository extends ServiceEntityRepository
             ->andWhere("a.activity_group_id = :activityGroupId")
             ->setParameters(["activityGroupId" => $activityGroupId, "programTypeId" => $programTypeId]);
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
     public function findAllByCustomerId($customerId)
@@ -74,7 +74,7 @@ class ActivityRepository extends ServiceEntityRepository
             ->where("ca.customer_id = :customerId")
             ->setParameters(["customerId" => $customerId]);
 
-        return $qb->execute()->fetchAll();
+        return $qb->execute()->fetchAllAssociative();
     }
 
 }

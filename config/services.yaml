@@ -32,8 +32,8 @@ services:
     #manual fix command fos oauth client
 
     FOS\OAuthServerBundle\Model\AccessTokenManagerInterface:
-            alias: fos_oauth_server.access_token_manager.default
-            public: true
+        alias: fos_oauth_server.access_token_manager.default
+        public: true
 
     FOS\OAuthServerBundle\Model\AuthCodeManagerInterface:
         alias: fos_oauth_server.auth_code_manager.default

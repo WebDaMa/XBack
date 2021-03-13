@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\EasyAdminController as BaseAdminController;
 
-class AdminController extends EasyAdminController
+class AdminController extends BaseAdminController
 {
     public function createNewUserEntity()
     {

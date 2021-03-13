@@ -20,6 +20,7 @@
         "symfony/apache-pack": "^1.0",
         "symfony/asset": "^4.0",
         "symfony/console": "^4.0",
+        "symfony/dotenv": "^4.0",
         "symfony/flex": "^1.0",
         "symfony/framework-bundle": "^4.0",
         "symfony/http-client": "^4.0",
@@ -35,7 +36,6 @@
     },
     "require-dev": {
         "rector/rector": "^0.4.12",
-        "symfony/dotenv": "^4.0",
         "symfony/profiler-pack": "^1.0"
     },
     "config": {

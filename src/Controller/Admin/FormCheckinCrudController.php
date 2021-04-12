@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Customer;
+use App\Logic\Calculations;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -97,13 +98,26 @@ class FormCheckinCrudController extends AbstractCrudController
         $updatedBy = AssociationField::new('updated_by');
 
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$checkedIn, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout];
+            return [$periodId, $checkedIn, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
             return [$id, $customerId, $fileId, $periodId, $bookerId, $booker, $lastName, $firstName, $email, $birthdate, $gsm, $nationalRegisterNumber, $expireDate, $sizeInfo, $nameShortage, $emergencyNumber, $licensePlate, $typePerson, $infoCustomer, $infoFile, $startDay, $endDay, $travelGoDate, $travelBackDate, $boardingPoint, $activityOption, $groupName, $lodgingLayout, $bookerPayed, $isCamper, $payed, $payedPayconiq, $checkedIn, $busToCheckedIn, $busBackCheckedIn, $totalExclInsurance, $insuranceValue, $createdAt, $modifiedAt, $size, $agency, $location, $programType, $lodgingType, $allInType, $insuranceType, $travelGoType, $travelBackType, $groupPreference, $groupLayout, $payerCustomers, $payer, $payments, $activities, $createdBy, $updatedBy];
         } elseif (Crud::PAGE_NEW === $pageName) {
-            return [$checkedIn, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout];
+            $rep = $this->getDoctrine()->getRepository(Customer::class);
+            $currentPeriod = Calculations::generatePeriodFromDate(date('Y-m-d H:i:s'));
+            $randomBookerID = $currentPeriod . rand(1000000, 3000000);
+            $lastId = $rep->getLastId();
+            $defaultCustomer = $currentPeriod . ($lastId + 1);
+            $randomFile = $currentPeriod . rand(1000000, 7000000);
+
+            // Fill in form with defaults
+            $periodId->setFormTypeOption('data', $currentPeriod);
+            $bookerId->setFormTypeOption('data', $randomBookerID);
+            $customerId->setFormTypeOption('data', $defaultCustomer);
+            $fileId->setFormTypeOption('data', $randomFile);
+
+            return [$checkedIn, $periodId, $bookerId, $customerId, $fileId, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout, $agency];
         } elseif (Crud::PAGE_EDIT === $pageName) {
-            return [$checkedIn, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout];
+            return [$checkedIn, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout, $programType];
         }
     }
 }

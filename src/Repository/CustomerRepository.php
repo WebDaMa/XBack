@@ -29,6 +29,17 @@ class CustomerRepository extends ServiceEntityRepository {
             ->getOneOrNullResult();
     }
 
+    public function getLastRow(): ?Customer
+    {
+        return $this->findOneBy([], ['id' => 'DESC']);
+    }
+
+    public function getLastId(): int
+    {
+        $lastRow = $this->getLastRow();
+        return $lastRow ? $lastRow->getId() : 0;
+    }
+
     public function getSuitSizesByCustomerIds(array $customerIds)
     {
         $connection = $this->_em->getConnection();

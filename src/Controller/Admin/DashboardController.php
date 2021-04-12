@@ -70,39 +70,69 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoRoute('Afrekening Export', 'fas fa-folder-open', 'admin_export_bill');
 
         yield MenuItem::section('Forms', 'fas fa-folder-open');
-        yield MenuItem::linkToCrud('FormBill', 'fas fa-folder-open', Customer::class);
-        yield MenuItem::linkToCrud('FormCheckin', 'fas fa-folder-open', Customer::class);
-        yield MenuItem::linkToCrud('FormGroupLayout', 'fas fa-folder-open', Customer::class);
-        yield MenuItem::linkToCrud('FormLodgingLayout', 'fas fa-folder-open', Customer::class);
-        yield MenuItem::linkToCrud('FormOptions', 'fas fa-folder-open', Customer::class);
-        yield MenuItem::linkToCrud('FormPayment', 'fas fa-folder-open', Payment::class);
-        yield MenuItem::linkToCrud('FormSizes', 'fas fa-folder-open', Customer::class);
+        yield MenuItem::linkToCrud('FormBill', 'fas fa-folder-open', Customer::class)
+            ->setController(FormBillCrudController::class);
+        yield MenuItem::linkToCrud('FormCheckin', 'fas fa-folder-open', Customer::class)
+            ->setController(FormCheckinCrudController::class);
+        yield MenuItem::linkToCrud('FormGroupLayout', 'fas fa-folder-open', Customer::class)
+            ->setController(FormGroupLayoutCrudController::class);
+        yield MenuItem::linkToCrud('FormLodgingLayout', 'fas fa-folder-open', Customer::class)
+            ->setController(FormLodgingLayoutCrudController::class);
+        yield MenuItem::linkToCrud('FormOptions', 'fas fa-folder-open', Customer::class)
+            ->setController(FormOptionsCrudController::class);
+        yield MenuItem::linkToCrud('FormPayment', 'fas fa-folder-open', Payment::class)
+            ->setController(FormPaymentCrudController::class);
+        yield MenuItem::linkToCrud('FormSizes', 'fas fa-folder-open', Customer::class)
+            ->setController(FormSizesCrudController::class);
 
         yield MenuItem::section('Entities', 'fas fa-folder-open');
-        yield MenuItem::linkToCrud('Activity', 'fas fa-folder-open', Activity::class);
-        yield MenuItem::linkToCrud('Agency', 'fas fa-folder-open', Agency::class);
-        yield MenuItem::linkToCrud('Customer', 'fas fa-folder-open', Customer::class);
-        yield MenuItem::linkToCrud('Groep', 'fas fa-folder-open', Groep::class);
-        yield MenuItem::linkToCrud('Guide', 'fas fa-folder-open', Guide::class);
-        yield MenuItem::linkToCrud('IncludeOption', 'fas fa-folder-open', IncludeOption::class);
-        yield MenuItem::linkToCrud('Location', 'fas fa-folder-open', Location::class);
-        yield MenuItem::linkToCrud('Planning', 'fas fa-folder-open', Planning::class);
-        yield MenuItem::linkToCrud('Program', 'fas fa-folder-open', Program::class);
-        yield MenuItem::linkToCrud('ProgramActivity', 'fas fa-folder-open', ProgramActivity::class);
-        yield MenuItem::linkToCrud('User', 'fas fa-folder-open', User::class);
+        yield MenuItem::linkToCrud('Activity', 'fas fa-folder-open', Activity::class)
+            ->setController(ActivityCrudController::class);
+        yield MenuItem::linkToCrud('Agency', 'fas fa-folder-open', Agency::class)
+            ->setController(AgencyCrudController::class);
+        yield MenuItem::linkToCrud('Customer', 'fas fa-folder-open', Customer::class)
+            ->setController(CustomerCrudController::class);
+        yield MenuItem::linkToCrud('Groep', 'fas fa-folder-open', Groep::class)
+            ->setController(GroepCrudController::class);
+        yield MenuItem::linkToCrud('Guide', 'fas fa-folder-open', Guide::class)
+            ->setController(GuideCrudController::class);
+        yield MenuItem::linkToCrud('IncludeOption', 'fas fa-folder-open', IncludeOption::class)
+            ->setController(IncludeOptionCrudController::class);
+        yield MenuItem::linkToCrud('Location', 'fas fa-folder-open', Location::class)
+            ->setController(LocationCrudController::class);
+        yield MenuItem::linkToCrud('Planning', 'fas fa-folder-open', Planning::class)
+            ->setController(PlanningCrudController::class);
+        yield MenuItem::linkToCrud('Program', 'fas fa-folder-open', Program::class)
+            ->setController(ProgramCrudController::class);
+        yield MenuItem::linkToCrud('ProgramActivity', 'fas fa-folder-open', ProgramActivity::class)
+            ->setController(ProgramActivityCrudController::class);
+        yield MenuItem::linkToCrud('User', 'fas fa-folder-open', User::class)
+            ->setController(UserCrudController::class);
 
         yield MenuItem::section('Types', 'fas fa-folder-open');
-        yield MenuItem::linkToCrud('ActivityGroup', 'fas fa-folder-open', ActivityGroup::class);
-        yield MenuItem::linkToCrud('AllInType', 'fas fa-folder-open', AllInType::class);
-        yield MenuItem::linkToCrud('BeltSize', 'fas fa-folder-open', BeltSize::class);
-        yield MenuItem::linkToCrud('InsuranceType', 'fas fa-folder-open', InsuranceType::class);
-        yield MenuItem::linkToCrud('HelmSize', 'fas fa-folder-open', HelmSize::class);
-        yield MenuItem::linkToCrud('GroupType', 'fas fa-folder-open', GroupType::class);
-        yield MenuItem::linkToCrud('LodgingType', 'fas fa-folder-open', LodgingType::class);
-        yield MenuItem::linkToCrud('ProgramGroup', 'fas fa-folder-open', ProgramGroup::class);
-        yield MenuItem::linkToCrud('ProgramType', 'fas fa-folder-open', ProgramType::class);
-        yield MenuItem::linkToCrud('SuitSize', 'fas fa-folder-open', SuitSize::class);
-        yield MenuItem::linkToCrud('TransportType', 'fas fa-folder-open', TransportType::class);
-        yield MenuItem::linkToCrud('TravelType', 'fas fa-folder-open', TravelType::class);
+        yield MenuItem::linkToCrud('ActivityGroup', 'fas fa-folder-open', ActivityGroup::class)
+            ->setController(ActivityGroupCrudController::class);
+        yield MenuItem::linkToCrud('AllInType', 'fas fa-folder-open', AllInType::class)
+            ->setController(AllInTypeCrudController::class);
+        yield MenuItem::linkToCrud('BeltSize', 'fas fa-folder-open', BeltSize::class)
+            ->setController(BeltSizeCrudController::class);
+        yield MenuItem::linkToCrud('InsuranceType', 'fas fa-folder-open', InsuranceType::class)
+            ->setController(InsuranceTypeCrudController::class);
+        yield MenuItem::linkToCrud('HelmSize', 'fas fa-folder-open', HelmSize::class)
+            ->setController(HelmSizeCrudController::class);
+        yield MenuItem::linkToCrud('GroupType', 'fas fa-folder-open', GroupType::class)
+            ->setController(GroupTypeCrudController::class);
+        yield MenuItem::linkToCrud('LodgingType', 'fas fa-folder-open', LodgingType::class)
+            ->setController(LodgingTypeCrudController::class);
+        yield MenuItem::linkToCrud('ProgramGroup', 'fas fa-folder-open', ProgramGroup::class)
+            ->setController(ProgramGroupCrudController::class);
+        yield MenuItem::linkToCrud('ProgramType', 'fas fa-folder-open', ProgramType::class)
+            ->setController(ProgramTypeCrudController::class);
+        yield MenuItem::linkToCrud('SuitSize', 'fas fa-folder-open', SuitSize::class)
+            ->setController(SuitSizeCrudController::class);
+        yield MenuItem::linkToCrud('TransportType', 'fas fa-folder-open', TransportType::class)
+            ->setController(TransportTypeCrudController::class);
+        yield MenuItem::linkToCrud('TravelType', 'fas fa-folder-open', TravelType::class)
+            ->setController(TravelTypeCrudController::class);
     }
 }

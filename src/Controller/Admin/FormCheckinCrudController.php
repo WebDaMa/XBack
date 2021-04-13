@@ -27,7 +27,7 @@ class FormCheckinCrudController extends AbstractCrudController
     {
         return $crud
             ->setSearchFields(['id', 'customerId', 'fileId', 'periodId', 'bookerId', 'booker', 'lastName', 'firstName', 'email', 'gsm', 'nationalRegisterNumber', 'expireDate', 'sizeInfo', 'nameShortage', 'emergencyNumber', 'licensePlate', 'typePerson', 'infoCustomer', 'infoFile', 'boardingPoint', 'activityOption', 'groupName', 'lodgingLayout', 'totalExclInsurance', 'insuranceValue'])
-            ->setPaginatorPageSize(200);
+            ->setPaginatorPageSize(50);
     }
 
     public function configureFilters(Filters $filters): Filters
@@ -103,7 +103,7 @@ class FormCheckinCrudController extends AbstractCrudController
             return [$id, $customerId, $fileId, $periodId, $bookerId, $booker, $lastName, $firstName, $email, $birthdate, $gsm, $nationalRegisterNumber, $expireDate, $sizeInfo, $nameShortage, $emergencyNumber, $licensePlate, $typePerson, $infoCustomer, $infoFile, $startDay, $endDay, $travelGoDate, $travelBackDate, $boardingPoint, $activityOption, $groupName, $lodgingLayout, $bookerPayed, $isCamper, $payed, $payedPayconiq, $checkedIn, $busToCheckedIn, $busBackCheckedIn, $totalExclInsurance, $insuranceValue, $createdAt, $modifiedAt, $size, $agency, $location, $programType, $lodgingType, $allInType, $insuranceType, $travelGoType, $travelBackType, $groupPreference, $groupLayout, $payerCustomers, $payer, $payments, $activities, $createdBy, $updatedBy];
         } elseif (Crud::PAGE_NEW === $pageName) {
             $rep = $this->getDoctrine()->getRepository(Customer::class);
-            $currentPeriod = Calculations::generatePeriodFromDate(date('Y-m-d H:i:s'));
+            $currentPeriod = Calculations::getCurrentPeriodId();
             $randomBookerID = $currentPeriod . rand(1000000, 3000000);
             $lastId = $rep->getLastId();
             $defaultCustomer = $currentPeriod . ($lastId + 1);
@@ -115,9 +115,9 @@ class FormCheckinCrudController extends AbstractCrudController
             $customerId->setFormTypeOption('data', $defaultCustomer);
             $fileId->setFormTypeOption('data', $randomFile);
 
-            return [$checkedIn, $periodId, $bookerId, $customerId, $fileId, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout, $agency];
+            return [$checkedIn, $periodId, $bookerId, $customerId, $fileId, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout, $agency, $programType];
         } elseif (Crud::PAGE_EDIT === $pageName) {
-            return [$checkedIn, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout, $programType];
+            return [$checkedIn, $periodId, $bookerId, $customerId, $fileId, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout, $agency, $programType];
         }
     }
 }

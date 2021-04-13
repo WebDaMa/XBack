@@ -21,6 +21,13 @@ class Calculations {
         return $year . $weekNumber;
     }
 
+    public static function getCurrentPeriodId(): string
+    {
+        $date = date('Y-m-d H:i:s');
+
+        return self::generatePeriodFromDate($date);
+    }
+
     public static function getLastSaturdayFromDate(string $date) : string
     {
         $dateTime = new \DateTime($date);

@@ -26,6 +26,7 @@ use App\Entity\SuitSize;
 use App\Entity\TransportType;
 use App\Entity\TravelType;
 use App\Entity\User;
+use App\Logic\Calculations;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -60,30 +61,43 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        $periodId = Calculations::getCurrentPeriodId();
 
-        yield MenuItem::section('Imports', 'fas fa-folder-open');
-        yield MenuItem::linktoRoute('Planning Import', 'fas fa-folder-open', 'admin_planning_upload');
-        yield MenuItem::linktoRoute('BO Import', 'fas fa-folder-open', 'admin_bo_upload');
+        yield MenuItem::section('Imports', 'fas fa-file-import');
+        yield MenuItem::linktoRoute('Planning Import', 'fas fa-file-import', 'admin_planning_upload');
+        yield MenuItem::linktoRoute('BO Import', 'fas fa-file-import', 'admin_bo_upload');
 
-        yield MenuItem::section('Exports', 'fas fa-folder-open');
-        yield MenuItem::linktoRoute('Rafting Export', 'fas fa-folder-open', 'admin_export_rafting');
-        yield MenuItem::linktoRoute('Afrekening Export', 'fas fa-folder-open', 'admin_export_bill');
+        yield MenuItem::section('Exports', 'fas fa-file-upload');
+        yield MenuItem::linktoRoute('Rafting Export', 'fas fa-file-upload', 'admin_export_rafting');
+        yield MenuItem::linktoRoute('Afrekening Export', 'fas fa-file-upload', 'admin_export_bill');
 
-        yield MenuItem::section('Forms', 'fas fa-folder-open');
-        yield MenuItem::linkToCrud('FormBill', 'fas fa-folder-open', Customer::class)
-            ->setController(FormBillCrudController::class);
-        yield MenuItem::linkToCrud('FormCheckin', 'fas fa-folder-open', Customer::class)
-            ->setController(FormCheckinCrudController::class);
-        yield MenuItem::linkToCrud('FormGroupLayout', 'fas fa-folder-open', Customer::class)
-            ->setController(FormGroupLayoutCrudController::class);
-        yield MenuItem::linkToCrud('FormLodgingLayout', 'fas fa-folder-open', Customer::class)
-            ->setController(FormLodgingLayoutCrudController::class);
-        yield MenuItem::linkToCrud('FormOptions', 'fas fa-folder-open', Customer::class)
-            ->setController(FormOptionsCrudController::class);
-        yield MenuItem::linkToCrud('FormPayment', 'fas fa-folder-open', Payment::class)
+        yield MenuItem::section('Forms', 'fas fa-clipboard-list');
+        yield MenuItem::linkToCrud('FormBill', 'fas fa-file-invoice', Customer::class)
+            ->setController(FormBillCrudController::class)
+            ->setQueryParameter('filters[periodId][comparison]', '=')
+            ->setQueryParameter('filters[periodId][value]', $periodId);
+        yield MenuItem::linkToCrud('FormCheckin', 'fas fa-user-check', Customer::class)
+            ->setController(FormCheckinCrudController::class)
+            ->setQueryParameter('filters[periodId][comparison]', '=')
+            ->setQueryParameter('filters[periodId][value]', $periodId);
+        yield MenuItem::linkToCrud('FormGroupLayout', 'fas fa-users', Customer::class)
+            ->setController(FormGroupLayoutCrudController::class)
+            ->setQueryParameter('filters[periodId][comparison]', '=')
+            ->setQueryParameter('filters[periodId][value]', $periodId);
+        yield MenuItem::linkToCrud('FormLodgingLayout', 'fas fa-campground', Customer::class)
+            ->setController(FormLodgingLayoutCrudController::class)
+            ->setQueryParameter('filters[periodId][comparison]', '=')
+            ->setQueryParameter('filters[periodId][value]', $periodId);
+        yield MenuItem::linkToCrud('FormOptions', 'fas fa-clipboard-list', Customer::class)
+            ->setController(FormOptionsCrudController::class)
+            ->setQueryParameter('filters[periodId][comparison]', '=')
+            ->setQueryParameter('filters[periodId][value]', $periodId);
+        yield MenuItem::linkToCrud('FormPayment', 'fas fa-shopping-cart', Payment::class)
             ->setController(FormPaymentCrudController::class);
-        yield MenuItem::linkToCrud('FormSizes', 'fas fa-folder-open', Customer::class)
-            ->setController(FormSizesCrudController::class);
+        yield MenuItem::linkToCrud('FormSizes', 'fas fa-tshirt', Customer::class)
+            ->setController(FormSizesCrudController::class)
+            ->setQueryParameter('filters[periodId][comparison]', '=')
+            ->setQueryParameter('filters[periodId][value]', $periodId);
 
         yield MenuItem::section('Entities', 'fas fa-folder-open');
         yield MenuItem::linkToCrud('Activity', 'fas fa-folder-open', Activity::class)
@@ -91,7 +105,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Agency', 'fas fa-folder-open', Agency::class)
             ->setController(AgencyCrudController::class);
         yield MenuItem::linkToCrud('Customer', 'fas fa-folder-open', Customer::class)
-            ->setController(CustomerCrudController::class);
+            ->setController(CustomerCrudController::class)
+            ->setQueryParameter('filters[periodId][comparison]', '=')
+            ->setQueryParameter('filters[periodId][value]', $periodId);
         yield MenuItem::linkToCrud('Groep', 'fas fa-folder-open', Groep::class)
             ->setController(GroepCrudController::class);
         yield MenuItem::linkToCrud('Guide', 'fas fa-folder-open', Guide::class)

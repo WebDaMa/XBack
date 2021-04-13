@@ -123,5 +123,4 @@ class Program extends TypeName
         $this->programType = $programType;
     }
 
-
 }

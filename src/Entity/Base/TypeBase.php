@@ -76,7 +76,7 @@ class TypeBase
 
     public function __toString() : string
     {
-        return (string) $this->getCode();
+        return (string) $this->getCode() . " - " . $this->getDescription();
     }
 
 }

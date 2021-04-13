@@ -28,7 +28,7 @@ class FormSizesCrudController extends AbstractCrudController
     {
         return $crud
             ->setSearchFields(['id', 'customerId', 'fileId', 'periodId', 'bookerId', 'booker', 'lastName', 'firstName', 'email', 'gsm', 'nationalRegisterNumber', 'expireDate', 'sizeInfo', 'nameShortage', 'emergencyNumber', 'licensePlate', 'typePerson', 'infoCustomer', 'infoFile', 'boardingPoint', 'activityOption', 'groupName', 'lodgingLayout', 'totalExclInsurance', 'insuranceValue'])
-            ->setPaginatorPageSize(200);
+            ->setPaginatorPageSize(50);
     }
 
     public function configureFilters(Filters $filters): Filters

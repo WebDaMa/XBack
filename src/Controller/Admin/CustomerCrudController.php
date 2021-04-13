@@ -28,7 +28,8 @@ class CustomerCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Customer')
             ->setEntityLabelInPlural('Customer')
             ->setSearchFields(['id', 'customerId', 'fileId', 'periodId', 'bookerId', 'booker', 'lastName', 'firstName', 'email', 'gsm', 'nationalRegisterNumber', 'expireDate', 'sizeInfo', 'nameShortage', 'emergencyNumber', 'licensePlate', 'typePerson', 'infoCustomer', 'infoFile', 'boardingPoint', 'activityOption', 'groupName', 'lodgingLayout', 'totalExclInsurance', 'insuranceValue'])
-            ->setPaginatorPageSize(200);
+            ->setPaginatorPageSize(50)
+            ->setDefaultSort(['customerId' => 'DESC']);
     }
 
     public function configureFilters(Filters $filters): Filters

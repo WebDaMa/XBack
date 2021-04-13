@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Controller\Admin\CustomerCrudController;
+use App\Controller\Admin\PlanningCrudController;
 use App\Entity\Agency;
 use App\Entity\AllInType;
 use App\Entity\ExportPeriodAndLocation;
@@ -22,6 +24,7 @@ use App\Form\ExportPeriodType;
 use App\Form\UploadType;
 use App\Logic\Calculations;
 use App\Logic\Extensions;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -126,7 +129,7 @@ class DashboardController extends AbstractController {
     /**
      * @Route("admin/bo-upload", name="admin_bo_upload")
      */
-    public function boUploadAction(Request $request)
+    public function boUploadAction(Request $request, AdminUrlGenerator $adminUrlGenerator)
     {
         $upload = new Upload();
         $form = $this->createForm(UploadType::class, $upload);
@@ -164,7 +167,7 @@ class DashboardController extends AbstractController {
                             if (!is_null($customerExists) || $customerExists)
                             {
                                 //Update current
-                                $customer = $this->importCustomer($row, $customerExists);
+                                $this->importCustomer($row, $customerExists);
                             } else
                             {
                                 //import
@@ -172,7 +175,6 @@ class DashboardController extends AbstractController {
                             }
                         }
                     }
-
                 }
                 $upload->setFile($file->getClientOriginalName());
                 $upload->setCreatedBy($this->getUser());
@@ -186,8 +188,8 @@ class DashboardController extends AbstractController {
                     'Your Customers were saved!'
                 );
             }
-
-            return $this->redirect($this->generateUrl('easyadmin', array('entity' => 'Customer')));
+            // redirect to some CRUD controller
+            return $this->redirect($adminUrlGenerator->setController(CustomerCrudController::class)->generateUrl());
         }
 
         return $this->render('dashboard/import.html.twig', array(
@@ -198,7 +200,7 @@ class DashboardController extends AbstractController {
     /**
      * @Route("admin/planning-upload", name="admin_planning_upload")
      */
-    public function planningUploadAction(Request $request)
+    public function planningUploadAction(Request $request, AdminUrlGenerator $adminUrlGenerator)
     {
         $upload = new Upload();
         $form = $this->createForm(UploadType::class, $upload);
@@ -331,7 +333,8 @@ class DashboardController extends AbstractController {
                 'Your plannings were saved!'
             );
 
-            return $this->redirect($this->generateUrl('easyadmin', array('entity' => 'Planning')));
+            // redirect to some CRUD controller
+            return $this->redirect($adminUrlGenerator->setController(PlanningCrudController::class)->generateUrl());
         }
 
         return $this->render('dashboard/import.html.twig', array(
@@ -357,7 +360,6 @@ class DashboardController extends AbstractController {
         $updateCustomer->setEmail($row[9]);
         $updateCustomer->setGsm($row[10]);
         $updateCustomer->setNationalRegisterNumber($row[11]);
-        //TODO: Change to string
         $updateCustomer->setExpireDate(Calculations::convertExcelDateToDateTime($row[12]));
 
         $size = $this->getDoctrine()->getRepository(SuitSize::class)->findBySizeId($row[13]);

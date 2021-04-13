@@ -22,7 +22,7 @@ class FormPaymentCrudController extends AbstractCrudController
     {
         return $crud
             ->setSearchFields(['id', 'price', 'description'])
-            ->setPaginatorPageSize(200);
+            ->setPaginatorPageSize(50);
     }
 
     public function configureFields(string $pageName): iterable

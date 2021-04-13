@@ -76,7 +76,7 @@ class Customer extends TypeTimestamps
     private $nationalRegisterNumber;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
      */
     private $expireDate;
 
@@ -372,17 +372,17 @@ class Customer extends TypeTimestamps
     }
 
     /**
-     * @return mixed
+     * @return \DateTimeInterface|null
      */
-    public function getBirthdate()
+    public function getBirthdate(): ?\DateTimeInterface
     {
         return $this->birthdate;
     }
 
     /**
-     * @param mixed $birthdate
+     * @param \DateTimeInterface|null $birthdate
      */
-    public function setBirthdate($birthdate): void
+    public function setBirthdate(?\DateTimeInterface $birthdate): void
     {
         $this->birthdate = $birthdate;
     }
@@ -420,17 +420,17 @@ class Customer extends TypeTimestamps
     }
 
     /**
-     * @return mixed
+     * @return \DateTimeInterface|null
      */
-    public function getExpireDate()
+    public function getExpireDate(): ?\DateTimeInterface
     {
         return $this->expireDate;
     }
 
     /**
-     * @param mixed $expireDate
+     * @param \DateTimeInterface|null $expireDate
      */
-    public function setExpireDate($expireDate): void
+    public function setExpireDate(?\DateTimeInterface $expireDate): void
     {
         $this->expireDate = $expireDate;
     }
@@ -644,33 +644,33 @@ class Customer extends TypeTimestamps
     }
 
     /**
-     * @return mixed
+     * @return \DateTimeInterface|null
      */
-    public function getStartDay()
+    public function getStartDay(): ?\DateTimeInterface
     {
         return $this->startDay;
     }
 
     /**
-     * @param mixed $startDay
+     * @param \DateTimeInterface|null $startDay
      */
-    public function setStartDay($startDay): void
+    public function setStartDay(?\DateTimeInterface $startDay): void
     {
         $this->startDay = $startDay;
     }
 
     /**
-     * @return mixed
+     * @return \DateTimeInterface|null
      */
-    public function getEndDay()
+    public function getEndDay(): ?\DateTimeInterface
     {
         return $this->endDay;
     }
 
     /**
-     * @param mixed $endDay
+     * @param \DateTimeInterface|null $endDay
      */
-    public function setEndDay($endDay): void
+    public function setEndDay(?\DateTimeInterface $endDay): void
     {
         $this->endDay = $endDay;
     }

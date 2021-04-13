@@ -24,7 +24,8 @@ class PlanningCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('Planning')
             ->setEntityLabelInPlural('Planning')
             ->setSearchFields(['id', 'planningId', 'activity', 'transport', 'guideFunction'])
-            ->setPaginatorPageSize(200);
+            ->setPaginatorPageSize(50)
+            ->setDefaultSort(['date' => 'DESC']);
     }
 
     public function configureFields(string $pageName): iterable

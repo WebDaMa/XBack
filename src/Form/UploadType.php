@@ -14,7 +14,7 @@ class UploadType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('file', FileType::class, array('label' => 'Excel file'))
+            ->add('file', FileType::class, array('label' => 'Excel file', 'attr' => ['class' => 'form-control-file']))
             ->add('import', SubmitType::class, array('label' => 'Import', 'attr' => ['class' => 'btn btn-primary']))
         ;
     }

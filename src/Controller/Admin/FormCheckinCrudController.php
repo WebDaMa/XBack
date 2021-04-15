@@ -15,6 +15,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 
 class FormCheckinCrudController extends AbstractCrudController
 {
@@ -47,7 +48,7 @@ class FormCheckinCrudController extends AbstractCrudController
         $groupName = TextField::new('groupName');
         $birthdate = DateField::new('birthdate');
         $nationalRegisterNumber = TextField::new('nationalRegisterNumber');
-        $expireDate = TextField::new('expireDate');
+        $expireDate = DateField::new('expireDate');
         $lodgingLayout = TextField::new('lodgingLayout');
         $allInType = AssociationField::new('allInType');
         $groupLayout = AssociationField::new('groupLayout');
@@ -96,6 +97,7 @@ class FormCheckinCrudController extends AbstractCrudController
         $activities = AssociationField::new('activities');
         $createdBy = AssociationField::new('created_by');
         $updatedBy = AssociationField::new('updated_by');
+        $file = FileUploadType::new('updated_by');
 
         if (Crud::PAGE_INDEX === $pageName) {
             return [$periodId, $checkedIn, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout];

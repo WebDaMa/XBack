@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\ExportPeriodAndLocation;
-use App\Excell\ExcellExport;
+use App\Excel\ExcelExport;
 use App\Form\ExportPeriodAndLocationType;
 use App\Form\ExportPeriodType;
 use App\Form\ExportYearType;
@@ -25,7 +25,7 @@ class ExportController extends AbstractController {
     /**
      * @Route("/rafting-period", name="rafting_period")
      */
-    public function raftingPeriodAction(Request $request, ExcellExport $excellExport, GroepRepository $groepRepository): Response
+    public function raftingPeriodAction(Request $request, ExcelExport $excellExport, GroepRepository $groepRepository): Response
     {
         $exportRaft = new ExportPeriodAndLocation();
 
@@ -74,7 +74,7 @@ class ExportController extends AbstractController {
     /**
      * @Route("/rafting-year", name="rafting_year")
      */
-    public function raftingYearAction(Request $request, ExcellExport $excellExport, GroepRepository $groepRepository): Response
+    public function raftingYearAction(Request $request, ExcelExport $excellExport, GroepRepository $groepRepository): Response
     {
         $exportRaft = new ExportPeriodAndLocation();
 
@@ -123,7 +123,7 @@ class ExportController extends AbstractController {
     /**
      * @Route("/bill", name="bill")
      */
-    public function billAction(Request $request, ExcellExport $excellExport, GroepRepository $groepRepository, LocationRepository $locationRepository): Response
+    public function billAction(Request $request, ExcelExport $excellExport, GroepRepository $groepRepository, LocationRepository $locationRepository): Response
     {
         $exportBill = new ExportPeriodAndLocation();
 

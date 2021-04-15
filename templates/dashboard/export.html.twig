@@ -1,15 +1,15 @@
 {% extends "@EasyAdmin/layout.html.twig" %}
-{% block head_stylesheets %}
-    {{ parent() }}
-    <style>
-        .form-group label {
-            text-align: left;
-        }
-    </style>
-{% endblock %}
 
 {% block main %}
-    {{ form_start(form) }}
 
-    {{ form_end(form) }}
+    <div class="col-4">
+        <h1>
+            Export
+            <small class="text-muted">Report</small>
+        </h1>
+        {{ form_start(form) }}
+
+        {{ form_end(form) }}
+    </div>
+
 {% endblock %}

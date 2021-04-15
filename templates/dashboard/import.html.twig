@@ -1,11 +1,17 @@
 {% extends "@EasyAdmin/layout.html.twig" %}
 
 {% block main %}
-    {{ form_start(form) }}
-    {{ form_row(form.file) }}
-    <br>
-    <div class="button-action">
+    <div class="col-4">
+        <h1>
+            Import
+            <small class="text-muted">Excel</small>
+        </h1>
+        {% form_theme form with ['form_div_layout.html.twig'] only %}
+        {{ form_start(form) }}
+        {{ form_row(form.file) }}
+        <br>
         {{ form_row(form.import) }}
+        {{ form_end(form) }}
     </div>
-    {{ form_end(form) }}
+
 {% endblock %}

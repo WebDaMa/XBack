@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Excell;
+namespace App\Excel;
 
 
 use App\Repository\CustomerRepository;
@@ -10,7 +10,7 @@ use App\Utils\Calculations;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ExcellExport {
+class ExcelExport {
 
     /**
      * @var CustomerRepository

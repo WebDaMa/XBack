@@ -53,7 +53,7 @@ class CustomerCrudController extends AbstractCrudController
         $birthdate = DateField::new('birthdate');
         $gsm = TextField::new('gsm');
         $nationalRegisterNumber = TextField::new('nationalRegisterNumber');
-        $expireDate = TextField::new('expireDate');
+        $expireDate = DateField::new('expireDate');
         $size = AssociationField::new('size');
         $sizeInfo = TextField::new('sizeInfo');
         $nameShortage = TextField::new('nameShortage');

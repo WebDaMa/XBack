@@ -26,9 +26,11 @@ class ExportPeriodAndLocationType extends AbstractType
         $builder
             ->add('period', ChoiceType::class, [
                 'choices' => $periods,
+                'attr' => ['data-widget' => 'select2']
             ])
             ->add('location', ChoiceType::class, [
                 'choices' => $locations,
+                'attr' => ['data-widget' => 'select2']
             ])
             ->add('export', SubmitType::class, array('label' => 'Export', 'attr' => ['class' => 'btn btn-primary']))
         ;

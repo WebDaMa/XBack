@@ -21,6 +21,7 @@ class ExportYearType extends AbstractType
         $builder
             ->add('period', ChoiceType::class, [
                 'choices' => $years,
+                'attr' => ['data-widget' => 'select2']
             ])
             ->add('export', SubmitType::class, array('label' => 'Export', 'attr' => ['class' => 'btn btn-primary']))
         ;

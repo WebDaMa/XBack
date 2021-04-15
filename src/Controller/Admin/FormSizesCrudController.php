@@ -55,7 +55,7 @@ class FormSizesCrudController extends AbstractCrudController
         $birthdate = DateField::new('birthdate');
         $gsm = TextField::new('gsm');
         $nationalRegisterNumber = TextField::new('nationalRegisterNumber');
-        $expireDate = TextField::new('expireDate');
+        $expireDate = DateField::new('expireDate');
         $nameShortage = TextField::new('nameShortage');
         $emergencyNumber = TextField::new('emergencyNumber');
         $licensePlate = TextField::new('licensePlate');

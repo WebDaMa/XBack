@@ -6,6 +6,7 @@ use App\Entity\ExportPeriodAndLocation;
 use App\Excell\ExcellExport;
 use App\Form\ExportPeriodAndLocationType;
 use App\Form\ExportPeriodType;
+use App\Form\ExportYearType;
 use App\Repository\GroepRepository;
 use App\Repository\LocationRepository;
 use App\Utils\Calculations;
@@ -22,18 +23,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class ExportController extends AbstractController {
 
     /**
-     * @Route("/rafting", name="rafting")
+     * @Route("/rafting-period", name="rafting_period")
      */
-    public function raftingAction(Request $request, ExcellExport $excellExport, GroepRepository $groepRepository): Response
+    public function raftingPeriodAction(Request $request, ExcellExport $excellExport, GroepRepository $groepRepository): Response
     {
         $exportRaft = new ExportPeriodAndLocation();
 
         $periods = $groepRepository->getAllPeriodIdsAsChoicesForForm();
         if (!empty($periods))
         {
-            unset($periods["Alle periodes"]);
+            unset($periods["All periods"]);
             $periods = array_reverse($periods, true);
-            $periods["Huidige Periode"] = Calculations::generatePeriodFromDate(date('Y-m-d H:i:s'));
+            $periods["Current period"] = Calculations::generatePeriodFromDate(date('Y-m-d H:i:s'));
             $periods = array_reverse($periods, true);
         }
         $options = [
@@ -49,15 +50,66 @@ class ExportController extends AbstractController {
 
             $em = $this->getDoctrine()->getManager();
 
+            $fileName = 'raftingCustomers-' . $periodId . '.xlsx';
             $exportRaft->setCreatedBy($this->getUser());
+            $exportRaft->setFileName($fileName);
             $em->persist($exportRaft);
             $em->flush();
 
-            $spreadsheet = $excellExport->generateRaftingExportSheet($periodId);
+            $spreadsheet = $excellExport->generateRaftingExportSheetForPeriod($periodId);
 
             $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment; filename="raftingCustomers-' . $periodId . '.xlsx"');
+            header('Content-Disposition: attachment; filename="' . $fileName . '"');
+            $writer->save("php://output");
+            exit();
+
+        }
+
+        return $this->render('dashboard/export.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/rafting-year", name="rafting_year")
+     */
+    public function raftingYearAction(Request $request, ExcellExport $excellExport, GroepRepository $groepRepository): Response
+    {
+        $exportRaft = new ExportPeriodAndLocation();
+
+        $years = $groepRepository->getAllYearsAsChoicesForForm();
+        if (!empty($years))
+        {
+            unset($years["All years"]);
+            $years = array_reverse($years, true);
+            $years["Current year"] = substr(date('Y'), 2, 2);
+            $years = array_reverse($years, true);
+        }
+        $options = [
+            'years' => $years
+        ];
+
+        $form = $this->createForm(ExportYearType::class, $exportRaft, $options);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $year = $exportRaft->getPeriod();
+
+            $em = $this->getDoctrine()->getManager();
+
+            $fileName = 'raftingCustomers-' . $year . '.xlsx';
+            $exportRaft->setCreatedBy($this->getUser());
+            $exportRaft->setFileName($fileName);
+            $em->persist($exportRaft);
+            $em->flush();
+
+            $spreadsheet = $excellExport->generateRaftingExportSheetForYear($year);
+
+            $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment; filename="' . $fileName . '"');
             $writer->save("php://output");
             exit();
 

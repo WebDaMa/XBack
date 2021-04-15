@@ -739,7 +739,6 @@ class CustomerRepository extends ServiceEntityRepository {
         return $qb->execute()->fetchAllAssociative();
     }
 
-    //Todo: still needed?
     public function getAllExtraByDateWithRafting($periodId, $date): array
     {
         //Default on a Wednesday
@@ -786,6 +785,80 @@ class CustomerRepository extends ServiceEntityRepository {
             //1 is raft
             ->andWhere('a.activity_group_id = 1')
             ->setParameter('periodId', $periodId)
+            ->orderBy('p.activity')
+            ->addOrderBy('c.last_name');
+
+        return $qb->execute()->fetchAllAssociative();
+    }
+
+    public function getAllExtraByYearWithRafting($year): array
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+        $qb
+            ->select('c.first_name', 'c.last_name', 'c.national_register_number', 'c.expire_date',
+                'c.birthdate', 'a.name AS activity_name', 'c.period_id', 'ag.code AS agency',
+                'l.code AS location', 'c.customer_id')
+            ->from('customer', 'c')
+            ->innerJoin('c', 'customers_activities', 'ca', 'c.id = ca.customer_id')
+            ->innerJoin('ca', 'activity', 'a', 'ca.activity_id = a.id')
+            ->innerJoin('c', 'agency', 'ag', 'c.agency_id = ag.id')
+            ->innerJoin('c', 'location', 'l', 'c.location_id = l.id')
+            ->where("c.period_id LIKE :year")
+            ->andWhere('a.activity_group_id = 1')
+            //Only XAD
+            ->andWhere('c.agency_id = 1')
+            ->setParameter('year', $year . '%')
+            ->orderBy('a.name');
+
+        $result = $qb->execute()->fetchAllAssociative();
+
+        // Add wednesday as activity day
+        foreach ($result as $k => $row) {
+            if (isset($row['period_id'])) {
+                $periodId = $row['period_id'];
+                $week = substr($periodId, 2, 2);
+                // Get 20 . year as ex: 21 => 2021
+                $year = substr(date("Y"), 0, 2) . substr($periodId, 0, 2);
+                $date = date('Y-m-d', strtotime($year . 'W' . $week));
+
+                $wednesday = Calculations::getWednesdayThisWeekFromDate($date);
+
+                $row['date'] = $wednesday;
+                unset($row['period_id']);
+                $result[$k] = $row;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param string $year as in year number 2019 => 19
+     * @return array
+     * @throws \Doctrine\DBAL\Exception
+     */
+    public function getAllByYearWithRafting(string $year): array
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select('c.first_name', 'c.last_name', 'c.national_register_number', 'c.expire_date',
+                'c.birthdate', 'a.name AS activity_name', 'p.date', 'ag.code AS agency',
+                'l.code AS location', 'c.customer_id')
+            ->from('planning', 'p')
+            ->innerJoin('p', 'groep', 'g', 'p.group_id = g.id')
+            ->innerJoin('g', 'customer', 'c', 'g.id = c.group_layout_id')
+            ->innerJoin('c', 'customers_activities', 'ca', 'ca.customer_id = c.id')
+            ->innerJoin('ca', 'activity', 'a', 'ca.activity_id = a.id')
+            ->innerJoin('c', 'agency', 'ag', 'c.agency_id = ag.id')
+            ->innerJoin('c', 'location', 'l', 'c.location_id = l.id')
+            ->where("c.period_id LIKE :year")
+            ->andWhere("p.activity LIKE '%raft%' OR p.activity LIKE '%hydro%'")
+            // 1 is raft
+            ->andWhere('a.activity_group_id = 1')
+            ->setParameter('year', $year . '%')
             ->orderBy('p.activity')
             ->addOrderBy('c.last_name');
 

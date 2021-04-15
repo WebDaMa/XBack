@@ -7,6 +7,7 @@ namespace App\Excell;
 use App\Repository\CustomerRepository;
 use App\Repository\GroepRepository;
 use App\Utils\Calculations;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ExcellExport {
@@ -32,24 +33,22 @@ class ExcellExport {
         $this->groepRepository = $groepRepository;
     }
 
-
-    public function generateRaftingExportSheet($periodId)
+    public function generateRaftingExportSheetForPeriod($periodId): Spreadsheet
     {
         $week = substr($periodId, 2, 2);
-        //This will bug in 2100 ;)
-        $year = '20' . substr($periodId, 0, 2);
+        // Get 20 . year as ex: 21 => 2021
+        $year = substr(date("Y"), 0, 2) . substr($periodId, 0, 2);
         $dateString = date('Y-m-d', strtotime($year . 'W' . $week));
 
         $lastSaturday = Calculations::getLastSaturdayFromDate($dateString);
         $nextSaturday = Calculations::getNextSaturdayFromDate($dateString);
 
-        //TODO: Extra still needed?
         $customers = array_merge(
             $this->customerRepository->getAllExtraByDateWithRafting($periodId, $dateString),
             $this->customerRepository->getAllByDateWithRafting($periodId)
         );
 
-        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $spreadsheet = new Spreadsheet();
 
         $semana = "Semana: " . $lastSaturday . " - " . $nextSaturday;
 
@@ -118,7 +117,92 @@ class ExcellExport {
 
     }
 
-    public function generateBillExportSheet($location, $period)
+    /**
+     * @param string $year as in year number 2019 => 19
+     * @return Spreadsheet
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function generateRaftingExportSheetForYear(string $year): Spreadsheet
+    {
+        $customers = array_merge(
+            $this->customerRepository->getAllExtraByYearWithRafting($year),
+            $this->customerRepository->getAllByYearWithRafting($year)
+        );
+
+        $spreadsheet = new Spreadsheet();
+
+        $yearText = "Year: " . $year;
+
+        $worksheet = new Worksheet($spreadsheet, "Rafting " . $year);
+        $spreadsheet->addSheet($worksheet);
+
+        $worksheet->getCell("B1")->setValue("Rafting LifeLong Explore:")
+            ->getStyle()->getFont()->setSize(20);
+        $worksheet->getCell("C1")->setValue($yearText)
+            ->getStyle()->getFont()->setSize(20);
+        $worksheet->getCell("D1")->setValue("Total: " . count($customers))
+            ->getStyle()->getFont()->setSize(20);
+
+        $worksheet->getCell("A2")->setValue("Apellido")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("B2")->setValue("Nombre")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("C2")->setValue("Numero dni")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("D2")->setValue("Fecha de validez")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("E2")->setValue("Fecha nacimiento")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("F2")->setValue("Actividad")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("G2")->setValue("Fecha actividad")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("H2")->setValue("Agencia")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("I2")->setValue("Residencia")
+            ->getStyle()->getFont()->setBold(true);
+        $worksheet->getCell("J2")->setValue("ReizigerId")
+            ->getStyle()->getFont()->setBold(true);
+
+        $worksheet->getColumnDimension("A")->setAutoSize(true);
+        $worksheet->getColumnDimension("B")->setAutoSize(true);
+        $worksheet->getColumnDimension("C")->setAutoSize(true);
+        $worksheet->getColumnDimension("D")->setAutoSize(true);
+        $worksheet->getColumnDimension("E")->setAutoSize(true);
+        $worksheet->getColumnDimension("F")->setAutoSize(true);
+        $worksheet->getColumnDimension("G")->setAutoSize(true);
+        $worksheet->getColumnDimension("H")->setAutoSize(true);
+        $worksheet->getColumnDimension("I")->setAutoSize(true);
+        $worksheet->getColumnDimension("J")->setAutoSize(true);
+
+        $rowIndex = 3;
+
+        foreach ($customers as $customer)
+        {
+            $worksheet->getCell("A" . $rowIndex)->setValue($customer["first_name"]);
+            $worksheet->getCell("B" . $rowIndex)->setValue($customer["last_name"]);
+            $worksheet->getCell("C" . $rowIndex)->setValue($customer["national_register_number"]);
+            $worksheet->getCell("D" . $rowIndex)->setValue($customer["expire_date"]);
+            $worksheet->getCell("E" . $rowIndex)->setValue($customer["birthdate"]);
+            $worksheet->getCell("F" . $rowIndex)->setValue($customer["activity_name"]);
+            $worksheet->getCell("G" . $rowIndex)->setValue($customer["date"]);
+            $worksheet->getCell("H" . $rowIndex)->setValue($customer["agency"]);
+            $worksheet->getCell("I" . $rowIndex)->setValue($customer["location"]);
+            $worksheet->getCell("J" . $rowIndex)->setValue($customer["customer_id"]);
+            $rowIndex ++;
+        }
+
+        //Remove default sheet
+        if (!empty($customers))
+        {
+            $spreadsheet->removeSheetByIndex(0);
+        }
+
+        return $spreadsheet;
+
+    }
+
+    public function generateBillExportSheet($location, $period): Spreadsheet
     {
 
         $groups = $this->groepRepository->getAllByPeriodAndLocation($period, $location);
@@ -147,7 +231,7 @@ class ExcellExport {
             }
         }
 
-        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $spreadsheet = new Spreadsheet();
 
         $location = is_null($location) ? "Overal" : $location;
         $period = is_null($period) ? "Alle periodes" : $period;

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="ExportPeriodAndLocationRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ExportPeriodAndLocationRepository")
  */
 class ExportPeriodAndLocation extends TypeTimestamps
 {
@@ -28,6 +28,11 @@ class ExportPeriodAndLocation extends TypeTimestamps
      * @ORM\JoinColumn(nullable=true)
      */
     private $location;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fileName;
 
     /**
      * ExportRaft constructor.
@@ -82,6 +87,18 @@ class ExportPeriodAndLocation extends TypeTimestamps
     public function setLocation(Location $location = null)
     {
         $this->location = $location;
+    }
+
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName(string $fileName): self
+    {
+        $this->fileName = $fileName;
+
+        return $this;
     }
 
 }

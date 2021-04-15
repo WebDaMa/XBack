@@ -68,7 +68,8 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoRoute('BO Import', 'fas fa-file-import', 'admin_import_bo');
 
         yield MenuItem::section('Exports', 'fas fa-file-upload');
-        yield MenuItem::linktoRoute('Rafting Export', 'fas fa-file-upload', 'admin_export_rafting');
+        yield MenuItem::linktoRoute('Rafting Period Export', 'fas fa-file-upload', 'admin_export_rafting_period');
+        yield MenuItem::linktoRoute('Rafting Yearly Export', 'fas fa-file-upload', 'admin_export_rafting_year');
         yield MenuItem::linktoRoute('Afrekening Export', 'fas fa-file-upload', 'admin_export_bill');
 
         yield MenuItem::section('Forms', 'fas fa-clipboard-list');

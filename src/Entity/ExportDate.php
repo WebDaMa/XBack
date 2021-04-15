@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\HasLifecycleCallbacks
- * @ORM\Entity(repositoryClass="ExportDateRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ExportDateRepository")
  */
 class ExportDate extends TypeTimestamps
 {
@@ -25,6 +25,11 @@ class ExportDate extends TypeTimestamps
      * @ORM\Column(type="date", nullable=true)
      */
     private $date;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $fileName;
 
     /**
      * ExportRaft constructor.
@@ -64,6 +69,18 @@ class ExportDate extends TypeTimestamps
     public function setDate($date): void
     {
         $this->date = $date;
+    }
+
+    public function getFileName(): ?string
+    {
+        return $this->fileName;
+    }
+
+    public function setFileName(string $fileName): self
+    {
+        $this->fileName = $fileName;
+
+        return $this;
     }
 
 }

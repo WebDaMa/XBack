@@ -64,15 +64,41 @@ class GroepRepository extends ServiceEntityRepository {
         return $qb->execute()->fetchAllAssociative();
     }
 
+    public function getAllYears()
+    {
+        $connection = $this->_em->getConnection();
+        $qb = $connection->createQueryBuilder();
+
+        $qb
+            ->select('DISTINCT(LEFT(g.period_id, 2)) AS year')
+            ->from('groep', 'g');
+
+        return $qb->execute()->fetchAllAssociative();
+    }
+
     public function getAllPeriodIdsAsChoicesForForm()
     {
         $choices = [];
-        $choices['Alle periodes'] = null;
+        $choices['All periods'] = null;
         $periods = $this->getAllPeriodIds();
 
         foreach ($periods as $period)
         {
             $choices[$period['period_id']] = $period['period_id'];
+        }
+
+        return $choices;
+    }
+
+    public function getAllYearsAsChoicesForForm()
+    {
+        $choices = [];
+        $choices['All years'] = null;
+        $years = $this->getAllYears();
+
+        foreach ($years as $year)
+        {
+            $choices[$year['year']] = $year['year'];
         }
 
         return $choices;

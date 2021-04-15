@@ -13,21 +13,21 @@ class GroepRepository extends ServiceEntityRepository {
         parent::__construct($registry, Groep::class);
     }
 
-    public function findByGroupIdAndPeriodId($groupId, $periodId): ?Groep
+    public function findByGroepIdAndPeriodId($groepId, $periodId): ?Groep
     {
         return $this->createQueryBuilder('e')
             ->where('e.groupId = :groupId AND e.periodId = :periodId')
-            ->setParameters(['groupId' => $groupId, 'periodId' => $periodId])
+            ->setParameters(['groupId' => $groepId, 'periodId' => $periodId])
             ->getQuery()
             ->setMaxResults(1)
             ->getOneOrNullResult();
     }
 
-    public function findByGroupIdAndPeriodIdAndLocationId($groupId, $periodId, $locationId): ?Groep
+    public function findByGroepIdAndPeriodIdAndLocationId($groepId, $periodId, $locationId): ?Groep
     {
         return $this->createQueryBuilder('e')
             ->where('e.groupId = :groupId AND e.periodId = :periodId AND e.location = :locationId')
-            ->setParameters(['groupId' => $groupId, 'periodId' => $periodId, 'locationId' => $locationId])
+            ->setParameters(['groupId' => $groepId, 'periodId' => $periodId, 'locationId' => $locationId])
             ->getQuery()
             ->setMaxResults(1)
             ->getOneOrNullResult();

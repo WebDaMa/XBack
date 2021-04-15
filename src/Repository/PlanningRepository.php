@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Planning;
-use App\Logic\Calculations;
+use App\Utils\Calculations;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

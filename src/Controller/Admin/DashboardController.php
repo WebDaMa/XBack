@@ -26,7 +26,7 @@ use App\Entity\SuitSize;
 use App\Entity\TransportType;
 use App\Entity\TravelType;
 use App\Entity\User;
-use App\Logic\Calculations;
+use App\Utils\Calculations;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -64,8 +64,8 @@ class DashboardController extends AbstractDashboardController
         $periodId = Calculations::getCurrentPeriodId();
 
         yield MenuItem::section('Imports', 'fas fa-file-import');
-        yield MenuItem::linktoRoute('Planning Import', 'fas fa-file-import', 'admin_planning_upload');
-        yield MenuItem::linktoRoute('BO Import', 'fas fa-file-import', 'admin_bo_upload');
+        yield MenuItem::linktoRoute('Planning Import', 'fas fa-file-import', 'admin_import_planning');
+        yield MenuItem::linktoRoute('BO Import', 'fas fa-file-import', 'admin_import_bo');
 
         yield MenuItem::section('Exports', 'fas fa-file-upload');
         yield MenuItem::linktoRoute('Rafting Export', 'fas fa-file-upload', 'admin_export_rafting');

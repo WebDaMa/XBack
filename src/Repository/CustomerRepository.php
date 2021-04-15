@@ -8,7 +8,7 @@ use App\Entity\Customer;
 use App\Entity\IncludeOption;
 use App\Entity\Payment;
 use App\Entity\TravelType;
-use App\Logic\Calculations;
+use App\Utils\Calculations;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 

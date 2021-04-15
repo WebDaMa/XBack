@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Logic;
+namespace App\Utils;
 
 use PhpOffice\PhpSpreadsheet\Shared\Date;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;

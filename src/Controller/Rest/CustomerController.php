@@ -9,7 +9,7 @@ use App\Entity\Customer;
 use App\Entity\Groep;
 use App\Entity\Payment;
 use App\Entity\SuitSize;
-use App\Logic\Calculations;
+use App\Utils\Calculations;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;

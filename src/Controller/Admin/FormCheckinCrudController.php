@@ -3,7 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Customer;
-use App\Logic\Calculations;
+use App\Utils\Calculations;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;

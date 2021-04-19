@@ -8,6 +8,7 @@ use App\Repository\CustomerRepository;
 use App\Repository\GroepRepository;
 use App\Utils\Calculations;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Color;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ExcelExport {
@@ -48,63 +49,100 @@ class ExcelExport {
             $this->customerRepository->getAllByDateWithRafting($periodId)
         );
 
+        // Map Customers by date, agency and location
+        $mappedWorksheetData = $this->mapCustomersByDateAgencyAndLocation($customers);
+
         $spreadsheet = new Spreadsheet();
 
         $semana = "Semana: " . $lastSaturday . " - " . $nextSaturday;
 
-        $worksheet = new Worksheet($spreadsheet, "Rafting " . $periodId);
-        $spreadsheet->addSheet($worksheet);
+        foreach ($mappedWorksheetData as $worksheetKey => $worksheetData) {
+            // Make a new worksheet page
+            $worksheet = new Worksheet($spreadsheet, $worksheetKey);
+            $spreadsheet->addSheet($worksheet);
 
-        $worksheet->getCell("B1")->setValue("Rafting LifeLong Explore:")
-            ->getStyle()->getFont()->setSize(20);
-        $worksheet->getCell("C1")->setValue($semana)
-            ->getStyle()->getFont()->setSize(20);
-        $worksheet->getCell("D1")->setValue("Total: " . count($customers))
-            ->getStyle()->getFont()->setSize(20);
+            // Set colors
+            $blue = new Color(Color::COLOR_BLUE);
+            $red = new Color(Color::COLOR_RED);
 
-        $worksheet->getCell("A2")->setValue("Apellido")
-            ->getStyle()->getFont()->setBold(true);
-        $worksheet->getCell("B2")->setValue("Nombre")
-            ->getStyle()->getFont()->setBold(true);
-        $worksheet->getCell("C2")->setValue("Numero dni")
-            ->getStyle()->getFont()->setBold(true);
-        $worksheet->getCell("D2")->setValue("Fecha de validez")
-            ->getStyle()->getFont()->setBold(true);
-        $worksheet->getCell("E2")->setValue("Fecha nacimiento")
-            ->getStyle()->getFont()->setBold(true);
-        $worksheet->getCell("F2")->setValue("Actividad")
-            ->getStyle()->getFont()->setBold(true);
-        $worksheet->getCell("G2")->setValue("Fecha actividad")
-            ->getStyle()->getFont()->setBold(true);
-        $worksheet->getCell("H2")->setValue("Agencia")
-            ->getStyle()->getFont()->setBold(true);
-        $worksheet->getCell("I2")->setValue("Residencia")
-            ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("A1")->setValue("Rafting LifeLong Explore: " . $semana)
+                ->getStyle()->getFont()->setSize(20);
+            // Merge cells
+            $worksheet->mergeCells('A1:I1');
+            $worksheet->getCell("A2")->setValue('Fecha actividad');
+            $worksheet->getCell("B2")->setValue($worksheetData['date'])
+                ->getStyle()->getFont()->setColor($blue)->setBold(true);
+            $worksheet->getCell("C2")->setValue('Total')
+                ->getStyle()->getFont()->setColor($red)->setBold(true);
+            $worksheet->getCell("D2")->setValue(count($worksheetData['customers']))
+                ->getStyle()->getFont()->setColor($red)->setBold(true);;
+            $worksheet->getCell("A3")->setValue('Agencia');
+            $worksheet->getCell("B3")->setValue($worksheetData['agency'])
+                ->getStyle()->getFont()->setColor($blue)->setBold(true);
+            $worksheet->getCell("A4")->setValue('Residencia');
+            $worksheet->getCell("B4")->setValue($worksheetData['location'])
+                ->getStyle()->getFont()->setColor($blue)->setBold(true);
 
-        $worksheet->getColumnDimension("A")->setAutoSize(true);
-        $worksheet->getColumnDimension("B")->setAutoSize(true);
-        $worksheet->getColumnDimension("C")->setAutoSize(true);
-        $worksheet->getColumnDimension("D")->setAutoSize(true);
-        $worksheet->getColumnDimension("E")->setAutoSize(true);
-        $worksheet->getColumnDimension("F")->setAutoSize(true);
-        $worksheet->getColumnDimension("G")->setAutoSize(true);
-        $worksheet->getColumnDimension("H")->setAutoSize(true);
-        $worksheet->getColumnDimension("I")->setAutoSize(true);
+            // Check from which row the customer header should start
+            $activitiesCount = count($worksheetData['activities']);
+            $rowsCountBeforeActivitiesTotal = 4; // Title, date, agency, location row
+            $rowsCountAfterActivitiesTotal = 1; // Blank row for spacing
+            $activitiesStartRow = $rowsCountBeforeActivitiesTotal - 1; // - because activities starts at agency row
+            $headerRowNumber = $rowsCountBeforeActivitiesTotal + $activitiesStartRow
+                + $rowsCountAfterActivitiesTotal;
 
-        $rowIndex = 3;
+            // Add activity count
+            foreach ($worksheetData['activities'] as $activity => $activityCount) {
+                $worksheet->getCell("C" . $activitiesStartRow)->setValue($activity);
+                $worksheet->getCell("D" . $activitiesStartRow)->setValue($activityCount);
+                $activitiesStartRow++;
+            }
 
-        foreach ($customers as $customer)
-        {
-            $worksheet->getCell("A" . $rowIndex)->setValue($customer["first_name"]);
-            $worksheet->getCell("B" . $rowIndex)->setValue($customer["last_name"]);
-            $worksheet->getCell("C" . $rowIndex)->setValue($customer["national_register_number"]);
-            $worksheet->getCell("D" . $rowIndex)->setValue($customer["expire_date"]);
-            $worksheet->getCell("E" . $rowIndex)->setValue($customer["birthdate"]);
-            $worksheet->getCell("F" . $rowIndex)->setValue($customer["activity_name"]);
-            $worksheet->getCell("G" . $rowIndex)->setValue($customer["date"]);
-            $worksheet->getCell("H" . $rowIndex)->setValue($customer["agency"]);
-            $worksheet->getCell("I" . $rowIndex)->setValue($customer["location"]);
-            $rowIndex ++;
+            $worksheet->getCell("A" . $headerRowNumber)->setValue("Apellido")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("B" . $headerRowNumber)->setValue("Nombre")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("C" . $headerRowNumber)->setValue("Numero dni")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("D" . $headerRowNumber)->setValue("Fecha de validez")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("E" . $headerRowNumber)->setValue("Fecha nacimiento")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("F" . $headerRowNumber)->setValue("Actividad")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("G" . $headerRowNumber)->setValue("Fecha actividad")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("H" . $headerRowNumber)->setValue("Agencia")
+                ->getStyle()->getFont()->setBold(true);
+            $worksheet->getCell("I" . $headerRowNumber)->setValue("Residencia")
+                ->getStyle()->getFont()->setBold(true);
+
+            $worksheet->getColumnDimension("A")->setAutoSize(true);
+            $worksheet->getColumnDimension("B")->setAutoSize(true);
+            $worksheet->getColumnDimension("C")->setAutoSize(true);
+            $worksheet->getColumnDimension("D")->setAutoSize(true);
+            $worksheet->getColumnDimension("E")->setAutoSize(true);
+            $worksheet->getColumnDimension("F")->setAutoSize(true);
+            $worksheet->getColumnDimension("G")->setAutoSize(true);
+            $worksheet->getColumnDimension("H")->setAutoSize(true);
+            $worksheet->getColumnDimension("I")->setAutoSize(true);
+
+            // Set row to show Customer Collection
+            $rowIndex = $headerRowNumber + 1;
+
+            foreach ($worksheetData['customers'] as $customer)
+            {
+                $worksheet->getCell("A" . $rowIndex)->setValue($customer["first_name"]);
+                $worksheet->getCell("B" . $rowIndex)->setValue($customer["last_name"]);
+                $worksheet->getCell("C" . $rowIndex)->setValue($customer["national_register_number"]);
+                $worksheet->getCell("D" . $rowIndex)->setValue($customer["expire_date"]);
+                $worksheet->getCell("E" . $rowIndex)->setValue($customer["birthdate"]);
+                $worksheet->getCell("F" . $rowIndex)->setValue($customer["activity_name"]);
+                $worksheet->getCell("G" . $rowIndex)->setValue($customer["date"]);
+                $worksheet->getCell("H" . $rowIndex)->setValue($customer["agency"]);
+                $worksheet->getCell("I" . $rowIndex)->setValue($customer["location"]);
+                $rowIndex ++;
+            }
         }
 
         //Remove default sheet
@@ -136,7 +174,7 @@ class ExcelExport {
         $worksheet = new Worksheet($spreadsheet, "Rafting " . $year);
         $spreadsheet->addSheet($worksheet);
 
-        $worksheet->getCell("B1")->setValue("Rafting LifeLong Explore:")
+        $worksheet->getCell("A1")->setValue("Rafting LifeLong Explore:")
             ->getStyle()->getFont()->setSize(20);
         $worksheet->getCell("C1")->setValue($yearText)
             ->getStyle()->getFont()->setSize(20);
@@ -391,5 +429,53 @@ class ExcelExport {
         $spreadsheet->removeSheetByIndex(0);
 
         return $spreadsheet;
+    }
+
+    /**
+     * @param array $customers
+     * @return array
+     * @throws \Exception
+     */
+    private function mapCustomersByDateAgencyAndLocation(Array $customers): array
+    {
+        $mappedCustomers = [];
+        foreach ($customers as $customer) {
+            if (isset($customer['date'], $customer['agency'], $customer['location'], $customer['activity_name'])) {
+                $date = $customer['date'];
+                $agency = $customer['agency'];
+                $location = $customer['location'];
+                $activity = $customer['activity_name'];
+
+                // Make a unique key
+                $mapKey = $date . '_' . $agency . '_' . $location;
+
+                // Start mapping collection
+                if (!isset($mappedCustomers[$mapKey])) {
+                    // add customer array
+                    $mappedCustomers[$mapKey] = [
+                        'customers' => [],
+                        'date' => $date,
+                        'agency' => $agency,
+                        'location' => $location,
+                        'activities' => []
+                    ];
+                }
+
+                // Check activity count
+                if (!isset($mappedCustomers[$mapKey]['activities'][$activity])) {
+                    // set count for activity
+                    $mappedCustomers[$mapKey]['activities'][$activity] = 0;
+                }
+                // Add the customer
+                $mappedCustomers[$mapKey]['customers'][] = $customer;
+
+                // Increase the count of the activity
+                $mappedCustomers[$mapKey]['activities'][$activity]++;
+            } else {
+                throw new \Exception("Customer " . $customer['first_name'] . " " . $customer['last_name'] . " is missing one of these required fields: [agency, date, location, activity_name] Check Customer table to complete.");
+            }
+        }
+
+        return $mappedCustomers;
     }
 }

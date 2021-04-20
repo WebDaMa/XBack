@@ -44,8 +44,11 @@ class DashboardController extends AbstractDashboardController
     {
         // redirect to some CRUD controller
         $routeBuilder = $this->get(AdminUrlGenerator::class);
+        $url = $routeBuilder->setRoute('admin_import_planning')->generateUrl();
+        // Add MenuIndex
+        $url .= '&menuIndex=1&submenuIndex=-1';
 
-        return $this->redirect($routeBuilder->setController(CustomerCrudController::class)->generateUrl());
+        return $this->redirect($url);
     }
 
     public function configureDashboard(): Dashboard

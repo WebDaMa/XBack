@@ -97,7 +97,6 @@ class FormCheckinCrudController extends AbstractCrudController
         $activities = AssociationField::new('activities');
         $createdBy = AssociationField::new('created_by');
         $updatedBy = AssociationField::new('updated_by');
-        $file = FileUploadType::new('updated_by');
 
         if (Crud::PAGE_INDEX === $pageName) {
             return [$periodId, $checkedIn, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout];

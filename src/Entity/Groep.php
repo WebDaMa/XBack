@@ -246,7 +246,7 @@ class Groep extends TypeTimestamps
 
     public function __toString() : string
     {
-        return (string) $this->getName() . ' - ' . $this->getPeriodId();
+        return (string) $this->getPeriodId() . ' - ' . $this->getName();
     }
 
 }

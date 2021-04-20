@@ -58,8 +58,6 @@ class SuitSizeRepository extends ServiceEntityRepository {
 
     public function findSuitSizesFullFromDateAndGuide($date, $guideId, $locationId)
     {
-
-
         $rep = $this->getEntityManager()->getRepository(Guide::class);
         $guide = $rep->find($guideId);
 
@@ -76,23 +74,25 @@ class SuitSizeRepository extends ServiceEntityRepository {
         {
             foreach ($plannings as $planning)
             {
-                $planning = $rep->find($planning["id"]);
                 /**
-                 * @var $planning Planning
+                 * @var $planningObject Planning
                  */
-                $activityName = $planning->getActivity();
-                $activityName = str_replace("o_", "", $activityName);
-                $rep = $this->getEntityManager()->getRepository(Activity::class);
+                $planningObject = $rep->find($planning["id"]);
+                if ($planningObject) {
+                    $activityName = $planningObject->getActivity();
+                    $activityName = str_replace("o_", "", $activityName);
+                    $rep = $this->getEntityManager()->getRepository(Activity::class);
 
-                $activity = $rep->findByName($activityName);
+                    $activity = $rep->findByName($activityName);
 
-                $group = $planning->getGroup();
-                if (isset($group))
-                {
-                    $groupName .= $group->getName() . " ";
-                    $groupTotal += $group->getGroupCustomers()->count();
-                    //Get all customers
-                    $customers = array_merge($customers, $group->getGroupCustomers()->toArray());
+                    $group = $planningObject->getGroup();
+                    if (isset($group))
+                    {
+                        $groupName .= $group->getName() . " ";
+                        $groupTotal += $group->getGroupCustomers()->count();
+                        //Get all customers
+                        $customers = array_merge($customers, $group->getGroupCustomers()->toArray());
+                    }
                 }
             }
         }
@@ -125,11 +125,11 @@ class SuitSizeRepository extends ServiceEntityRepository {
             if (!$hasActivityProgramType)
             {
                 $customersIds[] = $customer->getId();
-            } else
+            } /*else
             {
                 // klant gaat optioneel mee
-                /*$hasOption = false;
-                //Kijken of hij deze optie geboekt heeft
+                // $hasOption = false;
+                // Kijken of hij deze optie geboekt heeft
                 if (!is_null($activity) || $activity)
                 {
                     $rep = $this->getEntityManager()->getRepository(Customer::class);
@@ -140,8 +140,7 @@ class SuitSizeRepository extends ServiceEntityRepository {
                 {
                     $customersIds[] = $customer->getId();
                 }
-                */
-            }
+            }*/
 
         }
 

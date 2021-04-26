@@ -140,7 +140,7 @@ class FormCheckinCrudController extends AbstractCrudController
             $customerId->setFormTypeOption('data', $defaultCustomer);
             $fileId->setFormTypeOption('data', $randomFile);
 
-            return [$checkedIn, $periodId, $bookerId, $customerId, $fileId, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout, $agency, $programType];
+            return [$checkedIn, $periodId, $bookerId, $customerId, $fileId, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout, $agency, $programType, $location];
         } elseif (Crud::PAGE_EDIT === $pageName) {
             return [$checkedIn, $periodId, $bookerId, $customerId, $fileId, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout, $agency, $programType];
         }

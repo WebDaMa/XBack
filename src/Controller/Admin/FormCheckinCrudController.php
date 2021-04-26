@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Customer;
+use App\Repository\CustomerRepository;
+use App\Repository\GroepRepository;
 use App\Utils\Calculations;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
@@ -19,6 +21,21 @@ use EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType;
 
 class FormCheckinCrudController extends AbstractCrudController
 {
+
+    /**
+     * @var GroepRepository
+     */
+    private $groepRepository;
+
+    /**
+     * FormCheckinCrudController constructor.
+     * @param GroepRepository $groepRepository
+     */
+    public function __construct(GroepRepository $groepRepository)
+    {
+        $this->groepRepository = $groepRepository;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Customer::class;
@@ -51,7 +68,14 @@ class FormCheckinCrudController extends AbstractCrudController
         $expireDate = DateField::new('expireDate');
         $lodgingLayout = TextField::new('lodgingLayout');
         $allInType = AssociationField::new('allInType');
-        $groupLayout = AssociationField::new('groupLayout');
+        $groupLayout = AssociationField::new('groupLayout')->setFormTypeOptions(
+            [
+                'query_builder' => function () {
+                    return $this->groepRepository->createQueryBuilder('g')
+                        ->orderBy('g.periodId', 'DESC');
+                },
+            ]
+        );
         $id = IntegerField::new('id', 'ID');
         $customerId = IntegerField::new('customerId');
         $fileId = IntegerField::new('fileId');

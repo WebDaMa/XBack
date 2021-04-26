@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Customer;
+use App\Repository\GroepRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -17,6 +18,20 @@ use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 
 class CustomerCrudController extends AbstractCrudController
 {
+    /**
+     * @var GroepRepository
+     */
+    private $groepRepository;
+
+    /**
+     * FormCheckinCrudController constructor.
+     * @param GroepRepository $groepRepository
+     */
+    public function __construct(GroepRepository $groepRepository)
+    {
+        $this->groepRepository = $groepRepository;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Customer::class;
@@ -79,7 +94,14 @@ class CustomerCrudController extends AbstractCrudController
         $groupName = TextField::new('groupName');
         $groupPreference = AssociationField::new('groupPreference');
         $lodgingLayout = TextField::new('lodgingLayout');
-        $groupLayout = AssociationField::new('groupLayout');
+        $groupLayout = AssociationField::new('groupLayout')->setFormTypeOptions(
+            [
+                'query_builder' => function () {
+                    return $this->groepRepository->createQueryBuilder('g')
+                        ->orderBy('g.periodId', 'DESC');
+                },
+            ]
+        );
         $payed = Field::new('payed');
         $payedPayconiq = Field::new('payedPayconiq');
         $isCamper = Field::new('isCamper');

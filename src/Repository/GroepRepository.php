@@ -41,7 +41,8 @@ class GroepRepository extends ServiceEntityRepository {
             ->select('g.id, g.name')
             ->from('groep', 'g')
             ->where('g.period_id = :periodId')
-            ->setParameter('periodId', $periodId);
+            ->setParameter('periodId', $periodId)
+            ->orderBy('g.period_id', 'DESC');
 
         if (!is_null($locationId))
         {
@@ -59,7 +60,8 @@ class GroepRepository extends ServiceEntityRepository {
 
         $qb
             ->select('DISTINCT g.period_id')
-            ->from('groep', 'g');
+            ->from('groep', 'g')
+            ->orderBy('g.period_id', 'DESC');
 
         return $qb->execute()->fetchAllAssociative();
     }
@@ -71,7 +73,8 @@ class GroepRepository extends ServiceEntityRepository {
 
         $qb
             ->select('DISTINCT(LEFT(g.period_id, 2)) AS year')
-            ->from('groep', 'g');
+            ->from('groep', 'g')
+            ->orderBy('year', 'DESC');
 
         return $qb->execute()->fetchAllAssociative();
     }

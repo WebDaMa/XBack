@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Customer;
+use App\Repository\GroepRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -19,6 +20,20 @@ use EasyCorp\Bundle\EasyAdminBundle\Filter\EntityFilter;
 
 class FormSizesCrudController extends AbstractCrudController
 {
+    /**
+     * @var GroepRepository
+     */
+    private $groepRepository;
+
+    /**
+     * FormCheckinCrudController constructor.
+     * @param GroepRepository $groepRepository
+     */
+    public function __construct(GroepRepository $groepRepository)
+    {
+        $this->groepRepository = $groepRepository;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Customer::class;
@@ -90,7 +105,14 @@ class FormSizesCrudController extends AbstractCrudController
         $travelGoType = AssociationField::new('travelGoType');
         $travelBackType = AssociationField::new('travelBackType');
         $groupPreference = AssociationField::new('groupPreference');
-        $groupLayout = AssociationField::new('groupLayout');
+        $groupLayout = AssociationField::new('groupLayout')->setFormTypeOptions(
+            [
+                'query_builder' => function () {
+                    return $this->groepRepository->createQueryBuilder('g')
+                        ->orderBy('g.periodId', 'DESC');
+                },
+            ]
+        );
         $payerCustomers = AssociationField::new('payerCustomers');
         $payer = AssociationField::new('payer');
         $payments = AssociationField::new('payments');

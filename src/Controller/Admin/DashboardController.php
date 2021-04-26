@@ -76,10 +76,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linktoRoute('Afrekening Export', 'fas fa-file-upload', 'admin_export_bill');
 
         yield MenuItem::section('Forms', 'fas fa-clipboard-list');
-        yield MenuItem::linkToCrud('FormBill', 'fas fa-file-invoice', Customer::class)
-            ->setController(FormBillCrudController::class)
-            ->setQueryParameter('filters[periodId][comparison]', '=')
-            ->setQueryParameter('filters[periodId][value]', $periodId);
+        //yield MenuItem::linkToCrud('FormBill', 'fas fa-file-invoice', Customer::class)
+        //    ->setController(FormBillCrudController::class)
+        //    ->setQueryParameter('filters[periodId][comparison]', '=')
+        //    ->setQueryParameter('filters[periodId][value]', $periodId);
         yield MenuItem::linkToCrud('FormCheckin', 'fas fa-user-check', Customer::class)
             ->setController(FormCheckinCrudController::class)
             ->setQueryParameter('filters[periodId][comparison]', '=')
@@ -96,8 +96,8 @@ class DashboardController extends AbstractDashboardController
             ->setController(FormOptionsCrudController::class)
             ->setQueryParameter('filters[periodId][comparison]', '=')
             ->setQueryParameter('filters[periodId][value]', $periodId);
-        yield MenuItem::linkToCrud('FormPayment', 'fas fa-shopping-cart', Payment::class)
-            ->setController(FormPaymentCrudController::class);
+        //yield MenuItem::linkToCrud('FormPayment', 'fas fa-shopping-cart', Payment::class)
+        //    ->setController(FormPaymentCrudController::class);
         yield MenuItem::linkToCrud('FormSizes', 'fas fa-tshirt', Customer::class)
             ->setController(FormSizesCrudController::class)
             ->setQueryParameter('filters[periodId][comparison]', '=')

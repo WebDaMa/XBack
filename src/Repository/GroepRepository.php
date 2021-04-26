@@ -53,6 +53,26 @@ class GroepRepository extends ServiceEntityRepository {
         return $qb->execute()->fetchAllAssociative();
     }
 
+    public function getAllByYearAndLocation($year, $locationId): array
+    {
+        $connection = $this->_em->getConnection();
+
+        $qb = $connection->createQueryBuilder()
+            ->select('g.id, g.name')
+            ->from('groep', 'g')
+            ->where('LEFT(g.period_id, 2) = :year')
+            ->setParameter('year', $year)
+            ->orderBy('g.period_id', 'DESC');
+
+        if (!is_null($locationId))
+        {
+            $qb->andWhere('g.location_id = :locationId')
+                ->setParameter("locationId", $locationId);
+        }
+
+        return $qb->execute()->fetchAllAssociative();
+    }
+
     public function getAllPeriodIds()
     {
         $connection = $this->_em->getConnection();

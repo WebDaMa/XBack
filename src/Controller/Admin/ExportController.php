@@ -6,6 +6,7 @@ use App\Entity\ExportPeriodAndLocation;
 use App\Excel\ExcelExport;
 use App\Form\ExportPeriodAndLocationType;
 use App\Form\ExportPeriodType;
+use App\Form\ExportYearAndLocationType;
 use App\Form\ExportYearType;
 use App\Repository\GroepRepository;
 use App\Repository\LocationRepository;
@@ -30,13 +31,7 @@ class ExportController extends AbstractController {
         $exportRaft = new ExportPeriodAndLocation();
 
         $periods = $groepRepository->getAllPeriodIdsAsChoicesForForm();
-        if (!empty($periods))
-        {
-            unset($periods["All periods"]);
-            $periods = array_reverse($periods, true);
-            $periods["Current period"] = Calculations::generatePeriodFromDate(date('Y-m-d H:i:s'));
-            $periods = array_reverse($periods, true);
-        }
+        $periods = $this->replaceAllPeriodsWithCurrentPeriod($periods);
         $options = [
             'periods' => $periods
         ];
@@ -79,13 +74,7 @@ class ExportController extends AbstractController {
         $exportRaft = new ExportPeriodAndLocation();
 
         $years = $groepRepository->getAllYearsAsChoicesForForm();
-        if (!empty($years))
-        {
-            unset($years["All years"]);
-            $years = array_reverse($years, true);
-            $years["Current year"] = substr(date('Y'), 2, 2);
-            $years = array_reverse($years, true);
-        }
+        $years = $this->replaceAllYearsWithCurrentYear($years);
         $options = [
             'years' => $years
         ];
@@ -121,14 +110,15 @@ class ExportController extends AbstractController {
     }
 
     /**
-     * @Route("/bill", name="bill")
+     * @Route("/bill-period", name="bill_period")
      */
-    public function billAction(Request $request, ExcelExport $excellExport, GroepRepository $groepRepository, LocationRepository $locationRepository): Response
+    public function billPeriodAction(Request $request, ExcelExport $excellExport, GroepRepository $groepRepository, LocationRepository $locationRepository): Response
     {
         $exportBill = new ExportPeriodAndLocation();
 
         $locations = $locationRepository->findAllAsChoicesForForm();
         $periods = $groepRepository->getAllPeriodIdsAsChoicesForForm();
+        $periods = $this->replaceAllPeriodsWithCurrentPeriod($periods);
         $options = [
             'periods' => $periods,
             'locations' => $locations
@@ -143,18 +133,20 @@ class ExportController extends AbstractController {
             /** @var UploadedFile $file */
             $location = $exportBill->getLocation();
             $periodId = $exportBill->getPeriod();
+            $fileName = 'EindAfrekening-' . $periodId . '-' . $location . '.xlsx';
 
             $em = $this->getDoctrine()->getManager();
 
             $exportBill->setCreatedBy($this->getUser());
+            $exportBill->setFileName($fileName);
             $em->persist($exportBill);
             $em->flush();
 
-            $spreadsheet = $excellExport->generateBillExportSheet($location, $periodId);
+            $spreadsheet = $excellExport->generateBillExportSheetForPeriodAndLocation($periodId, $location);
 
             $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
             header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment; filename="EindAfrekening-' . $periodId . '-' . $location . '.xlsx"');
+            header('Content-Disposition: attachment; filename="' . $fileName . '"');
             $writer->save("php://output");
             exit();
 
@@ -163,5 +155,85 @@ class ExportController extends AbstractController {
         return $this->render('dashboard/export.html.twig', array(
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * @Route("/bill-year", name="bill_year")
+     */
+    public function billYearAction(Request $request, ExcelExport $excellExport, GroepRepository $groepRepository, LocationRepository $locationRepository): Response
+    {
+        $exportBill = new ExportPeriodAndLocation();
+
+        $locations = $locationRepository->findAllAsChoicesForForm();
+        $years = $groepRepository->getAllYearsAsChoicesForForm();
+        $years = $this->replaceAllYearsWithCurrentYear($years);
+        $options = [
+            'years' => $years,
+            'locations' => $locations
+        ];
+
+        $form = $this->createForm(ExportYearAndLocationType::class, $exportBill, $options);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            // $file stores the uploaded file
+            /** @var UploadedFile $file */
+            $location = $exportBill->getLocation();
+            $year = $exportBill->getPeriod();
+            $fileName = 'EindAfrekening-' . $year . '-' . $location . '.xlsx';
+
+            $em = $this->getDoctrine()->getManager();
+
+            $exportBill->setCreatedBy($this->getUser());
+            $exportBill->setFileName($fileName);
+            $em->persist($exportBill);
+            $em->flush();
+
+            $spreadsheet = $excellExport->generateBillExportSheetForYearAndLocation($year, $location);
+
+            $writer = IOFactory::createWriter($spreadsheet, "Xlsx");
+            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+            header('Content-Disposition: attachment; filename="' . $fileName . '"');
+            $writer->save("php://output");
+            exit();
+
+        }
+
+        return $this->render('dashboard/export.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @param array $years
+     * @return array
+     */
+    private function replaceAllYearsWithCurrentYear(array $years): array
+    {
+        if (!empty($years))
+        {
+            unset($years["All years"]);
+            $years = array_reverse($years, true);
+            $years["Current year"] = substr(date('Y'), 2, 2);
+            $years = array_reverse($years, true);
+        }
+        return $years;
+    }
+
+    /**
+     * @param array $periods
+     * @return array
+     */
+    private function replaceAllPeriodsWithCurrentPeriod(array $periods): array
+    {
+        if (!empty($periods))
+        {
+            unset($periods["All periods"]);
+            $periods = array_reverse($periods, true);
+            $periods["Current period"] = Calculations::generatePeriodFromDate(date('Y-m-d H:i:s'));
+            $periods = array_reverse($periods, true);
+        }
+        return $periods;
     }
 }

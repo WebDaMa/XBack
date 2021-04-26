@@ -34,7 +34,12 @@ class ExcelExport {
         $this->groepRepository = $groepRepository;
     }
 
-    public function generateRaftingExportSheetForPeriod($periodId): Spreadsheet
+    /**
+     * @param string $periodId
+     * @return Spreadsheet
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function generateRaftingExportSheetForPeriod(string $periodId): Spreadsheet
     {
         $week = substr($periodId, 2, 2);
         // Get 20 . year as ex: 21 => 2021
@@ -240,11 +245,89 @@ class ExcelExport {
 
     }
 
-    public function generateBillExportSheet($location, $period): Spreadsheet
+    /**
+     * @param string $period
+     * @param string $location
+     * @return Spreadsheet
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function generateBillExportSheetForPeriodAndLocation(?string $period, ?string $location): Spreadsheet
     {
-
         $groups = $this->groepRepository->getAllByPeriodAndLocation($period, $location);
 
+        return $this->getBillSpreadsheetForGroups($groups, $period, $location);
+    }
+
+    /**
+     * @param string $year
+     * @param string $location
+     * @return Spreadsheet
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    public function generateBillExportSheetForYearAndLocation(?string $year, ?string $location): Spreadsheet
+    {
+        $groups = $this->groepRepository->getAllByYearAndLocation($year, $location);
+
+        return $this->getBillSpreadsheetForGroups($groups, $year, $location);
+    }
+
+    /**
+     * @param array $customers
+     * @return array
+     * @throws \Exception
+     */
+    private function mapCustomersByDateAgencyAndLocation(Array $customers): array
+    {
+        $mappedCustomers = [];
+        foreach ($customers as $customer) {
+            if (isset($customer['date'], $customer['agency'], $customer['location'], $customer['activity_name'])) {
+                $date = $customer['date'];
+                $agency = $customer['agency'];
+                $location = $customer['location'];
+                $activity = $customer['activity_name'];
+
+                // Make a unique key
+                $mapKey = $date . '_' . $agency . '_' . $location;
+
+                // Start mapping collection
+                if (!isset($mappedCustomers[$mapKey])) {
+                    // add customer array
+                    $mappedCustomers[$mapKey] = [
+                        'customers' => [],
+                        'date' => $date,
+                        'agency' => $agency,
+                        'location' => $location,
+                        'activities' => []
+                    ];
+                }
+
+                // Check activity count
+                if (!isset($mappedCustomers[$mapKey]['activities'][$activity])) {
+                    // set count for activity
+                    $mappedCustomers[$mapKey]['activities'][$activity] = 0;
+                }
+                // Add the customer
+                $mappedCustomers[$mapKey]['customers'][] = $customer;
+
+                // Increase the count of the activity
+                $mappedCustomers[$mapKey]['activities'][$activity]++;
+            } else {
+                throw new \Exception("Customer " . $customer['first_name'] . " " . $customer['last_name'] . " is missing one of these required fields: [agency, date, location, activity_name] Check Customer table to complete.");
+            }
+        }
+
+        return $mappedCustomers;
+    }
+
+    /**
+     * @param array $groups
+     * @param string $period
+     * @param string $location
+     * @return Spreadsheet
+     * @throws \PhpOffice\PhpSpreadsheet\Exception
+     */
+    private function getBillSpreadsheetForGroups(array $groups, ?string $period, ?string $location): Spreadsheet
+    {
         $customers = [];
 
         foreach ($groups as $group)
@@ -271,8 +354,8 @@ class ExcelExport {
 
         $spreadsheet = new Spreadsheet();
 
-        $location = is_null($location) ? "Overal" : $location;
-        $period = is_null($period) ? "Alle periodes" : $period;
+        $location = empty($location) ? "Overal" : $location;
+        $period = empty($period) ? "Alle periodes" : $period;
 
         $worksheet = new Worksheet($spreadsheet, $location . " - " . $period);
         $spreadsheet->addSheet($worksheet);
@@ -429,53 +512,5 @@ class ExcelExport {
         $spreadsheet->removeSheetByIndex(0);
 
         return $spreadsheet;
-    }
-
-    /**
-     * @param array $customers
-     * @return array
-     * @throws \Exception
-     */
-    private function mapCustomersByDateAgencyAndLocation(Array $customers): array
-    {
-        $mappedCustomers = [];
-        foreach ($customers as $customer) {
-            if (isset($customer['date'], $customer['agency'], $customer['location'], $customer['activity_name'])) {
-                $date = $customer['date'];
-                $agency = $customer['agency'];
-                $location = $customer['location'];
-                $activity = $customer['activity_name'];
-
-                // Make a unique key
-                $mapKey = $date . '_' . $agency . '_' . $location;
-
-                // Start mapping collection
-                if (!isset($mappedCustomers[$mapKey])) {
-                    // add customer array
-                    $mappedCustomers[$mapKey] = [
-                        'customers' => [],
-                        'date' => $date,
-                        'agency' => $agency,
-                        'location' => $location,
-                        'activities' => []
-                    ];
-                }
-
-                // Check activity count
-                if (!isset($mappedCustomers[$mapKey]['activities'][$activity])) {
-                    // set count for activity
-                    $mappedCustomers[$mapKey]['activities'][$activity] = 0;
-                }
-                // Add the customer
-                $mappedCustomers[$mapKey]['customers'][] = $customer;
-
-                // Increase the count of the activity
-                $mappedCustomers[$mapKey]['activities'][$activity]++;
-            } else {
-                throw new \Exception("Customer " . $customer['first_name'] . " " . $customer['last_name'] . " is missing one of these required fields: [agency, date, location, activity_name] Check Customer table to complete.");
-            }
-        }
-
-        return $mappedCustomers;
     }
 }

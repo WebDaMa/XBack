@@ -3,6 +3,8 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
@@ -24,7 +26,8 @@ class UserCrudController extends AbstractCrudController
             ->setEntityLabelInSingular('User')
             ->setEntityLabelInPlural('User')
             ->setSearchFields(['username', 'email', 'confirmationToken', 'roles', 'id', 'usernameCanonical', 'emailCanonical'])
-            ->setPaginatorPageSize(200);
+            ->setPaginatorPageSize(200)
+            ->setHelp('index', 'ROLE_USER => gids, ROLE_KV => Kamp verantwoordelijke, ROLE_STV => Stations verantwoordelijke, ROLE_CMS => beperkte administratie CMS, ROLE_ADMIN => volledig beheer CMS, ROLE_SUPER_ADMIN => volledige toegang');
     }
 
     public function configureFields(string $pageName): iterable
@@ -33,7 +36,7 @@ class UserCrudController extends AbstractCrudController
         $email = TextField::new('email');
         $enabled = Field::new('enabled');
         $plainPassword = Field::new('plainPassword');
-        $roles = ArrayField::new('roles');
+        $roles = ArrayField::new('roles')->setHelp('ROLE_USER => gids, ROLE_KV => Kamp verantwoordelijke, ROLE_STV => Stations verantwoordelijke, ROLE_CMS => beperkte administratie CMS, ROLE_ADMIN => volledig beheer CMS, ROLE_SUPER_ADMIN => volledige toegang');
         $salt = TextField::new('salt');
         $password = TextField::new('password');
         $lastLogin = DateTimeField::new('lastLogin');
@@ -52,5 +55,16 @@ class UserCrudController extends AbstractCrudController
         } elseif (Crud::PAGE_EDIT === $pageName) {
             return [$username, $email, $enabled, $plainPassword, $roles];
         }
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->setPermission(Action::INDEX, 'ROLE_ADMIN')
+            ->setPermission(Action::DELETE, 'ROLE_ADMIN')
+            ->setPermission(Action::DETAIL, 'ROLE_ADMIN')
+            ->setPermission(Action::NEW, 'ROLE_ADMIN')
+            ->setPermission(Action::EDIT, 'ROLE_ADMIN')
+            ->setPermission(Action::BATCH_DELETE, 'ROLE_ADMIN');
     }
 }

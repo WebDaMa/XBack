@@ -4,6 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Entity\Customer;
 use App\Repository\GroepRepository;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -130,5 +132,16 @@ class CustomerCrudController extends AbstractCrudController
         } elseif (Crud::PAGE_EDIT === $pageName) {
             return [$customerId, $fileId, $periodId, $bookerId, $booker, $lastName, $firstName, $email, $birthdate, $gsm, $nationalRegisterNumber, $expireDate, $size, $sizeInfo, $nameShortage, $emergencyNumber, $licensePlate, $typePerson, $infoCustomer, $infoFile, $agency, $location, $startDay, $endDay, $programType, $lodgingType, $allInType, $insuranceType, $travelGoType, $travelGoDate, $travelBackType, $travelBackDate, $boardingPoint, $activityOption, $groupName, $groupPreference, $lodgingLayout, $groupLayout, $payed, $payedPayconiq, $isCamper, $checkedIn, $totalExclInsurance, $insuranceValue, $activities];
         }
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions
+            ->setPermission(Action::INDEX, 'ROLE_ADMIN')
+            ->setPermission(Action::DELETE, 'ROLE_ADMIN')
+            ->setPermission(Action::DETAIL, 'ROLE_ADMIN')
+            ->setPermission(Action::NEW, 'ROLE_ADMIN')
+            ->setPermission(Action::EDIT, 'ROLE_ADMIN')
+            ->setPermission(Action::BATCH_DELETE, 'ROLE_ADMIN');
     }
 }

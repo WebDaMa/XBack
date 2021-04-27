@@ -36,13 +36,13 @@ class AllInTypeCrudController extends AbstractCrudController
         $agency = AssociationField::new('agency');
 
         if (Crud::PAGE_INDEX === $pageName) {
-            return [$code, $description, $price, $allCustomers];
+            return [$code, $description, $price, $agency, $allCustomers];
         } elseif (Crud::PAGE_DETAIL === $pageName) {
-            return [$price, $id, $code, $description, $allCustomers, $agency];
+            return [$price, $id, $code, $description, $agency, $allCustomers];
         } elseif (Crud::PAGE_NEW === $pageName) {
-            return [$code, $description, $price, $allCustomers];
+            return [$code, $description, $price, $agency];
         } elseif (Crud::PAGE_EDIT === $pageName) {
-            return [$code, $description, $price, $allCustomers];
+            return [$code, $description, $price, $agency];
         }
     }
 }

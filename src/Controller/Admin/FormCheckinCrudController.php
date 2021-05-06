@@ -43,9 +43,12 @@ class FormCheckinCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
+        $requiredFieldsText = 'Al deze velden zijn nodig om in de app te kunnen werken!';
         return $crud
             ->setSearchFields(['id', 'customerId', 'fileId', 'periodId', 'bookerId', 'booker', 'lastName', 'firstName', 'email', 'gsm', 'nationalRegisterNumber', 'expireDate', 'sizeInfo', 'nameShortage', 'emergencyNumber', 'licensePlate', 'typePerson', 'infoCustomer', 'infoFile', 'boardingPoint', 'activityOption', 'groupName', 'lodgingLayout', 'totalExclInsurance', 'insuranceValue'])
-            ->setPaginatorPageSize(50);
+            ->setPaginatorPageSize(50)
+            ->setHelp('edit', $requiredFieldsText)
+            ->setHelp('new', $requiredFieldsText);
     }
 
     public function configureFilters(Filters $filters): Filters
@@ -59,15 +62,15 @@ class FormCheckinCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         $checkedIn = Field::new('checkedIn');
-        $firstName = TextField::new('firstName');
-        $lastName = TextField::new('lastName');
-        $booker = TextField::new('booker');
+        $firstName = TextField::new('firstName')->setRequired(true);
+        $lastName = TextField::new('lastName')->setRequired(true);
+        $booker = TextField::new('booker')->setRequired(true);
         $groupName = TextField::new('groupName');
-        $birthdate = DateField::new('birthdate');
-        $nationalRegisterNumber = TextField::new('nationalRegisterNumber');
-        $expireDate = DateField::new('expireDate');
+        $birthdate = DateField::new('birthdate')->setRequired(true);
+        $nationalRegisterNumber = TextField::new('nationalRegisterNumber')->setRequired(true);
+        $expireDate = DateField::new('expireDate')->setRequired(true);
         $lodgingLayout = TextField::new('lodgingLayout');
-        $allInType = AssociationField::new('allInType');
+        $allInType = AssociationField::new('allInType')->setRequired(true);
         $groupLayout = AssociationField::new('groupLayout')->setFormTypeOptions(
             [
                 'query_builder' => function () {
@@ -75,7 +78,7 @@ class FormCheckinCrudController extends AbstractCrudController
                         ->orderBy('g.periodId', 'DESC');
                 },
             ]
-        );
+        )->setRequired(true);
         $id = IntegerField::new('id', 'ID');
         $customerId = IntegerField::new('customerId');
         $fileId = IntegerField::new('fileId');
@@ -107,12 +110,12 @@ class FormCheckinCrudController extends AbstractCrudController
         $createdAt = DateTimeField::new('created_at');
         $modifiedAt = DateTimeField::new('modified_at');
         $size = AssociationField::new('size');
-        $agency = AssociationField::new('agency');
-        $location = AssociationField::new('location');
-        $programType = AssociationField::new('programType');
-        $lodgingType = AssociationField::new('lodgingType');
+        $agency = AssociationField::new('agency')->setRequired(true);
+        $location = AssociationField::new('location')->setRequired(true);
+        $programType = AssociationField::new('programType')->setRequired(true);
+        $lodgingType = AssociationField::new('lodgingType')->setRequired(true);
         $insuranceType = AssociationField::new('insuranceType');
-        $travelGoType = AssociationField::new('travelGoType');
+        $travelGoType = AssociationField::new('travelGoType')->setRequired(true);
         $travelBackType = AssociationField::new('travelBackType');
         $groupPreference = AssociationField::new('groupPreference');
         $payerCustomers = AssociationField::new('payerCustomers');
@@ -129,9 +132,8 @@ class FormCheckinCrudController extends AbstractCrudController
         } elseif (Crud::PAGE_NEW === $pageName) {
             $rep = $this->getDoctrine()->getRepository(Customer::class);
             $currentPeriod = Calculations::getCurrentPeriodId();
-            $randomBookerID = $currentPeriod . rand(1000000, 3000000);
             $lastId = $rep->getLastId();
-            $defaultCustomer = $currentPeriod . ($lastId + 1);
+            $defaultCustomer = $randomBookerID = $currentPeriod . ($lastId + 1);
             $randomFile = $currentPeriod . rand(1000000, 7000000);
 
             // Fill in form with defaults
@@ -140,9 +142,9 @@ class FormCheckinCrudController extends AbstractCrudController
             $customerId->setFormTypeOption('data', $defaultCustomer);
             $fileId->setFormTypeOption('data', $randomFile);
 
-            return [$checkedIn, $periodId, $bookerId, $customerId, $fileId, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout, $agency, $programType, $location];
+            return [$checkedIn, $periodId, $bookerId, $customerId, $fileId, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingType, $allInType, $groupLayout, $agency, $programType, $location, $travelGoType];
         } elseif (Crud::PAGE_EDIT === $pageName) {
-            return [$checkedIn, $periodId, $bookerId, $customerId, $fileId, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingLayout, $allInType, $groupLayout, $agency, $programType];
+            return [$checkedIn, $periodId, $bookerId, $customerId, $fileId, $firstName, $lastName, $booker, $groupName, $birthdate, $nationalRegisterNumber, $expireDate, $lodgingType, $allInType, $groupLayout, $agency, $programType, $location, $travelGoType];
         }
     }
 }
